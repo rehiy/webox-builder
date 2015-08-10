@@ -1,0 +1,16 @@
+##
+# Server Status
+##
+
+location /status/nginx {
+    stub_status on;
+}
+
+location /status/php {
+    if ($request_filename ~* /status/(php\d)/(.*)) {
+        set $pver $1;
+        set $pool $2;
+    }
+    fastcgi_pass   unix:/srv/$pver/var/run/$pool.sock;
+    include        fastcgi_params;
+}

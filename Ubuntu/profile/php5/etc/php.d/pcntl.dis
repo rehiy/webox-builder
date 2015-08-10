@@ -1,0 +1,4 @@
+[pcntl]
+
+extension = pcntl.so
+

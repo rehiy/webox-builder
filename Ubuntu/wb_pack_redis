@@ -1,0 +1,26 @@
+
+wk_redis=redis-3.0.3
+
+########################################################################
+
+wb_make_redis() {
+
+    wb_apply http://download.redis.io/releases/ ${wk_redis} .tar.gz
+
+    make && make PREFIX=/srv/redis install
+
+    mkdir -p /srv/redis/var
+
+}
+
+########################################################################
+
+wb_inst_redis() {
+
+    [ -d /srv/redis/bin ] || wb_make_redis
+
+    [ -d /srv/redis/bin ] || exit
+
+    wb_rtm /srv/redis
+
+}

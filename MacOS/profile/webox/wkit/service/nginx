@@ -1,0 +1,25 @@
+
+APP_BIN_START='/srv/nginx/sbin/nginx'
+
+APP_PID_FILE='/srv/nginx/var/run/nginx.pid'
+
+APP_SIG_STOP='TERM'
+
+APP_SIG_RELOAD='HUP'
+
+
+app_once() {
+
+    mkdir -p /srv/nginx/var/run /srv/nginx/var/log /srv/nginx/var/tmp
+    chown -R _www:_www /srv/nginx/var/*
+
+}
+
+app_init() {
+
+    if [ ! -d /srv/nginx/var/tmp/proxy_cache ]; then
+        mkdir -p /srv/nginx/var/tmp/proxy_cache
+        chown -R _www:_www /srv/nginx/var/tmp/proxy_cache
+    fi
+
+}

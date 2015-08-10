@@ -1,0 +1,41 @@
+
+APP_BIN_START='/srv/php5/sbin/php-fpm'
+
+APP_PID_FILE='/srv/php5/var/run/fpm.pid'
+
+APP_SIG_STOP='TERM'
+
+APP_SIG_RELOAD='USR2'
+
+
+app_once() {
+
+    if [ ! $(cat /etc/group | grep www-data) ]; then
+        groupadd www-data -g 33
+    fi
+    if [ ! $(cat /etc/passwd | grep www-data) ]; then
+        useradd www-data -u 33 -g 33
+        usermod www-data -d /srv/webroot -s /usr/sbin/nologin
+    fi
+
+    mkdir -p /srv/php5/var/run /srv/php5/var/log /srv/php5/var/tmp
+    mkdir -p /srv/php5/var/tmp/upload /srv/php5/var/tmp/session
+    chown -R www-data:www-data /srv/php5/var/*
+
+}
+
+app_init() {
+
+    local poolvar poolconfig
+
+    for poolconfig in /srv/php5/etc/fpm.d/*.inc; do
+
+        poolvar=${poolconfig##*/}
+        poolvar=/srv/webroot/${poolvar/.inc/}/var
+
+        mkdir -p $poolvar/upload $poolvar/session
+        chown -R www-data:www-data $poolvar
+
+    done
+
+}

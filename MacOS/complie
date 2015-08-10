@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+
+if [ -f $(pwd)/wb_base ]; then
+    source $(pwd)/wb_base
+fi
+
+if [ -z ${wbdir} ]; then
+    echo "Please use './complie' to run this script"
+    exit 1
+fi
+
+source ${wbdir}/wb_function
+
+#################################################################WEBOX#
+
+source ${wbdir}/wb_lib_webox
+wb_inst_webox
+
+#################################################################PACK#
+
+source ${wbdir}/wb_pack_php5
+wb_inst_php5
+
+source ${wbdir}/wb_pack_nginx
+wb_inst_nginx
+
+source ${wbdir}/wb_pack_mysql
+wb_inst_mysql
+
+source ${wbdir}/wb_pack_redis
+wb_inst_redis
+
+#################################################################ETC#
+
+cp -av ${wbdir}/profile/* /srv/
+
+chown -R 0:0  /srv
+chmod -R 0777 /srv/webroot/*
+chmod -R 0755 /srv/webox /srv/service
+
+find /srv/*/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
+find /srv/*/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+find /srv/*/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+

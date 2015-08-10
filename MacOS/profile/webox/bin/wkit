@@ -1,0 +1,15 @@
+#!/bin/bash
+
+wkexec=${0##*/}
+wktemp=/srv/webox/var
+wkroot=/srv/webox/wkit
+
+[ "${wkexec}" = "wkit" ] && {
+    wkexec=${1}
+    shift
+}
+
+source /srv/webox/runtime
+
+source ${wkroot}/wb_main
+wk_run ${wkexec} "${@}"

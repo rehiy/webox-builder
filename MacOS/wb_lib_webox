@@ -1,0 +1,441 @@
+
+wk_m4=m4-1.4.17
+wk_autoconf=autoconf-2.69
+wk_automake=automake-1.15
+wk_bison=bison-3.0.4
+wk_pcre=pcre-8.37
+wk_zlib=zlib-1.2.8
+wk_re2c=re2c-0.14.3
+wk_openssl=openssl-1.0.2d
+wk_jpeg=jpeg-9a
+wk_libpng=libpng-1.6.18
+wk_freetype=freetype-2.5.5
+wk_ncurses=ncurses-6.0-20150725
+wk_libiconv=libiconv-1.14
+wk_libmcrypt=libmcrypt-2.5.8
+wk_libxml2=libxml2-2.9.2
+wk_gettext=gettext-0.19.5
+wk_curl=curl-7.43.0
+wk_cmake=cmake-3.3.0
+
+wb_inst_webox() {
+
+    wb_inst_m4
+    wb_inst_autoconf
+    wb_inst_automake
+    wb_inst_bison
+    wb_inst_pcre
+    wb_inst_zlib
+    wb_inst_openssl
+    wb_inst_jpeg
+    wb_inst_libpng
+    wb_inst_freetype
+    wb_inst_ncurses
+    wb_inst_libiconv
+    wb_inst_libmcrypt
+    wb_inst_libxml2
+    wb_inst_gettext
+    wb_inst_curl
+    wb_inst_cmake
+
+    wb_rtm ${webox}
+
+}
+
+########################################################################
+
+wb_make_m4() {
+
+    wb_apply http://mirrors.kernel.org/gnu/m4/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_m4() {
+
+    local name=${wk_m4}
+    local fine=${webox}/bin/m4
+
+    [ -e ${fine} ] || wb_make_m4 ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_autoconf() {
+
+    wb_apply http://mirrors.kernel.org/gnu/autoconf/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_autoconf() {
+
+    local name=${wk_autoconf}
+    local fine=${webox}/bin/autoconf
+
+    [ -e ${fine} ] || wb_make_autoconf ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_automake() {
+
+    wb_apply http://mirrors.kernel.org/gnu/automake/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_automake() {
+
+    local name=${wk_automake}
+    local fine=${webox}/bin/automake
+
+    [ -e ${fine} ] || wb_make_automake ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_bison() {
+
+    wb_apply http://ftp.gnu.org/gnu/bison/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_bison() {
+
+    local name=${wk_bison}
+    local fine=${webox}/bin/bison
+
+    [ -e ${fine} ] || wb_make_bison ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_pcre() {
+
+    wb_apply http://jaist.dl.sourceforge.net/project/pcre/pcre/${1##*-}/ ${1} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_pcre() {
+
+    local name=${wk_pcre}
+    local fine=${webox}/lib/libpcre.a
+
+    [ -e ${fine} ] || wb_make_pcre ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_zlib() {
+
+    wb_apply http://zlib.net/ ${1} .tar.xz
+
+    ./configure --prefix=${webox} --64
+
+    make && make install
+
+}
+
+wb_inst_zlib() {
+
+    local name=${wk_zlib}
+    local fine=${webox}/lib/libz.a
+
+    [ -e ${fine} ] || wb_make_zlib ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_re2c() {
+
+    wb_apply http://nchc.dl.sourceforge.net/project/re2c/re2c/${1##*-}/ ${1} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_re2c() {
+
+    local name=${wk_re2c}
+    local fine=${webox}/bin/re2c
+
+    [ -e ${fine} ] || wb_make_re2c ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_openssl() {
+
+    wb_apply http://www.openssl.org/source/ ${1} .tar.gz
+
+    ./Configure --prefix=${webox} darwin64-x86_64-cc shared
+
+    make && make install_sw
+
+}
+
+wb_inst_openssl() {
+
+    local name=${wk_openssl}
+    local fine=${webox}/lib/libssl.a
+
+    [ -e ${fine} ] || wb_make_openssl ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_jpeg() {
+
+    wb_apply http://www.ijg.org/files/ jpegsrc.v${1##*-} .tar.gz ${1}
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_jpeg() {
+
+    local name=${wk_jpeg}
+    local fine=${webox}/lib/libjpeg.a
+
+    [ -e ${fine} ] || wb_make_jpeg ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_libpng() {
+
+    wb_apply ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_libpng() {
+
+    local name=${wk_libpng}
+    local fine=${webox}/lib/libpng.a
+
+    [ -e ${fine} ] || wb_make_libpng ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_freetype() {
+
+    wb_apply http://ftp.twaren.net/Unix/NonGNU/freetype/ ${1} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_freetype() {
+
+    local name=${wk_freetype}
+    local fine=${webox}/lib/libfreetype.a
+
+    [ -e ${fine} ] || wb_make_freetype ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_ncurses() {
+
+    wb_apply ftp://invisible-island.net/ncurses/current/ ${1} .tgz
+
+    ./configure --prefix=${webox} --mandir=${webox}/share/man --with-shared
+
+    make && make install
+
+}
+
+wb_inst_ncurses() {
+
+    local name=${wk_ncurses}
+    local fine=${webox}/lib/libncurses.a
+
+    [ -e ${fine} ] || wb_make_ncurses ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_libiconv() {
+
+    wb_apply http://ftp.gnu.org/gnu/libiconv/ ${1} .tar.gz
+
+    ./configure --prefix=${webox} --enable-shared
+
+    make && make install
+
+}
+
+wb_inst_libiconv() {
+
+    local name=${wk_libiconv}
+    local fine=${webox}/lib/libiconv.la
+
+    [ -e ${fine} ] || wb_make_libiconv ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_libmcrypt() {
+
+    wb_apply http://jaist.dl.sourceforge.net/project/mcrypt/Libmcrypt/${1##*-}/ ${1} .tar.gz
+
+    ./configure --prefix=${webox} --mandir=${webox}/share/man
+
+    make && make install
+
+}
+
+wb_inst_libmcrypt() {
+
+    local name=${wk_libmcrypt}
+    local fine=${webox}/lib/libmcrypt.la
+
+    [ -e ${fine} ] || wb_make_libmcrypt ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_libxml2() {
+
+    wb_apply ftp://xmlsoft.org/libxml2/ ${1} .tar.gz
+
+    ./configure --prefix=${webox} \
+        --with-iconv=${webox} \
+        --with-zlib=${webox}
+
+    make && make install
+
+}
+
+wb_inst_libxml2() {
+
+    local name=${wk_libxml2}
+    local fine=${webox}/lib/libxml2.a
+
+    [ -e ${fine} ] || wb_make_libxml2 ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_gettext() {
+
+    wb_apply http://ftp.gnu.org/gnu/gettext/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_gettext() {
+
+    local name=${wk_gettext}
+    local fine=${webox}/bin/gettext
+
+    [ -e ${fine} ] || wb_make_gettext ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_curl() {
+
+    wb_apply http://curl.haxx.se/download/ ${1} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+}
+
+wb_inst_curl() {
+
+    local name=${wk_curl}
+    local fine=${webox}/lib/libcurl.a
+
+    [ -e ${fine} ] || wb_make_curl ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+
+########################################################################
+
+wb_make_cmake() {
+
+    wb_apply http://www.cmake.org/files/v3.3/ ${1} .tar.gz
+
+    ./bootstrap --prefix=${webox} --docdir=share/doc/cmake --system-curl
+
+    make && make install
+
+}
+
+wb_inst_cmake() {
+
+    local name=${wk_cmake}
+    local fine=${webox}/bin/cmake
+
+    [ -e ${fine} ] || wb_make_cmake ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
+

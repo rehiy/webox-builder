@@ -1,0 +1,17 @@
+
+wk_install() {
+
+    chown 0:0  ${wkroot}
+    chmod 0755 ${wkroot}/bin/*
+
+    rm -rf /bin/wkit
+    ln ${wkroot}/bin/wkit /bin/wkit
+
+}
+
+
+wk_install_usage() {
+
+    echo "install           install wkit to /bin/wkit"
+
+}

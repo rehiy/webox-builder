@@ -1,0 +1,56 @@
+
+wk_mysql=mysql-5.6.26
+
+########################################################################
+
+wb_make_mysql() {
+
+    wb_apply http://cdn.mysql.com/Downloads/MySQL-5.6/ ${wk_mysql} .tar.gz
+
+    rm -f CMakeCache.txt
+
+    cmake . \
+        -DCMAKE_INSTALL_PREFIX=/srv/mysql \
+        -DSYSCONFDIR=/srv/mysql/etc \
+        -DMYSQL_DATADIR=/srv/mysql/var/data \
+        -DMYSQL_UNIX_ADDR=/srv/mysql/var/run/mysqld.sock \
+        -DWITH_INNOBASE_STORAGE_ENGINE=1 \
+        -DWITH_READLINE=1 \
+        -DENABLED_LOCAL_INFILE=1 \
+        -DEXTRA_CHARSETS=all \
+        -DDEFAULT_CHARSET=utf8 \
+        -DDEFAULT_COLLATION=utf8_general_ci \
+        -DWITH_SSL=${webox} \
+        -DWITH_ZLIB=${webox} \
+        -DCURSES_LIBRARY=${webox}/lib/libncurses.a \
+        -DCURSES_INCLUDE_PATH=${webox}/include \
+        -DWITH_DEBUG=0
+
+    make && make install
+
+    sleep 1
+
+    mkdir -p /srv/mysql/var/run /srv/mysql/var/log
+    mkdir -p /srv/mysql/var/tmp /srv/mysql/var/data
+
+    /srv/mysql/scripts/mysql_install_db \
+        --basedir=/srv/mysql --datadir=/srv/mysql/var/data
+
+    sleep 2
+
+    rm -rf /srv/mysql/*.* /srv/mysql/README /srv/mysql/COPYING /srv/mysql/INSTALL-BINARY
+    rm -rf /srv/mysql/data /srv/mysql/docs /srv/mysql/scripts /srv/mysql/support-files
+    rm -rf /srv/mysql/sql-bench /srv/mysql/mysql-test /srv/mysql/bin/*test
+    rm -rf /srv/mysql/bin/*embedded
+
+}
+
+wb_inst_mysql() {
+
+    [ -d /srv/mysql/bin ] || wb_make_mysql
+
+    [ -d /srv/mysql/bin ] || exit
+
+    wb_rtm /srv/mysql
+
+}

@@ -1,0 +1,33 @@
+
+APP_BIN_START='/srv/nginx/sbin/nginx'
+
+APP_PID_FILE='/srv/nginx/var/run/nginx.pid'
+
+APP_SIG_STOP='TERM'
+
+APP_SIG_RELOAD='HUP'
+
+
+app_once() {
+
+    if [ ! $(cat /etc/group | grep www-data) ]; then
+        groupadd www-data -g 33
+    fi
+    if [ ! $(cat /etc/passwd | grep www-data) ]; then
+        useradd www-data -u 33 -g 33
+        usermod www-data -d /srv/webroot -s /usr/sbin/nologin
+    fi
+
+    mkdir -p /srv/nginx/var/run /srv/nginx/var/log /srv/nginx/var/tmp
+    chown -R www-data:www-data /srv/nginx/var/*
+
+}
+
+app_init() {
+
+    if [ ! -d /srv/nginx/var/tmp/proxy_cache ]; then
+        mkdir -p /srv/nginx/var/tmp/proxy_cache
+        chown -R www-data:www-data /srv/nginx/var/tmp/proxy_cache
+    fi
+
+}

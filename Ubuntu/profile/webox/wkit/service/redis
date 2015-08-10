@@ -1,0 +1,16 @@
+
+APP_BIN_START='/srv/redis/bin/redis-server /srv/redis/etc/redis.conf'
+
+APP_PID_FILE='/srv/redis/var/run/redis.pid'
+
+APP_SIG_STOP='TERM'
+
+APP_SIG_RELOAD='HUP'
+
+
+app_once() {
+
+    mkdir -p /srv/redis/var/run /srv/redis/var/log /srv/redis/var/tmp
+    chown -R daemon:daemon /srv/redis/var/*
+
+}

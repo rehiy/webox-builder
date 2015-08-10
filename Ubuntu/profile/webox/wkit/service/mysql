@@ -1,0 +1,26 @@
+
+APP_BIN_NOHUP=1
+
+APP_BIN_START='/srv/mysql/bin/mysqld_safe'
+
+APP_PID_FILE='/srv/mysql/var/run/mysql.pid'
+
+APP_SIG_STOP='TERM'
+
+APP_SIG_RELOAD='HUP'
+
+
+app_once() {
+
+    if [ ! $(cat /etc/group | grep mysql) ]; then
+        groupadd mysql -g 77
+    fi
+    if [ ! $(cat /etc/passwd | grep mysql) ]; then
+        useradd mysql -u 77 -g 77
+        usermod mysql -d /srv/mysql -s /usr/sbin/nologin
+    fi
+
+    mkdir -p /srv/mysql/var/run /srv/mysql/var/log /srv/mysql/var/tmp
+    chown -R mysql:mysql /srv/mysql/var/*
+
+}

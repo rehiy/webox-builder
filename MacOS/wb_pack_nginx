@@ -1,0 +1,112 @@
+
+wk_nginx=nginx-1.8.0
+
+#########################################################################
+
+wb_make_nginx() {
+
+    wb_apply http://nginx.org/download/ ${wk_nginx} .tar.gz
+
+    sed -i~ 's/^CFLAGS="$CFLAGS -g"/#CFLAGS="$CFLAGS -g"/' auto/cc/gcc
+    sed -i~ 's/^CFLAGS="$CFLAGS -Werror"/#CFLAGS="$CFLAGS -Werror"/' auto/cc/gcc
+
+    ./configure \
+        --prefix=/srv/nginx \
+        --sbin-path=/srv/nginx/sbin/nginx \
+        --conf-path=/srv/nginx/etc/nginx.conf \
+        --pid-path=/srv/nginx/var/run/nginx.pid \
+        --lock-path=/srv/nginx/var/run/nginx.lock \
+        --error-log-path=/srv/nginx/var/log/error.log \
+        --http-log-path=/srv/nginx/var/log/access.log \
+        --http-client-body-temp-path=/srv/nginx/var/tmp/body \
+        --http-proxy-temp-path=/srv/nginx/var/tmp/proxy \
+        --http-fastcgi-temp-path=/srv/nginx/var/tmp/fastcgi \
+        --http-uwsgi-temp-path=/srv/nginx/var/tmp/uwsgi \
+        --http-scgi-temp-path=/srv/nginx/var/tmp/scgi \
+        --with-http_ssl_module \
+        --with-http_spdy_module \
+        --with-http_realip_module \
+        --with-http_addition_module \
+        --with-http_gzip_static_module \
+        --with-http_stub_status_module \
+        --with-pcre=${wbsrc}/${wk_pcre} \
+        --with-zlib=${wbsrc}/${wk_zlib} \
+        --with-openssl=${wbsrc}/${wk_openssl} \
+        $(wb_plus_nginx_http_cache_purge) \
+        $(wb_plus_nginx_http_subs_filter) \
+        $(wb_plus_nginx_http_echo) \
+        --with-cc-opt='-O3'
+
+    sed -i~ "s/config \(.*openssl\)/Configure darwin64-x86_64-cc \1/" objs/Makefile
+
+    make && make install
+
+    rm -rf /srv/nginx/etc /srv/nginx/html/*
+
+}
+
+########################################################################
+
+wb_plus_nginx_http_cache_purge() {
+
+    if [ ! -d http_cache_purge ]; then
+
+        local url=https://codeload.github.com/FRiCKLE/ngx_cache_purge/zip/master
+        local zip=$(wb_get ${url} ${wk_nginx}/ngx_cache_purge-master.zip)
+
+        unzip -q ${zip} && mv ngx_cache_purge-master http_cache_purge
+
+        wb_error_check 'not found http_cache_purge'
+
+    fi
+
+    echo "--add-module=http_cache_purge"
+
+}
+
+wb_plus_nginx_http_subs_filter() {
+
+    if [ ! -d http_subs_filter ]; then
+
+        local url=https://codeload.github.com/yaoweibin/ngx_http_substitutions_filter_module/zip/master
+        local zip=$(wb_get ${url} ${wk_nginx}/ngx_http_substitutions_filter_module-master.zip)
+
+        unzip -q ${zip} && mv ngx_http_substitutions_filter_module-master http_subs_filter
+
+        wb_error_check 'not found http_subs_filter'
+
+    fi
+
+    echo "--add-module=http_subs_filter"
+
+}
+
+wb_plus_nginx_http_echo() {
+
+    if [ ! -d http_echo ]; then
+
+        local url=https://codeload.github.com/openresty/echo-nginx-module/zip/master
+        local zip=$(wb_get ${url} ${wk_nginx}/echo-nginx-module-master.zip)
+
+        unzip -q ${zip} && mv echo-nginx-module-master http_echo
+
+        wb_error_check 'not found http_echo'
+
+    fi
+
+    echo "--add-module=http_echo"
+
+}
+
+
+########################################################################
+
+wb_inst_nginx() {
+
+    [ -d /srv/nginx/sbin ] || wb_make_nginx
+
+    [ -d /srv/nginx/sbin ] || exit
+
+    wb_rtm /srv/nginx
+
+}

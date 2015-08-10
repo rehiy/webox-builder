@@ -1,0 +1,82 @@
+
+wk_php5=php-5.6.12
+
+########################################################################
+
+wb_make_php5() {
+
+    wb_apply http://cn2.php.net/distributions/ ${wk_php5} .tar.gz
+
+    ./configure \
+        --prefix=/srv/php5 \
+        --sysconfdir=/srv/php5/etc \
+        --with-config-file-path=/srv/php5/etc \
+        --with-config-file-scan-dir=/srv/php5/etc/php.d \
+        --disable-rpath \
+        --without-pear \
+        --enable-fpm \
+        --enable-calendar \
+        --enable-mbstring \
+        --enable-zip \
+        --enable-exif \
+        --enable-sockets \
+        --enable-ftp \
+        --with-pcre-dir=${webox} \
+        --with-zlib-dir=${webox} \
+        --with-libxml-dir=${webox} \
+        --with-openssl-dir=${webox} \
+        --with-mcrypt=${webox} \
+        --with-iconv=${webox} \
+        --with-gettext=${webox} \
+        --with-curl=${webox} \
+        --with-gd \
+        --enable-gd-native-ttf \
+        --with-freetype-dir=${webox} \
+        --with-jpeg-dir=${webox} \
+        --with-png-dir=${webox} \
+        --with-mysql \
+        --with-mysqli \
+        --with-pdo-mysql
+
+    make && make install
+
+    wb_make_php5_ext opcache
+    wb_make_php5_ext pcntl
+
+    wb_make_php5_pecl redis-2.2.7
+
+    rm -rf /srv/php5/etc/*
+
+}
+
+wb_make_php5_ext() {
+
+    cd ${wbsrc}/${wk_php5}/ext/${1}
+
+    /srv/php5/bin/phpize && ./configure \
+        --with-php-config=/srv/php5/bin/php-config
+
+    make && make install
+
+}
+
+wb_make_php5_pecl() {
+
+    wb_apply http://pecl.php.net/get/ ${1} .tgz ${wk_php5}/ext/${1}
+    rm -rf ../package.xml
+
+    wb_make_php5_ext ${1}
+
+}
+
+########################################################################
+
+wb_inst_php5() {
+
+    [ -d /srv/php5/bin ] || wb_make_php5
+
+    [ -d /srv/php5/bin ] || exit
+
+    wb_rtm /srv/php5
+
+}

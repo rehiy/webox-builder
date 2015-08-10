@@ -1,0 +1,72 @@
+
+wk_service() {
+
+    source ${wkroot}/wk_service_define "${@}"
+
+    [ -f ${app_file} ] || {
+        wk_error "Aborted: ${app_name} not found"
+    }
+
+    shift 2
+    source ${app_file}
+    wk_service_todo "${@}"
+
+}
+
+wk_service_todo() {
+
+    local does=" ${app_does} "
+
+    [ "${does}" = "${does/ ${app_todo} / }" ] && {
+        app_todo=help
+    }
+
+    [ "${app_todo}" = "start" ] && {
+        wk_ready ${app_name} || {
+            app_once && wk_ready ${app_name} true
+        }
+        app_init "${@}"
+    }
+
+    echo "${app_todo} ${app_name} ..."
+
+    app_${app_todo} "${@}"
+    wk_error_check "Aborted: ${app_todo} ${app_name}"
+
+}
+
+wk_service_usage() {
+
+    echo "service          manage service for ${wkroot}/service/*"
+    echo "service_setup    setup ${wkroot}/service/* to /etc/init.d/*"
+    echo "service_remove   remove /etc/init.d/* for ${wkroot}/service/*"
+
+}
+
+wk_service_setup() {
+
+    for wkfile in ${wkroot}/service/*; do
+
+        local initd=/etc/init.d/${wkfile##*/}
+
+        echo "setup ${initd}"
+        echo "#!${wkroot}/bin/wkit service" > ${initd}
+
+        chmod 0755 ${initd}
+
+    done
+
+}
+
+wk_service_remove() {
+
+    for wkfile in ${wkroot}/service/*; do
+
+        local initd=/etc/init.d/${wkfile##*/}
+
+        echo "remove ${initd}"
+        rm -f ${initd}
+
+    done
+
+}

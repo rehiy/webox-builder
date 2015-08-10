@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+
+####################################################################
+
+cd ~
+
+if [ -x /usr/bin/macerror ]; then
+    name=webox-osx-v5.0806.tgz
+fi
+
+if [ -x /usr/bin/apt-get ]; then
+    name=webox-ubu-v5.0806.tgz
+fi
+
+if [ $(which wget) ]; then
+    wget -c -O ${name} http://dev.anrip.com/webox/${name}
+else
+    curl -C - -o ${name} http://dev.anrip.com/webox/${name}
+fi
+
+tar -xvf ${name} && rm ${name}
+
+####################################################################
+
+sh ./srv/service stop
+
+rm -rf ./srv/*/etc ./srv/*/var ./srv/webroot
+
+rm -rf /srv/*/bin /srv/*/sbin /srv/*/lib
+rm -rf /srv/*/man /srv/*/share /srv/*/include
+rm -rf /srv/nginx/html /srv/php5/php
+
+rm -rf /srv/common /srv/library
+rm -rf /srv/update /srv/webox
+
+####################################################################
+
+[ -e /srv ] || mkdir -p /srv
+cp -av srv/* /srv/
+rm -rv srv/
+
+chown -R 0:0  /srv
+chmod -R 0777 /srv/webroot/*
+chmod -R 0755 /srv/webox /srv/service
+
+find /srv/*/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
+find /srv/*/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+find /srv/*/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+
+####################################################################
+
+[ -x /srv/service ] && /srv/service start
+
+if [ -x /usr/bin/apt-get ]; then
+    /srv/webox/bin/wkit service_setup
+fi

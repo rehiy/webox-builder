@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+
+if [ -f $(pwd)/wb_base ]; then
+    source $(pwd)/wb_base
+fi
+
+if [ -z ${wbdir} ]; then
+    echo "Please use './package' to run this script"
+    exit 1
+fi
+
+source ${wbdir}/wb_function
+
+#####################################################################RUN#
+
+#wb_strip /srv/webox
+
+#wb_strip /srv/php5
+#wb_strip /srv/nginx
+#wb_strip /srv/mysql
+
+#####################################################################RUN#
+
+rm -rf /srv/*.md
+rm -rf /srv/webox/ready/*
+
+rm -rf /srv/*/var/run/*
+rm -rf /srv/*/var/log/*
+rm -rf /srv/*/var/tmp/*
+
+rm -rf /srv/mysql/var/data/*.*
+rm -rf /srv/mysql/var/data/test
+
+find /srv -type f -name "*.log" -exec rm {} \;
+find /srv -type f -name "*.pid" -exec rm {} \;
+find /srv -type f -name ".DS_Store" -exec rm {} \;
+find /srv -type f -name "sess_*" -exec rm {} \;
+find /srv -type f -name "lost+found" -exec rm {} \;
+
+tar -czvf ~/webox.tgz /srv
+

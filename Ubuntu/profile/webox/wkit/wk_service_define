@@ -1,0 +1,112 @@
+
+app_name=${1##*[/.]}
+app_file=${wkroot}/service/${app_name}
+
+app_does='stop start reload restart'
+app_todo=${2:-help}
+
+app_help() {
+
+    local name=${app_name:-help}
+    local does=$(echo ${app_does})
+
+    echo "Usage: service ${name} ${does// /|}" >&2
+    exit 3
+
+}
+
+app_once() {
+
+    return 0
+
+}
+
+app_init() {
+
+    return 0
+
+}
+
+app_stop() {
+
+    local try
+
+    app_check_pid
+
+    [ -f ${APP_PID_FILE} ] || {
+        echo "${app_name}'s pid does not exist, it may be not running"
+        return 2
+    }
+
+    kill -${APP_SIG_STOP} `cat ${APP_PID_FILE}`
+
+    while [ $((try++)) -lt 5 ]; do
+        [ -f ${APP_PID_FILE} ] || return 0
+        sleep 1
+    done
+
+    return 1
+
+}
+
+app_start() {
+
+    local try
+
+    app_check_pid
+
+    [ -f ${APP_PID_FILE} ] && {
+        echo "${app_name}'s pid already exists, it may be running"
+        return 2
+    }
+
+    if [ "${APP_BIN_NOHUP}" == "1" ]; then
+
+        ${APP_BIN_START} >/dev/null 2>&1 &
+
+        while [ $((try++)) -lt 5 ]; do
+            [ -f ${APP_PID_FILE} ] && return 0
+            sleep 2
+        done
+
+        return 1
+
+    fi
+
+    ${APP_BIN_START}
+
+}
+
+app_reload() {
+
+    app_check_pid
+
+    [ -f ${APP_PID_FILE} ] || {
+        echo "${app_name}'s pid does not exist, it may be not running"
+        return 2
+    }
+
+    kill -${APP_SIG_RELOAD} `cat ${APP_PID_FILE}`
+
+}
+
+app_restart() {
+
+    app_stop "${@}" && app_start "${@}"
+
+}
+
+app_check_pid() {
+
+    if [ -f ${APP_PID_FILE} ] ; then
+
+        local APP_PID=`cat ${APP_PID_FILE}`
+        if kill -0 ${APP_PID} 2>/dev/null ; then
+            return 1
+        fi
+
+        rm -f ${APP_PID_FILE}
+
+    fi
+
+}

@@ -1,0 +1,18 @@
+
+APP_BIN_NOHUP=1
+
+APP_BIN_START='/srv/mysql/bin/mysqld_safe'
+
+APP_PID_FILE='/srv/mysql/var/run/mysql.pid'
+
+APP_SIG_STOP='TERM'
+
+APP_SIG_RELOAD='HUP'
+
+
+app_once() {
+
+    mkdir -p /srv/mysql/var/run /srv/mysql/var/log /srv/mysql/var/tmp
+    chown -R _mysql:_mysql /srv/mysql/var/*
+
+}
