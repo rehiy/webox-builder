@@ -37,7 +37,6 @@ wb_rtm() {
 
 wb_get() {
 
-    local LD_LIBRARY_PATH=""
     local save=${wbget}/${1##*/}
 
     [ -z ${2} ] || save=${wbget}/${2}
