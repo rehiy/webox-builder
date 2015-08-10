@@ -11,10 +11,10 @@ fi
 [ -z ${webox} ] && webox=/srv/webox
 [ -d ${webox} ] || mkdir -p ${webox}
 
-[ -z ${wbget} ] && wbget=${wbdir}/download
+[ -z ${wbget} ] && wbget=${wbdir}/wb_cache
 [ -d ${wbget} ] || mkdir -p ${wbget}
 
-[ -z ${wbsrc} ] && wbsrc=${wbdir}/workspace
+[ -z ${wbsrc} ] && wbsrc=${wbdir}/wb_source
 [ -d ${wbsrc} ] || mkdir -p ${wbsrc}
 
 #################################################################RTM#
