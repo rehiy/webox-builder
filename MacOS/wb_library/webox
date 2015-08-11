@@ -402,7 +402,7 @@ wb_make_curl() {
 
     wb_apply http://curl.haxx.se/download/ ${1} .tar.gz
 
-    sed -i 's/SSLv2_client_method//' configure
+    sed -i~ 's/SSLv2_client_method//' configure
 
     ./configure --prefix=${webox}
 
