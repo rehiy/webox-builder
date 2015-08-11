@@ -24,12 +24,13 @@ fi
 
 export PATH="${wbsys}:${webox}/bin:${PATH}"
 
-export LD_LIBRARY_PATH="${webox}/lib"
-export LDFLAGS="-L${LD_LIBRARY_PATH}"
-
 export CFLAGS="-I${webox}/include"
 export CPPFLAGS="-I${webox}/include"
 export CXXFLAGS="-I${webox}/include"
+
+export LDFLAGS="-L${webox}/lib"
+
+export LD_LIBRARY_PATH="${webox}/lib"
 
 apt-get install -y --force-yes build-essential python-dev unzip
 

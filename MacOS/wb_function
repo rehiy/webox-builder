@@ -18,7 +18,7 @@ wb_rtm() {
     local path=${webox}/runtime
 
     if [ ! -f ${path} ] ; then
-        echo "export DYLD_LIBRARY_PATH=${webox}/lib" >${path}
+        touch ${path}
     fi
 
     for p in ${1}/bin ${1}/sbin; do

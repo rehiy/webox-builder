@@ -1,5 +1,0 @@
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-
-DYLD_LIBRARY_PATH=""
-
-${0##*/} "${@}"

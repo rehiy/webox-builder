@@ -24,9 +24,9 @@ fi
 
 export PATH="${wbsys}:${webox}/bin:${PATH}"
 
-export DYLD_LIBRARY_PATH="${webox}/lib"
-export LDFLAGS="-L${DYLD_LIBRARY_PATH}"
-
 export CFLAGS="-I${webox}/include"
 export CPPFLAGS="-I${webox}/include"
 export CXXFLAGS="-I${webox}/include"
+
+export LDFLAGS="-L${webox}/lib"
+
