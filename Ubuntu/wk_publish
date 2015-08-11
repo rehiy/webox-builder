@@ -38,4 +38,3 @@ find /srv -type f -name "sess_*" -exec rm {} \;
 find /srv -type f -name "lost+found" -exec rm {} \;
 
 tar -czvf ${wbdir}/webox.tgz /srv
-

@@ -10,7 +10,7 @@ if [ -x /usr/bin/macerror ]; then
 fi
 
 if [ -x /usr/bin/apt-get ]; then
-    name=webox-ubu-v5.0806.tgz
+    name=webox-ubu-v5.0810.tgz
 fi
 
 if [ $(which wget) ]; then
@@ -42,7 +42,7 @@ rm -rv srv/
 
 chown -R 0:0  /srv
 chmod -R 0777 /srv/webroot/*
-chmod -R 0755 /srv/webox /srv/service
+chmod -R 0755 /srv/service /srv/*/bin
 
 find /srv/*/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
 find /srv/*/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
