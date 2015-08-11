@@ -17,12 +17,9 @@ fi
 [ -z ${wbsrc} ] && wbsrc=${wbdir}/wb_source
 [ -d ${wbsrc} ] || mkdir -p ${wbsrc}
 
-[ -z ${wbsys} ] && wbsys=${wbdir}/wb_sysbin
-[ -d ${wbsys} ] && chmod 0755 ${wbsys}/*
-
 #################################################################RTM#
 
-export PATH="${wbsys}:${webox}/bin:${PATH}"
+export PATH="${webox}/bin:${PATH}"
 
 export CFLAGS="-I${webox}/include"
 export CPPFLAGS="-I${webox}/include"
@@ -30,3 +27,4 @@ export CXXFLAGS="-I${webox}/include"
 
 export LDFLAGS="-L${webox}/lib"
 
+export DYLD_LIBRARY_PATH="${webox}/lib"
