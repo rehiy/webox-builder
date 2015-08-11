@@ -14,9 +14,6 @@ source ${wbdir}/wb_function
 
 #################################################################Library#
 
-cp -av ${wbdir}/wb_profile/webox /srv/
-chmod -R 0755 /srv/webox/bin/
-
 source ${wbdir}/wb_library/webox
 wb_inst_webox
 

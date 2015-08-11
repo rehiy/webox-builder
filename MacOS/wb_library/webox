@@ -162,6 +162,9 @@ wb_make_zlib() {
 
     make && make install
 
+    # ln for curl cmake
+    ln -s /${webox}/lib/libz.so.${1##*-} /usr/lib/libz.so.${1##*-}
+
 }
 
 wb_inst_zlib() {

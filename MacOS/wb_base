@@ -19,12 +19,7 @@ fi
 
 #################################################################RTM#
 
-export PATH="${webox}/bin:${PATH}"
+export PATH=${webox}/bin:${PATH}
 
-export CFLAGS="-I${webox}/include"
-export CPPFLAGS="-I${webox}/include"
-export CXXFLAGS="-I${webox}/include"
-
-export LDFLAGS="-L${webox}/lib"
-
-export DYLD_LIBRARY_PATH="${webox}/lib"
+export CPATH=${webox}/include
+export LIBRARY_PATH=${webox}/lib

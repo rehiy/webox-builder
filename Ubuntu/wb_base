@@ -19,15 +19,12 @@ fi
 
 #################################################################RTM#
 
-export PATH="${webox}/bin:${PATH}"
+export PATH=${webox}/bin:${PATH}
 
-export CFLAGS="-I${webox}/include"
-export CPPFLAGS="-I${webox}/include"
-export CXXFLAGS="-I${webox}/include"
+export CPATH=${webox}/include
+export LIBRARY_PATH=${webox}/lib
 
-export LDFLAGS="-L${webox}/lib"
-
-export LD_LIBRARY_PATH="${webox}/lib"
+export LD_LIBRARY_PATH=${LIBRARY_PATH}
 
 apt-get install -y --force-yes build-essential python-dev unzip
 
