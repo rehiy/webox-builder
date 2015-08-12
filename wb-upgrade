@@ -28,11 +28,11 @@ tar -xvf ${name} && rm ${name}
 rm -rf ./srv/*/etc ./srv/*/var
 rm -rf ./srv/webroot
 
+rm -rf /srv/webox/
 rm -rf /srv/*/bin /srv/*/sbin
 rm -rf /srv/*/lib /srv/*/include
 rm -rf /srv/*/man /srv/*/share
 
-rm -rf /srv/webox/wkit
 rm -rf /srv/nginx/html
 rm -rf /srv/php5/php
 
