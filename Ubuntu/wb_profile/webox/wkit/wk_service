@@ -45,12 +45,14 @@ wk_service_usage() {
 
 wk_service_setup() {
 
+    local initd
+
     for wkfile in ${wkroot}/service/*; do
 
-        local initd=/etc/init.d/${wkfile##*/}
+        initd=/etc/init.d/${wkfile##*/}
 
         echo "setup ${initd}"
-        echo "#!${wkroot}/bin/wkit service" > ${initd}
+        echo "#!${wksbin}/wkit service" > ${initd}
 
         chmod 0755 ${initd}
 
@@ -60,9 +62,11 @@ wk_service_setup() {
 
 wk_service_remove() {
 
+    local initd
+
     for wkfile in ${wkroot}/service/*; do
 
-        local initd=/etc/init.d/${wkfile##*/}
+        initd=/etc/init.d/${wkfile##*/}
 
         echo "remove ${initd}"
         rm -f ${initd}

@@ -1,13 +1,15 @@
 #!/bin/bash
 
 wkexec=${0##*/}
-wktemp=/srv/webox/var
-wkroot=/srv/webox/wkit
 
 [ "${wkexec}" = "wkit" ] && {
     wkexec=${1}
     shift
 }
+
+wksbin=/srv/webox/bin
+wktemp=/srv/webox/var
+wkroot=/srv/webox/wkit
 
 source /srv/webox/runtime
 
