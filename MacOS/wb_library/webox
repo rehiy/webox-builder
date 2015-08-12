@@ -158,12 +158,9 @@ wb_make_zlib() {
 
     wb_apply http://zlib.net/ ${1} .tar.xz
 
-    ./configure --prefix=${webox} --64
+    CC=/usr/bin/clang ./configure --prefix=${webox} --64
 
     make && make install
-
-    # ln for curl cmake
-    ln -s /${webox}/lib/libz.so.${1##*-} /usr/lib/libz.so.${1##*-}
 
 }
 

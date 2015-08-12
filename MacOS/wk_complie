@@ -38,6 +38,7 @@ cp -av ${wbdir}/wb_profile/* /srv/
 chown -R 0:0  /srv
 chmod -R 0755 /srv/service
 chmod -R 0755 /srv/webox/bin/wkit
+chmod -R 0755 /srv/webox/wkit
 chmod -R 0755 /srv/webroot/*
 
 find /srv/*/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
