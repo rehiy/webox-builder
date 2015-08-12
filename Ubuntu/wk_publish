@@ -31,6 +31,8 @@ rm -rf /srv/webox/var/ready/*
 rm -rf /srv/mysql/var/data/*.*
 rm -rf /srv/mysql/var/data/test
 
+find /srv -type f -name *.a | xargs rm
+
 find /srv -type f -name "*.log" -exec rm {} \;
 find /srv -type f -name "*.pid" -exec rm {} \;
 find /srv -type f -name ".DS_Store" -exec rm {} \;

@@ -6,11 +6,11 @@
 cd ~
 
 if [ -x /usr/bin/macerror ]; then
-    name=webox-osx-v5.0806.tgz
+    name=webox-osx-v5.0812.tgz
 fi
 
 if [ -x /usr/bin/apt-get ]; then
-    name=webox-ubu-v5.0810.tgz
+    name=webox-ubu-v5.0812.tgz
 fi
 
 if [ $(which wget) ]; then
