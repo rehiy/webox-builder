@@ -1,0 +1,21 @@
+wk_m4=m4-1.4.17
+
+wb_make_m4() {
+
+    wb_apply http://mirrors.kernel.org/gnu/m4/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_m4() {
+
+    local name=${wk_m4}
+    local fine=${webox}/bin/m4
+
+    [ -e ${fine} ] || wb_make_m4 ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}

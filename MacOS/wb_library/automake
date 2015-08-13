@@ -1,0 +1,21 @@
+wk_automake=automake-1.15
+
+wb_make_automake() {
+
+    wb_apply http://mirrors.kernel.org/gnu/automake/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_automake() {
+
+    local name=${wk_automake}
+    local fine=${webox}/bin/automake
+
+    [ -e ${fine} ] || wb_make_automake ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}

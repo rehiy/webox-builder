@@ -1,0 +1,20 @@
+wk_curl=curl-7.43.0
+
+wb_make_curl() {
+
+    wb_apply http://curl.haxx.se/download/ ${1} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+}
+
+wb_inst_curl() {
+
+    local name=${wk_curl}
+    local fine=${webox}/lib/libcurl.a
+
+    [ -e ${fine} ] || wb_make_curl ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}

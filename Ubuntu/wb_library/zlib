@@ -1,0 +1,21 @@
+wk_zlib=zlib-1.2.8
+
+wb_make_zlib() {
+
+    wb_apply http://zlib.net/ ${1} .tar.xz
+
+    ./configure --prefix=${webox} --64
+
+    make && make install
+
+}
+
+wb_inst_zlib() {
+
+    local name=${wk_zlib}
+    local fine=${webox}/lib/libz.a
+
+    [ -e ${fine} ] || wb_make_zlib ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}

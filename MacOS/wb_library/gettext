@@ -1,0 +1,21 @@
+wk_gettext=gettext-0.19.5
+
+wb_make_gettext() {
+
+    wb_apply http://ftp.gnu.org/gnu/gettext/ ${1} .tar.xz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_gettext() {
+
+    local name=${wk_gettext}
+    local fine=${webox}/bin/gettext
+
+    [ -e ${fine} ] || wb_make_gettext ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}

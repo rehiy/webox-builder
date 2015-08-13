@@ -1,0 +1,23 @@
+wk_libiconv=libiconv-1.14
+
+wb_make_libiconv() {
+
+    wb_apply http://ftp.gnu.org/gnu/libiconv/ ${1} .tar.gz
+
+    sed -i '/gets is a security hole/d' srclib/stdio*.h
+
+    ./configure --prefix=${webox} --enable-shared
+
+    make && make install
+
+}
+
+wb_inst_libiconv() {
+
+    local name=${wk_libiconv}
+    local fine=${webox}/lib/libiconv.la
+
+    [ -e ${fine} ] || wb_make_libiconv ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}

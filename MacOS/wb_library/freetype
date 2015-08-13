@@ -1,0 +1,21 @@
+wk_freetype=freetype-2.5.5
+
+wb_make_freetype() {
+
+    wb_apply http://ftp.twaren.net/Unix/NonGNU/freetype/ ${1} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_freetype() {
+
+    local name=${wk_freetype}
+    local fine=${webox}/lib/libfreetype.a
+
+    [ -e ${fine} ] || wb_make_freetype ${name}
+    [ -e ${fine} ] || wb_error ${name}
+
+}
