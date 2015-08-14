@@ -23,3 +23,7 @@ export PATH=${webox}/bin:${PATH}
 
 export CPATH=${webox}/include
 export LIBRARY_PATH=${webox}/lib
+
+export KERNEL_BITS=64
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++

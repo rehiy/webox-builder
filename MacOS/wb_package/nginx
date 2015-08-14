@@ -34,8 +34,6 @@ wb_make_nginx() {
         $(wb_plus_nginx_http_echo) \
         --with-cc-opt='-O3'
 
-    sed -i~ "s/config \(.*openssl\)/Configure darwin64-x86_64-cc \1/" objs/Makefile
-
     make && make install
 
     rm -rf /srv/nginx/etc /srv/nginx/html/*

@@ -4,7 +4,7 @@ wb_make_openssl() {
 
     wb_apply http://www.openssl.org/source/ ${1} .tar.gz
 
-    ./Configure --prefix=${webox} linux-x86_64 shared
+    ./config --prefix=${webox} shared
 
     make && make install_sw
 
