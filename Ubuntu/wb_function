@@ -80,11 +80,11 @@ wb_apply() {
 
 wb_strip() {
 
-    local data=${wbsrc}/wb_strip
+    local data=${wbsrc}/wb_to_strip
 
-    echo "Searching files to be strip ..."
-    find ${1} -type f | xargs file | grep 'Mach-O \|ELF \| ar ' >${data}
-    sed -i~ 's/:.*//' ${data}
+    echo "Searching files to strip ..."
+    find ${1} -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >${data}
+    sed -i 's/:.*//' ${data}
 
     for line in $(<${data}); do
         echo "Strip: ${line}"

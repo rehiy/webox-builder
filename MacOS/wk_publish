@@ -12,26 +12,22 @@ fi
 
 source ${wbdir}/wb_function
 
-#####################################################################RUN#
+#####################################################################MIN#
 
-#wb_strip /srv/webox
+find /srv -name *.a | xargs rm
+find /srv -name *.la | xargs rm
 
-#wb_strip /srv/php5
-#wb_strip /srv/nginx
-#wb_strip /srv/mysql
+wb_strip /srv/*/{bin,sbin} > ${wbsrc}/wb_striped
 
-#####################################################################RUN#
+#####################################################################PKG#
 
 rm -rf /srv/*/var/run/*
 rm -rf /srv/*/var/log/*
 rm -rf /srv/*/var/tmp/*
 
-rm -rf /srv/webox/var/ready/*
-
 rm -rf /srv/mysql/var/data/*.*
-rm -rf /srv/mysql/var/data/test
 
-find /srv -name *.a | xargs rm
+rm -rf /srv/webox/var/ready/*
 
 find /srv -type f -name "*.log" -exec rm {} \;
 find /srv -type f -name "*.pid" -exec rm {} \;
