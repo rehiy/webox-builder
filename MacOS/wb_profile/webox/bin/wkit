@@ -9,9 +9,9 @@ wkexec=${0##*/}
 
 wksbin=/srv/webox/bin
 wktemp=/srv/webox/var
-wkroot=/srv/webox/wkit
+wkhome=/srv/webox/wkit
 
 source /srv/webox/runtime
 
-source ${wkroot}/wb_main
+source ${wkhome}/wb_main
 wk_run ${wkexec} "${@}"

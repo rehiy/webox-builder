@@ -54,20 +54,22 @@ wb_get() {
 
 wb_apply() {
 
-    local save=${2}${3}
+    local name=${2}${3}
     local dist=${wbsrc}/${2}
 
-    [ -z ${4} ] || save=${4}${3}
+    [ -z ${4} ] || name=${4}${3}
     [ -z ${4} ] || dist=${wbsrc}/${4}
 
     if [ ! -d ${dist} ]; then
 
         echo "Appling: ${1}${2}${3}"
 
+        local save=$(wb_get ${1}${2}${3} ${name})
+
         [ -d ${dist%/*} ] || mkdir -p ${dist%/*}
 
-        tar -xvf $(wb_get ${1}${2}${3} ${save}) -C ${dist%/*}
-        wb_error_check wb_apply ${save}
+        tar -xvf ${save} -C ${dist%/*}
+        wb_error_check wb_apply ${name}
 
     fi
 
@@ -80,17 +82,20 @@ wb_apply() {
 
 wb_strip() {
 
-    local data=${wbsrc}/wb_to_strip
+    local lst=${wbsrc}/wb_strip_list
 
-    echo "Searching files to strip ..."
-    find ${1} -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >${data}
-    sed -i 's/:.*//' ${data}
+    rm -f ${lst}
 
-    for line in $(<${data}); do
+    echo "Search ${1} to strip ..."
+    find ${1} -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >>${lst}
+
+    sed -i 's/:.*//' ${lst}
+
+    for line in $(<${lst}); do
         echo "Strip: ${line}"
         strip ${line}
     done
 
-    rm -f ${data}*
+    rm -f ${lst}
 
 }

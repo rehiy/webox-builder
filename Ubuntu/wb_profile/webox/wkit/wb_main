@@ -2,11 +2,11 @@
 wk_run() {
 
     local wkname=${1}
-    local wkfile=${wkroot}/wk_${1}
+    local wkfile=${wkhome}/wk_${1}
 
     if [ ! -f ${wkfile} ]; then
 
-        wkfile=${wkroot}/wk_${1%_*}
+        wkfile=${wkhome}/wk_${1%_*}
 
         if [ ! -f ${wkfile} ]; then
             wk_usage "${@}" | less
@@ -30,9 +30,9 @@ wk_usage() {
     local wkname
     local wkfile
 
-    cat ${wkroot}/wb_usage
+    cat ${wkhome}/wb_usage
 
-    for wkfile in ${wkroot}/wk_*; do
+    for wkfile in ${wkhome}/wk_*; do
 
         wkname=$(echo ${wkfile} | sed 's/^.\+\/wk_\([a-z0-9]\+\)$/\1/')
 
@@ -49,13 +49,14 @@ wk_ready() {
 
     local wkname=${1}
     local wbmark=${2}
-    local wbsdir=${wktemp}/ready
+
+    local wready=${wktemp}/ready
 
     if [ -n "${wbmark}" ]; then
-        mkdir -m 0755 -p ${wbsdir}
-        date > ${wbsdir}/${wkname}
+        mkdir -m 0755 -p ${wready}
+        date > ${wready}/${wkname}
     else
-        [ -f ${wbsdir}/${wkname} ]
+        [ -f ${wready}/${wkname} ]
     fi
 
 }

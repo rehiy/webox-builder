@@ -1,6 +1,6 @@
 
 app_name=${1##*[/.]}
-app_file=${wkroot}/service/${app_name}
+app_file=${wkhome}/service/${app_name}
 
 app_does='stop start reload restart'
 app_todo=${2:-help}

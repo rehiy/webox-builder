@@ -1,7 +1,7 @@
 
 wk_service() {
 
-    source ${wkroot}/wk_service_define "${@}"
+    source ${wkhome}/wk_service_define "${@}"
 
     [ -f ${app_file} ] || {
         wk_error "Aborted: ${app_name} not found"
@@ -37,9 +37,9 @@ wk_service_todo() {
 
 wk_service_usage() {
 
-    echo "service          manage service for ${wkroot}/service/*"
-    echo "service_setup    setup ${wkroot}/service/* to /etc/init.d/*"
-    echo "service_remove   remove /etc/init.d/* for ${wkroot}/service/*"
+    echo "service          manage service for ${wkhome}/service/*"
+    echo "service_setup    setup ${wkhome}/service/* to /etc/init.d/*"
+    echo "service_remove   remove /etc/init.d/* for ${wkhome}/service/*"
 
 }
 
@@ -47,7 +47,7 @@ wk_service_setup() {
 
     local initd
 
-    for wkfile in ${wkroot}/service/*; do
+    for wkfile in ${wkhome}/service/*; do
 
         initd=/etc/init.d/${wkfile##*/}
 
@@ -64,7 +64,7 @@ wk_service_remove() {
 
     local initd
 
-    for wkfile in ${wkroot}/service/*; do
+    for wkfile in ${wkhome}/service/*; do
 
         initd=/etc/init.d/${wkfile##*/}
 

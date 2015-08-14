@@ -1,11 +1,11 @@
 
 wk_install() {
 
-    chown 0:0  ${wkroot}
-    chmod 0755 ${wkroot}/bin/*
+    chown 0:0  ${wksbin}
+    chmod 0755 ${wksbin}/*
 
     rm -rf /bin/wkit
-    ln ${wkroot}/bin/wkit /bin/wkit
+    ln ${wksbin}/wkit /bin/wkit
 
 }
 

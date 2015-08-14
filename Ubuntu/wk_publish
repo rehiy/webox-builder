@@ -14,10 +14,20 @@ source ${wbdir}/wb_function
 
 #####################################################################MIN#
 
-find /srv -name *.a | xargs rm
-find /srv -name *.la | xargs rm
+if [ "${1}" == "-min" ]; then
 
-wb_strip /srv/*/{bin,sbin} > ${wbsrc}/wb_striped
+    find /srv -type f -name "*.a" -exec rm {} \;
+    find /srv -type f -name "*.la" -exec rm {} \;
+
+    wb_strip /srv/mysql/bin
+    wb_strip /srv/nginx/sbin
+    wb_strip /srv/php5/bin
+    wb_strip /srv/php5/sbin
+    wb_strip /srv/redis/bin
+    wb_strip /srv/webox/bin
+
+fi
+
 
 #####################################################################PKG#
 
@@ -35,4 +45,4 @@ find /srv -type f -name ".DS_Store" -exec rm {} \;
 find /srv -type f -name "sess_*" -exec rm {} \;
 find /srv -type d -name "lost+found" -exec rm {} \;
 
-tar -czvf ${wbdir}/webox.tgz /srv
+tar -czvf ${wbdir}/webox${1}.tgz /srv
