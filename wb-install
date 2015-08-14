@@ -5,12 +5,12 @@
 
 cd ~
 
-if [ -x /usr/bin/macerror ]; then
-    name=webox-osx-v5.0812.tgz
-fi
+bit=`getconf LONG_BIT`
 
-if [ -x /usr/bin/apt-get ]; then
-    name=webox-ubu-v5.0812.tgz
+if [ -x /usr/bin/macerror ]; then
+    name=webox-osx-v5.0812-${bit}bit.tgz
+else
+    name=webox-ubu-v5.0812-${bit}bit.tgz
 fi
 
 if [ $(which wget) ]; then
