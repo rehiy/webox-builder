@@ -17,7 +17,7 @@ source ${wbdir}/wb_function
 find /srv -name *.a | xargs rm
 find /srv -name *.la | xargs rm
 
-wb_strip /srv/*/{bin,sbin,lib} > ${wbsrc}/wb_striped
+wb_strip /srv/*/{bin,sbin} > ${wbsrc}/wb_striped
 
 #####################################################################PKG#
 
