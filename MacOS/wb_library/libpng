@@ -1,8 +1,8 @@
-wk_libpng=libpng-1.6.18
+export wk_libpng=libpng-1.6.18
 
 wb_make_libpng() {
 
-    wb_apply ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/ ${1} .tar.xz
+    wb_apply ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/ ${wk_libpng} .tar.xz
 
     ./configure --prefix=${webox}
 
@@ -12,10 +12,9 @@ wb_make_libpng() {
 
 wb_inst_libpng() {
 
-    local name=${wk_libpng}
     local fine=${webox}/lib/libpng.a
 
-    [ -e ${fine} ] || wb_make_libpng ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_libpng
+    [ -e ${fine} ] || wb_error ${wk_libpng}
 
 }

@@ -1,8 +1,8 @@
-wk_cmake=cmake-3.3.0
+export wk_cmake=cmake-3.3.0
 
 wb_make_cmake() {
 
-    wb_apply http://www.cmake.org/files/v3.3/ ${1} .tar.gz
+    wb_apply http://www.cmake.org/files/v3.3/ ${wk_cmake} .tar.gz
 
     ./bootstrap --prefix=${webox} --docdir=share/doc/cmake --system-curl
 
@@ -12,10 +12,9 @@ wb_make_cmake() {
 
 wb_inst_cmake() {
 
-    local name=${wk_cmake}
     local fine=${webox}/bin/cmake
 
-    [ -e ${fine} ] || wb_make_cmake ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_cmake
+    [ -e ${fine} ] || wb_error ${wk_cmake}
 
 }

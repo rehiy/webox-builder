@@ -1,4 +1,4 @@
-wk_redis=redis-3.0.3
+export wk_redis=redis-3.0.3
 
 wb_make_redis() {
 
@@ -15,8 +15,7 @@ wb_make_redis() {
 wb_inst_redis() {
 
     [ -d /srv/redis/bin ] || wb_make_redis
-
-    [ -d /srv/redis/bin ] || exit
+    [ -d /srv/redis/bin ] || wb_error ${wk_redis}
 
     wb_rtm /srv/redis
 

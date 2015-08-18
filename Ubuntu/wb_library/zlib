@@ -1,8 +1,8 @@
-wk_zlib=zlib-1.2.8
+export wk_zlib=zlib-1.2.8
 
 wb_make_zlib() {
 
-    wb_apply http://zlib.net/ ${1} .tar.xz
+    wb_apply http://zlib.net/ ${wk_zlib} .tar.xz
 
     ./configure --prefix=${webox} --$(getconf LONG_BIT)
 
@@ -12,10 +12,9 @@ wb_make_zlib() {
 
 wb_inst_zlib() {
 
-    local name=${wk_zlib}
     local fine=${webox}/lib/libz.a
 
-    [ -e ${fine} ] || wb_make_zlib ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_zlib
+    [ -e ${fine} ] || wb_error ${wk_zlib}
 
 }

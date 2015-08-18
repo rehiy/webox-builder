@@ -1,8 +1,8 @@
-wk_ncurses=ncurses-6.0-20150725
+export wk_ncurses=ncurses-6.0-20150725
 
 wb_make_ncurses() {
 
-    wb_apply ftp://invisible-island.net/ncurses/current/ ${1} .tgz
+    wb_apply ftp://invisible-island.net/ncurses/current/ ${wk_ncurses} .tgz
 
     ./configure --prefix=${webox} --mandir=${webox}/share/man --with-shared
 
@@ -12,10 +12,9 @@ wb_make_ncurses() {
 
 wb_inst_ncurses() {
 
-    local name=${wk_ncurses}
     local fine=${webox}/lib/libncurses.a
 
-    [ -e ${fine} ] || wb_make_ncurses ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_ncurses
+    [ -e ${fine} ] || wb_error ${wk_ncurses}
 
 }

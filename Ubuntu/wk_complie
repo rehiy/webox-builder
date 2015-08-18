@@ -12,40 +12,23 @@ fi
 
 source ${wbdir}/wb_function
 
-#################################################################Library#
+#################################################################Package#
 
 for pkg in $(ls ${wbdir}/wb_library); do
     source ${wbdir}/wb_library/${pkg}
 done
 
-wb_inst_m4
-wb_inst_autoconf
-wb_inst_automake
-wb_inst_bison
-wb_inst_pcre
-wb_inst_zlib
-wb_inst_openssl
-wb_inst_jpeg
-wb_inst_libpng
-wb_inst_freetype
-wb_inst_ncurses
-wb_inst_libiconv
-wb_inst_libmcrypt
-wb_inst_libxml2
-wb_inst_gettext
-wb_inst_curl
-wb_inst_cmake
-
-wb_rtm ${webox}
-
-#################################################################Package#
-
 for pkg in $(ls ${wbdir}/wb_package); do
     source ${wbdir}/wb_package/${pkg}
 done
 
+wb_inst_webox
+
 wb_inst_php5
+wb_inst_node
+
 wb_inst_nginx
+
 wb_inst_mysql
 wb_inst_redis
 

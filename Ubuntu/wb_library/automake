@@ -1,8 +1,8 @@
-wk_automake=automake-1.15
+export wk_automake=automake-1.15
 
 wb_make_automake() {
 
-    wb_apply http://mirrors.kernel.org/gnu/automake/ ${1} .tar.xz
+    wb_apply http://mirrors.kernel.org/gnu/automake/ ${wk_automake} .tar.xz
 
     ./configure --prefix=${webox}
 
@@ -12,10 +12,9 @@ wb_make_automake() {
 
 wb_inst_automake() {
 
-    local name=${wk_automake}
     local fine=${webox}/bin/automake
 
-    [ -e ${fine} ] || wb_make_automake ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_automake
+    [ -e ${fine} ] || wb_error ${wk_automake}
 
 }

@@ -1,8 +1,8 @@
-wk_openssl=openssl-1.0.2d
+export wk_openssl=openssl-1.0.2d
 
 wb_make_openssl() {
 
-    wb_apply http://www.openssl.org/source/ ${1} .tar.gz
+    wb_apply http://www.openssl.org/source/ ${wk_openssl} .tar.gz
 
     ./config --prefix=${webox} shared
 
@@ -12,10 +12,9 @@ wb_make_openssl() {
 
 wb_inst_openssl() {
 
-    local name=${wk_openssl}
     local fine=${webox}/lib/libssl.a
 
-    [ -e ${fine} ] || wb_make_openssl ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_openssl
+    [ -e ${fine} ] || wb_error ${wk_openssl}
 
 }

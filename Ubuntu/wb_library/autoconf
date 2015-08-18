@@ -1,8 +1,8 @@
-wk_autoconf=autoconf-2.69
+export wk_autoconf=autoconf-2.69
 
 wb_make_autoconf() {
 
-    wb_apply http://mirrors.kernel.org/gnu/autoconf/ ${1} .tar.xz
+    wb_apply http://mirrors.kernel.org/gnu/autoconf/ ${wk_autoconf} .tar.xz
 
     ./configure --prefix=${webox}
 
@@ -12,10 +12,9 @@ wb_make_autoconf() {
 
 wb_inst_autoconf() {
 
-    local name=${wk_autoconf}
     local fine=${webox}/bin/autoconf
 
-    [ -e ${fine} ] || wb_make_autoconf ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_autoconf
+    [ -e ${fine} ] || wb_error ${wk_autoconf}
 
 }

@@ -1,8 +1,8 @@
-wk_m4=m4-1.4.17
+export wk_m4=m4-1.4.17
 
 wb_make_m4() {
 
-    wb_apply http://mirrors.kernel.org/gnu/m4/ ${1} .tar.xz
+    wb_apply http://mirrors.kernel.org/gnu/m4/ ${wk_m4} .tar.xz
 
     ./configure --prefix=${webox}
 
@@ -12,10 +12,9 @@ wb_make_m4() {
 
 wb_inst_m4() {
 
-    local name=${wk_m4}
     local fine=${webox}/bin/m4
 
-    [ -e ${fine} ] || wb_make_m4 ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_m4
+    [ -e ${fine} ] || wb_error ${wk_m4}
 
 }

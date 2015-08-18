@@ -1,8 +1,8 @@
-wk_re2c=re2c-0.14.3
+export wk_re2c=re2c-0.14.3
 
 wb_make_re2c() {
 
-    wb_apply http://nchc.dl.sourceforge.net/project/re2c/re2c/${1##*-}/ ${1} .tar.gz
+    wb_apply http://nchc.dl.sourceforge.net/project/re2c/re2c/${wk_re2c##*-}/ ${wk_re2c} .tar.gz
 
     ./configure --prefix=${webox}
 
@@ -12,10 +12,9 @@ wb_make_re2c() {
 
 wb_inst_re2c() {
 
-    local name=${wk_re2c}
     local fine=${webox}/bin/re2c
 
-    [ -e ${fine} ] || wb_make_re2c ${name}
-    [ -e ${fine} ] || wb_error ${name}
+    [ -e ${fine} ] || wb_make_re2c
+    [ -e ${fine} ] || wb_error ${wk_re2c}
 
 }

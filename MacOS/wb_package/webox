@@ -1,0 +1,34 @@
+export wk_webox=webox-v0.5.08
+
+wb_make_webox() {
+
+    wb_inst_m4
+    wb_inst_autoconf
+    wb_inst_automake
+    wb_inst_bison
+    wb_inst_pcre
+    wb_inst_zlib
+    wb_inst_openssl
+    wb_inst_jpeg
+    wb_inst_libpng
+    wb_inst_freetype
+    wb_inst_ncurses
+    wb_inst_libiconv
+    wb_inst_libmcrypt
+    wb_inst_libxml2
+    wb_inst_gettext
+    wb_inst_curl
+    wb_inst_cmake
+
+}
+
+########################################################################
+
+wb_inst_webox() {
+
+    [ -d /srv/webox/bin ] || wb_make_webox
+    [ -d /srv/webox/bin ] || wb_error ${wk_webox}
+
+    wb_rtm /srv/webox
+
+}

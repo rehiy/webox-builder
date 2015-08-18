@@ -1,0 +1,24 @@
+export wk_node=node-v0.12.7
+
+wb_make_node() {
+
+    wb_apply https://nodejs.org/dist/${wk_node##*-}/ ${wk_node} .tar.gz
+
+    ./configure --prefix=/srv/node
+
+    make && make install
+
+    mkdir -p /srv/node/var
+
+}
+
+########################################################################
+
+wb_inst_node() {
+
+    [ -d /srv/node/bin ] || wb_make_node
+    [ -d /srv/node/bin ] || wb_error ${wk_node}
+
+    wb_rtm /srv/node
+
+}
