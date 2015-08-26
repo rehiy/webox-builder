@@ -1,0 +1,20 @@
+export wk_ImageMagick=ImageMagick
+
+wb_make_ImageMagick() {
+
+    wb_apply http://www.imagemagick.org/download/ ${wk_ImageMagick} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_ImageMagick() {
+
+    local fine=${webox}/bin/convert
+
+    [ -e ${fine} ] || wb_make_ImageMagick
+    [ -e ${fine} ] || wb_error ${wk_ImageMagick}
+
+}
