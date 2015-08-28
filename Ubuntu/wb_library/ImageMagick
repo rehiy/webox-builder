@@ -4,7 +4,7 @@ wb_make_ImageMagick() {
 
     wb_apply http://www.imagemagick.org/download/ ${wk_ImageMagick} .tar.gz
 
-    ./configure --prefix=${webox}
+    env LDFLAGS=-L${webox}/lib ./configure --prefix=${webox}
 
     make && make install
 
