@@ -11,6 +11,7 @@ wb_make_webox() {
     wb_inst_openssl
     wb_inst_jpeg
     wb_inst_libpng
+    wb_inst_libtiff
     wb_inst_freetype
     wb_inst_ncurses
     wb_inst_libiconv

@@ -1,0 +1,20 @@
+export wk_libtiff=tiff-3.8.2
+
+wb_make_libtiff() {
+
+    wb_apply http://dl.maptools.org/dl/libtiff/ ${wk_libtiff} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_libtiff() {
+
+    local fine=${webox}/lib/libtiff.a
+
+    [ -e ${fine} ] || wb_make_libtiff
+    [ -e ${fine} ] || wb_error ${wk_libtiff}
+
+}
