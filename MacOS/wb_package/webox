@@ -26,8 +26,7 @@ wb_make_webox() {
 
 wb_inst_webox() {
 
-    [ -d /srv/webox/bin ] || wb_make_webox
-    [ -d /srv/webox/bin ] || wb_error ${wk_webox}
+    wb_make_webox
 
     wb_rtm /srv/webox
 
