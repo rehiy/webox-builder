@@ -1,0 +1,20 @@
+export wk_iconv=libiconv-1.14
+
+wb_make_iconv() {
+
+    wb_apply http://ftp.gnu.org/gnu/libiconv/ ${wk_iconv} .tar.gz
+
+    ./configure --prefix=${webox} --enable-shared
+
+    make && make install
+
+}
+
+wb_inst_iconv() {
+
+    local fine=${webox}/lib/libiconv.la
+
+    [ -e ${fine} ] || wb_make_iconv
+    [ -e ${fine} ] || wb_error ${wk_iconv}
+
+}

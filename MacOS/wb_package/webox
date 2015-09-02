@@ -10,13 +10,13 @@ wb_make_webox() {
     wb_inst_zlib
     wb_inst_openssl
     wb_inst_jpeg
-    wb_inst_libpng
-    wb_inst_libtiff
+    wb_inst_png
+    wb_inst_tiff
     wb_inst_freetype
     wb_inst_ncurses
-    wb_inst_libiconv
-    wb_inst_libmcrypt
-    wb_inst_libxml2
+    wb_inst_iconv
+    wb_inst_mcrypt
+    wb_inst_xml2
     wb_inst_gettext
     wb_inst_curl
     wb_inst_cmake
