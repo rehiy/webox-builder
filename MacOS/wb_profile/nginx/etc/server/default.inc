@@ -5,15 +5,17 @@ server {
     include common/21.server_status;
     include common/22.server_error_page;
 
+    set $pooldir /srv/webroot/default;
+
     if ($host ~ ^([^\.]+)\.([^\.]+)$) {
         rewrite ^/?(.*)$ http://www.$host/$1 last;
     }
     if ($host ~* ([^\.]+)\.([^\.]+)\.([a-z]+)$) {
-        set $webroot /srv/webroot/default/$3.$2/$1;
+        set $webroot $pooldir/$3.$2/$1;
     }
 
     if (!-d $webroot) {
-        set $webroot /srv/webroot/default/sample;
+        set $webroot $pooldir/sample;
     }
 
     root  $webroot;
