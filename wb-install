@@ -5,13 +5,8 @@
 
 cd ~
 
-bit=`getconf LONG_BIT`
-
-if [ -x /usr/bin/macerror ]; then
-    name=webox-osx-v5.0812-${bit}bit.tgz
-else
-    name=webox-ubu-v5.0812-${bit}bit.tgz
-fi
+plat=$(uname -s)-$(getconf LONG_BIT)
+name=Webox-${plat}bit-v5.0818.tgz
 
 if [ $(which wget) ]; then
     wget -c -O ${name} http://dev.anrip.com/webox/${name}
@@ -19,7 +14,8 @@ else
     curl -C - -o ${name} http://dev.anrip.com/webox/${name}
 fi
 
-tar -xvf ${name} && rm ${name}
+tar -xvf ${name}
+rm -rf ${name}
 
 chown -R 0:0  srv
 chmod -R 0777 srv/webroot/*
@@ -34,6 +30,6 @@ rm -rf srv/
 
 [ -x /srv/service ] && /srv/service start
 
-if [ -x /usr/bin/apt-get ]; then
+if [ -x /usr/sbin/service ]; then
     /srv/webox/bin/wkit service_setup
 fi

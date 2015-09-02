@@ -16,20 +16,29 @@ source ${wbdir}/wb_function
 
 if [ "${1}" == "-min" ]; then
 
+    mkdir -p /srv/webox/sbin
+    for x in wkit convert; do
+        cp -av /srv/webox/bin/${x} /srv/webox/sbin/
+    done
+
+    rm -rf /srv/webox/{bin,etc,man,share}
+    mv /srv/webox/sbin /srv/webox/bin
+
     find /srv -type f -name "*.a" -exec rm {} \;
     find /srv -type f -name "*.la" -exec rm {} \;
 
-    wb_strip /srv/mysql/bin
-    wb_strip /srv/nginx/sbin
-    wb_strip /srv/php5/bin
-    wb_strip /srv/php5/sbin
-    wb_strip /srv/redis/bin
     wb_strip /srv/webox/bin
+
+    wb_strip /srv/nginx/sbin
+
+    wb_strip /srv/redis/bin
+    wb_strip /srv/mysql/bin
+
+    wb_strip /srv/php5/bin
 
 fi
 
-
-#####################################################################PKG#
+#####################################################################CLS#
 
 rm -rf /srv/*/var/run/*
 rm -rf /srv/*/var/log/*
@@ -45,4 +54,7 @@ find /srv -type f -name ".DS_Store" -exec rm {} \;
 find /srv -type f -name "sess_*" -exec rm {} \;
 find /srv -type d -name "lost+found" -exec rm {} \;
 
-tar -czvf ${wbdir}/webox${1}.tgz /srv
+#####################################################################PKG#
+
+plat=$(uname -s)-$(getconf LONG_BIT)
+tar -czvf ${wbdir}/Weobx-${plat}bit${1}.tgz /srv
