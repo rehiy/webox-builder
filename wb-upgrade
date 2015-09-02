@@ -6,7 +6,7 @@
 cd ~
 
 plat=$(uname -s)-$(getconf LONG_BIT)
-name=Webox-${plat}bit-v5.0818.tgz
+name=Webox-${plat}bit-v5.0902.tgz
 
 if [ $(which wget) ]; then
     wget -c -O ${name} http://dev.anrip.com/webox/${name}
@@ -20,7 +20,10 @@ rm -rf ${name}
 chown -R 0:0  srv
 chmod -R 0777 srv/webroot/*
 
-rm -rf srv/webroot srv/*/etc srv/*/var
+rm -rf srv/webroot srv/*/var
+rm -rf srv/*/etc
+
+rm -rf srv/node
 
 ####################################################################
 
@@ -39,6 +42,6 @@ rm -rf srv/
 
 [ -x /srv/service ] && /srv/service start
 
-if [ -x /usr/bin/apt-get ]; then
+if [ -x /usr/sbin/service ]; then
     /srv/webox/bin/wkit service_setup
 fi

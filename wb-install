@@ -6,7 +6,7 @@
 cd ~
 
 plat=$(uname -s)-$(getconf LONG_BIT)
-name=Webox-${plat}bit-v5.0818.tgz
+name=Webox-${plat}bit-v5.0902.tgz
 
 if [ $(which wget) ]; then
     wget -c -O ${name} http://dev.anrip.com/webox/${name}

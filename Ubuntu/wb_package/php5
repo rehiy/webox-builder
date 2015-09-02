@@ -9,6 +9,7 @@ wb_make_php5() {
         --sysconfdir=/srv/php5/etc \
         --with-config-file-path=/srv/php5/etc \
         --with-config-file-scan-dir=/srv/php5/etc/php.d \
+        --with-layout=GNU \
         --without-pear \
         --disable-rpath \
         --disable-cgi \
