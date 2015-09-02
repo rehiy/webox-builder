@@ -4,7 +4,7 @@ wb_make_tiff() {
 
     wb_apply http://dl.maptools.org/dl/libtiff/ ${wk_tiff} .tar.gz
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${webox} --mandir=${webox}/share/man
 
     make && make install
 

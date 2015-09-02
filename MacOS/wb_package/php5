@@ -9,8 +9,9 @@ wb_make_php5() {
         --sysconfdir=/srv/php5/etc \
         --with-config-file-path=/srv/php5/etc \
         --with-config-file-scan-dir=/srv/php5/etc/php.d \
-        --disable-rpath \
         --without-pear \
+        --disable-rpath \
+        --disable-cgi \
         --enable-fpm \
         --enable-calendar \
         --enable-mbstring \
@@ -42,7 +43,7 @@ wb_make_php5() {
 
     wb_make_php5_pecl redis-2.2.7
 
-    rm -rf /srv/php5/etc/*
+    rm -rf /srv/php5/etc /srv/php5/php
 
 }
 

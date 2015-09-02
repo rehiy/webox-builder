@@ -17,24 +17,27 @@ source ${wbdir}/wb_function
 if [ "${1}" == "-min" ]; then
 
     mkdir -p /srv/webox/sbin
-    for x in wkit convert; do
+    for x in wkit curl convert openssl; do
         cp -av /srv/webox/bin/${x} /srv/webox/sbin/
+    done
+
+    for x in cmake gettext libmcrypt pkgconfig terminfo preloadable*; do
+        rm -rf /srv/webox/lib/${x}
     done
 
     rm -rf /srv/webox/{bin,etc,man,share}
     mv /srv/webox/sbin /srv/webox/bin
 
-    find /srv -type f -name "*.a" -exec rm {} \;
-    find /srv -type f -name "*.la" -exec rm {} \;
+    find /srv -name "*.a" -exec rm {} \;
+    find /srv -name "*.la" -exec rm {} \;
 
     wb_strip /srv/webox/bin
 
+    wb_strip /srv/mysql/bin
+    wb_strip /srv/redis/bin
+
     wb_strip /srv/nginx/sbin
 
-    wb_strip /srv/redis/bin
-    wb_strip /srv/mysql/bin
-
-    wb_strip /srv/php5/bin
 
 fi
 
