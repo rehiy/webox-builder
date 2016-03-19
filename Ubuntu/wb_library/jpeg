@@ -1,4 +1,4 @@
-export wk_jpeg=jpeg-9a
+export wk_jpeg=jpeg-9b
 
 wb_make_jpeg() {
 

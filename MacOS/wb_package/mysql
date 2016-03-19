@@ -1,8 +1,8 @@
-export wk_mysql=mysql-5.6.27
+export wk_mysql=mysql-5.7.11
 
 wb_make_mysql() {
 
-    wb_apply http://cdn.mysql.com/Downloads/MySQL-5.6/ ${wk_mysql} .tar.gz
+    wb_apply http://cdn.mysql.com/Downloads/MySQL-5.7/ ${wk_mysql} .tar.gz
 
     rm -f CMakeCache.txt
 

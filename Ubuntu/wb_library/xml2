@@ -1,4 +1,4 @@
-export wk_xml2=libxml2-2.9.2
+export wk_xml2=libxml2-2.9.3
 
 wb_make_xml2() {
 

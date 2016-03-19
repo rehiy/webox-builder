@@ -1,4 +1,4 @@
-export wk_freetype=freetype-2.5.5
+export wk_freetype=freetype-2.6.3
 
 wb_make_freetype() {
 

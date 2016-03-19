@@ -1,4 +1,4 @@
-export wk_png=libpng-1.6.18
+export wk_png=libpng-1.6.21
 
 wb_make_png() {
 
