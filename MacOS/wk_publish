@@ -16,17 +16,17 @@ source ${wbdir}/wb_function
 
 if [ "${1}" == "-min" ]; then
 
-    mkdir -p /srv/webox/sbin
-    for x in wkit curl convert openssl; do
-        cp -av /srv/webox/bin/${x} /srv/webox/sbin/
+    for d in cmake gettext libmcrypt terminfo preloadable_*; do
+        rm -rf /srv/webox/lib/${d}
     done
 
-    for x in cmake gettext libmcrypt pkgconfig terminfo preloadable*; do
-        rm -rf /srv/webox/lib/${x}
+    mkdir -p /srv/webox/bin2
+    for f in wkit curl convert openssl; do
+        mv /srv/webox/bin/${f} /srv/webox/bin2/
     done
 
     rm -rf /srv/webox/{bin,etc,man,share}
-    mv /srv/webox/sbin /srv/webox/bin
+    mv /srv/webox/bin2 /srv/webox/bin
 
     find /srv -name "*.a" -exec rm {} \;
     find /srv -name "*.la" -exec rm {} \;

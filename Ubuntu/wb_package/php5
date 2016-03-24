@@ -43,6 +43,7 @@ wb_make_php5() {
     wb_make_php5_ext pcntl
 
     wb_make_php5_pecl redis-2.2.7
+    wb_make_php5_pecl geoip-1.1.0
 
     rm -rf /srv/php5/etc /srv/php5/php
 

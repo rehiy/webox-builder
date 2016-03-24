@@ -20,16 +20,20 @@ wb_make_nginx() {
         --http-fastcgi-temp-path=/srv/nginx/var/tmp/fastcgi \
         --http-uwsgi-temp-path=/srv/nginx/var/tmp/uwsgi \
         --http-scgi-temp-path=/srv/nginx/var/tmp/scgi \
+        --with-file-aio \
         --with-http_ssl_module \
+        --with-http_v2_module \
         --with-http_realip_module \
         --with-http_addition_module \
+        --with-http_image_filter_module=dynamic \
+        --with-http_geoip_module=dynamic \
+        --with-http_sub_module \
         --with-http_gzip_static_module \
         --with-http_stub_status_module \
         --with-pcre=${wbsrc}/${wk_pcre} \
         --with-zlib=${wbsrc}/${wk_zlib} \
         --with-openssl=${wbsrc}/${wk_openssl} \
         $(wb_plus_nginx_http_cache_purge) \
-        $(wb_plus_nginx_http_subs_filter) \
         $(wb_plus_nginx_http_echo) \
         --with-cc-opt='-O3'
 
@@ -58,23 +62,6 @@ wb_plus_nginx_http_cache_purge() {
 
 }
 
-wb_plus_nginx_http_subs_filter() {
-
-    if [ ! -d http_subs_filter ]; then
-
-        local url=https://codeload.github.com/yaoweibin/ngx_http_substitutions_filter_module/zip/master
-        local zip=$(wb_get ${url} ${wk_nginx}/ngx_http_substitutions_filter_module-master.zip)
-
-        unzip -q ${zip} && mv ngx_http_substitutions_filter_module-master http_subs_filter
-
-        wb_error_check 'not found http_subs_filter'
-
-    fi
-
-    echo "--add-module=http_subs_filter"
-
-}
-
 wb_plus_nginx_http_echo() {
 
     if [ ! -d http_echo ]; then
@@ -91,7 +78,6 @@ wb_plus_nginx_http_echo() {
     echo "--add-module=http_echo"
 
 }
-
 
 ########################################################################
 
