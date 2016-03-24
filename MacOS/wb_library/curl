@@ -1,8 +1,8 @@
-export wk_curl=curl-7.47.1
+export wk_curl=curl-7.48.0
 
 wb_make_curl() {
 
-    wb_apply http://curl.haxx.se/download/ ${wk_curl} .tar.gz
+    wb_apply https://curl.haxx.se/download/ ${wk_curl} .tar.gz
 
     ./configure --prefix=${webox}
 

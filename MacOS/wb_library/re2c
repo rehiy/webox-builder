@@ -2,7 +2,7 @@ export wk_re2c=re2c-0.16
 
 wb_make_re2c() {
 
-    wb_apply http://nchc.dl.sourceforge.net/project/re2c/re2c/${wk_re2c##*-}/ ${wk_re2c} .tar.gz
+    wb_apply https://github.com/skvadrik/re2c/releases/download/${wk_re2c##*-}/ ${wk_re2c} .tar.gz
 
     ./configure --prefix=${webox}
 

@@ -2,7 +2,7 @@ export wk_cmake=cmake-3.5.0
 
 wb_make_cmake() {
 
-    wb_apply http://www.cmake.org/files/v3.5/ ${wk_cmake} .tar.gz
+    wb_apply https://cmake.org/files/v3.5/ ${wk_cmake} .tar.gz
 
     ./bootstrap --prefix=${webox} --docdir=share/doc/cmake --system-curl
 

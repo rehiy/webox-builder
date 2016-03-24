@@ -2,7 +2,7 @@ export wk_pcre=pcre-8.38
 
 wb_make_pcre() {
 
-    wb_apply http://jaist.dl.sourceforge.net/project/pcre/pcre/${wk_pcre##*-}/ ${wk_pcre} .tar.gz
+    wb_apply http://ftp.csx.cam.ac.uk/pub/software/programming/pcre/ ${wk_pcre} .tar.gz
 
     ./configure --prefix=${webox}
 

@@ -6,8 +6,9 @@ wb_make_mysql() {
 
     rm -f CMakeCache.txt
 
-    sed -i ':a;N;$!ba;s/char buf/\/\/char buf/'  cmd-line-utils/libedit/terminal.c
-    sed -i ':a;N;$!ba;s/area = buf/area = NULL/' cmd-line-utils/libedit/terminal.c
+    # fix 5.6.x error `Segmentation fault`
+    #sed -i ':a;N;$!ba;s/char buf/\/\/char buf/'  cmd-line-utils/libedit/terminal.c
+    #sed -i ':a;N;$!ba;s/area = buf/area = NULL/' cmd-line-utils/libedit/terminal.c
 
     cmake . \
         -DCMAKE_INSTALL_PREFIX=/srv/mysql \

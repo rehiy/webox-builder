@@ -1,8 +1,8 @@
-export wk_mcrypt=libmcrypt-2.5.8
+export wk_mcrypt=libmcrypt-2.5.7
 
 wb_make_mcrypt() {
 
-    wb_apply http://jaist.dl.sourceforge.net/project/mcrypt/Libmcrypt/${wk_mcrypt##*-}/ ${wk_mcrypt} .tar.gz
+    wb_apply ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/libmcrypt/ ${wk_mcrypt} .tar.gz
 
     ./configure --prefix=${webox} --mandir=${webox}/share/man
 
