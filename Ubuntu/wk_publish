@@ -62,4 +62,7 @@ find /srv -type d -name "lost+found" -exec rm {} \;
 #####################################################################PKG#
 
 plat=$(uname -s)-$(getconf LONG_BIT)
-tar -czvf ${wbdir}/Weobx-${plat}bit${1}.tgz /srv
+dist=${wbdir}/Weobx-${plat}bit${1}.tgz
+
+tar -czvf ${dist} /srv --exclude=/srv/webox2
+
