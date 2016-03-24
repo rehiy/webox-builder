@@ -43,7 +43,7 @@ wb_make_php5() {
     wb_make_php5_ext pcntl
 
     wb_make_php5_pecl redis-2.2.7
-    wb_make_php5_pecl geoip-1.1.0
+    wb_make_php5_pecl geoip-1.1.0 --with-geoip=${webox}
 
     rm -rf /srv/php5/etc /srv/php5/php
 
@@ -53,7 +53,9 @@ wb_make_php5_ext() {
 
     cd ${wbsrc}/${wk_php5}/ext/${1}
 
-    /srv/php5/bin/phpize && ./configure \
+    shift 1
+
+    /srv/php5/bin/phpize && ./configure "${@}" \
         --with-php-config=/srv/php5/bin/php-config
 
     make && make install
@@ -65,7 +67,7 @@ wb_make_php5_pecl() {
     wb_apply http://pecl.php.net/get/ ${1} .tgz ${wk_php5}/ext/${1}
     rm -rf ../package.xml
 
-    wb_make_php5_ext ${1}
+    wb_make_php5_ext "${@}"
 
 }
 

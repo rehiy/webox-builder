@@ -6,6 +6,7 @@ wb_make_webox() {
     wb_inst_autoconf
     wb_inst_automake
     wb_inst_bison
+    wb_inst_re2c
     wb_inst_pcre
     wb_inst_zlib
     wb_inst_openssl
