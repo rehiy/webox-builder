@@ -21,9 +21,9 @@ wb_make_php5() {
         --enable-sockets \
         --enable-ftp \
         --with-pcre-dir=${webox} \
-        --with-zlib-dir=${webox} \
         --with-libxml-dir=${webox} \
-        --with-openssl-dir=${webox} \
+        --with-zlib=${webox} \
+        --with-openssl=${webox} \
         --with-mcrypt=${webox} \
         --with-iconv=${webox} \
         --with-gettext=${webox} \
