@@ -21,8 +21,6 @@ wb_make_webox() {
     wb_inst_curl
     wb_inst_cmake
 
-    wb_inst_imagick
-
 }
 
 ########################################################################

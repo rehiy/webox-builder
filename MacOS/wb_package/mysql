@@ -21,23 +21,27 @@ wb_make_mysql() {
         -DWITH_ZLIB=${webox} \
         -DCURSES_LIBRARY=${webox}/lib/libncurses.a \
         -DCURSES_INCLUDE_PATH=${webox}/include \
+        -DWITH_BOOST=${wbsrc}/mysql-boost \
+        -DDOWNLOAD_BOOST=1 \
         -DWITH_DEBUG=0
 
     make && make install
 
     sleep 1
 
-    mkdir -p /srv/mysql/var/run /srv/mysql/var/log
-    mkdir -p /srv/mysql/var/tmp /srv/mysql/var/data
+    mkdir -p /srv/mysql/etc/conf.d
+    mkdir -p /srv/mysql/var/run
+    mkdir -p /srv/mysql/var/log
+    mkdir -p /srv/mysql/var/tmp
 
-    /srv/mysql/scripts/mysql_install_db \
+    /srv/mysql/bin/mysqld --initialize-insecure \
         --basedir=/srv/mysql --datadir=/srv/mysql/var/data
 
     sleep 2
 
-    rm -rf /srv/mysql/*.* /srv/mysql/README /srv/mysql/COPYING /srv/mysql/INSTALL-BINARY
-    rm -rf /srv/mysql/data /srv/mysql/docs /srv/mysql/scripts /srv/mysql/support-files
-    rm -rf /srv/mysql/sql-bench /srv/mysql/mysql-test /srv/mysql/bin/*test
+    rm -rf /srv/mysql/README /srv/mysql/COPYING
+    rm -rf /srv/mysql/docs /srv/mysql/support-files
+    rm -rf /srv/mysql/mysql-test /srv/mysql/bin/*test
     rm -rf /srv/mysql/bin/*embedded
 
 }

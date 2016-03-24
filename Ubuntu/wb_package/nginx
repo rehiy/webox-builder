@@ -21,7 +21,6 @@ wb_make_nginx() {
         --http-uwsgi-temp-path=/srv/nginx/var/tmp/uwsgi \
         --http-scgi-temp-path=/srv/nginx/var/tmp/scgi \
         --with-http_ssl_module \
-        --with-http_spdy_module \
         --with-http_realip_module \
         --with-http_addition_module \
         --with-http_gzip_static_module \

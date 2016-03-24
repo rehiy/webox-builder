@@ -45,7 +45,7 @@ wb_get() {
     if [ $(which wget) ]; then
         wget --no-check-certificate -c -O ${save} ${1}
     else
-        curl -k -C - -o ${save} ${1}
+        curl -k -L -C - -o ${save} ${1}
     fi
 
     echo ${save}
