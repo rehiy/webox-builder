@@ -2,49 +2,42 @@ export wk_mysql=mysql-5.7.11
 
 wb_make_mysql() {
 
+    # http://dev.mysql.com/doc/refman/5.7/en/source-configuration-options.html
+
     wb_apply http://cdn.mysql.com/Downloads/MySQL-5.7/ ${wk_mysql} .tar.gz
 
     rm -f CMakeCache.txt
-
-    # fix 5.6.x error `Segmentation fault`
-    #sed -i ':a;N;$!ba;s/char buf/\/\/char buf/'  cmd-line-utils/libedit/terminal.c
-    #sed -i ':a;N;$!ba;s/area = buf/area = NULL/' cmd-line-utils/libedit/terminal.c
 
     cmake . \
         -DCMAKE_INSTALL_PREFIX=/srv/mysql \
         -DSYSCONFDIR=/srv/mysql/etc \
         -DMYSQL_DATADIR=/srv/mysql/var/data \
         -DMYSQL_UNIX_ADDR=/srv/mysql/var/run/mysqld.sock \
-        -DWITH_INNOBASE_STORAGE_ENGINE=1 \
-        -DWITH_READLINE=1 \
+        -DINSTALL_SHAREDIR=/srv/mysql/share/mysql \
+        -DINSTALL_MANDIR=/srv/mysql/share/man \
         -DENABLED_LOCAL_INFILE=1 \
-        -DEXTRA_CHARSETS=all \
         -DDEFAULT_CHARSET=utf8 \
         -DDEFAULT_COLLATION=utf8_general_ci \
         -DWITH_SSL=${webox} \
         -DWITH_ZLIB=${webox} \
-        -DCURSES_LIBRARY=${webox}/lib/libncurses.a \
-        -DCURSES_INCLUDE_PATH=${webox}/include \
         -DWITH_BOOST=${wbsrc} \
         -DDOWNLOAD_BOOST=1 \
-        -DWITH_DEBUG=0
+        -DDOWNLOAD_BOOST_TIMEOUT=600
 
     make && make install
 
     sleep 1
 
     mkdir -p /srv/mysql/etc/conf.d
-    mkdir -p /srv/mysql/var/run
-    mkdir -p /srv/mysql/var/log
-    mkdir -p /srv/mysql/var/tmp
+    mkdir -p /srv/mysql/var/{run,log,tmp}
 
     /srv/mysql/bin/mysqld --initialize-insecure \
         --basedir=/srv/mysql --datadir=/srv/mysql/var/data
 
     sleep 2
 
-    rm -rf /srv/mysql/README /srv/mysql/COPYING
-    rm -rf /srv/mysql/docs /srv/mysql/support-files
+    rm -rf /srv/mysql/{README,COPYING}
+    rm -rf /srv/mysql/{docs,scripts,support-files}
     rm -rf /srv/mysql/mysql-test /srv/mysql/bin/*test
     rm -rf /srv/mysql/bin/*embedded
 

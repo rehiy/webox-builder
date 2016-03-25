@@ -24,6 +24,9 @@ export PATH=${webox}/bin:${PATH}
 export CPATH=${webox}/include
 export LIBRARY_PATH=${webox}/lib
 
+export LC_COLLATE=C
+export LC_CTYPE=C
+
 export KERNEL_BITS=64
 
 export CC=/usr/bin/clang

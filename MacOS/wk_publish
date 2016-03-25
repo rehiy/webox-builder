@@ -21,7 +21,7 @@ if [ "${1}" == "-min" ]; then
     done
 
     mkdir -p /srv/webox/bin2
-    for f in wkit curl convert openssl; do
+    for f in wkit curl openssl; do
         mv /srv/webox/bin/${f} /srv/webox/bin2/
     done
 
@@ -62,5 +62,5 @@ find /srv -type d -name "lost+found" -exec rm {} \;
 plat=$(uname -s)-$(getconf LONG_BIT)
 dist=${wbdir}/Weobx-${plat}bit${1}.tgz
 
-tar -czvf ${dist} /srv --exclude=/srv/webox2
+tar --exclude webox2 -czvf ${dist} /srv
 
