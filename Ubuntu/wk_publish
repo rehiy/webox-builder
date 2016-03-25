@@ -6,7 +6,7 @@ if [ -f $(pwd)/wb_base ]; then
 fi
 
 if [ -z ${wbdir} ]; then
-    echo "Please use './package' to run this script"
+    echo "Please use './wk_publish' to run this script"
     exit 1
 fi
 

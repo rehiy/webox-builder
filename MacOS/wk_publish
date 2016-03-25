@@ -51,6 +51,8 @@ rm -rf /srv/webox/var/ready/*
 
 rm -rf /srv/mysql/var/data/*.cnf
 
+xattr -rd com.apple.quarantine /srv
+
 find /srv -type f -name "*.log" -exec rm {} \;
 find /srv -type f -name "*.pid" -exec rm {} \;
 find /srv -type f -name ".DS_Store" -exec rm {} \;

@@ -20,7 +20,6 @@ wb_make_nginx() {
         --http-fastcgi-temp-path=/srv/nginx/var/tmp/fastcgi \
         --http-uwsgi-temp-path=/srv/nginx/var/tmp/uwsgi \
         --http-scgi-temp-path=/srv/nginx/var/tmp/scgi \
-        --with-file-aio \
         --with-http_ssl_module \
         --with-http_v2_module \
         --with-http_realip_module \
