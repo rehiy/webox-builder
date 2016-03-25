@@ -25,7 +25,7 @@ wb_make_mysql() {
         -DWITH_ZLIB=${webox} \
         -DCURSES_LIBRARY=${webox}/lib/libncurses.a \
         -DCURSES_INCLUDE_PATH=${webox}/include \
-        -DWITH_BOOST=${wbsrc}/mysql-boost \
+        -DWITH_BOOST=${wbsrc} \
         -DDOWNLOAD_BOOST=1 \
         -DWITH_DEBUG=0
 
