@@ -13,8 +13,6 @@ wb_make_mysql() {
         -DSYSCONFDIR=/srv/mysql/etc \
         -DMYSQL_DATADIR=/srv/mysql/var/data \
         -DMYSQL_UNIX_ADDR=/srv/mysql/var/run/mysqld.sock \
-        -DINSTALL_SHAREDIR=/srv/mysql/share/mysql \
-        -DINSTALL_MANDIR=/srv/mysql/share/man \
         -DENABLED_LOCAL_INFILE=1 \
         -DDEFAULT_CHARSET=utf8 \
         -DDEFAULT_COLLATION=utf8_general_ci \
