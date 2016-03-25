@@ -6,7 +6,7 @@ if [ -f $(pwd)/wb_base ]; then
 fi
 
 if [ -z ${wbdir} ]; then
-    echo "Please use './complie' to run this script"
+    echo "Please use './wk_complie' to run this script"
     exit 1
 fi
 

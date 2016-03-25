@@ -49,9 +49,9 @@ rm -rf /srv/*/var/run/*
 rm -rf /srv/*/var/log/*
 rm -rf /srv/*/var/tmp/*
 
-rm -rf /srv/mysql/var/data/*.*
-
 rm -rf /srv/webox/var/ready/*
+
+rm -rf /srv/mysql/var/data/*.cnf
 
 find /srv -type f -name "*.log" -exec rm {} \;
 find /srv -type f -name "*.pid" -exec rm {} \;

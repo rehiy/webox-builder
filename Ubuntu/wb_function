@@ -89,7 +89,7 @@ wb_strip() {
     echo "Search ${1} to strip ..."
     find ${1} -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >>${lst}
 
-    sed -i 's/:.*//' ${lst}
+    sed -i~ 's/:.*//' ${lst}
 
     for line in $(<${lst}); do
         echo "Strip: ${line}"
