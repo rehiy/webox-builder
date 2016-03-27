@@ -14,28 +14,29 @@ wb_make_php5() {
         --disable-rpath \
         --disable-cgi \
         --enable-fpm \
+        --enable-bcmath \
         --enable-calendar \
-        --enable-mbstring \
-        --enable-zip \
         --enable-exif \
-        --enable-sockets \
         --enable-ftp \
-        --with-pcre-dir=${webox} \
-        --with-libxml-dir=${webox} \
-        --with-zlib=${webox} \
-        --with-openssl=${webox} \
-        --with-mcrypt=${webox} \
-        --with-iconv=${webox} \
-        --with-gettext=${webox} \
-        --with-curl=${webox} \
+        --enable-mbstring \
+        --enable-sockets \
+        --enable-zip \
+        --with-mysql \
+        --with-mysqli \
+        --with-pdo-mysql \
         --with-gd \
         --enable-gd-native-ttf \
         --with-freetype-dir=${webox} \
         --with-jpeg-dir=${webox} \
         --with-png-dir=${webox} \
-        --with-mysql \
-        --with-mysqli \
-        --with-pdo-mysql
+        --with-curl=${webox} \
+        --with-gettext=${webox} \
+        --with-iconv=${webox} \
+        --with-mcrypt=${webox} \
+        --with-openssl=${webox} \
+        --with-pcre-dir=${webox} \
+        --with-libxml-dir=${webox} \
+        --with-zlib=${webox}
 
     make && make install
 

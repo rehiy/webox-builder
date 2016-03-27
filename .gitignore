@@ -1,6 +1,8 @@
 /Binary
+/*/wb_cache
+/*/wb_source
 
 _notes
 .DS_Store
-
 Thumbs.db
+nbproject
