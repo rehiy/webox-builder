@@ -35,8 +35,7 @@ wb_inst_redis
 
 cp -av ${wbdir}/wb_profile/* /srv/
 for pkg in $(ls /srv/webox/etc); do
-    if [ -d /srv/${pkg} ]; then
-    	rm -rf /srv/${pkg}/etc
+    if [ -d /srv/${pkg} ] && [ ! -e /srv/${pgk}/etc ]; then
     	ln -s ../webox/etc/${pkg} /srv/${pkg}/etc
     fi
 done
