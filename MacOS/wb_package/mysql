@@ -26,7 +26,6 @@ wb_make_mysql() {
 
     sleep 1
 
-    mkdir -p /srv/mysql/etc/conf.d
     mkdir -p /srv/mysql/var/{run,log,tmp}
 
     /srv/mysql/bin/mysqld --initialize-insecure \

@@ -34,6 +34,12 @@ wb_inst_redis
 #################################################################Profile#
 
 cp -av ${wbdir}/wb_profile/* /srv/
+for pkg in $(ls /srv/webox/etc); do
+    if [ -d /srv/${pkg} ]; then
+    	rm -rf /srv/${pkg}/etc
+    	ln -s ../webox/etc/${pkg} /srv/${pkg}/etc
+    fi
+done
 
 chown -R 0:0  /srv
 chmod -R 0755 /srv/service

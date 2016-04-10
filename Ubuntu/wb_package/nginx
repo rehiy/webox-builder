@@ -38,7 +38,7 @@ wb_make_nginx() {
 
     make && make install
 
-    rm -rf /srv/nginx/etc /srv/nginx/html/*
+    rm -rf /srv/nginx/etc /srv/nginx/html
 
 }
 
