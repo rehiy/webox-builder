@@ -1,4 +1,4 @@
-export wk_node=node-v5.9.0
+export wk_node=node-v5.10.1
 
 wb_make_node() {
 
