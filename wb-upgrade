@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 
 ####################################################################
@@ -20,24 +20,25 @@ rm -rf ${name}
 chown -R 0:0  srv
 chmod -R 0777 srv/webroot/*
 
-rm -rf srv/webroot
-rm -rf srv/*/var
-rm -rf srv/*/etc
-
-rm -rf srv/node
-
 ####################################################################
 
 [ -x /srv/service ] && /srv/service stop
 
 for x in php5 nginx mysql redis webox; do
-    ls /srv/${x} | grep -v 'etc\|var' | xargs -I {} rm -rf /srv/${x}/{}
+    mkdir -p /srv/backup/{etc,var}/${x}
+    mv /srv/${x}/etc /srv/backup/etc/${x}
+    mv /srv/${x}/var /srv/backup/var/${x}
 done
 
-rm -rf /srv/common /srv/library /srv/update
-
+rm -rf srv/*/{etc,var} srv/webroot
 cp -av srv/* /srv/
 rm -rf srv/
+
+for x in webox redis mysql nginx php5; do
+    mv /srv/backup/var/${x} /srv/${x}/var
+    mv /srv/backup/etc/${x} /srv/webox/etc
+    ln -s /srv/webox/etc/${x} /srv/${x}/etc
+done
 
 ####################################################################
 
