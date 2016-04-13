@@ -10,7 +10,7 @@ APP_SIG_RELOAD='HUP'
 
 app_once() {
 
-    mkdir -p /srv/nginx/var/run /srv/nginx/var/log /srv/nginx/var/tmp
+    mkdir -p /srv/nginx/var/{run,log,tmp}
     chown -R _www:_www /srv/nginx/var/*
 
 }

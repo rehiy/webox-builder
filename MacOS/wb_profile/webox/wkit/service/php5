@@ -10,8 +10,8 @@ APP_SIG_RELOAD='USR2'
 
 app_once() {
 
-    mkdir -p /srv/php5/var/run /srv/php5/var/log /srv/php5/var/tmp
-    mkdir -p /srv/php5/var/tmp/upload /srv/php5/var/tmp/session
+    mkdir -p /srv/php5/var/{run,log,tmp}
+    mkdir -p /srv/php5/var/tmp/{upload,session}
     chown -R _www:_www /srv/php5/var/*
 
 }

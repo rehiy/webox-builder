@@ -20,7 +20,7 @@ app_once() {
         usermod mysql -d /srv/mysql -s /usr/sbin/nologin
     fi
 
-    mkdir -p /srv/mysql/var/run /srv/mysql/var/log /srv/mysql/var/tmp
+    mkdir -p /srv/mysql/var/{run,log,tmp}
     chown -R mysql:mysql /srv/mysql/var/*
 
 }

@@ -10,7 +10,7 @@ APP_SIG_RELOAD='HUP'
 
 app_once() {
 
-    mkdir -p /srv/redis/var/run /srv/redis/var/log /srv/redis/var/tmp
+    mkdir -p /srv/redis/var/{run,log,tmp}
     chown -R daemon:daemon /srv/redis/var/*
 
 }

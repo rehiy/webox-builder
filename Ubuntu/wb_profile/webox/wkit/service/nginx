@@ -18,7 +18,7 @@ app_once() {
         usermod www-data -d /srv/webroot -s /usr/sbin/nologin
     fi
 
-    mkdir -p /srv/nginx/var/run /srv/nginx/var/log /srv/nginx/var/tmp
+    mkdir -p /srv/nginx/var/{run,log,tmp}
     chown -R www-data:www-data /srv/nginx/var/*
 
 }

@@ -12,7 +12,7 @@ APP_SIG_RELOAD='HUP'
 
 app_once() {
 
-    mkdir -p /srv/mysql/var/run /srv/mysql/var/log /srv/mysql/var/tmp
+    mkdir -p /srv/mysql/var/{run,log,tmp}
     chown -R _mysql:_mysql /srv/mysql/var/*
 
 }
