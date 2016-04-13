@@ -16,20 +16,18 @@ source ${wbdir}/wb_function
 
 if [ "${1}" == "-min" ]; then
 
-    for d in cmake gettext libmcrypt terminfo preloadable_*; do
-        rm -rf /srv/webox/lib/${d}
-    done
+    mkdir -p /srv/webox/{bin2,etc2}
+    mv /srv/webox/bin/{wkit,curl,openssl} /srv/webox/bin2/
+    mv /srv/webox/etc/{mysql,nginx,php5,redis} /srv/webox/etc2/
 
-    mkdir -p /srv/webox/bin2
-    for f in wkit curl openssl; do
-        mv /srv/webox/bin/${f} /srv/webox/bin2/
-    done
-
+    rm -rf /srv/webox/lib/{cmake,gettext,libmcrypt,terminfo,preloadable_*}
     rm -rf /srv/webox/{bin,etc,man,share}
-    mv /srv/webox/bin2 /srv/webox/bin
 
     find /srv -name "*.a" -exec rm {} \;
     find /srv -name "*.la" -exec rm {} \;
+
+    mv /srv/webox/bin2 /srv/webox/bin
+    mv /srv/webox/etc2 /srv/webox/etc
 
     wb_strip /srv/webox/bin
 
@@ -37,7 +35,6 @@ if [ "${1}" == "-min" ]; then
     wb_strip /srv/redis/bin
 
     wb_strip /srv/nginx/sbin
-
 
 fi
 
