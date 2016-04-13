@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 
 ####################################################################
@@ -6,12 +6,12 @@
 cd ~
 
 plat=$(uname -s)-$(uname -m)
-name=Webox-${plat}-v5.0902.tgz
+name=Webox-${plat}-v6.0414.tgz
 
 if [ $(which wget) ]; then
-    wget -c -O ${name} http://dev.anrip.com/webox/${name}
+    wget -c -O ${name} http://get.anrip.com/webox/${name}
 else
-    curl -C - -o ${name} http://dev.anrip.com/webox/${name}
+    curl -C - -o ${name} http://get.anrip.com/webox/${name}
 fi
 
 tar -xvf ${name}
@@ -24,7 +24,8 @@ chmod -R 0777 srv/webroot/*
 
 [ -e /srv ] || mkdir -p /srv
 cp -av srv/* /srv/
-rm -rf srv/
+
+rm -rf srv/ ${name}
 
 ####################################################################
 

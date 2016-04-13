@@ -20,7 +20,7 @@ wb_make_mysql() {
         -DWITH_ZLIB=${webox} \
         -DWITH_BOOST=${wbsrc} \
         -DDOWNLOAD_BOOST=1 \
-        -DDOWNLOAD_BOOST_TIMEOUT=600
+        -DDOWNLOAD_BOOST_TIMEOUT=1800
 
     make && make install
 

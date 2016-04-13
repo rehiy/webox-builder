@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 
 ####################################################################
@@ -6,39 +6,34 @@
 cd ~
 
 plat=$(uname -s)-$(uname -m)
-name=Webox-${plat}-v5.0902.tgz
+name=Webox-${plat}-v6.0414.tgz
 
 if [ $(which wget) ]; then
-    wget -c -O ${name} http://dev.anrip.com/webox/${name}
+    wget -c -O ${name} http://get.anrip.com/webox/${name}
 else
-    curl -C - -o ${name} http://dev.anrip.com/webox/${name}
+    curl -C - -o ${name} http://get.anrip.com/webox/${name}
 fi
 
 tar -xvf ${name}
-rm -rf ${name}
 
 chown -R 0:0  srv
 chmod -R 0777 srv/webroot/*
+
+rm -rf srv/*/var
+rm -rf srv/*/etc
+rm -rf srv/webroot
 
 ####################################################################
 
 [ -x /srv/service ] && /srv/service stop
 
 for x in php5 nginx mysql redis webox; do
-    mkdir -p /srv/backup/{etc,var}/${x}
-    mv /srv/${x}/etc /srv/backup/etc/${x}
-    mv /srv/${x}/var /srv/backup/var/${x}
+    ls /srv/${x} | grep -v 'etc\|var' | xargs -I {} rm -rf /srv/${x}/{}
 done
 
-rm -rf srv/*/{etc,var} srv/webroot
 cp -av srv/* /srv/
-rm -rf srv/
 
-for x in webox redis mysql nginx php5; do
-    mv /srv/backup/var/${x} /srv/${x}/var
-    mv /srv/backup/etc/${x} /srv/webox/etc
-    ln -s /srv/webox/etc/${x} /srv/${x}/etc
-done
+rm -rf srv/ ${name}
 
 ####################################################################
 
