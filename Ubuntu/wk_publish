@@ -16,20 +16,19 @@ source ${wbdir}/wb_function
 
 if [ "${1}" == "-min" ]; then
 
+    mkdir -p /srv/webox/bin2
+    mv /srv/webox/bin/{wkit,curl,openssl} /srv/webox/bin2
+
     for d in cmake gettext libmcrypt terminfo preloadable_*; do
         rm -rf /srv/webox/lib/${d}
     done
 
-    mkdir -p /srv/webox/bin2
-    for f in wkit curl openssl; do
-        mv /srv/webox/bin/${f} /srv/webox/bin2/
-    done
-
     rm -rf /srv/webox/{bin,etc,man,share}
-    mv /srv/webox/bin2 /srv/webox/bin
 
     find /srv -name "*.a" -exec rm {} \;
     find /srv -name "*.la" -exec rm {} \;
+
+    mv /srv/webox/bin2 /srv/webox/bin
 
     wb_strip /srv/webox/bin
 
