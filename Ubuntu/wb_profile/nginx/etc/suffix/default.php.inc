@@ -4,7 +4,6 @@ location ~ \.php$ {
     include fastcgi_params;
 
     fastcgi_param PHP_ADMIN_VALUE "open_basedir=$document_root/:$pooldir/var";
-   #fastcgi_param PHP_ADMIN_VALUE "disable_functions=";
 
     fastcgi_index index.php;
     fastcgi_pass  unix:/srv/php5/var/run/default.sock;
