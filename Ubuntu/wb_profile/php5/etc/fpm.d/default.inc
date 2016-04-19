@@ -57,5 +57,5 @@ php_admin_value[sys_temp_dir]      = /srv/webroot/$pool/var
 php_admin_value[upload_tmp_dir]    = /srv/webroot/$pool/var/upload
 php_admin_value[session.save_path] = /srv/webroot/$pool/var/session
 
-php_admin_value[error_log] = /srv/php5/var/log/$pool.error.log
-php_admin_value[mail.log]  = /srv/php5/var/log/$pool.mail.log
+php_admin_value[error_log] = /srv/webroot/$pool/var/php_error.log
+php_admin_value[mail.log]  = /srv/webroot/$pool/var/php_mail.log
