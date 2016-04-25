@@ -26,7 +26,7 @@ wb_make_mysql() {
 
     sleep 1
 
-    mkdir -p /srv/mysql/var/{run,log,tmp}
+    mkdir -p /srv/mysql/var/{keyring,run,log,tmp}
 
     /srv/mysql/bin/mysqld --initialize-insecure \
         --basedir=/srv/mysql --datadir=/srv/mysql/var/data
