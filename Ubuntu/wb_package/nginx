@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 export wk_nginx=nginx-1.10.1
+=======
+export wk_nginx=nginx-1.9.15
+>>>>>>> 5c88e1ac864cbfa22be126e7507e9fa11305fb30
 
 wb_make_nginx() {
 
