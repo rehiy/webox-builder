@@ -1,4 +1,4 @@
-export wk_openssl=openssl-1.1.0
+export wk_openssl=openssl-1.0.2h
 
 wb_make_openssl() {
 
