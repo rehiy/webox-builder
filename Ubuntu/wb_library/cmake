@@ -1,4 +1,4 @@
-export wk_cmake=cmake-3.5.0
+export wk_cmake=cmake-3.5.2
 
 wb_make_cmake() {
 

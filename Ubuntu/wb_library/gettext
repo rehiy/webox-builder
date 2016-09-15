@@ -1,4 +1,4 @@
-export wk_gettext=gettext-0.19.7
+export wk_gettext=gettext-0.19.8
 
 wb_make_gettext() {
 
