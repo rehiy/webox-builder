@@ -1,4 +1,4 @@
-export wk_glibc=glibc-2.23
+export wk_glibc=glibc-2.24
 
 wb_make_glibc() {
 

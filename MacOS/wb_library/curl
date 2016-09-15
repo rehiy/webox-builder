@@ -1,4 +1,4 @@
-export wk_curl=curl-7.48.0
+export wk_curl=curl-7.50.3
 
 wb_make_curl() {
 
