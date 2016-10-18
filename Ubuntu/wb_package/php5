@@ -1,4 +1,4 @@
-export wk_php5=php-5.6.25
+export wk_php5=php-5.6.27
 
 wb_make_php5() {
 
@@ -43,7 +43,7 @@ wb_make_php5() {
     wb_make_php5_ext opcache
     wb_make_php5_ext pcntl
 
-    wb_make_php5_pecl redis-3.0.0
+    wb_make_php5_pecl redis-2.2.8
     wb_make_php5_pecl geoip-1.1.1 --with-geoip=${webox}
 
     rm -rf /srv/php5/etc /srv/php5/php
