@@ -1,5 +1,5 @@
 ##
-# Server Error Page 
+# Server Error Page
 ##
 
 location /errpage/ {
