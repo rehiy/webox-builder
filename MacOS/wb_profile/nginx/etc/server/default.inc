@@ -20,7 +20,7 @@ server {
 
     root  $sitedir;
     index index.html index.htm index.php;
-    #try_files $uri $uri/ /index.php?q=$uri&$args;
+    #try_files $uri $uri/ /index.php$is_args$args;
 
     include suffix/default.*.inc;
 
