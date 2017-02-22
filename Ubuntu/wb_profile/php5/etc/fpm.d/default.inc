@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;
-; Pool Definitions ; 
+; Pool Definitions ;
 ;;;;;;;;;;;;;;;;;;;;
 
 [default]
@@ -35,19 +35,24 @@ pm.max_requests = 10240
 ; recognized as a status page.
 
 pm.status_path = /status/php5/$pool
- 
+
 ; The access log file
 
 ;access.log = log/$pool.access.log
- 
+
 ; The log file for slow requests
 
 slowlog = log/$pool.slow.log
- 
+
 ; The timeout for serving a single request after which a PHP backtrace will be
 ; dumped to the 'slowlog' file.
 
 request_slowlog_timeout = 60s
+
+; Pass environment variables like LD_LIBRARY_PATH. All $VARIABLEs are taken from
+; the current environment.
+
+env[PATH] = /srv/webox/bin:/usr/bin:/bin
 
 ; Additional php.ini defines, specific to this pool of workers. These settings
 ; overwrite the values previously defined in the php.ini.

@@ -3,6 +3,9 @@ location ~ \.php$ {
 
     include fastcgi_params;
 
+    fastcgi_split_path_info ^(.+\.php)(/.*)$;
+    fastcgi_param PATH_INFO $fastcgi_path_info;
+
     fastcgi_param PHP_ADMIN_VALUE "open_basedir=$sitedir/:$pooldir/var";
 
     fastcgi_index index.php;
