@@ -1,4 +1,4 @@
-export wk_iconv=libiconv-1.14
+export wk_iconv=libiconv-1.15
 
 wb_make_iconv() {
 

@@ -12,6 +12,14 @@ APP_SIG_RELOAD='HUP'
 
 app_once() {
 
+    if [ ! $(cat /etc/group | grep _mysql) ]; then
+        groupadd _mysql -g 74
+    fi
+    if [ ! $(cat /etc/passwd | grep _mysql) ]; then
+        useradd _mysql -u 74 -g 74
+        usermod _mysql -d /srv/mysql -s /usr/bin/false
+    fi
+
     mkdir -p /srv/mysql/var/{run,log,tmp}
     chown -R _mysql:_mysql /srv/mysql/var/*
 

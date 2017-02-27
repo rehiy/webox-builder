@@ -1,4 +1,4 @@
-export wk_pcre=pcre-8.39
+export wk_pcre=pcre-8.40
 
 wb_make_pcre() {
 

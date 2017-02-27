@@ -1,4 +1,4 @@
-export wk_ncurses=ncurses-6.0-20161029
+export wk_ncurses=ncurses-6.0-20170218
 
 wb_make_ncurses() {
 

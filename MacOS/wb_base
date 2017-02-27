@@ -31,3 +31,7 @@ export KERNEL_BITS=64
 
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
+
+if [ ! $(which make) ]; then
+    xcode-select --install
+fi

@@ -1,4 +1,4 @@
-export wk_zlib=zlib-1.2.8
+export wk_zlib=zlib-1.2.11
 
 wb_make_zlib() {
 

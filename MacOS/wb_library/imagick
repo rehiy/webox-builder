@@ -1,4 +1,4 @@
-export wk_imagick=ImageMagick-6.9.6-3
+export wk_imagick=ImageMagick-6.9.7-9
 
 wb_make_imagick() {
 

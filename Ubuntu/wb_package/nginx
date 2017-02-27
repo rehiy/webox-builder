@@ -1,4 +1,4 @@
-export wk_nginx=nginx-1.10.2
+export wk_nginx=nginx-1.10.3
 
 wb_make_nginx() {
 

@@ -1,4 +1,4 @@
-export wk_webox=webox-v0.5.08
+export wk_webox=webox-v7.2.1
 
 wb_make_webox() {
 
