@@ -19,7 +19,7 @@ listen = run/$pool.sock
 
 listen.owner = _www
 listen.group = _www
-listen.mode = 0777
+listen.mode = 0770
 
 ; Choose how the process manager will control the number of child processes.
 
