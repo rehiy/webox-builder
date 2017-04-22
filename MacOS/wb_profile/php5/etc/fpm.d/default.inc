@@ -29,6 +29,7 @@ pm.max_children = 32
 pm.start_servers = 4
 pm.min_spare_servers = 2
 pm.max_spare_servers = 6
+pm.process_idle_timeout = 30s
 pm.max_requests = 10240
 
 ; The URI to view the FPM status page. If this value is not set, no URI will be
@@ -48,6 +49,11 @@ slowlog = log/$pool.slow.log
 ; dumped to the 'slowlog' file.
 
 request_slowlog_timeout = 60s
+
+; The timeout for serving a single request after which the worker process will
+; be killed.
+
+request_terminate_timeout = 0
 
 ; Pass environment variables like LD_LIBRARY_PATH. All $VARIABLEs are taken from
 ; the current environment.
