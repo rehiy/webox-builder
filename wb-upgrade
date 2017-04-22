@@ -27,7 +27,7 @@ rm -rf srv/webroot
 
 [ -x /srv/service ] && /srv/service stop
 
-for x in php5 nginx mysql redis webox; do
+for x in php7 nginx mysql redis webox; do
     ls /srv/${x} | grep -v 'etc\|var' | xargs -I {} rm -rf /srv/${x}/{}
 done
 
