@@ -1,4 +1,3 @@
-
 APP_BIN_START='/srv/php5/sbin/php-fpm'
 
 APP_PID_FILE='/srv/php5/var/run/fpm.pid'

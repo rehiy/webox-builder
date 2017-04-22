@@ -1,4 +1,4 @@
-export wk_mysql=mysql-5.7.17
+export wk_mysql=mysql-5.7.18
 
 wb_make_mysql() {
 

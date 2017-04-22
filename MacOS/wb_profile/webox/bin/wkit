@@ -1,15 +1,15 @@
 #!/bin/bash
 
-wkexec=${0##*/}
+export wkexec=${0##*/}
 
 [ "${wkexec}" = "wkit" ] && {
     wkexec=${1}
     shift
 }
 
-wksbin=/srv/webox/bin
-wktemp=/srv/webox/var
-wkhome=/srv/webox/wkit
+export wksbin=/srv/webox/bin
+export wktemp=/srv/webox/var
+export wkhome=/srv/webox/wkit
 
 source /srv/webox/runtime
 

@@ -1,4 +1,3 @@
-
 wk_service() {
 
     source ${wkhome}/wk_service_define "${@}"
