@@ -6,7 +6,7 @@
 
 ; Per pool prefix
 
-prefix = /srv/php5/var
+prefix = /srv/php7/var
 
 ; Unix user/group of processes
 
@@ -35,7 +35,7 @@ pm.max_requests = 10240
 ; The URI to view the FPM status page. If this value is not set, no URI will be
 ; recognized as a status page.
 
-pm.status_path = /status/php5/$pool
+pm.status_path = /status/php7/$pool
 
 ; The access log file
 

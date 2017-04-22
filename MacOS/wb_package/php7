@@ -1,14 +1,14 @@
-export wk_php5=php-7.1.4
+export wk_php7=php-7.1.4
 
-wb_make_php5() {
+wb_make_php7() {
 
-    wb_apply http://cn2.php.net/distributions/ ${wk_php5} .tar.gz
+    wb_apply http://cn2.php.net/distributions/ ${wk_php7} .tar.gz
 
     ./configure \
-        --prefix=/srv/php5 \
-        --sysconfdir=/srv/php5/etc \
-        --with-config-file-path=/srv/php5/etc \
-        --with-config-file-scan-dir=/srv/php5/etc/php.d \
+        --prefix=/srv/php7 \
+        --sysconfdir=/srv/php7/etc \
+        --with-config-file-path=/srv/php7/etc \
+        --with-config-file-scan-dir=/srv/php7/etc/php.d \
         --with-layout=GNU \
         --without-pear \
         --disable-rpath \
@@ -40,45 +40,45 @@ wb_make_php5() {
 
     make && make install
 
-    wb_make_php5_ext opcache
-    wb_make_php5_ext pcntl
+    wb_make_php7_ext opcache
+    wb_make_php7_ext pcntl
 
-    wb_make_php5_pecl redis-3.1.2
-    wb_make_php5_pecl geoip-1.1.1 --with-geoip=${webox}
+    wb_make_php7_pecl redis-3.1.2
+    wb_make_php7_pecl geoip-1.1.1 --with-geoip=${webox}
 
-    rm -rf /srv/php5/etc /srv/php5/php
+    rm -rf /srv/php7/etc /srv/php7/php
 
 }
 
-wb_make_php5_ext() {
+wb_make_php7_ext() {
 
-    cd ${wbsrc}/${wk_php5}/ext/${1}
+    cd ${wbsrc}/${wk_php7}/ext/${1}
 
     shift 1
 
-    /srv/php5/bin/phpize && ./configure "${@}" \
-        --with-php-config=/srv/php5/bin/php-config
+    /srv/php7/bin/phpize && ./configure "${@}" \
+        --with-php-config=/srv/php7/bin/php-config
 
     make && make install
 
 }
 
-wb_make_php5_pecl() {
+wb_make_php7_pecl() {
 
-    wb_apply http://pecl.php.net/get/ ${1} .tgz ${wk_php5}/ext/${1}
+    wb_apply http://pecl.php.net/get/ ${1} .tgz ${wk_php7}/ext/${1}
     rm -rf ../package.xml
 
-    wb_make_php5_ext "${@}"
+    wb_make_php7_ext "${@}"
 
 }
 
 ########################################################################
 
-wb_inst_php5() {
+wb_inst_php7() {
 
-    [ -d /srv/php5/bin ] || wb_make_php5
-    [ -d /srv/php5/bin ] || wb_error ${wk_php5}
+    [ -d /srv/php7/bin ] || wb_make_php7
+    [ -d /srv/php7/bin ] || wb_error ${wk_php7}
 
-    wb_rtm /srv/php5
+    wb_rtm /srv/php7
 
 }

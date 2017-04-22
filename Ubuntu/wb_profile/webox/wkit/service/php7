@@ -1,6 +1,6 @@
-APP_BIN_START='/srv/php5/sbin/php-fpm'
+APP_BIN_START='/srv/php7/sbin/php-fpm'
 
-APP_PID_FILE='/srv/php5/var/run/fpm.pid'
+APP_PID_FILE='/srv/php7/var/run/fpm.pid'
 
 APP_SIG_STOP='TERM'
 
@@ -17,9 +17,9 @@ app_once() {
         usermod www-data -d /srv/webroot -s /usr/sbin/nologin
     fi
 
-    mkdir -p /srv/php5/var/{run,log,tmp}
-    mkdir -p /srv/php5/var/tmp/{upload,session}
-    chown -R www-data:www-data /srv/php5/var/*
+    mkdir -p /srv/php7/var/{run,log,tmp}
+    mkdir -p /srv/php7/var/tmp/{upload,session}
+    chown -R www-data:www-data /srv/php7/var/*
 
 }
 
@@ -27,7 +27,7 @@ app_init() {
 
     local poolvar poolconfig
 
-    for poolconfig in /srv/php5/etc/fpm.d/*.inc; do
+    for poolconfig in /srv/php7/etc/fpm.d/*.inc; do
 
         poolvar=${poolconfig##*/}
         poolvar=/srv/webroot/${poolvar/.inc/}/var

@@ -9,7 +9,7 @@ location ~ \.php$ {
     fastcgi_param PHP_ADMIN_VALUE "open_basedir=$sitedir/:$pooldir/var";
 
     fastcgi_index index.php;
-    fastcgi_pass  unix:/srv/php5/var/run/default.sock;
+    fastcgi_pass  unix:/srv/php7/var/run/default.sock;
 
     fastcgi_buffer_size 128k;
     fastcgi_buffers 4 256k;

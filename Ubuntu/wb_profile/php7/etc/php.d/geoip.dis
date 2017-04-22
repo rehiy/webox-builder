@@ -1,0 +1,5 @@
+[Geoip]
+
+extension = geoip.so
+
+geoip.custom_directory = /srv/php7/share
