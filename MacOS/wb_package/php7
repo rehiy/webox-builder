@@ -21,7 +21,6 @@ wb_make_php7() {
         --enable-mbstring \
         --enable-sockets \
         --enable-zip \
-        --with-mysql \
         --with-mysqli \
         --with-pdo-mysql \
         --with-gd \
