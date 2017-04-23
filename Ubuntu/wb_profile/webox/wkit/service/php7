@@ -9,10 +9,13 @@ APP_SIG_RELOAD='USR2'
 
 app_once() {
 
-    if [ ! $(cat /etc/group | grep www-data) ]; then
+    grep www-data /etc/group > /dev/null
+    if [ $? -ne 0 ]; then
         groupadd www-data -g 33
     fi
-    if [ ! $(cat /etc/passwd | grep www-data) ]; then
+
+    grep www-data /etc/passwd > /dev/null
+    if [ $? -ne 0 ]; then
         useradd www-data -u 33 -g 33
         usermod www-data -d /srv/webroot -s /usr/sbin/nologin
     fi

@@ -9,10 +9,13 @@ APP_SIG_RELOAD='USR2'
 
 app_once() {
 
-    if [ ! $(cat /etc/group | grep _www) ]; then
+    grep _www /etc/group > /dev/null
+    if [ $? -ne 0 ]; then
         groupadd _www -g 70
     fi
-    if [ ! $(cat /etc/passwd | grep _www) ]; then
+
+    grep _www /etc/passwd > /dev/null
+    if [ $? -ne 0 ]; then
         useradd _www -u 70 -g 70
         usermod _www -d /srv/webroot -s /usr/bin/false
     fi
