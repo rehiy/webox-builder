@@ -37,6 +37,9 @@ if [ "${1}" == "-min" ]; then
 
     wb_strip /srv/nginx/sbin
 
+    wb_strip /srv/php5/bin
+    wb_strip /srv/php5/sbin
+
     wb_strip /srv/php7/bin
     wb_strip /srv/php7/sbin
 

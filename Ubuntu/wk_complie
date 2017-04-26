@@ -24,6 +24,7 @@ done
 
 wb_inst_webox
 
+wb_inst_php5
 wb_inst_php7
 
 wb_inst_nginx
