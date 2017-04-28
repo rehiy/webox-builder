@@ -6,7 +6,7 @@
 cd ~
 
 plat=$(uname -s)-$(uname -m)
-name=Webox-${plat}-v6.0414.tgz
+name=Webox-${plat}-v7.0428.tgz
 
 if [ $(which wget) ]; then
     wget -c -O ${name} http://get.anrip.com/webox/${name}
@@ -30,7 +30,3 @@ rm -rf srv/ ${name}
 ####################################################################
 
 [ -x /srv/service ] && /srv/service start
-
-if [ -x /usr/sbin/service ]; then
-    /srv/webox/bin/wkit service_setup
-fi
