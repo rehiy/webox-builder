@@ -1,4 +1,3 @@
-
 APP_BIN_START='/srv/redis/bin/redis-server /srv/redis/etc/redis.conf'
 
 APP_PID_FILE='/srv/redis/var/run/redis.pid'
@@ -17,8 +16,8 @@ app_once() {
 
 app_init() {
 
-    if [ ! -f /srv/redis/etc/conf.d/other.conf ]; then
-        touch /srv/redis/etc/conf.d/other.conf
+    if [ ! -f /srv/redis/etc/conf.d/useful.conf ]; then
+        touch /srv/redis/etc/conf.d/useful.conf
     fi
 
 }
