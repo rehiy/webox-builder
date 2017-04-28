@@ -14,3 +14,11 @@ app_once() {
     chown -R daemon:daemon /srv/redis/var/*
 
 }
+
+app_init() {
+
+    if [ ! -f /srv/redis/etc/conf.d/other.conf ]; then
+        touch /srv/redis/etc/conf.d/other.conf
+    fi
+
+}
