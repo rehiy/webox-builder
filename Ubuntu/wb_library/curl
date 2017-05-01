@@ -8,7 +8,7 @@ wb_make_curl() {
 
     make && make install
 
-    local cert=$(http://curl.haxx.se/ca/cacert.pem)
+    local cert=$(wb_get http://curl.haxx.se/ca/cacert.pem)
     cp -a $cert ${webox}/ssl/cert.pem
 
 }
