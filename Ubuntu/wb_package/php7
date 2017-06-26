@@ -1,4 +1,4 @@
-export wk_php7=php-7.1.5
+export wk_php7=php-7.1.6
 
 wb_make_php7() {
 
