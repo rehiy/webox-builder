@@ -1,6 +1,8 @@
 server {
 
     listen 80 default_server;
+    listen [::]:80 default_server;
+
     server_name localhost;
 
     include common/21.server_status;

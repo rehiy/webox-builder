@@ -1,6 +1,8 @@
 server {
 
     listen 80;
+    listen [::]:80;
+
     server_name www.anrip.net;
 
     include common/22.server_error_page;
