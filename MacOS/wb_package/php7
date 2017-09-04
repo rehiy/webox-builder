@@ -1,4 +1,4 @@
-export wk_php7=php-7.1.6
+export wk_php7=php-7.1.9
 
 wb_make_php7() {
 
@@ -31,7 +31,6 @@ wb_make_php7() {
         --with-curl=${webox} \
         --with-gettext=${webox} \
         --with-iconv=${webox} \
-        --with-mcrypt=${webox} \
         --with-openssl=${webox} \
         --with-pcre-dir=${webox} \
         --with-libxml-dir=${webox} \
@@ -42,7 +41,7 @@ wb_make_php7() {
     wb_make_php7_ext opcache
     wb_make_php7_ext pcntl
 
-    wb_make_php7_pecl redis-3.1.2
+    wb_make_php7_pecl redis-3.1.3
     wb_make_php7_pecl geoip-1.1.1 --with-geoip=${webox}
 
     rm -rf /srv/php7/etc /srv/php7/php

@@ -37,39 +37,5 @@ wk_service_todo() {
 wk_service_usage() {
 
     echo "service          manage service for ${wkhome}/service/*"
-    echo "service_setup    setup ${wkhome}/service/* to /etc/init.d/*"
-    echo "service_remove   remove /etc/init.d/* for ${wkhome}/service/*"
-
-}
-
-wk_service_setup() {
-
-    local initd
-
-    for wkfile in ${wkhome}/service/*; do
-
-        initd=/etc/init.d/${wkfile##*/}
-
-        echo "setup ${initd}"
-        echo "#!${wksbin}/wkit service" > ${initd}
-
-        chmod 0755 ${initd}
-
-    done
-
-}
-
-wk_service_remove() {
-
-    local initd
-
-    for wkfile in ${wkhome}/service/*; do
-
-        initd=/etc/init.d/${wkfile##*/}
-
-        echo "remove ${initd}"
-        rm -f ${initd}
-
-    done
 
 }

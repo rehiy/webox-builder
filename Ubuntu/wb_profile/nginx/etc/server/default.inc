@@ -1,6 +1,7 @@
 server {
 
-    listen 80 default;
+    listen 80 default_server;
+    server_name localhost;
 
     include common/21.server_status;
     include common/22.server_error_page;
@@ -20,8 +21,8 @@ server {
 
     root  $sitedir;
     index index.html index.htm index.php;
-    #try_files $uri $uri/ /index.php$is_args$args;
+    try_files $uri $uri/ /index.php$is_args$args;
 
-    include suffix/default.*.inc;
+    include suffix/default.php7.inc;
 
 }

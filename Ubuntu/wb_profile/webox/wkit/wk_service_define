@@ -41,7 +41,7 @@ app_stop() {
 
     while [ $((try++)) -lt 5 ]; do
         [ -f ${APP_PID_FILE} ] || return 0
-        sleep 1
+        sleep 2
     done
 
     return 1
@@ -91,7 +91,7 @@ app_reload() {
 
 app_restart() {
 
-    app_stop "${@}" && app_start "${@}"
+    app_stop "${@}" && sleep 3 && app_start "${@}"
 
 }
 
