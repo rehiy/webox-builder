@@ -1,0 +1,22 @@
+### Update: 2017-01-15 ###
+
+export wk_zlib=zlib-1.2.11
+
+wb_make_zlib() {
+
+    wb_apply http://zlib.net/ ${wk_zlib} .tar.xz
+
+    ./configure --prefix=${webox} --$(getconf LONG_BIT)
+
+    make && make install
+
+}
+
+wb_inst_zlib() {
+
+    local fine=${webox}/lib/libz.a
+
+    [ -e ${fine} ] || wb_make_zlib
+    [ -e ${fine} ] || wb_error ${wk_zlib}
+
+}

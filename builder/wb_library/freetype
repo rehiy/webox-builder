@@ -1,0 +1,22 @@
+### Update: 2017-05-13 ###
+
+export wk_freetype=freetype-2.8
+
+wb_make_freetype() {
+
+    wb_apply http://ftp.twaren.net/Unix/NonGNU/freetype/ ${wk_freetype} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_freetype() {
+
+    local fine=${webox}/lib/libfreetype.a
+
+    [ -e ${fine} ] || wb_make_freetype
+    [ -e ${fine} ] || wb_error ${wk_freetype}
+
+}

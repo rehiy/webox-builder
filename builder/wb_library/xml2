@@ -1,0 +1,24 @@
+### Update: 2017-09-04 ###
+
+export wk_xml2=libxml2-2.9.5
+
+wb_make_xml2() {
+
+    wb_apply ftp://xmlsoft.org/libxml2/ ${wk_xml2} .tar.gz
+
+    ./configure --prefix=${webox} \
+        --with-iconv=${webox} \
+        --with-zlib=${webox}
+
+    make && make install
+
+}
+
+wb_inst_xml2() {
+
+    local fine=${webox}/lib/libxml2.a
+
+    [ -e ${fine} ] || wb_make_xml2
+    [ -e ${fine} ] || wb_error ${wk_xml2}
+
+}

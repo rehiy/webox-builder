@@ -1,0 +1,22 @@
+### Update: 2017-09-02 ###
+
+export wk_ncurses=ncurses-6.0-20170902
+
+wb_make_ncurses() {
+
+    wb_apply http://invisible-mirror.net/archives/ncurses/current/ ${wk_ncurses} .tgz
+
+    ./configure --prefix=${webox} --mandir=${webox}/share/man --with-shared
+
+    make && make install
+
+}
+
+wb_inst_ncurses() {
+
+    local fine=${webox}/lib/libncurses.a
+
+    [ -e ${fine} ] || wb_make_ncurses
+    [ -e ${fine} ] || wb_error ${wk_ncurses}
+
+}

@@ -1,0 +1,22 @@
+### Update: 2017-05-16 ###
+
+export wk_geoip=GeoIP-1.6.11
+
+wb_make_geoip() {
+
+    wb_apply https://github.com/maxmind/geoip-api-c/releases/download/v${wk_geoip##*-}/ ${wk_geoip} .tar.gz
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_geoip() {
+
+    local fine=${webox}/lib/libGeoIP.a
+
+    [ -e ${fine} ] || wb_make_geoip
+    [ -e ${fine} ] || wb_error ${wk_geoip}
+
+}

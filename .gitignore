@@ -1,9 +1,8 @@
-/Binary
+Binary
+Webox*.tgz
 
-/*/We*.tgz
-
-/*/wb_cache
-/*/wb_source
+wb_cache
+wb_source
 
 _notes
 .DS_Store

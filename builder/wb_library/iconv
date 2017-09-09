@@ -1,0 +1,26 @@
+#### Update: 2017-02-02 ###
+
+export wk_iconv=libiconv-1.15
+
+wb_make_iconv() {
+
+    wb_apply http://ftp.gnu.org/gnu/libiconv/ ${wk_iconv} .tar.gz
+
+    if [ "$OSTYPE" == "Ubuntu" ]; then
+        sed -i '/gets is a security hole/d' srclib/stdio*.h
+    fi
+
+    ./configure --prefix=${webox} --enable-shared
+
+    make && make install
+
+}
+
+wb_inst_iconv() {
+
+    local fine=${webox}/lib/libiconv.la
+
+    [ -e ${fine} ] || wb_make_iconv
+    [ -e ${fine} ] || wb_error ${wk_iconv}
+
+}
