@@ -11,3 +11,6 @@ export CXX=/usr/bin/clang++
 if [ ! $(which make) ]; then
     xcode-select --install
 fi
+
+sysctl kern.maxfiles=65536
+sysctl kern.maxfilesperproc=65536
