@@ -12,5 +12,6 @@ if [ ! $(which make) ]; then
     xcode-select --install
 fi
 
+ulimit -n 65536
 sysctl kern.maxfiles=65536
 sysctl kern.maxfilesperproc=65536
