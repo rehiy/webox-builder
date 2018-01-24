@@ -1,4 +1,4 @@
-export wk_php5=php-5.6.32
+export wk_php5=php-5.6.33
 
 wb_make_php5() {
 
