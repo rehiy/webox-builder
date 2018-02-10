@@ -2,9 +2,13 @@
 
 export wk_curl=curl-7.55.1
 
-wb_make_curl() {
+wb_find_curl() {
 
     wb_apply https://curl.haxx.se/download/ ${wk_curl} .tar.gz
+
+}
+
+wb_make_curl() {
 
     ./configure --prefix=${webox}
 
@@ -19,6 +23,7 @@ wb_inst_curl() {
 
     local fine=${webox}/lib/libcurl.a
 
+    [ -e ${fine} ] || wb_find_curl
     [ -e ${fine} ] || wb_make_curl
     [ -e ${fine} ] || wb_error ${wk_curl}
 

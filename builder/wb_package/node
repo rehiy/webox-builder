@@ -1,8 +1,12 @@
 export wk_node=node-v8.9.4
 
-wb_make_node() {
+wb_find_node() {
 
     wb_apply https://nodejs.org/dist/${wk_node##*-}/ ${wk_node} .tar.gz
+
+}
+
+wb_make_node() {
 
     ./configure --prefix=/srv/node
 
@@ -12,10 +16,9 @@ wb_make_node() {
 
 }
 
-########################################################################
-
 wb_inst_node() {
 
+    [ -d /srv/node/bin ] || wb_find_node
     [ -d /srv/node/bin ] || wb_make_node
     [ -d /srv/node/bin ] || wb_error ${wk_node}
 

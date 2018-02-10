@@ -2,11 +2,15 @@
 
 export wk_iconv=libiconv-1.15
 
-wb_make_iconv() {
+wb_find_iconv() {
 
     wb_apply http://ftp.gnu.org/gnu/libiconv/ ${wk_iconv} .tar.gz
 
-    if [ "$OSTYPE" == "Ubuntu" ]; then
+}
+
+wb_make_iconv() {
+
+    if [ "$OSTYPE" == "Debian" ]; then
         sed -i '/gets is a security hole/d' srclib/stdio*.h
     fi
 
@@ -20,6 +24,7 @@ wb_inst_iconv() {
 
     local fine=${webox}/lib/libiconv.la
 
+    [ -e ${fine} ] || wb_find_iconv
     [ -e ${fine} ] || wb_make_iconv
     [ -e ${fine} ] || wb_error ${wk_iconv}
 

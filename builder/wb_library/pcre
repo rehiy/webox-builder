@@ -2,9 +2,13 @@
 
 export wk_pcre=pcre-8.41
 
-wb_make_pcre() {
+wb_find_pcre() {
 
     wb_apply http://ftp.csx.cam.ac.uk/pub/software/programming/pcre/ ${wk_pcre} .tar.gz
+
+}
+
+wb_make_pcre() {
 
     ./configure --prefix=${webox}
 
@@ -16,6 +20,7 @@ wb_inst_pcre() {
 
     local fine=${webox}/lib/libpcre.a
 
+    [ -e ${fine} ] || wb_find_pcre
     [ -e ${fine} ] || wb_make_pcre
     [ -e ${fine} ] || wb_error ${wk_pcre}
 

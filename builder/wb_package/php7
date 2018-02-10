@@ -1,8 +1,12 @@
-export wk_php7=php-7.1.13
+export wk_php7=php-7.2.2
 
-wb_make_php7() {
+wb_find_php7() {
 
     wb_apply http://cn2.php.net/distributions/ ${wk_php7} .tar.gz
+
+}
+
+wb_make_php7() {
 
     ./configure \
         --prefix=/srv/php7 \
@@ -48,6 +52,18 @@ wb_make_php7() {
 
 }
 
+wb_inst_php7() {
+
+    [ -d /srv/php7/bin ] || wb_find_php7
+    [ -d /srv/php7/bin ] || wb_make_php7
+    [ -d /srv/php7/bin ] || wb_error ${wk_php7}
+
+    wb_rtm /srv/php7
+
+}
+
+########################################################################
+
 wb_make_php7_ext() {
 
     cd ${wbsrc}/${wk_php7}/ext/${1}
@@ -67,16 +83,5 @@ wb_make_php7_pecl() {
     rm -rf ../package.xml
 
     wb_make_php7_ext "${@}"
-
-}
-
-########################################################################
-
-wb_inst_php7() {
-
-    [ -d /srv/php7/bin ] || wb_make_php7
-    [ -d /srv/php7/bin ] || wb_error ${wk_php7}
-
-    wb_rtm /srv/php7
 
 }

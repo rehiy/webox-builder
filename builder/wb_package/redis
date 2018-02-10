@@ -1,8 +1,12 @@
 export wk_redis=redis-4.0.6
 
-wb_make_redis() {
+wb_find_redis() {
 
     wb_apply http://download.redis.io/releases/ ${wk_redis} .tar.gz
+
+}
+
+wb_make_redis() {
 
     make && make PREFIX=/srv/redis install
 
@@ -10,10 +14,9 @@ wb_make_redis() {
 
 }
 
-########################################################################
-
 wb_inst_redis() {
 
+    [ -d /srv/redis/bin ] || wb_find_redis
     [ -d /srv/redis/bin ] || wb_make_redis
     [ -d /srv/redis/bin ] || wb_error ${wk_redis}
 

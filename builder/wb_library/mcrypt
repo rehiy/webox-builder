@@ -2,9 +2,13 @@
 
 export wk_mcrypt=libmcrypt-2.5.7
 
-wb_make_mcrypt() {
+wb_find_mcrypt() {
 
     wb_apply ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/libmcrypt/ ${wk_mcrypt} .tar.gz
+    
+}
+
+wb_make_mcrypt() {
 
     ./configure --prefix=${webox} --mandir=${webox}/share/man
 
@@ -16,6 +20,7 @@ wb_inst_mcrypt() {
 
     local fine=${webox}/lib/libmcrypt.la
 
+    [ -e ${fine} ] || wb_find_mcrypt
     [ -e ${fine} ] || wb_make_mcrypt
     [ -e ${fine} ] || wb_error ${wk_mcrypt}
 

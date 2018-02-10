@@ -2,9 +2,13 @@
 
 export wk_tiff=tiff-3.8.2
 
-wb_make_tiff() {
+wb_find_tiff() {
 
     wb_apply http://dl.maptools.org/dl/libtiff/ ${wk_tiff} .tar.gz
+
+}
+
+wb_make_tiff() {
 
     ./configure --prefix=${webox} --mandir=${webox}/share/man
 
@@ -16,6 +20,7 @@ wb_inst_tiff() {
 
     local fine=${webox}/lib/libtiff.a
 
+    [ -e ${fine} ] || wb_find_tiff
     [ -e ${fine} ] || wb_make_tiff
     [ -e ${fine} ] || wb_error ${wk_tiff}
 

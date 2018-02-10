@@ -1,11 +1,15 @@
 export wk_nginx=nginx-1.12.2
 
-wb_make_nginx() {
+wb_find_nginx() {
 
     wb_apply http://nginx.org/download/ ${wk_nginx} .tar.gz
 
     sed -i~ 's/^CFLAGS="$CFLAGS -g"/#CFLAGS="$CFLAGS -g"/' auto/cc/gcc
     sed -i~ 's/^CFLAGS="$CFLAGS -Werror"/#CFLAGS="$CFLAGS -Werror"/' auto/cc/gcc
+
+}
+
+wb_make_nginx() {
 
     ./configure \
         --prefix=/srv/nginx \
@@ -45,6 +49,16 @@ wb_make_nginx() {
 
 }
 
+wb_inst_nginx() {
+
+    [ -d /srv/nginx/sbin ] || wb_find_nginx
+    [ -d /srv/nginx/sbin ] || wb_make_nginx
+    [ -d /srv/nginx/sbin ] || wb_error ${wk_nginx}
+
+    wb_rtm /srv/nginx
+
+}
+
 ########################################################################
 
 wb_plus_nginx_http_cache_purge() {
@@ -78,16 +92,5 @@ wb_plus_nginx_http_echo() {
     fi
 
     echo "--add-module=http_echo"
-
-}
-
-########################################################################
-
-wb_inst_nginx() {
-
-    [ -d /srv/nginx/sbin ] || wb_make_nginx
-    [ -d /srv/nginx/sbin ] || wb_error ${wk_nginx}
-
-    wb_rtm /srv/nginx
 
 }

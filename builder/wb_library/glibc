@@ -2,9 +2,13 @@
 
 export wk_glibc=glibc-2.26
 
-wb_make_glibc() {
+wb_find_glibc() {
 
     wb_apply http://ftp.gnu.org/gnu/glibc/ ${wk_glibc} .tar.xz
+
+}
+
+wb_make_glibc() {
 
     mkdir -p build && cd build
 
@@ -18,6 +22,7 @@ wb_inst_glibc() {
 
     local fine=${webox}/lib/libc.a
 
+    [ -e ${fine} ] || wb_find_glibc
     [ -e ${fine} ] || wb_make_glibc
     [ -e ${fine} ] || wb_error ${wk_glibc}
 

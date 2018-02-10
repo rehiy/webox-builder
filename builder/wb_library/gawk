@@ -2,9 +2,13 @@
 
 export wk_gawk=gawk-4.1.4
 
-wb_make_gawk() {
+wb_find_gawk() {
 
     wb_apply http://ftp.gnu.org/gnu/gawk/ ${wk_gawk} .tar.xz
+
+}
+
+wb_make_gawk() {
 
     mkdir -p build && cd build
 
@@ -18,6 +22,7 @@ wb_inst_gawk() {
 
     local fine=${webox}/bin/gawk
 
+    [ -e ${fine} ] || wb_find_gawk
     [ -e ${fine} ] || wb_make_gawk
     [ -e ${fine} ] || wb_error ${wk_gawk}
 

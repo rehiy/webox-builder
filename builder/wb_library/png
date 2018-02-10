@@ -1,10 +1,14 @@
-### Update: 2017-08-25 ###
+### Update: 2018-02-10 ###
 
-export wk_png=libpng-1.6.32
+export wk_png=libpng-1.6.34
 
-wb_make_png() {
+wb_find_png() {
 
     wb_apply ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/ ${wk_png} .tar.xz
+
+}
+
+wb_make_png() {
 
     ./configure --prefix=${webox}
 
@@ -16,6 +20,7 @@ wb_inst_png() {
 
     local fine=${webox}/lib/libpng.a
 
+    [ -e ${fine} ] || wb_find_png
     [ -e ${fine} ] || wb_make_png
     [ -e ${fine} ] || wb_error ${wk_png}
 

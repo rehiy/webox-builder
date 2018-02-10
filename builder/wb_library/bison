@@ -2,9 +2,13 @@
 
 export wk_bison=bison-3.0.4
 
-wb_make_bison() {
+wb_find_bison() {
 
     wb_apply http://ftp.gnu.org/gnu/bison/ ${wk_bison} .tar.xz
+
+}
+
+wb_make_bison() {
 
     ./configure --prefix=${webox}
 
@@ -16,6 +20,7 @@ wb_inst_bison() {
 
     local fine=${webox}/bin/bison
 
+    [ -e ${fine} ] || wb_find_bison
     [ -e ${fine} ] || wb_make_bison
     [ -e ${fine} ] || wb_error ${wk_bison}
 

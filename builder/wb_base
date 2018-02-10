@@ -19,17 +19,22 @@ fi
 [ -z ${wbsrc} ] && wbsrc=${wbdir}/wb_source
 [ -d ${wbsrc} ] || mkdir -p ${wbsrc}
 
-if [ -f /etc/lsb-release ]; then
-    wbetc=${wbdir}/wb_profile/Ubuntu
-else
-    wbetc=${wbdir}/wb_profile/MacOS
-fi
-
 #################################################################RTM#
 
 export PATH=${webox}/bin:${PATH}
 
 export CPATH=${webox}/include
 export LIBRARY_PATH=${webox}/lib
+
+case $(uname) in
+    "Linux")
+        wbetc=${wbdir}/wb_profile/Debian
+    ;;
+    "Darwin")
+        wbetc=${wbdir}/wb_profile/MacOS
+    ;;
+    *)
+        exit 100
+esac
 
 source ${wbetc}.rtm

@@ -21,7 +21,7 @@ wb_rtm() {
 
         touch ${path}
 
-        if [ "$OSTYPE" == "Ubuntu" ]; then
+        if [ "$OSTYPE" == "Debian" ]; then
             echo "export LD_LIBRARY_PATH=${webox}/lib" >${path}
         fi
 

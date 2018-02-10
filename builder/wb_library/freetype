@@ -2,9 +2,13 @@
 
 export wk_freetype=freetype-2.8
 
-wb_make_freetype() {
+wb_find_freetype() {
 
     wb_apply http://ftp.twaren.net/Unix/NonGNU/freetype/ ${wk_freetype} .tar.gz
+
+}
+
+wb_make_freetype() {
 
     ./configure --prefix=${webox}
 
@@ -16,6 +20,7 @@ wb_inst_freetype() {
 
     local fine=${webox}/lib/libfreetype.a
 
+    [ -e ${fine} ] || wb_find_freetype
     [ -e ${fine} ] || wb_make_freetype
     [ -e ${fine} ] || wb_error ${wk_freetype}
 

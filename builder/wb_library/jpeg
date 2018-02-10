@@ -2,9 +2,13 @@
 
 export wk_jpeg=jpeg-9b
 
-wb_make_jpeg() {
+wb_find_jpeg() {
 
     wb_apply http://www.ijg.org/files/ jpegsrc.v${wk_jpeg##*-} .tar.gz ${wk_jpeg}
+
+}
+
+wb_make_jpeg() {
 
     ./configure --prefix=${webox}
 
@@ -16,6 +20,7 @@ wb_inst_jpeg() {
 
     local fine=${webox}/lib/libjpeg.a
 
+    [ -e ${fine} ] || wb_find_jpeg
     [ -e ${fine} ] || wb_make_jpeg
     [ -e ${fine} ] || wb_error ${wk_jpeg}
 

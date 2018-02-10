@@ -1,8 +1,12 @@
 export wk_php5=php-5.6.33
 
-wb_make_php5() {
+wb_find_php5() {
 
     wb_apply http://cn2.php.net/distributions/ ${wk_php5} .tar.gz
+
+}
+
+wb_make_php5() {
 
     ./configure \
         --prefix=/srv/php5 \
@@ -50,6 +54,18 @@ wb_make_php5() {
 
 }
 
+wb_inst_php5() {
+
+    [ -d /srv/php5/bin ] || wb_find_php5
+    [ -d /srv/php5/bin ] || wb_make_php5
+    [ -d /srv/php5/bin ] || wb_error ${wk_php5}
+
+    wb_rtm /srv/php5
+
+}
+
+########################################################################
+
 wb_make_php5_ext() {
 
     cd ${wbsrc}/${wk_php5}/ext/${1}
@@ -69,16 +85,5 @@ wb_make_php5_pecl() {
     rm -rf ../package.xml
 
     wb_make_php5_ext "${@}"
-
-}
-
-########################################################################
-
-wb_inst_php5() {
-
-    [ -d /srv/php5/bin ] || wb_make_php5
-    [ -d /srv/php5/bin ] || wb_error ${wk_php5}
-
-    wb_rtm /srv/php5
 
 }

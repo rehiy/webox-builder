@@ -1,12 +1,16 @@
 export wk_mysql=mysql-5.7.21
 
-wb_make_mysql() {
-
-    # http://dev.mysql.com/doc/refman/5.7/en/source-configuration-options.html
+wb_find_mysql() {
 
     wb_apply http://cdn.mysql.com/Downloads/MySQL-5.7/ ${wk_mysql} .tar.gz
 
     rm -f CMakeCache.txt
+
+}
+
+wb_make_mysql() {
+
+    # http://dev.mysql.com/doc/refman/5.7/en/source-configuration-options.html
 
     cmake . \
         -DCMAKE_INSTALL_PREFIX=/srv/mysql \
@@ -42,6 +46,7 @@ wb_make_mysql() {
 
 wb_inst_mysql() {
 
+    [ -d /srv/mysql/bin ] || wb_find_mysql
     [ -d /srv/mysql/bin ] || wb_make_mysql
     [ -d /srv/mysql/bin ] || wb_error ${wk_mysql}
 

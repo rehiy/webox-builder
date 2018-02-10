@@ -2,9 +2,13 @@
 
 export wk_gd=libgd-2.1.1
 
-wb_make_gd() {
+wb_find_gd() {
 
     wb_apply https://bitbucket.org/libgd/gd-libgd/downloads/ ${wk_gd} .tar.gz
+
+}
+
+wb_make_gd() {
 
     ./configure --prefix=${webox} \
         --with-libiconv-prefix=${webox} \
@@ -22,6 +26,7 @@ wb_inst_gd() {
 
     local fine=${webox}/lib/libgd.a
 
+    [ -e ${fine} ] || wb_find_gd
     [ -e ${fine} ] || wb_make_gd
     [ -e ${fine} ] || wb_error ${wk_gd}
 
