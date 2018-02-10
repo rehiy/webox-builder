@@ -71,5 +71,5 @@ find /srv -type d -name "lost+found" -exec rm {} \;
 plat=$(uname -s)-$(getconf LONG_BIT)
 dist=${wbdir}/Webox-${plat}bit${1}.tgz
 
-tar --exclude webox2 -czvf ${dist} /srv
+tar --exclude builder -czvf ${dist} /srv
 
