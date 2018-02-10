@@ -41,7 +41,7 @@ wb_make_mysql() {
 
     rm -rf /srv/mysql/{README,COPYING}
     rm -rf /srv/mysql/{docs,scripts,support-files}
-    rm -rf /srv/mysql/mysql-test /srv/mysql/bin/*test
+    rm -rf /srv/mysql/*-test /srv/mysql/bin/*test
     rm -rf /srv/mysql/bin/*embedded
 
 }
