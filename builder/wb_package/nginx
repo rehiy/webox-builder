@@ -41,6 +41,7 @@ wb_make_nginx() {
         --with-openssl=${wbsrc}/${wk_openssl} \
         $(wb_plus_nginx_http_cache_purge) \
         $(wb_plus_nginx_http_echo) \
+        $(wb_plus_nginx_js) \
         --with-cc-opt='-O3'
 
     make && make install
@@ -61,20 +62,22 @@ wb_inst_nginx() {
 
 ########################################################################
 
-wb_plus_nginx_http_cache_purge() {
+wb_plus_nginx_js() {
 
-    if [ ! -d http_cache_purge ]; then
+    if [ ! -d njs ]; then
 
-        local url=https://codeload.github.com/FRiCKLE/ngx_cache_purge/zip/master
-        local zip=$(wb_get ${url} ${wk_nginx}/ngx_cache_purge-master.zip)
+        local url=http://hg.nginx.org/njs/archive/tip.tar.gz
+        local tar=$(wb_get ${url} ${wk_nginx}/njs.tar.gz)
 
-        unzip -q ${zip} && mv ngx_cache_purge-master http_cache_purge
+        tar xf ${tar} && mv $(ls | grep njs) njs
 
-        wb_error_check 'not found http_cache_purge'
+        wb_error_check 'not found njs'
+
+        rm njs/.hg*
 
     fi
 
-    echo "--add-module=http_cache_purge"
+    echo "--add-dynamic-module=njs/nginx"
 
 }
 
@@ -92,5 +95,22 @@ wb_plus_nginx_http_echo() {
     fi
 
     echo "--add-module=http_echo"
+
+}
+
+wb_plus_nginx_http_cache_purge() {
+
+    if [ ! -d http_cache_purge ]; then
+
+        local url=https://codeload.github.com/FRiCKLE/ngx_cache_purge/zip/master
+        local zip=$(wb_get ${url} ${wk_nginx}/ngx_cache_purge-master.zip)
+
+        unzip -q ${zip} && mv ngx_cache_purge-master http_cache_purge
+
+        wb_error_check 'not found http_cache_purge'
+
+    fi
+
+    echo "--add-module=http_cache_purge"
 
 }
