@@ -4,7 +4,7 @@ export wk_tiff=tiff-4.0.9
 
 wb_find_tiff() {
 
-    wb_apply http://dl.maptools.org/dl/libtiff/ ${wk_tiff} .tar.gz
+    wb_apply http://download.osgeo.org/libtiff/ ${wk_tiff} .tar.gz
 
 }
 
