@@ -1,6 +1,6 @@
-### Update: 2018-01-23 ###
+### Update: 2017-11-03 ###
 
-export wk_xml2=libxml2-2.9.8
+export wk_xml2=libxml2-2.9.7
 
 wb_find_xml2() {
 
