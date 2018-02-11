@@ -1,6 +1,6 @@
-### Update: 2017-09-09 ###
+### Update: 2018-01-22 ###
 
-export wk_imagick=ImageMagick-6.9.9-12
+export wk_imagick=ImageMagick-6.9.9-34
 
 wb_find_imagick() {
 

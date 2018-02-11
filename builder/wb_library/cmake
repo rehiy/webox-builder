@@ -1,6 +1,6 @@
-### Update: 2017-09-07 ###
+### Update: 2017-12-10 ###
 
-export wk_cmake=cmake-3.9.2
+export wk_cmake=cmake-3.9.6
 
 wb_find_cmake() {
 

@@ -1,6 +1,6 @@
-### Update: 2016-01-17 ###
+### Update: 2018-01-14 ###
 
-export wk_jpeg=jpeg-9b
+export wk_jpeg=jpeg-9c
 
 wb_find_jpeg() {
 

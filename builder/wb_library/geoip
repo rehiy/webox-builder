@@ -1,6 +1,6 @@
-### Update: 2017-05-16 ###
+### Update: 2018-01-18 ###
 
-export wk_geoip=GeoIP-1.6.11
+export wk_geoip=GeoIP-1.6.12
 
 wb_find_geoip() {
 
