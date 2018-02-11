@@ -19,6 +19,8 @@ fi
 [ -z ${wbsrc} ] && wbsrc=${wbdir}/wb_source
 [ -d ${wbsrc} ] || mkdir -p ${wbsrc}
 
+find ${wbget} -name "*" -type f -size 0c | xargs -n 1 rm -f
+
 #################################################################RTM#
 
 export PATH=${webox}/bin:${PATH}
