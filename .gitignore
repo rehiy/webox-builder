@@ -1,10 +1,8 @@
-Binary
-Webox*.tgz
-
-wb_cache
-wb_source
-
 _notes
 .DS_Store
 Thumbs.db
-nbproject
+
+/builder/wb_cache
+/builder/wb_source
+
+/publish
