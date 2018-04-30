@@ -1,6 +1,6 @@
-### Update: 2018-01-01 ###
+### Update: 2018-03-26 ###
 
-export wk_redis=redis-4.0.8
+export wk_redis=redis-4.0.9
 
 wb_find_redis() {
 

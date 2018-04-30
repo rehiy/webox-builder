@@ -1,6 +1,6 @@
-### Update: 2018-01-15 ###
+### Update: 2018-03-03 ###
 
-export wk_mysql=mysql-5.7.21
+export wk_mysql=mysql-5.7.22
 
 wb_find_mysql() {
 

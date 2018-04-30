@@ -1,6 +1,6 @@
-### Update: 2018-02-03 ###
+### Update: 2018-03-30 ###
 
-export wk_node=node-v8.9.4
+export wk_node=node-v8.11.1
 
 wb_find_node() {
 
