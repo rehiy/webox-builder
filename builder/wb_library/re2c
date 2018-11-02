@@ -1,6 +1,6 @@
-### Update: 2017-11-09 ###
+### Update: 2018-08-31 ###
 
-export wk_re2c=re2c-1.0.3
+export wk_re2c=re2c-1.1.1
 
 wb_find_re2c() {
 

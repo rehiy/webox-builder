@@ -1,6 +1,6 @@
-### Update: 2018-01-08 ###
+### Update: 2018-05-02 ###
 
-export wk_freetype=freetype-2.9
+export wk_freetype=freetype-2.9.1
 
 wb_find_freetype() {
 
@@ -13,6 +13,7 @@ wb_make_freetype() {
     ./configure --prefix=${webox}
 
     make && make install
+    cp -av builds/unix/freetype-config ${webox}/bin/
 
 }
 

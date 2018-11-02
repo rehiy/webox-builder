@@ -1,6 +1,6 @@
-### Update: 2017-05-19 ###
+### Update: 2018-03-11 ###
 
-export wk_automake=automake-1.15.1
+export wk_automake=automake-1.16.1
 
 wb_find_automake() {
 
