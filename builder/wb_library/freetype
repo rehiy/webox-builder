@@ -13,6 +13,9 @@ wb_make_freetype() {
     ./configure --prefix=${webox}
 
     make && make install
+
+    sleep 1
+
     cp -av builds/unix/freetype-config ${webox}/bin/
 
 }

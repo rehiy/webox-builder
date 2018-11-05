@@ -1,6 +1,6 @@
 ### Update: 2018-03-03 ###
 
-export wk_mysql=mysql-5.7.22
+export wk_mysql=mysql-5.7.24
 
 wb_find_mysql() {
 
@@ -17,13 +17,16 @@ wb_make_mysql() {
     # http://dev.mysql.com/doc/refman/5.7/en/source-configuration-options.html
 
     cmake . \
+        -DCMAKE_PREFIX_PATH=${webox} \
+        -DCMAKE_INCLUDE_PATH=${CPATH} \
+        -DCMAKE_LIBRARY_PATH=${LIBRARY_PATH} \
         -DCMAKE_INSTALL_PREFIX=/srv/mysql \
         -DSYSCONFDIR=/srv/mysql/etc \
         -DMYSQL_DATADIR=/srv/mysql/var/data \
         -DMYSQL_UNIX_ADDR=/srv/mysql/var/run/mysqld.sock \
-        -DENABLED_LOCAL_INFILE=1 \
         -DDEFAULT_CHARSET=utf8 \
         -DDEFAULT_COLLATION=utf8_general_ci \
+        -DENABLED_LOCAL_INFILE=1 \
         -DWITH_SSL=${webox} \
         -DWITH_ZLIB=${webox} \
         -DWITH_BOOST=${wbsrc} \
