@@ -61,7 +61,7 @@ app_start() {
 
     if [ "${APP_BIN_NOHUP}" == "1" ]; then
 
-        ${APP_BIN_START} >/dev/null 2>&1 &
+        ${APP_BIN_START} >/dev/null 2>${wktemp}/service.err &
 
         while [ $((try++)) -lt 15 ]; do
             [ -f ${APP_PID_FILE} ] && return 0
