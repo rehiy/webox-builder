@@ -15,11 +15,11 @@ source ${wbdir}/function
 #################################################################Package#
 
 for pkg in ${wbdir}/library/*; do
-    [ -x ${pkg} ] && source ${pkg}
+    source ${pkg}
 done
 
 for pkg in ${wbdir}/app/*; do
-    [ -x ${pkg} ] && source ${pkg}
+    source ${pkg}
 done
 
 wb_inst_webox
