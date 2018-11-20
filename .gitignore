@@ -2,7 +2,7 @@ _notes
 .DS_Store
 Thumbs.db
 
-/builder/wb_cache
-/builder/wb_source
+/builder/source
+/builder/storage
 
 /publish

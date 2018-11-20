@@ -13,10 +13,10 @@ fi
 [ -z ${webox} ] && webox=/srv/webox
 [ -d ${webox} ] || mkdir -p ${webox}
 
-[ -z ${wbget} ] && wbget=${wbdir}/wb_cache
+[ -z ${wbget} ] && wbget=${wbdir}/storage
 [ -d ${wbget} ] || mkdir -p ${wbget}
 
-[ -z ${wbsrc} ] && wbsrc=${wbdir}/wb_source
+[ -z ${wbsrc} ] && wbsrc=${wbdir}/source
 [ -d ${wbsrc} ] || mkdir -p ${wbsrc}
 
 find ${wbget} -name "*" -type f -size 0c | xargs -n 1 rm -f
@@ -32,10 +32,10 @@ mkdir -p ${CPATH} ${LIBRARY_PATH}
 
 case $(uname) in
     "Linux")
-        wbetc=${wbdir}/wb_profile/Debian
+        wbetc=${wbdir}/profile/Debian
     ;;
     "Darwin")
-        wbetc=${wbdir}/wb_profile/MacOS
+        wbetc=${wbdir}/profile/MacOS
     ;;
     *)
         exit 100
