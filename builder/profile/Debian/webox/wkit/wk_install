@@ -3,14 +3,15 @@ wk_install() {
     chown 0:0  ${wksbin}
     chmod 0755 ${wksbin}/*
 
-    rm -rf /bin/wkit
-    ln -s ${wksbin}/wkit /bin/wkit
+    if [ -f ~/.bashrc ]; then
+        echo "source /srv/webox/runtime" >> ~/.bashrc
+    fi
 
 }
 
 
 wk_install_usage() {
 
-    echo "install           install wkit to /bin/wkit"
+    echo "install           add runtime to ~/.bashrc"
 
 }
