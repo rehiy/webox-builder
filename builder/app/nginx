@@ -1,6 +1,6 @@
-### Update: 2018-11-06 ###
+### Update: 2018-12-04 ###
 
-export wk_nginx=nginx-1.14.1
+export wk_nginx=nginx-1.14.2
 
 wb_find_nginx() {
 
