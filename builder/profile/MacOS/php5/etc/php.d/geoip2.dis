@@ -1,0 +1,3 @@
+[Geoip2]
+
+extension = maxminddb.so

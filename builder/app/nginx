@@ -34,7 +34,6 @@ wb_make_nginx() {
         --with-http_gzip_static_module \
         --with-http_stub_status_module \
         --with-http_image_filter_module=dynamic \
-        --with-http_geoip_module=dynamic \
         --with-stream \
         --with-stream_ssl_module \
         --with-stream_realip_module \
@@ -43,6 +42,7 @@ wb_make_nginx() {
         --with-openssl=${wbsrc}/${wk_openssl} \
         $(wb_plus_nginx_http_cache_purge) \
         $(wb_plus_nginx_http_echo) \
+        $(wb_plus_nginx_http_geoip2) \
         $(wb_plus_nginx_js) \
         --with-cc-opt='-O3'
 
@@ -82,6 +82,24 @@ wb_plus_nginx_js() {
     echo "--add-dynamic-module=njs/nginx"
 
 }
+
+wb_plus_nginx_http_geoip2() {
+
+    if [ ! -d http_geoip2 ]; then
+
+        local url=https://codeload.github.com/leev/ngx_http_geoip2_module/zip/master
+        local zip=$(wb_get ${url} ${wk_nginx}/ngx_http_geoip2_module-master.zip)
+
+        unzip -q ${zip} && mv ngx_http_geoip2_module-master http_geoip2
+
+        wb_error_check 'not found http_geoip2'
+
+    fi
+
+    echo "--add-dynamic-module=http_geoip2"
+
+}
+
 
 wb_plus_nginx_http_echo() {
 

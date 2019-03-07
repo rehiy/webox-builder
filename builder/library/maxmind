@@ -1,0 +1,27 @@
+### Update: 2018-01-18 ###
+
+export wk_maxmind=libmaxminddb-1.3.2
+
+wb_find_maxmind() {
+
+    wb_apply https://github.com/maxmind/libmaxminddb/releases/download/${wk_maxmind##*-}/ ${wk_maxmind} .tar.gz
+
+}
+
+wb_make_maxmind() {
+
+    ./configure --prefix=${webox}
+
+    make && make install
+
+}
+
+wb_inst_maxmind() {
+
+    local fine=${webox}/lib/libmaxminddb.a
+
+    [ -e ${fine} ] || wb_find_maxmind
+    [ -e ${fine} ] || wb_make_maxmind
+    [ -e ${fine} ] || wb_error ${wk_maxmind}
+
+}

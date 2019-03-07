@@ -1,6 +1,6 @@
-### Update: 2018-01-01 ###
+### Update: 2019-03-08 ###
 
-export wk_webox=webox-v7.2.2
+export wk_webox=webox-v9.0.0
 
 wb_make_webox() {
 
@@ -18,8 +18,8 @@ wb_make_webox() {
     wb_inst_jpeg
     wb_inst_png
     wb_inst_gd
-    wb_inst_geoip
     wb_inst_ncurses
+    wb_inst_maxmind
     wb_inst_mcrypt
     wb_inst_xml2
     wb_inst_gettext

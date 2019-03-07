@@ -4,7 +4,7 @@ export wk_php7=php-7.2.16
 
 wb_find_php7() {
 
-    wb_apply http://cn2.php.net/distributions/ ${wk_php7} .tar.gz
+    wb_apply http://jp2.php.net/distributions/ ${wk_php7} .tar.gz
 
 }
 
@@ -48,7 +48,8 @@ wb_make_php7() {
     wb_make_php7_ext pcntl
 
     wb_make_php7_pecl redis-4.2.0
-    wb_make_php7_pecl geoip-1.1.1 --with-geoip=${webox}
+
+    wb_plus_php7_geoip2
 
     rm -rf /srv/php7/etc /srv/php7/php
 
@@ -85,5 +86,26 @@ wb_make_php7_pecl() {
     rm -rf ../package.xml
 
     wb_make_php7_ext "${@}"
+
+}
+
+wb_plus_php7_geoip2() {
+
+    cd ${wbsrc}/${wk_php7}/ext
+
+    if [ ! -d geoip2 ]; then
+
+        local url=https://codeload.github.com/maxmind/MaxMind-DB-Reader-php/zip/master
+        local zip=$(wb_get ${url} ${wk_php7}/ext/MaxMind-DB-Reader-php-master.zip)
+
+        unzip -q ${zip} && mv MaxMind-DB-Reader-php-master/ext geoip2
+
+        wb_error_check 'not found geoip2'
+
+        rm -rf MaxMind-DB-Reader-php-master
+
+    fi
+
+    wb_make_php7_ext geoip2 --with-maxminddb=${webox}
 
 }

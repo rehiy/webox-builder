@@ -4,7 +4,7 @@ export wk_php5=php-5.6.40
 
 wb_find_php5() {
 
-    wb_apply http://cn2.php.net/distributions/ ${wk_php5} .tar.gz
+    wb_apply http://jp2.php.net/distributions/ ${wk_php5} .tar.gz
 
 }
 
@@ -50,7 +50,8 @@ wb_make_php5() {
     wb_make_php5_ext pcntl
 
     wb_make_php5_pecl redis-4.2.0
-    wb_make_php5_pecl geoip-1.1.1 --with-geoip=${webox}
+
+    wb_plus_php5_geoip2
 
     rm -rf /srv/php5/etc /srv/php5/php
 
@@ -87,5 +88,26 @@ wb_make_php5_pecl() {
     rm -rf ../package.xml
 
     wb_make_php5_ext "${@}"
+
+}
+
+wb_plus_php5_geoip2() {
+
+    cd ${wbsrc}/${wk_php5}/ext
+
+    if [ ! -d geoip2 ]; then
+
+        local url=https://codeload.github.com/maxmind/MaxMind-DB-Reader-php/zip/master
+        local zip=$(wb_get ${url} ${wk_php5}/ext/MaxMind-DB-Reader-php-master.zip)
+
+        unzip -q ${zip} && mv MaxMind-DB-Reader-php-master/ext geoip2
+
+        wb_error_check 'not found geoip2'
+
+        rm -rf MaxMind-DB-Reader-php-master
+
+    fi
+
+    wb_make_php5_ext geoip2 --with-maxminddb=${webox}
 
 }
