@@ -1,6 +1,6 @@
-### Update: 2018-03-20 ###
+### Update: 2019-02-23 ###
 
-export wk_pcre=pcre-8.42
+export wk_pcre=pcre-8.43
 
 wb_find_pcre() {
 

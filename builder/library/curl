@@ -1,6 +1,6 @@
-### Update: 2018-10-31 ###
+### Update: 2019-02-06 ###
 
-export wk_curl=curl-7.62.0
+export wk_curl=curl-7.64.0
 
 wb_find_curl() {
 

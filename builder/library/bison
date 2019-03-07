@@ -1,6 +1,6 @@
-### Update: 2015-01-23 ###
+### Update: 2019-02-03 ###
 
-export wk_bison=bison-3.0.4
+export wk_bison=bison-3.3.2
 
 wb_find_bison() {
 

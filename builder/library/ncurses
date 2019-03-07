@@ -1,6 +1,6 @@
-### Update: 2018-10-27 ###
+### Update: 2019-01-05 ###
 
-export wk_ncurses=ncurses-6.1-20181027
+export wk_ncurses=ncurses-6.1-20190105
 
 wb_find_ncurses() {
 

@@ -1,6 +1,6 @@
-### Update: 2017-11-18 ###
+### Update: 2018-12-10 ###
 
-export wk_tiff=tiff-4.0.9
+export wk_tiff=tiff-4.0.10
 
 wb_find_tiff() {
 
