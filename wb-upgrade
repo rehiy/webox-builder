@@ -6,13 +6,17 @@
 cd ~
 
 plat=$(uname -s)-$(uname -m)
-name=Webox-${plat}-v7.0910.tgz
 
-if [ $(which wget) ]; then
-    wget -c -O ${name} http://get.anrip.com/webox/${name}
-else
-    curl -C - -o ${name} http://get.anrip.com/webox/${name}
-fi
+case ${plat} in
+    "Darwin-x86_64")
+        name=Webox-Darwin-x86_64-v7.0910.tgz
+        curl -C - -o ${name} http://get.vmlu.com/webox/${name}
+    ;;
+    "Linux-x86_64")
+        name=Webox-Darwin-x86_64-v9.0309.tgz
+        wget -c -O ${name} http://get.vmlu.com/webox/${name}
+    ;;
+esac
 
 tar -xvf ${name}
 
