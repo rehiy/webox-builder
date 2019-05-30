@@ -1,6 +1,6 @@
-### Update: 2018-05-02 ###
+### Update: 2019-03-15 ###
 
-export wk_freetype=freetype-2.9.1
+export wk_freetype=freetype-2.10.0
 
 wb_find_freetype() {
 

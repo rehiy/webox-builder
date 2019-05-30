@@ -1,6 +1,6 @@
-### Update: 2017-09-29 ###
+### Update: 2019-04-15 ###
 
-export wk_png=libpng-1.6.34
+export wk_png=libpng-1.6.37
 
 wb_find_png() {
 

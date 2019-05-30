@@ -1,10 +1,10 @@
-### Update: 2019-02-01 ###
+### Update: 2019-05-14 ###
 
-export wk_cmake=cmake-3.13.4
+export wk_cmake=cmake-3.14.4
 
 wb_find_cmake() {
 
-    wb_apply https://cmake.org/files/v3.13/ ${wk_cmake} .tar.gz
+    wb_apply https://cmake.org/files/v3.14/ ${wk_cmake} .tar.gz
 
 }
 
