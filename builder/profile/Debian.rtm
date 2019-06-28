@@ -4,4 +4,5 @@ export LD_LIBRARY_PATH=${LIBRARY_PATH}
 
 ulimit -n 65536
 
-apt-get install -y --force-yes build-essential python-dev unzip
+apt install -y build-essential python-dev
+apt install -y pkg-config unzip
