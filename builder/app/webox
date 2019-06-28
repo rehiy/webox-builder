@@ -1,6 +1,6 @@
-### Update: 2019-03-08 ###
+### Update: 2019-06-28 ###
 
-export wk_webox=webox-v9.0.0
+export wk_webox=webox-v9.1.0
 
 wb_make_webox() {
 
@@ -25,6 +25,7 @@ wb_make_webox() {
     wb_inst_gettext
     wb_inst_curl
     wb_inst_cmake
+    wb_inst_zip
 
 }
 

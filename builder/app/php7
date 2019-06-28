@@ -39,7 +39,8 @@ wb_make_php7() {
         --with-iconv=${webox} \
         --with-openssl=${webox} \
         --with-pcre-dir=${webox} \
-        --with-libxml-dir=${webox} \
+        --with-libxml-dir=${webox} \ \
+        --with-libzip=${webox} \
         --with-zlib=${webox}
 
     make && make install

@@ -1,0 +1,28 @@
+### Update: 2019-03-12 ###
+
+export wk_zip=libzip-1.5.2
+
+wb_find_zip() {
+
+    wb_apply https://libzip.org/download/ ${wk_zip} .tar.xz
+
+}
+
+wb_make_zip() {
+
+    cmake . \
+        -DCMAKE_PREFIX_PATH=${webox}
+
+    make && make install
+
+}
+
+wb_inst_zip() {
+
+    local fine=${webox}/lib/libzip.so
+
+    [ -e ${fine} ] || wb_find_zip
+    [ -e ${fine} ] || wb_make_zip
+    [ -e ${fine} ] || wb_error ${wk_zip}
+
+}
