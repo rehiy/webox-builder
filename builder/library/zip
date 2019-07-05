@@ -6,12 +6,15 @@ wb_find_zip() {
 
     wb_apply https://libzip.org/download/ ${wk_zip} .tar.xz
 
+    rm -f CMakeCache.txt
+
 }
 
 wb_make_zip() {
 
     cmake . \
-        -DCMAKE_PREFIX_PATH=${webox}
+        -DCMAKE_PREFIX_PATH=${webox} \
+        -DCMAKE_INSTALL_PREFIX=${webox}
 
     make && make install
 
@@ -19,7 +22,7 @@ wb_make_zip() {
 
 wb_inst_zip() {
 
-    local fine=${webox}/lib/libzip.so
+    local fine=${webox}/bin/ziptool
 
     [ -e ${fine} ] || wb_find_zip
     [ -e ${fine} ] || wb_make_zip
