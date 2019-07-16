@@ -30,7 +30,6 @@ wb_make_php7() {
         --with-mysqli \
         --with-pdo-mysql \
         --with-gd \
-        --enable-gd-native-ttf \
         --with-freetype-dir=${webox} \
         --with-jpeg-dir=${webox} \
         --with-png-dir=${webox} \
@@ -39,7 +38,7 @@ wb_make_php7() {
         --with-iconv=${webox} \
         --with-openssl=${webox} \
         --with-pcre-dir=${webox} \
-        --with-libxml-dir=${webox} \ \
+        --with-libxml-dir=${webox} \
         --with-libzip=${webox} \
         --with-zlib=${webox}
 
