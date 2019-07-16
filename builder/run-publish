@@ -37,7 +37,7 @@ if [ "${1}" == "-min" ]; then
 
     wb_strip /srv/nginx/sbin
 
-    if [ "$OSTYPE" == "Debian" ]; then
+    if [ "$OS_TYPE" == "Debian" ]; then
         wb_strip /srv/php5/bin
         wb_strip /srv/php5/sbin
         wb_strip /srv/php7/bin
@@ -56,7 +56,7 @@ rm -rf /srv/webox/var/ready/*
 
 rm -rf /srv/mysql/var/data/*.cnf
 
-if [ "$OSTYPE" == "MacOS" ]; then
+if [ "$OS_TYPE" == "MacOS" ]; then
     xattr -rd com.apple.quarantine /srv
 fi
 

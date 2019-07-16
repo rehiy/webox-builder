@@ -10,7 +10,7 @@ wb_find_iconv() {
 
 wb_make_iconv() {
 
-    if [ "$OSTYPE" == "Debian" ]; then
+    if [ "$OS_TYPE" == "Debian" ]; then
         sed -i '/gets is a security hole/d' srclib/stdio*.h
     fi
 

@@ -1,4 +1,4 @@
-export OSTYPE=Debian
+export OS_TYPE=Debian
 
 export LD_LIBRARY_PATH=${LIBRARY_PATH}
 

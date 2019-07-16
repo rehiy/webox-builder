@@ -1,4 +1,4 @@
-export OSTYPE=MacOS
+export OS_TYPE=MacOS
 
 export LC_COLLATE=C
 export LC_CTYPE=C
