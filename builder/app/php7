@@ -43,6 +43,7 @@ wb_make_php7() {
         --with-zlib=${webox}
 
     make && make install
+    wb_error_check ${wk_php7}
 
     wb_make_php7_ext opcache
     wb_make_php7_ext pcntl

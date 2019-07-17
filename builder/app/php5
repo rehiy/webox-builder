@@ -45,6 +45,7 @@ wb_make_php5() {
         --with-zlib=${webox}
 
     make && make install
+    wb_error_check ${wk_php5}
 
     wb_make_php5_ext opcache
     wb_make_php5_ext pcntl
