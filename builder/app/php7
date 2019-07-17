@@ -1,6 +1,6 @@
-### Update: 2019-05-30 ###
+### Update: 2019-07-04 ###
 
-export wk_php7=php-7.3.6
+export wk_php7=php-7.3.7
 
 wb_find_php7() {
 

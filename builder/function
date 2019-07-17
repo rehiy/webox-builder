@@ -19,11 +19,7 @@ wb_rtm() {
 
     if [ ! -f ${path} ] ; then
 
-        touch ${path}
-
-        if [ "$OS_TYPE" == "Debian" ]; then
-            echo "export LD_LIBRARY_PATH=${webox}/lib" >${path}
-        fi
+        echo "export LD_LIBRARY_PATH=${webox}/lib" >${path}
 
     fi
 

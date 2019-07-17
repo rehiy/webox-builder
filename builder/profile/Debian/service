@@ -4,7 +4,6 @@
 source /srv/webox/runtime
 
 if [ $# -eq 1 ]; then
-    wkit service php5  "${@}"
     wkit service php7  "${@}"
     wkit service redis "${@}"
     wkit service mysql "${@}"

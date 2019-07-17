@@ -1,5 +1,7 @@
 export OS_TYPE=MacOS
 
+export LD_LIBRARY_PATH=${LIBRARY_PATH}
+
 export LC_COLLATE=C
 export LC_CTYPE=C
 
