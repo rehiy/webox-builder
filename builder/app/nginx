@@ -71,6 +71,7 @@ wb_plus_nginx_js() {
         local url=http://hg.nginx.org/njs/archive/tip.tar.gz
         local tar=$(wb_get ${url} ${wk_nginx}/njs.tar.gz)
 
+        rm -rf njs-*
         tar xf ${tar} && mv $(ls | grep njs) njs
 
         wb_error_check 'not found njs'
