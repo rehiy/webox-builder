@@ -24,11 +24,10 @@ if [ "${1}" == "-min" ]; then
     done
 
     rm -rf /srv/webox/{bin,etc,man,share}
+    mv /srv/webox/bin2 /srv/webox/bin
 
     find /srv -name "*.a" -exec rm {} \;
     find /srv -name "*.la" -exec rm {} \;
-
-    mv /srv/webox/bin2 /srv/webox/bin
 
     wb_strip /srv/webox/bin
 
