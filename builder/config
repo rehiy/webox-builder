@@ -27,6 +27,7 @@ export PATH=${webox}/bin:${PATH}
 
 export CPATH=${webox}/include
 export LIBRARY_PATH=${webox}/lib
+export LD_LIBRARY_PATH=${webox}/lib
 
 mkdir -p ${CPATH} ${LIBRARY_PATH}
 

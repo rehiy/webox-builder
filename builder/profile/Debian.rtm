@@ -1,8 +1,8 @@
 export OS_TYPE=Debian
 
-export LD_LIBRARY_PATH=${LIBRARY_PATH}
-
-ulimit -n 65536
+export PKG_CONFIG_PATH=${webox}/lib/pkgconfig
 
 apt install -y build-essential python-dev
 apt install -y pkg-config unzip
+
+ulimit -n 65536
