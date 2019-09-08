@@ -1,7 +1,7 @@
-## deps by mysql
+# deps by mysql
 
-# https://gcc.gnu.org/viewcvs/gcc/trunk/libatomic
+## <https://gcc.gnu.org/viewcvs/gcc/trunk/libatomic>
 
-## deps by nginx
+# deps by nginx
 
-# https://github.com/ivmai/libatomic_ops
+## <https://github.com/ivmai/libatomic_ops>
