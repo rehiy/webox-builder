@@ -5,7 +5,7 @@ export wk_mcrypt=libmcrypt-2.5.7
 wb_find_mcrypt() {
 
     wb_apply ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/libmcrypt/ ${wk_mcrypt} .tar.gz
-    
+
 }
 
 wb_make_mcrypt() {
