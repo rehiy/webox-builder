@@ -1,0 +1,63 @@
+### Update: 2019-08-02 ###
+
+export wk_maria=mariadb-10.4.7
+
+wb_find_maria() {
+
+    wb_apply https://nchc.dl.sourceforge.net/project/boost/boost/1.59.0/ boost_1_59_0 .tar.gz
+
+    wb_apply http://ftp.yz.yamagata-u.ac.jp/pub/dbms/mariadb/${wk_maria}/source/ ${wk_maria} .tar.gz
+
+    rm -f CMakeCache.txt
+
+}
+
+wb_make_maria() {
+
+    # https://mariadb.com/kb/en/library/generic-build-instructions/
+
+    cmake . \
+        -DCMAKE_PREFIX_PATH=${webox} \
+        -DCMAKE_INCLUDE_PATH=${CPATH} \
+        -DCMAKE_LIBRARY_PATH=${LIBRARY_PATH} \
+        -DCMAKE_INSTALL_PREFIX=/srv/maria \
+        -DSYSCONFDIR=/srv/maria/etc \
+        -DMYSQL_DATADIR=/srv/maria/var/data \
+        -DMYSQL_UNIX_ADDR=/srv/maria/var/run/mysqld.sock \
+        -DDEFAULT_CHARSET=utf8 \
+        -DDEFAULT_COLLATION=utf8_general_ci \
+        -DENABLED_LOCAL_INFILE=1 \
+        -DWITH_SSL=${webox} \
+        -DWITH_ZLIB=${webox} \
+        -DWITH_BOOST=${wbsrc} \
+        -DDOWNLOAD_BOOST=1 \
+        -DDOWNLOAD_BOOST_TIMEOUT=1800
+
+    make -j4 && make install
+    wb_error_check ${wk_maria}
+
+    sleep 1
+
+    mkdir -p /srv/maria/var/{run,log,tmp}
+
+    /srv/maria/bin/mysqld --initialize-insecure \
+        --basedir=/srv/maria --datadir=/srv/maria/var/data
+
+    sleep 2
+
+    rm -rf /srv/maria/{README,COPYING}
+    rm -rf /srv/maria/{docs,scripts,support-files}
+    rm -rf /srv/maria/*-test /srv/maria/bin/*test
+    rm -rf /srv/maria/bin/*embedded
+
+}
+
+wb_inst_maria() {
+
+    [ -d /srv/maria/bin ] || wb_find_maria
+    [ -d /srv/maria/bin ] || wb_make_maria
+    [ -d /srv/maria/bin ] || wb_error ${wk_maria}
+
+    wb_rtm /srv/maria
+
+}
