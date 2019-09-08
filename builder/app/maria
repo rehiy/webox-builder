@@ -24,8 +24,8 @@ wb_make_maria() {
         -DSYSCONFDIR=/srv/maria/etc \
         -DMYSQL_DATADIR=/srv/maria/var/data \
         -DMYSQL_UNIX_ADDR=/srv/maria/var/run/mysqld.sock \
-        -DDEFAULT_CHARSET=utf8 \
-        -DDEFAULT_COLLATION=utf8_general_ci \
+        -DDEFAULT_CHARSET=utf8mb4 \
+        -DDEFAULT_COLLATION=utf8mb4_general_ci \
         -DENABLED_LOCAL_INFILE=1 \
         -DWITH_SSL=${webox} \
         -DWITH_ZLIB=${webox} \
