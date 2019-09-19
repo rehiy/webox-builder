@@ -63,6 +63,8 @@ env[PATH] = /srv/webox/bin:/usr/bin:/bin
 ; Additional php.ini defines, specific to this pool of workers. These settings
 ; overwrite the values previously defined in the php.ini.
 
+php_admin_value[disable_functions] = "dl,exec,shell_exec,popen,proc_open,passthru,system"
+
 php_admin_value[open_basedir]      = /srv/webroot/$pool/
 php_admin_value[sys_temp_dir]      = /srv/webroot/$pool/var
 php_admin_value[upload_tmp_dir]    = /srv/webroot/$pool/var/upload

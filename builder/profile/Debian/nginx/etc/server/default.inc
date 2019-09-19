@@ -2,10 +2,8 @@ server {
 
     listen 80 default_server;
 
-    include common/21.server_status;
-    include common/22.server_error_page;
-
-    set $pooldir /srv/webroot/default;
+    set $pool default;
+    set $pooldir /srv/webroot/$pool;
 
     if ($host ~ ^([^\.]+)\.([^\.]+)$) {
         rewrite ^/?(.*)$ http://www.$host/$1 last;
@@ -19,9 +17,11 @@ server {
     }
 
     root  $sitedir;
-    index index.html index.htm index.php;
+    index index.php index.htm index.html;
     try_files $uri $uri/ /index.php$is_args$args;
 
-    include suffix/default.php7.inc;
+    include common/21.server_status;
+    include common/22.server_error_page;
+    include common/25.server_fastcgi_php7;
 
 }
