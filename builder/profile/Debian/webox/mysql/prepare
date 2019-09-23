@@ -28,7 +28,7 @@ app_prepare() {
     fi
 
     if [ ! -f $APP_ROOT/var/lib/mysql/ibdata1 ]; then
-        $APP_ROOT/bin/mysqld --initialize-insecure \
+        $APP_ROOT/sbin/mysqld --initialize-insecure \
             --basedir=$APP_ROOT --datadir=$APP_ROOT/var/lib/mysql
     fi
 

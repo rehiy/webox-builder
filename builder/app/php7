@@ -13,8 +13,9 @@ wk_make_php7() {
     ./configure \
         --prefix=${wbapp} \
         --program-suffix=7 \
-        --libdir=${wbapp}/lib/php7 \
         --datadir=${wbapp}/share/php7 \
+        --includedir=${wbapp}/include/php7 \
+        --libdir=${wbapp}/lib/php7 \
         --sysconfdir=${wbapp}/etc/php7 \
         --with-config-file-path=${wbapp}/etc/php7 \
         --with-config-file-scan-dir=${wbapp}/etc/php7/php.d \

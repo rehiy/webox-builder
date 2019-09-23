@@ -57,7 +57,7 @@ wk_make_nginx() {
 
 wk_inst_nginx() {
 
-    local fine=${wbapp}/bin/mysql
+    local fine=${wbapp}/sbin/nginx
 
     [ -e ${fine} ] || wk_find_nginx
     [ -e ${fine} ] || wk_make_nginx

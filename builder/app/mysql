@@ -21,9 +21,11 @@ wk_make_mysql() {
         -DCMAKE_INCLUDE_PATH=${CPATH} \
         -DCMAKE_LIBRARY_PATH=${LIBRARY_PATH} \
         -DCMAKE_INSTALL_PREFIX=${wbapp} \
+        -DINSTALL_SBINDIR=${wbapp}/sbin \
         -DINSTALL_DOCDIR=${wbapp}/share/doc/mysql \
         -DINSTALL_DOCREADMEDIR=${wbapp}/share/doc/mysql \
         -DINSTALL_INCLUDEDIR=${wbapp}/include/mysql \
+        -DINSTALL_INFODIR=${wbapp}/share/info/mysql \
         -DINSTALL_MANDIR=${wbapp}/share/man \
         -DINSTALL_MYSQLSHAREDIR=${wbapp}/share/mysql \
         -DINSTALL_MYSQLTESTDIR=${wbapp}/share/mysql-test \
@@ -49,6 +51,7 @@ wk_make_mysql() {
     rm -rf ${wbapp}/bin/*test
 
     rm -rf ${wbapp}/share/doc/mysql
+    rm -rf ${wbapp}/share/info/mysql
     rm -rf ${wbapp}/share/mysql-scripts
     rm -rf ${wbapp}/share/mysql-support
     rm -rf ${wbapp}/share/mysql-test

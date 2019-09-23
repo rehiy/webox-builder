@@ -13,8 +13,9 @@ wk_make_php5() {
     ./configure \
         --prefix=${wbapp} \
         --program-suffix=5 \
-        --libdir=${wbapp}/lib/php5 \
-        --datadir=${wbapp}/share/php5 \
+        --datadir=${wbapp}/share/php7 \
+        --includedir=${wbapp}/include/php7 \
+        --libdir=${wbapp}/lib/php7 \
         --sysconfdir=${wbapp}/etc/php5 \
         --with-config-file-path=${wbapp}/etc/php5 \
         --with-config-file-scan-dir=${wbapp}/etc/php5/php.d \
