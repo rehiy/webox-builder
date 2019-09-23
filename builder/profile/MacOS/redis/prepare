@@ -16,7 +16,7 @@ app_prepare() {
     [ -d $APP_ROOT/var/tmp ] || mkdir -p $APP_ROOT/var/tmp
     [ -d $APP_ROOT/var/run ] || mkdir -p $APP_ROOT/var/run
 
-    chown -R $APP_USER:$APP_USER $APP_ROOT/var
+    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*
 
     if [ ! -f $APP_ROOT/etc/conf.d/useful.conf ]; then
         touch $APP_ROOT/etc/conf.d/useful.conf

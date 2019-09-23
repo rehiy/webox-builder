@@ -19,7 +19,7 @@ app_prepare() {
         mkdir -p $APP_ROOT/var/tmp/proxy_cache
     fi
 
-    chown -R $APP_USER:$APP_USER $APP_ROOT/var
+    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*
 
 }
 

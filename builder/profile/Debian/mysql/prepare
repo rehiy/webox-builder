@@ -23,12 +23,16 @@ app_prepare() {
     [ -d $APP_ROOT/var/tmp ] || mkdir -p $APP_ROOT/var/tmp
     [ -d $APP_ROOT/var/run ] || mkdir -p $APP_ROOT/var/run
 
+    if [ ! -f $APP_ROOT/var/log/error.log ]; then
+        touch $APP_ROOT/var/log/error.log
+    fi
+
     if [ ! -f $APP_ROOT/var/data/ibdata1 ]; then
         $APP_ROOT/bin/mysqld --initialize-insecure \
             --basedir=$APP_ROOT --datadir=$APP_ROOT/var/data
     fi
 
-    chown -R $APP_USER:$APP_USER $APP_ROOT/var
+    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*
 
 }
 

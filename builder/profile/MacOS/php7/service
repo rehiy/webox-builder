@@ -25,10 +25,10 @@ app_start() {
 
     local POOL_CONF POOL_ROOT
 
-    for POOL_CONF in $APP_ETC_PATH/fpm.d/*.conf; do
+    for POOL_CONF in $APP_ROOT/etc/fpm.d/*.conf; do
 
         POOL_CONF=${POOL_CONF##*/}
-        POOL_ROOT=$APP_DATA/${POOL_CONF/.conf/}
+        POOL_ROOT=$APP_DATA/${POOL_CONF%.*}
 
         mkdir -p $POOL_ROOT/log $POOL_ROOT/temp
         mkdir -p $POOL_ROOT/session $POOL_ROOT/web
@@ -37,7 +37,7 @@ app_start() {
 
     done
 
-    $APP_BIN_FILE -c $APP_ETC_PATH -y $APP_ETC_PATH/fpm.conf
+    $APP_BIN_FILE -c $APP_ROOT/etc -y $APP_ROOT/etc/fpm.conf
 
 }
 
