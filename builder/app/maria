@@ -24,8 +24,6 @@ wk_make_maria() {
         -DINSTALL_DOCDIR=${wbapp}/share/doc/mysql \
         -DINSTALL_DOCREADMEDIR=${wbapp}/share/doc/mysql \
         -DINSTALL_INCLUDEDIR=${wbapp}/include/mysql \
-        -DINSTALL_INFODIR=${wbapp}/share/info/mysql \
-        -DINSTALL_LIBDIR=${wbapp}/lib/mysql \
         -DINSTALL_MANDIR=${wbapp}/share/man/mysql \
         -DINSTALL_MYSQLSHAREDIR=${wbapp}/share/mysql \
         -DINSTALL_MYSQLTESTDIR=${wbapp}/share/mysql-test \
