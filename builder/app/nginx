@@ -38,6 +38,7 @@ wb_make_nginx() {
         --with-stream_ssl_module \
         --with-stream_realip_module \
         --with-pcre=${wbsrc}/${wk_pcre} \
+        --with-pcre-jit \
         --with-zlib=${wbsrc}/${wk_zlib} \
         --with-openssl=${wbsrc}/${wk_openssl} \
         $(wb_plus_nginx_http_cache_purge) \
