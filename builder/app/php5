@@ -58,6 +58,8 @@ wk_make_php5() {
 
     wk_plus_php5_geoip2
 
+    rm -rf ${wbapp}/etc/php5
+
 }
 
 wk_inst_php5() {

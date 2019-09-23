@@ -55,6 +55,8 @@ wk_make_php7() {
 
     wk_plus_php7_geoip2
 
+    rm -rf ${wbapp}/etc/php7
+
 }
 
 wk_inst_php7() {

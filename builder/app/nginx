@@ -50,6 +50,7 @@ wk_make_nginx() {
 
     make && make install
 
+    rm -rf ${wbapp}/etc/nginx
     rm -rf ${wbapp}/html
 
 }
