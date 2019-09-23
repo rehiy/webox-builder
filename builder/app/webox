@@ -1,6 +1,6 @@
 ### Update: 2019-09-23 ###
 
-export wk_webox=webox-v10.0.0
+export wk_webox=webox-v9.2.0
 
 wk_make_webox() {
 
@@ -8,26 +8,27 @@ wk_make_webox() {
     wk_inst_autoconf
     wk_inst_automake
 
+    wk_inst_pcre
+    wk_inst_ncurses
+    wk_inst_iconv
+    wk_inst_xml2
     wk_inst_gettext
+
     wk_inst_openssl
     wk_inst_curl
     wk_inst_zlib
     wk_inst_cmake
 
-    wk_inst_pcre
-    wk_inst_xml2
-    wk_inst_zip
+    wk_inst_png
+    wk_inst_jpeg
+    wk_inst_tiff
+    wk_inst_freetype
+    wk_inst_gd
 
-    wk_inst_ncurses
-    wk_inst_iconv
     wk_inst_bison
     wk_inst_re2c
 
-    wk_inst_freetype
-    wk_inst_jpeg
-    wk_inst_png
-    wk_inst_tiff
-    wk_inst_gd
+    wk_inst_zip
 
     wk_inst_mcrypt
 
