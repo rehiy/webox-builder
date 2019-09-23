@@ -1,0 +1,14 @@
+[Opcache]
+
+zend_extension = opcache.so
+
+;opcache.blacklist_filename = /srv/wbapp/etc/php7/php.d/opcache.black
+
+opcache.memory_consumption = 256
+opcache.interned_strings_buffer = 16
+opcache.max_accelerated_files = 32531
+
+opcache.validate_timestamps=1
+opcache.revalidate_freq = 30
+
+opcache.fast_shutdown = 1

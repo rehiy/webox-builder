@@ -2,26 +2,26 @@
 
 export wk_png=libpng-1.6.37
 
-wb_find_png() {
+wk_find_png() {
 
-    wb_apply ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/ ${wk_png} .tar.xz
+    wk__apply ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/ ${wk_png} .tar.xz
 
 }
 
-wb_make_png() {
+wk_make_png() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_png() {
+wk_inst_png() {
 
-    local fine=${webox}/lib/libpng.a
+    local fine=${wbcom}/lib/libpng.a
 
-    [ -e ${fine} ] || wb_find_png
-    [ -e ${fine} ] || wb_make_png
-    [ -e ${fine} ] || wb_error ${wk_png}
+    [ -e ${fine} ] || wk_find_png
+    [ -e ${fine} ] || wk_make_png
+    [ -e ${fine} ] || wk__error ${wk_png}
 
 }

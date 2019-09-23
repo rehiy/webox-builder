@@ -2,26 +2,26 @@
 
 export wk_openssl=openssl-1.0.2s
 
-wb_find_openssl() {
+wk_find_openssl() {
 
-    wb_apply http://www.openssl.org/source/ ${wk_openssl} .tar.gz
+    wk__apply http://www.openssl.org/source/ ${wk_openssl} .tar.gz
 
 }
 
-wb_make_openssl() {
+wk_make_openssl() {
 
-    ./config --prefix=${webox} shared
+    ./config --prefix=${wbcom} shared
 
     make && make install_sw
 
 }
 
-wb_inst_openssl() {
+wk_inst_openssl() {
 
-    local fine=${webox}/lib/libssl.a
+    local fine=${wbcom}/lib/libssl.a
 
-    [ -e ${fine} ] || wb_find_openssl
-    [ -e ${fine} ] || wb_make_openssl
-    [ -e ${fine} ] || wb_error ${wk_openssl}
+    [ -e ${fine} ] || wk_find_openssl
+    [ -e ${fine} ] || wk_make_openssl
+    [ -e ${fine} ] || wk__error ${wk_openssl}
 
 }

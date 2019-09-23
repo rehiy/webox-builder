@@ -2,28 +2,24 @@
 
 export wk_node=node-v10.16.3
 
-wb_find_node() {
+wk_find_node() {
 
-    wb_apply https://nodejs.org/dist/${wk_node##*-}/ ${wk_node} .tar.gz
+    wk__apply https://nodejs.org/dist/${wk_node##*-}/ ${wk_node} .tar.gz
 
 }
 
-wb_make_node() {
+wk_make_node() {
 
-    ./configure --prefix=/srv/node
+    ./configure --prefix=${wbapp}
 
     make && make install
 
-    mkdir -p /srv/node/var
-
 }
 
-wb_inst_node() {
+wk_inst_node() {
 
-    [ -d /srv/node/bin ] || wb_find_node
-    [ -d /srv/node/bin ] || wb_make_node
-    [ -d /srv/node/bin ] || wb_error ${wk_node}
-
-    wb_rtm /srv/node
+    [ -f ${wbapp}/bin/node ] || wk_find_node
+    [ -f ${wbapp}/bin/node ] || wk_make_node
+    [ -f ${wbapp}/bin/node ] || wk__error ${wk_node}
 
 }

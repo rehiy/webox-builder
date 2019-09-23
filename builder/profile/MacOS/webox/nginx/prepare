@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+
+export APP_USER=_www
+export APP_GROUP=_www
+
+export APP_ROOT=/srv/wbapp
+export APP_DATA=/srv/htdoc
+
+#####################################################################
+
+app_prepare() {
+
+    [ -d $APP_ROOT/var/log/nginx ] || mkdir -p $APP_ROOT/var/log/nginx
+    [ -d $APP_ROOT/var/run/nginx ] || mkdir -p $APP_ROOT/var/run/nginx
+    [ -d $APP_ROOT/var/tmp/nginx ] || mkdir -p $APP_ROOT/var/tmp/nginx
+
+    if [ ! -d $APP_ROOT/var/tmp/nginx/proxy_cache ]; then
+        mkdir -p $APP_ROOT/var/tmp/nginx/proxy_cache
+    fi
+
+    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*/nginx
+
+}
+
+#####################################################################
+
+[ "$1" = "prepare" ] && app_prepare

@@ -2,29 +2,29 @@
 
 export wk_curl=curl-7.65.0
 
-wb_find_curl() {
+wk_find_curl() {
 
-    wb_apply https://curl.haxx.se/download/ ${wk_curl} .tar.gz
+    wk__apply https://curl.haxx.se/download/ ${wk_curl} .tar.gz
 
 }
 
-wb_make_curl() {
+wk_make_curl() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
-    local cert=$(wb_get http://curl.haxx.se/ca/cacert.pem)
-    cp -a ${cert} ${webox}/ssl/cert.pem
+    local cert=$(wk__fetch http://curl.haxx.se/ca/cacert.pem)
+    cp -a ${cert} ${wbcom}/ssl/cert.pem
 
 }
 
-wb_inst_curl() {
+wk_inst_curl() {
 
-    local fine=${webox}/lib/libcurl.a
+    local fine=${wbcom}/lib/libcurl.a
 
-    [ -e ${fine} ] || wb_find_curl
-    [ -e ${fine} ] || wb_make_curl
-    [ -e ${fine} ] || wb_error ${wk_curl}
+    [ -e ${fine} ] || wk_find_curl
+    [ -e ${fine} ] || wk_make_curl
+    [ -e ${fine} ] || wk__error ${wk_curl}
 
 }

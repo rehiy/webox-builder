@@ -6,40 +6,46 @@ if [ "$UID" != "0" ]; then
     exit 1
 fi
 
-[ -z ${wbdir} ] && wbdir=$(pwd)
+#####################################################WEBOX-TARGET-VAR#
 
-#################################################################VAR#
+export wbapp=/srv/wbapp
+export wbcom=/srv/wbcom
 
-[ -z ${webox} ] && webox=/srv/webox
-[ -d ${webox} ] || mkdir -p ${webox}
+[ -d ${wbapp} ] || mkdir -p ${wbapp}
+[ -d ${wbcom} ] || mkdir -p ${wbcom}
 
-[ -z ${wbget} ] && wbget=${wbdir}/storage
-[ -d ${wbget} ] || mkdir -p ${wbget}
+##################################################WEBOX-BUILD-KIT-VAR#
 
-[ -z ${wbsrc} ] && wbsrc=${wbdir}/source
-[ -d ${wbsrc} ] || mkdir -p ${wbsrc}
+export wkdir=$(pwd)
 
-find ${wbget} -name "*" -type f -size 0c | xargs -n 1 rm -f
+export wksrc=${wkdir}/source
+export wkget=${wkdir}/storage
 
-#################################################################RTM#
+[ -d ${wksrc} ] || mkdir -p ${wksrc}
+[ -d ${wkget} ] || mkdir -p ${wkget}
 
-export PATH=${webox}/bin:${PATH}
+find ${wkget} -name "*" -type f -size 0c | xargs -n 1 rm -f
 
-export CPATH=${webox}/include
-export LIBRARY_PATH=${webox}/lib
-export LD_LIBRARY_PATH=${webox}/lib
+##############################################################RUNTIME#
 
-mkdir -p ${CPATH} ${LIBRARY_PATH}
+export PATH=${wbapp}/bin:${wbcom}/bin:${PATH}
+
+export CPATH=${wbapp}/include:${wbcom}/include
+export LIBRARY_PATH=${wbapp}/lib:${wbcom}/lib
+export LD_LIBRARY_PATH=$LIBRARY_PATH
+
+mkdir -p ${wbapp}/include ${wbcom}/include
+mkdir -p ${wbapp}/lib ${wbcom}/lib
 
 case $(uname) in
     "Linux")
-        wbetc=${wbdir}/profile/Debian
+        wketc=${wkdir}/profile/Debian
     ;;
     "Darwin")
-        wbetc=${wbdir}/profile/MacOS
+        wketc=${wkdir}/profile/MacOS
     ;;
     *)
-        exit 100
+        exit 10
 esac
 
-source ${wbetc}.rtm
+source ${wketc}.rtm

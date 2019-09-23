@@ -2,19 +2,22 @@
 
 export wk_php5=php-5.6.40
 
-wb_find_php5() {
+wk_find_php5() {
 
-    wb_apply http://jp2.php.net/distributions/ ${wk_php5} .tar.gz
+    wk__apply http://jp2.php.net/distributions/ ${wk_php5} .tar.gz
 
 }
 
-wb_make_php5() {
+wk_make_php5() {
 
     ./configure \
-        --prefix=/srv/php5 \
-        --sysconfdir=/srv/php5/etc \
-        --with-config-file-path=/srv/php5/etc \
-        --with-config-file-scan-dir=/srv/php5/etc/php.d \
+        --prefix=${wbapp} \
+        --program-suffix=5 \
+        --libdir=${wbapp}/lib/php5 \
+        --datadir=${wbapp}/share/php5 \
+        --sysconfdir=${wbapp}/etc/php5 \
+        --with-config-file-path=${wbapp}/etc/php5 \
+        --with-config-file-scan-dir=${wbapp}/etc/php5/php.d \
         --with-layout=GNU \
         --without-pear \
         --disable-rpath \
@@ -32,83 +35,80 @@ wb_make_php5() {
         --with-pdo-mysql \
         --with-gd \
         --enable-gd-native-ttf \
-        --with-freetype-dir=${webox} \
-        --with-jpeg-dir=${webox} \
-        --with-png-dir=${webox} \
-        --with-curl=${webox} \
-        --with-gettext=${webox} \
-        --with-iconv=${webox} \
-        --with-mcrypt=${webox} \
-        --with-openssl=${webox} \
-        --with-pcre-dir=${webox} \
-        --with-libxml-dir=${webox} \
-        --with-zlib=${webox}
+        --with-freetype-dir=${wbcom} \
+        --with-jpeg-dir=${wbcom} \
+        --with-png-dir=${wbcom} \
+        --with-curl=${wbcom} \
+        --with-gettext=${wbcom} \
+        --with-iconv=${wbcom} \
+        --with-mcrypt=${wbcom} \
+        --with-openssl=${wbcom} \
+        --with-pcre-dir=${wbcom} \
+        --with-libxml-dir=${wbcom} \
+        --with-libzip=${wbcom} \
+        --with-zlib=${wbcom}
 
     make && make install
-    wb_error_check ${wk_php5}
+    wk__error_check ${wk_php5}
 
-    wb_make_php5_ext opcache
-    wb_make_php5_ext pcntl
+    wk_make_php5_ext opcache
+    wk_make_php5_ext pcntl
 
-    wb_make_php5_pecl redis-4.2.0
+    wk_make_php5_pecl redis-4.2.0
 
-    wb_plus_php5_geoip2
-
-    rm -rf /srv/php5/etc /srv/php5/php
+    wk_plus_php5_geoip2
 
 }
 
-wb_inst_php5() {
+wk_inst_php5() {
 
-    [ -d /srv/php5/bin ] || wb_find_php5
-    [ -d /srv/php5/bin ] || wb_make_php5
-    [ -d /srv/php5/bin ] || wb_error ${wk_php5}
-
-    wb_rtm /srv/php5
+    [ -f ${wbapp}/bin/php5 ] || wk_find_php5
+    [ -f ${wbapp}/bin/php5 ] || wk_make_php5
+    [ -f ${wbapp}/bin/php5 ] || wk__error ${wk_php5}
 
 }
 
 ########################################################################
 
-wb_make_php5_ext() {
+wk_make_php5_ext() {
 
-    cd ${wbsrc}/${wk_php5}/ext/${1}
+    cd ${wksrc}/${wk_php5}/ext/${1}
 
     shift 1
 
-    /srv/php5/bin/phpize && ./configure "${@}" \
-        --with-php-config=/srv/php5/bin/php-config
+    ${wbapp}/bin/phpize5 && ./configure "${@}" \
+        --with-php-config=${wbapp}/bin/php-config5
 
     make && make install
 
 }
 
-wb_make_php5_pecl() {
+wk_make_php5_pecl() {
 
-    wb_apply http://pecl.php.net/get/ ${1} .tgz ${wk_php5}/ext/${1}
+    wk__apply http://pecl.php.net/get/ ${1} .tgz ${wk_php5}/ext/${1}
     rm -rf ../package.xml
 
-    wb_make_php5_ext "${@}"
+    wk_make_php5_ext "${@}"
 
 }
 
-wb_plus_php5_geoip2() {
+wk_plus_php5_geoip2() {
 
-    cd ${wbsrc}/${wk_php5}/ext
+    cd ${wksrc}/${wk_php5}/ext
 
     if [ ! -d geoip2 ]; then
 
         local url=https://codeload.github.com/maxmind/MaxMind-DB-Reader-php/zip/master
-        local zip=$(wb_get ${url} ${wk_php5}/ext/MaxMind-DB-Reader-php-master.zip)
+        local zip=$(wk__fetch ${url} ${wk_php5}/ext/MaxMind-DB-Reader-php-master.zip)
 
         unzip -q ${zip} && mv MaxMind-DB-Reader-php-master/ext geoip2
 
-        wb_error_check 'not found geoip2'
+        wk__error_check 'not found geoip2'
 
         rm -rf MaxMind-DB-Reader-php-master
 
     fi
 
-    wb_make_php5_ext geoip2 --with-maxminddb=${webox}
+    wk_make_php5_ext geoip2 --with-maxminddb=${wbcom}
 
 }

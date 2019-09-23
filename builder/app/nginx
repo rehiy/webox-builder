@@ -2,30 +2,31 @@
 
 export wk_nginx=nginx-1.16.1
 
-wb_find_nginx() {
+wk_find_nginx() {
 
-    wb_apply http://nginx.org/download/ ${wk_nginx} .tar.gz
+    wk__apply http://nginx.org/download/ ${wk_nginx} .tar.gz
 
     sed -i~ 's/^CFLAGS="$CFLAGS -g"/#CFLAGS="$CFLAGS -g"/' auto/cc/gcc
     sed -i~ 's/^CFLAGS="$CFLAGS -Werror"/#CFLAGS="$CFLAGS -Werror"/' auto/cc/gcc
 
 }
 
-wb_make_nginx() {
+wk_make_nginx() {
 
     ./configure \
-        --prefix=/srv/nginx \
-        --sbin-path=/srv/nginx/sbin/nginx \
-        --conf-path=/srv/nginx/etc/nginx.conf \
-        --pid-path=/srv/nginx/var/run/nginx.pid \
-        --lock-path=/srv/nginx/var/run/nginx.lock \
-        --error-log-path=/srv/nginx/var/log/error.log \
-        --http-log-path=/srv/nginx/var/log/access.log \
-        --http-client-body-temp-path=/srv/nginx/var/tmp/body \
-        --http-proxy-temp-path=/srv/nginx/var/tmp/proxy \
-        --http-fastcgi-temp-path=/srv/nginx/var/tmp/fastcgi \
-        --http-uwsgi-temp-path=/srv/nginx/var/tmp/uwsgi \
-        --http-scgi-temp-path=/srv/nginx/var/tmp/scgi \
+        --prefix=${wbapp} \
+        --sbin-path=${wbapp}/sbin/nginx \
+        --modules-path=${wbapp}/lib/nginx \
+        --conf-path=${wbapp}/etc/nginx/nginx.conf \
+        --pid-path=${wbapp}/var/run/nginx/nginx.pid \
+        --lock-path=${wbapp}/var/run/nginx/nginx.lock \
+        --error-log-path=${wbapp}/var/log/nginx/error.log \
+        --http-log-path=${wbapp}/var/log/nginx/access.log \
+        --http-client-body-temp-path=${wbapp}/var/tmp/nginx/body \
+        --http-proxy-temp-path=${wbapp}/var/tmp/nginx/proxy \
+        --http-fastcgi-temp-path=${wbapp}/var/tmp/nginx/fastcgi \
+        --http-scgi-temp-path=${wbapp}/var/tmp/nginx/scgi \
+        --http-uwsgi-temp-path=${wbapp}/var/tmp/nginx/uwsgi \
         --with-http_v2_module \
         --with-http_ssl_module \
         --with-http_realip_module \
@@ -37,45 +38,43 @@ wb_make_nginx() {
         --with-stream \
         --with-stream_ssl_module \
         --with-stream_realip_module \
-        --with-pcre=${wbsrc}/${wk_pcre} \
+        --with-pcre=${wksrc}/${wk_pcre} \
         --with-pcre-jit \
-        --with-zlib=${wbsrc}/${wk_zlib} \
-        --with-openssl=${wbsrc}/${wk_openssl} \
-        $(wb_plus_nginx_http_cache_purge) \
-        $(wb_plus_nginx_http_echo) \
-        $(wb_plus_nginx_http_geoip2) \
-        $(wb_plus_nginx_js) \
+        --with-zlib=${wksrc}/${wk_zlib} \
+        --with-openssl=${wksrc}/${wk_openssl} \
+        $(wk_plus_nginx_http_cache_purge) \
+        $(wk_plus_nginx_http_echo) \
+        $(wk_plus_nginx_http_geoip2) \
+        $(wk_plus_nginx_js) \
         --with-cc-opt='-O3'
 
     make && make install
 
-    rm -rf /srv/nginx/etc /srv/nginx/html
+    rm -rf ${wbapp}/html
 
 }
 
-wb_inst_nginx() {
+wk_inst_nginx() {
 
-    [ -d /srv/nginx/sbin ] || wb_find_nginx
-    [ -d /srv/nginx/sbin ] || wb_make_nginx
-    [ -d /srv/nginx/sbin ] || wb_error ${wk_nginx}
-
-    wb_rtm /srv/nginx
+    [ -f ${wbapp}/sbin/nginx ] || wk_find_nginx
+    [ -f ${wbapp}/sbin/nginx ] || wk_make_nginx
+    [ -f ${wbapp}/sbin/nginx ] || wk__error ${wk_nginx}
 
 }
 
 ########################################################################
 
-wb_plus_nginx_js() {
+wk_plus_nginx_js() {
 
     if [ ! -d njs ]; then
 
         local url=http://hg.nginx.org/njs/archive/tip.tar.gz
-        local tar=$(wb_get ${url} ${wk_nginx}/njs.tar.gz)
+        local tar=$(wk__fetch ${url} ${wk_nginx}/njs.tar.gz)
 
         rm -rf njs-*
         tar xf ${tar} && mv $(ls | grep njs) njs
 
-        wb_error_check 'not found njs'
+        wk__error_check 'not found njs'
 
         rm njs/.hg*
 
@@ -85,16 +84,16 @@ wb_plus_nginx_js() {
 
 }
 
-wb_plus_nginx_http_geoip2() {
+wk_plus_nginx_http_geoip2() {
 
     if [ ! -d http_geoip2 ]; then
 
         local url=https://codeload.github.com/leev/ngx_http_geoip2_module/zip/master
-        local zip=$(wb_get ${url} ${wk_nginx}/ngx_http_geoip2_module-master.zip)
+        local zip=$(wk__fetch ${url} ${wk_nginx}/ngx_http_geoip2_module-master.zip)
 
         unzip -q ${zip} && mv ngx_http_geoip2_module-master http_geoip2
 
-        wb_error_check 'not found http_geoip2'
+        wk__error_check 'not found http_geoip2'
 
     fi
 
@@ -103,16 +102,16 @@ wb_plus_nginx_http_geoip2() {
 }
 
 
-wb_plus_nginx_http_echo() {
+wk_plus_nginx_http_echo() {
 
     if [ ! -d http_echo ]; then
 
         local url=https://codeload.github.com/openresty/echo-nginx-module/zip/master
-        local zip=$(wb_get ${url} ${wk_nginx}/echo-nginx-module-master.zip)
+        local zip=$(wk__fetch ${url} ${wk_nginx}/echo-nginx-module-master.zip)
 
         unzip -q ${zip} && mv echo-nginx-module-master http_echo
 
-        wb_error_check 'not found http_echo'
+        wk__error_check 'not found http_echo'
 
     fi
 
@@ -120,16 +119,16 @@ wb_plus_nginx_http_echo() {
 
 }
 
-wb_plus_nginx_http_cache_purge() {
+wk_plus_nginx_http_cache_purge() {
 
     if [ ! -d http_cache_purge ]; then
 
         local url=https://codeload.github.com/FRiCKLE/ngx_cache_purge/zip/master
-        local zip=$(wb_get ${url} ${wk_nginx}/ngx_cache_purge-master.zip)
+        local zip=$(wk__fetch ${url} ${wk_nginx}/ngx_cache_purge-master.zip)
 
         unzip -q ${zip} && mv ngx_cache_purge-master http_cache_purge
 
-        wb_error_check 'not found http_cache_purge'
+        wk__error_check 'not found http_cache_purge'
 
     fi
 

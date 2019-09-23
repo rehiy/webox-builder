@@ -2,30 +2,30 @@
 
 export wk_iconv=libiconv-1.16
 
-wb_find_iconv() {
+wk_find_iconv() {
 
-    wb_apply http://ftp.gnu.org/gnu/libiconv/ ${wk_iconv} .tar.gz
+    wk__apply http://ftp.gnu.org/gnu/libiconv/ ${wk_iconv} .tar.gz
 
 }
 
-wb_make_iconv() {
+wk_make_iconv() {
 
     if [ "$OS_TYPE" == "Debian" ]; then
         sed -i '/gets is a security hole/d' srclib/stdio*.h
     fi
 
-    ./configure --prefix=${webox} --enable-shared
+    ./configure --prefix=${wbcom} --enable-shared
 
     make && make install
 
 }
 
-wb_inst_iconv() {
+wk_inst_iconv() {
 
-    local fine=${webox}/lib/libiconv.la
+    local fine=${wbcom}/lib/libiconv.la
 
-    [ -e ${fine} ] || wb_find_iconv
-    [ -e ${fine} ] || wb_make_iconv
-    [ -e ${fine} ] || wb_error ${wk_iconv}
+    [ -e ${fine} ] || wk_find_iconv
+    [ -e ${fine} ] || wk_make_iconv
+    [ -e ${fine} ] || wk__error ${wk_iconv}
 
 }

@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+
+export APP_NAME=redis
+
+export APP_USER=daemon
+export APP_GROUP=daemon
+
+export APP_ROOT=/srv/wbapp
+
+#####################################################################
+
+app_prepare() {
+
+    [ -d $APP_ROOT/var/log/redis ] || mkdir -p $APP_ROOT/var/log/redis
+    [ -d $APP_ROOT/var/run/redis ] || mkdir -p $APP_ROOT/var/run/redis
+    [ -d $APP_ROOT/var/tmp/redis ] || mkdir -p $APP_ROOT/var/tmp/redis
+
+    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*/redis
+
+    if [ ! -f $APP_ROOT/etc/redis/conf.d/useful.conf ]; then
+        touch $APP_ROOT/etc/redis/conf.d/useful.conf
+    fi
+
+}
+
+#####################################################################
+
+[ "$1" = "prepare" ] && app_prepare

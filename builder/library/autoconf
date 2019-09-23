@@ -2,26 +2,26 @@
 
 export wk_autoconf=autoconf-2.69
 
-wb_find_autoconf() {
+wk_find_autoconf() {
 
-    wb_apply http://mirrors.kernel.org/gnu/autoconf/ ${wk_autoconf} .tar.xz
+    wk__apply http://mirrors.kernel.org/gnu/autoconf/ ${wk_autoconf} .tar.xz
 
 }
 
-wb_make_autoconf() {
+wk_make_autoconf() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_autoconf() {
+wk_inst_autoconf() {
 
-    local fine=${webox}/bin/autoconf
+    local fine=${wbcom}/bin/autoconf
 
-    [ -e ${fine} ] || wb_find_autoconf
-    [ -e ${fine} ] || wb_make_autoconf
-    [ -e ${fine} ] || wb_error ${wk_autoconf}
+    [ -e ${fine} ] || wk_find_autoconf
+    [ -e ${fine} ] || wk_make_autoconf
+    [ -e ${fine} ] || wk__error ${wk_autoconf}
 
 }

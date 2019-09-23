@@ -2,28 +2,28 @@
 
 export wk_xml2=libxml2-2.9.9
 
-wb_find_xml2() {
+wk_find_xml2() {
 
-    wb_apply ftp://xmlsoft.org/libxml2/ ${wk_xml2} .tar.gz
+    wk__apply ftp://xmlsoft.org/libxml2/ ${wk_xml2} .tar.gz
 
 }
 
-wb_make_xml2() {
+wk_make_xml2() {
 
-    ./configure --prefix=${webox} \
-        --with-iconv=${webox} \
-        --with-zlib=${webox}
+    ./configure --prefix=${wbcom} \
+        --with-iconv=${wbcom} \
+        --with-zlib=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_xml2() {
+wk_inst_xml2() {
 
-    local fine=${webox}/lib/libxml2.a
+    local fine=${wbcom}/lib/libxml2.a
 
-    [ -e ${fine} ] || wb_find_xml2
-    [ -e ${fine} ] || wb_make_xml2
-    [ -e ${fine} ] || wb_error ${wk_xml2}
+    [ -e ${fine} ] || wk_find_xml2
+    [ -e ${fine} ] || wk_make_xml2
+    [ -e ${fine} ] || wk__error ${wk_xml2}
 
 }

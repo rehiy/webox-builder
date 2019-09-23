@@ -2,26 +2,26 @@
 
 export wk_gettext=gettext-0.19.8
 
-wb_find_gettext() {
+wk_find_gettext() {
 
-    wb_apply http://ftp.gnu.org/gnu/gettext/ ${wk_gettext} .tar.xz
+    wk__apply http://ftp.gnu.org/gnu/gettext/ ${wk_gettext} .tar.xz
 
 }
 
-wb_make_gettext() {
+wk_make_gettext() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_gettext() {
+wk_inst_gettext() {
 
-    local fine=${webox}/bin/gettext
+    local fine=${wbcom}/bin/gettext
 
-    [ -e ${fine} ] || wb_find_gettext
-    [ -e ${fine} ] || wb_make_gettext
-    [ -e ${fine} ] || wb_error ${wk_gettext}
+    [ -e ${fine} ] || wk_find_gettext
+    [ -e ${fine} ] || wk_make_gettext
+    [ -e ${fine} ] || wk__error ${wk_gettext}
 
 }

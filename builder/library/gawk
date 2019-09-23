@@ -2,28 +2,28 @@
 
 export wk_gawk=gawk-5.0.0
 
-wb_find_gawk() {
+wk_find_gawk() {
 
-    wb_apply http://ftp.gnu.org/gnu/gawk/ ${wk_gawk} .tar.xz
+    wk__apply http://ftp.gnu.org/gnu/gawk/ ${wk_gawk} .tar.xz
 
 }
 
-wb_make_gawk() {
+wk_make_gawk() {
 
     mkdir -p build && cd build
 
-    ../configure --prefix=${webox}
+    ../configure --prefix=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_gawk() {
+wk_inst_gawk() {
 
-    local fine=${webox}/bin/gawk
+    local fine=${wbcom}/bin/gawk
 
-    [ -e ${fine} ] || wb_find_gawk
-    [ -e ${fine} ] || wb_make_gawk
-    [ -e ${fine} ] || wb_error ${wk_gawk}
+    [ -e ${fine} ] || wk_find_gawk
+    [ -e ${fine} ] || wk_make_gawk
+    [ -e ${fine} ] || wk__error ${wk_gawk}
 
 }

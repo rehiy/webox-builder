@@ -2,26 +2,26 @@
 
 export wk_pcre=pcre-8.43
 
-wb_find_pcre() {
+wk_find_pcre() {
 
-    wb_apply https://ftp.pcre.org/pub/pcre/ ${wk_pcre} .tar.gz
+    wk__apply https://ftp.pcre.org/pub/pcre/ ${wk_pcre} .tar.gz
 
 }
 
-wb_make_pcre() {
+wk_make_pcre() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_pcre() {
+wk_inst_pcre() {
 
-    local fine=${webox}/lib/libpcre.a
+    local fine=${wbcom}/lib/libpcre.a
 
-    [ -e ${fine} ] || wb_find_pcre
-    [ -e ${fine} ] || wb_make_pcre
-    [ -e ${fine} ] || wb_error ${wk_pcre}
+    [ -e ${fine} ] || wk_find_pcre
+    [ -e ${fine} ] || wk_make_pcre
+    [ -e ${fine} ] || wk__error ${wk_pcre}
 
 }

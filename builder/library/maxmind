@@ -2,26 +2,26 @@
 
 export wk_maxmind=libmaxminddb-1.3.2
 
-wb_find_maxmind() {
+wk_find_maxmind() {
 
-    wb_apply https://github.com/maxmind/libmaxminddb/releases/download/${wk_maxmind##*-}/ ${wk_maxmind} .tar.gz
+    wk__apply https://github.com/maxmind/libmaxminddb/releases/download/${wk_maxmind##*-}/ ${wk_maxmind} .tar.gz
 
 }
 
-wb_make_maxmind() {
+wk_make_maxmind() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_maxmind() {
+wk_inst_maxmind() {
 
-    local fine=${webox}/lib/libmaxminddb.a
+    local fine=${wbcom}/lib/libmaxminddb.a
 
-    [ -e ${fine} ] || wb_find_maxmind
-    [ -e ${fine} ] || wb_make_maxmind
-    [ -e ${fine} ] || wb_error ${wk_maxmind}
+    [ -e ${fine} ] || wk_find_maxmind
+    [ -e ${fine} ] || wk_make_maxmind
+    [ -e ${fine} ] || wk__error ${wk_maxmind}
 
 }

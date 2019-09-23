@@ -1,27 +1,27 @@
-### Update: 2019-05-25 ###
+### Update: 2019-09-21 ###
 
-export wk_ncurses=ncurses-6.1-20190525
+export wk_ncurses=ncurses-6.1-20190921
 
-wb_find_ncurses() {
+wk_find_ncurses() {
 
-    wb_apply http://invisible-mirror.net/archives/ncurses/current/ ${wk_ncurses} .tgz
+    wk__apply http://invisible-mirror.net/archives/ncurses/current/ ${wk_ncurses} .tgz
 
 }
 
-wb_make_ncurses() {
+wk_make_ncurses() {
 
-    ./configure --prefix=${webox} --mandir=${webox}/share/man --with-shared
+    ./configure --prefix=${wbcom} --mandir=${wbcom}/share/man --with-shared
 
     make && make install
 
 }
 
-wb_inst_ncurses() {
+wk_inst_ncurses() {
 
-    local fine=${webox}/lib/libncurses.a
+    local fine=${wbcom}/lib/libncurses.a
 
-    [ -e ${fine} ] || wb_find_ncurses
-    [ -e ${fine} ] || wb_make_ncurses
-    [ -e ${fine} ] || wb_error ${wk_ncurses}
+    [ -e ${fine} ] || wk_find_ncurses
+    [ -e ${fine} ] || wk_make_ncurses
+    [ -e ${fine} ] || wk__error ${wk_ncurses}
 
 }

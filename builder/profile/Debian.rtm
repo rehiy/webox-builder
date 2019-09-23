@@ -1,8 +1,9 @@
 export OS_TYPE=Debian
 
-export PKG_CONFIG_PATH=${webox}/lib/pkgconfig
+export PKG_CONFIG_PATH=${wbcom}/lib/pkgconfig
 
+apt update
+apt install -y pkg-config unzip wget
 apt install -y build-essential python-dev
-apt install -y pkg-config unzip
 
 ulimit -n 65536

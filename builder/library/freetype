@@ -2,30 +2,30 @@
 
 export wk_freetype=freetype-2.10.0
 
-wb_find_freetype() {
+wk_find_freetype() {
 
-    wb_apply http://ftp.twaren.net/Unix/NonGNU/freetype/ ${wk_freetype} .tar.gz
+    wk__apply http://ftp.twaren.net/Unix/NonGNU/freetype/ ${wk_freetype} .tar.gz
 
 }
 
-wb_make_freetype() {
+wk_make_freetype() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
     sleep 1
 
-    cp -av builds/unix/freetype-config ${webox}/bin/
+    cp -av builds/unix/freetype-config ${wbcom}/bin/
 
 }
 
-wb_inst_freetype() {
+wk_inst_freetype() {
 
-    local fine=${webox}/lib/libfreetype.a
+    local fine=${wbcom}/lib/libfreetype.a
 
-    [ -e ${fine} ] || wb_find_freetype
-    [ -e ${fine} ] || wb_make_freetype
-    [ -e ${fine} ] || wb_error ${wk_freetype}
+    [ -e ${fine} ] || wk_find_freetype
+    [ -e ${fine} ] || wk_make_freetype
+    [ -e ${fine} ] || wk__error ${wk_freetype}
 
 }

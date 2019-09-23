@@ -5,43 +5,44 @@ if [ -f $(pwd)/config ]; then
     source $(pwd)/config
 fi
 
-if [ -z ${wbdir} ]; then
+if [ -z ${wkdir} ]; then
     echo "Please use './wk_complie' to run this script"
     exit 1
 fi
 
-source ${wbdir}/function
+source ${wkdir}/function
 
 #################################################################Package#
 
-for pkg in ${wbdir}/library/*; do
+for pkg in ${wkdir}/library/*; do
     source ${pkg}
 done
 
-for pkg in ${wbdir}/app/*; do
+for pkg in ${wkdir}/app/*; do
     source ${pkg}
 done
 
-wb_inst_webox
+wk_inst_webox
 
-wb_inst_php5
-wb_inst_php7
+wk_inst_mysql
+wk_inst_redis
 
-wb_inst_nginx
+wk_inst_nginx
 
-wb_inst_mysql
-wb_inst_redis
+wk_inst_php5
+wk_inst_php7
 
 #################################################################Profile#
 
-cp -av ${wbetc}/* /srv/
+rm -rf ${wbapp}/etc/nginx
+rm -rf ${wbapp}/etc/php*
+cp -av ${wketc}/* /srv/
 
 chown -R 0:0  /srv
+chmod -R 0755 ${wbcom}/bin
 chmod -R 0755 /srv/service
-chmod -R 0755 /srv/webox/bin/wkit
-chmod -R 0755 /srv/webox/wkit
-chmod -R 0755 /srv/www/*
+chmod -R 0755 /srv/htdoc/*
 
-find /srv/*/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
-find /srv/*/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
-find /srv/*/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+find ${wbapp}/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
+find ${wbapp}/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+find ${wbapp}/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;

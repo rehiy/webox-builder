@@ -1,25 +1,25 @@
 
-wb_error() {
+wk__error() {
 
     echo Failed: ${@}; exit 1
 
 }
 
-wb_error_check() {
+wk__error_check() {
 
-    [ ${?} -ne 0 ] && wb_error ${@}
+    [ ${?} -ne 0 ] && wk__error ${@}
 
 }
 
 ########################################################################
 
-wb_rtm() {
+wk__runtime() {
 
-    local path=${webox}/runtime
+    local path=${wbcom}/runtime
 
     if [ ! -f ${path} ] ; then
 
-        echo "export LD_LIBRARY_PATH=${webox}/lib" >${path}
+        echo "export LD_LIBRARY_PATH=${wbcom}/lib" >${path}
 
     fi
 
@@ -37,11 +37,11 @@ wb_rtm() {
 
 ########################################################################
 
-wb_get() {
+wk__fetch() {
 
-    local save=${wbget}/${1##*/}
+    local save=${wkget}/${1##*/}
 
-    [ -z ${2} ] || save=${wbget}/${2}
+    [ -z ${2} ] || save=${wkget}/${2}
     [ -d ${save%/*} ] || mkdir -p ${save%/*}
 
     if [ $(which wget) ]; then
@@ -54,37 +54,37 @@ wb_get() {
 
 }
 
-wb_apply() {
+wk__apply() {
 
     local name=${2}${3}
-    local dist=${wbsrc}/${2}
+    local dist=${wksrc}/${2}
 
     [ -z ${4} ] || name=${4}${3}
-    [ -z ${4} ] || dist=${wbsrc}/${4}
+    [ -z ${4} ] || dist=${wksrc}/${4}
 
     if [ ! -d ${dist} ]; then
 
         echo "Appling: ${1}${2}${3}"
 
-        local save=$(wb_get ${1}${2}${3} ${name})
+        local save=$(wk__fetch ${1}${2}${3} ${name})
 
         [ -d ${dist%/*} ] || mkdir -p ${dist%/*}
 
         tar -xvf ${save} -C ${dist%/*}
-        wb_error_check wb_apply ${name}
+        wk__error_check wk__apply ${name}
 
     fi
 
     cd ${dist}
-    wb_error_check wb_apply ${dist}
+    wk__error_check wk__apply ${dist}
 
     if [ -f Makefile ]; then make clean; fi
 
 }
 
-wb_strip() {
+wk__strip() {
 
-    local lst=${wbsrc}/wb_strip_list
+    local lst=${wksrc}/wk__strip_list
 
     rm -f ${lst}
 

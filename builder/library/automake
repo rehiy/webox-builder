@@ -2,26 +2,26 @@
 
 export wk_automake=automake-1.16.1
 
-wb_find_automake() {
+wk_find_automake() {
 
-    wb_apply http://mirrors.kernel.org/gnu/automake/ ${wk_automake} .tar.xz
+    wk__apply http://mirrors.kernel.org/gnu/automake/ ${wk_automake} .tar.xz
 
 }
 
-wb_make_automake() {
+wk_make_automake() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_automake() {
+wk_inst_automake() {
 
-    local fine=${webox}/bin/automake
+    local fine=${wbcom}/bin/automake
 
-    [ -e ${fine} ] || wb_find_automake
-    [ -e ${fine} ] || wb_make_automake
-    [ -e ${fine} ] || wb_error ${wk_automake}
+    [ -e ${fine} ] || wk_find_automake
+    [ -e ${fine} ] || wk_make_automake
+    [ -e ${fine} ] || wk__error ${wk_automake}
 
 }

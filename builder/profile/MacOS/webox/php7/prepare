@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+
+export APP_USER=_www
+export APP_GROUP=_www
+
+export APP_ROOT=/srv/wbapp
+export APP_DATA=/srv/htdoc
+
+#####################################################################
+
+app_prepare() {
+
+    [ -d $APP_ROOT/var/log/php7 ] || mkdir -p $APP_ROOT/var/log/php7
+    [ -d $APP_ROOT/var/run/php7 ] || mkdir -p $APP_ROOT/var/run/php7
+    [ -d $APP_ROOT/var/tmp/php7 ] || mkdir -p $APP_ROOT/var/tmp/php7
+
+    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*/php7
+
+}
+
+#####################################################################
+
+[ "$1" = "prepare" ] && app_prepare

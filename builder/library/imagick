@@ -2,26 +2,26 @@
 
 export wk_imagick=ImageMagick-7.0.8-47
 
-wb_find_imagick() {
+wk_find_imagick() {
 
-    wb_apply http://www.imagemagick.org/download/ ${wk_imagick} .tar.gz
+    wk__apply http://www.imagemagick.org/download/ ${wk_imagick} .tar.gz
 
 }
 
-wb_make_imagick() {
+wk_make_imagick() {
 
-    ./configure --prefix=${webox} LDFLAGS=-L${webox}/lib
+    ./configure --prefix=${wbcom} LDFLAGS=-L${wbcom}/lib
 
     make && make install
 
 }
 
-wb_inst_imagick() {
+wk_inst_imagick() {
 
-    local fine=${webox}/bin/convert
+    local fine=${wbcom}/bin/convert
 
-    [ -e ${fine} ] || wb_find_imagick
-    [ -e ${fine} ] || wb_make_imagick
-    [ -e ${fine} ] || wb_error ${wk_imagick}
+    [ -e ${fine} ] || wk_find_imagick
+    [ -e ${fine} ] || wk_make_imagick
+    [ -e ${fine} ] || wk__error ${wk_imagick}
 
 }

@@ -2,26 +2,26 @@
 
 export wk_cmake=cmake-3.14.4
 
-wb_find_cmake() {
+wk_find_cmake() {
 
-    wb_apply https://cmake.org/files/v3.14/ ${wk_cmake} .tar.gz
+    wk__apply https://cmake.org/files/v3.14/ ${wk_cmake} .tar.gz
 
 }
 
-wb_make_cmake() {
+wk_make_cmake() {
 
-    ./bootstrap --prefix=${webox} --docdir=share/doc/cmake --system-curl
+    ./bootstrap --prefix=${wbcom} --docdir=share/doc/cmake --system-curl
 
     make && make install
 
 }
 
-wb_inst_cmake() {
+wk_inst_cmake() {
 
-    local fine=${webox}/bin/cmake
+    local fine=${wbcom}/bin/cmake
 
-    [ -e ${fine} ] || wb_find_cmake
-    [ -e ${fine} ] || wb_make_cmake
-    [ -e ${fine} ] || wb_error ${wk_cmake}
+    [ -e ${fine} ] || wk_find_cmake
+    [ -e ${fine} ] || wk_make_cmake
+    [ -e ${fine} ] || wk__error ${wk_cmake}
 
 }

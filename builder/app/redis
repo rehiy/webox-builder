@@ -2,26 +2,22 @@
 
 export wk_redis=redis-5.0.5
 
-wb_find_redis() {
+wk_find_redis() {
 
-    wb_apply http://download.redis.io/releases/ ${wk_redis} .tar.gz
-
-}
-
-wb_make_redis() {
-
-    make && make PREFIX=/srv/redis install
-
-    mkdir -p /srv/redis/var
+    wk__apply http://download.redis.io/releases/ ${wk_redis} .tar.gz
 
 }
 
-wb_inst_redis() {
+wk_make_redis() {
 
-    [ -d /srv/redis/bin ] || wb_find_redis
-    [ -d /srv/redis/bin ] || wb_make_redis
-    [ -d /srv/redis/bin ] || wb_error ${wk_redis}
+    make && make PREFIX=${wbapp} install
 
-    wb_rtm /srv/redis
+}
+
+wk_inst_redis() {
+
+    [ -f ${wbapp}/bin/redis ] || wk_find_redis
+    [ -f ${wbapp}/bin/redis ] || wk_make_redis
+    [ -f ${wbapp}/bin/redis ] || wk__error ${wk_redis}
 
 }

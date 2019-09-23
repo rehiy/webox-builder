@@ -2,32 +2,32 @@
 
 export wk_gd=libgd-2.1.1
 
-wb_find_gd() {
+wk_find_gd() {
 
-    wb_apply https://bitbucket.org/libgd/gd-libgd/downloads/ ${wk_gd} .tar.gz
+    wk__apply https://bitbucket.org/libgd/gd-libgd/downloads/ ${wk_gd} .tar.gz
 
 }
 
-wb_make_gd() {
+wk_make_gd() {
 
-    ./configure --prefix=${webox} \
-        --with-libiconv-prefix=${webox} \
-        --with-zlib=${webox} \
-        --with-png=${webox} \
-        --with-freetype=${webox} \
-        --with-jpeg=${webox} \
-        --with-tiff=${webox}
+    ./configure --prefix=${wbcom} \
+        --with-libiconv-prefix=${wbcom} \
+        --with-zlib=${wbcom} \
+        --with-png=${wbcom} \
+        --with-freetype=${wbcom} \
+        --with-jpeg=${wbcom} \
+        --with-tiff=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_gd() {
+wk_inst_gd() {
 
-    local fine=${webox}/lib/libgd.a
+    local fine=${wbcom}/lib/libgd.a
 
-    [ -e ${fine} ] || wb_find_gd
-    [ -e ${fine} ] || wb_make_gd
-    [ -e ${fine} ] || wb_error ${wk_gd}
+    [ -e ${fine} ] || wk_find_gd
+    [ -e ${fine} ] || wk_make_gd
+    [ -e ${fine} ] || wk__error ${wk_gd}
 
 }

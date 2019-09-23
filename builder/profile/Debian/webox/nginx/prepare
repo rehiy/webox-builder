@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+
+export APP_USER=www-data
+export APP_GROUP=www-data
+
+export APP_ROOT=/srv/wbapp
+export APP_DATA=/srv/htdoc
+
+#####################################################################
+
+app_prepare() {
+
+    if ! grep $APP_GROUP /etc/group >/dev/null; then
+        groupadd $APP_GROUP -g 33
+    fi
+
+    if ! grep $APP_USER /etc/passwd >/dev/null; then
+        useradd $APP_USER -u 33 -g 33
+        usermod $APP_USER -d $APP_DATA -s /usr/sbin/nologin
+    fi
+
+    [ -d $APP_ROOT/var/log/nginx ] || mkdir -p $APP_ROOT/var/log/nginx
+    [ -d $APP_ROOT/var/run/nginx ] || mkdir -p $APP_ROOT/var/run/nginx
+    [ -d $APP_ROOT/var/tmp/nginx ] || mkdir -p $APP_ROOT/var/tmp/nginx
+
+    if [ ! -d $APP_ROOT/var/tmp/nginx/proxy_cache ]; then
+        mkdir -p $APP_ROOT/var/tmp/nginx/proxy_cache
+    fi
+
+    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*/nginx
+
+}
+
+#####################################################################
+
+[ "$1" = "prepare" ] && app_prepare

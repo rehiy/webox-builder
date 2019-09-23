@@ -2,53 +2,63 @@
 
 export wk_mysql=mysql-5.7.26
 
-wb_find_mysql() {
+wk_find_mysql() {
 
-    wb_apply https://nchc.dl.sourceforge.net/project/boost/boost/1.59.0/ boost_1_59_0 .tar.gz
+    wk__apply https://nchc.dl.sourceforge.net/project/boost/boost/1.59.0/ boost_1_59_0 .tar.gz
 
-    wb_apply http://cdn.mysql.com/Downloads/MySQL-5.7/ ${wk_mysql} .tar.gz
+    wk__apply http://cdn.mysql.com/Downloads/MySQL-5.7/ ${wk_mysql} .tar.gz
 
     rm -f CMakeCache.txt
 
 }
 
-wb_make_mysql() {
+wk_make_mysql() {
 
     # http://dev.mysql.com/doc/refman/5.7/en/source-configuration-options.html
 
     cmake . \
-        -DCMAKE_PREFIX_PATH=${webox} \
+        -DCMAKE_PREFIX_PATH=${wbapp} \
         -DCMAKE_INCLUDE_PATH=${CPATH} \
         -DCMAKE_LIBRARY_PATH=${LIBRARY_PATH} \
-        -DCMAKE_INSTALL_PREFIX=/srv/mysql \
-        -DSYSCONFDIR=/srv/mysql/etc \
-        -DMYSQL_DATADIR=/srv/mysql/var/data \
-        -DMYSQL_UNIX_ADDR=/srv/mysql/var/run/mysqld.sock \
+        -DCMAKE_INSTALL_PREFIX=${wbapp} \
+        -DINSTALL_DOCDIR=${wbapp}\share\doc\mysql \
+        -DINSTALL_DOCREADMEDIR=${wbapp}\share\doc\mysql \
+        -DINSTALL_INCLUDEDIR=${wbapp}\include\mysql \
+        -DINSTALL_INFODIR=${wbapp}\share\info\mysql \
+        -DINSTALL_LIBDIR=${wbapp}\lib\mysql \
+        -DINSTALL_MANDIR=${wbapp}\share\man\mysql \
+        -DINSTALL_MYSQLSHAREDIR=${wbapp}\share\mysql \
+        -DINSTALL_MYSQLTESTDIR=${wbapp}\share\mysql-test \
+        -DINSTALL_PLUGINDIR=${wbapp}\lib\mysql\plugin \
+        -DINSTALL_SCRIPTDIR=${wbapp}\share\mysql\scripts \
+        -DINSTALL_SUPPORTFILESDIR=${wbapp}\share\mysql\support-files \
+        -DSYSCONFDIR=${wbapp}/etc/mysql \
+        -DMYSQL_DATADIR=${wbapp}/var/lib/mysql \
+        -DMYSQL_UNIX_ADDR=${wbapp}/var/run/mysql/mysqld.sock \
         -DDEFAULT_CHARSET=utf8mb4 \
         -DDEFAULT_COLLATION=utf8mb4_general_ci \
         -DENABLED_LOCAL_INFILE=1 \
-        -DWITH_SSL=${webox} \
-        -DWITH_ZLIB=${webox} \
-        -DWITH_BOOST=${wbsrc} \
+        -DWITH_SSL=${wbcom} \
+        -DWITH_ZLIB=${wbcom} \
+        -DWITH_BOOST=${wksrc} \
         -DDOWNLOAD_BOOST=1 \
         -DDOWNLOAD_BOOST_TIMEOUT=1800
 
     make -j4 && make install
-    wb_error_check ${wk_mysql}
+    wk__error_check ${wk_mysql}
 
-    rm -rf /srv/mysql/{README,COPYING}
-    rm -rf /srv/mysql/{docs,scripts,support-files}
-    rm -rf /srv/mysql/*-test /srv/mysql/bin/*test
-    rm -rf /srv/mysql/bin/*embedded
+    rm -rf ${wbapp}/share/mysql/{scripts,support-files}
+    rm -rf ${wbapp}/share/mysql-test
+    rm -rf ${wbapp}/share/doc/mysql
+    rm -rf ${wbapp}/bin/*embedded
+    rm -rf ${wbapp}/bin/*test
 
 }
 
-wb_inst_mysql() {
+wk_inst_mysql() {
 
-    [ -d /srv/mysql/bin ] || wb_find_mysql
-    [ -d /srv/mysql/bin ] || wb_make_mysql
-    [ -d /srv/mysql/bin ] || wb_error ${wk_mysql}
-
-    wb_rtm /srv/mysql
+    [ -f ${wbapp}/bin/mysql ] || wk_find_mysql
+    [ -f ${wbapp}/bin/mysql ] || wk_make_mysql
+    [ -f ${wbapp}/bin/mysql ] || wk__error ${wk_mysql}
 
 }

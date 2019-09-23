@@ -2,26 +2,26 @@
 
 export wk_zlib=zlib-1.2.11
 
-wb_find_zlib() {
+wk_find_zlib() {
 
-    wb_apply http://zlib.net/ ${wk_zlib} .tar.xz
+    wk__apply http://zlib.net/ ${wk_zlib} .tar.xz
 
 }
 
-wb_make_zlib() {
+wk_make_zlib() {
 
-    ./configure --prefix=${webox} --$(getconf LONG_BIT)
+    ./configure --prefix=${wbcom} --$(getconf LONG_BIT)
 
     make && make install
 
 }
 
-wb_inst_zlib() {
+wk_inst_zlib() {
 
-    local fine=${webox}/lib/libz.a
+    local fine=${wbcom}/lib/libz.a
 
-    [ -e ${fine} ] || wb_find_zlib
-    [ -e ${fine} ] || wb_make_zlib
-    [ -e ${fine} ] || wb_error ${wk_zlib}
+    [ -e ${fine} ] || wk_find_zlib
+    [ -e ${fine} ] || wk_make_zlib
+    [ -e ${fine} ] || wk__error ${wk_zlib}
 
 }

@@ -2,26 +2,26 @@
 
 export wk_re2c=re2c-1.1.1
 
-wb_find_re2c() {
+wk_find_re2c() {
 
-    wb_apply https://github.com/skvadrik/re2c/releases/download/${wk_re2c##*-}/ ${wk_re2c} .tar.gz
+    wk__apply https://github.com/skvadrik/re2c/releases/download/${wk_re2c##*-}/ ${wk_re2c} .tar.gz
 
 }
 
-wb_make_re2c() {
+wk_make_re2c() {
 
-    ./configure --prefix=${webox}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
 }
 
-wb_inst_re2c() {
+wk_inst_re2c() {
 
-    local fine=${webox}/bin/re2c
+    local fine=${wbcom}/bin/re2c
 
-    [ -e ${fine} ] || wb_find_re2c
-    [ -e ${fine} ] || wb_make_re2c
-    [ -e ${fine} ] || wb_error ${wk_re2c}
+    [ -e ${fine} ] || wk_find_re2c
+    [ -e ${fine} ] || wk_make_re2c
+    [ -e ${fine} ] || wk__error ${wk_re2c}
 
 }

@@ -2,19 +2,22 @@
 
 export wk_php7=php-7.3.9
 
-wb_find_php7() {
+wk_find_php7() {
 
-    wb_apply http://jp2.php.net/distributions/ ${wk_php7} .tar.gz
+    wk__apply http://jp2.php.net/distributions/ ${wk_php7} .tar.gz
 
 }
 
-wb_make_php7() {
+wk_make_php7() {
 
     ./configure \
-        --prefix=/srv/php7 \
-        --sysconfdir=/srv/php7/etc \
-        --with-config-file-path=/srv/php7/etc \
-        --with-config-file-scan-dir=/srv/php7/etc/php.d \
+        --prefix=${wbapp} \
+        --program-suffix=7 \
+        --libdir=${wbapp}/lib/php7 \
+        --datadir=${wbapp}/share/php7 \
+        --sysconfdir=${wbapp}/etc/php7 \
+        --with-config-file-path=${wbapp}/etc/php7 \
+        --with-config-file-scan-dir=${wbapp}/etc/php7/php.d \
         --with-layout=GNU \
         --without-pear \
         --disable-rpath \
@@ -30,83 +33,79 @@ wb_make_php7() {
         --with-mysqli \
         --with-pdo-mysql \
         --with-gd \
-        --with-freetype-dir=${webox} \
-        --with-jpeg-dir=${webox} \
-        --with-png-dir=${webox} \
-        --with-curl=${webox} \
-        --with-gettext=${webox} \
-        --with-iconv=${webox} \
-        --with-openssl=${webox} \
-        --with-pcre-dir=${webox} \
-        --with-libxml-dir=${webox} \
-        --with-libzip=${webox} \
-        --with-zlib=${webox}
+        --with-freetype-dir=${wbcom} \
+        --with-jpeg-dir=${wbcom} \
+        --with-png-dir=${wbcom} \
+        --with-curl=${wbcom} \
+        --with-gettext=${wbcom} \
+        --with-iconv=${wbcom} \
+        --with-openssl=${wbcom} \
+        --with-pcre-dir=${wbcom} \
+        --with-libxml-dir=${wbcom} \
+        --with-libzip=${wbcom} \
+        --with-zlib=${wbcom}
 
     make && make install
-    wb_error_check ${wk_php7}
+    wk__error_check ${wk_php7}
 
-    wb_make_php7_ext opcache
-    wb_make_php7_ext pcntl
+    wk_make_php7_ext opcache
+    wk_make_php7_ext pcntl
 
-    wb_make_php7_pecl redis-4.2.0
+    wk_make_php7_pecl redis-4.2.0
 
-    wb_plus_php7_geoip2
-
-    rm -rf /srv/php7/etc /srv/php7/php
+    wk_plus_php7_geoip2
 
 }
 
-wb_inst_php7() {
+wk_inst_php7() {
 
-    [ -d /srv/php7/bin ] || wb_find_php7
-    [ -d /srv/php7/bin ] || wb_make_php7
-    [ -d /srv/php7/bin ] || wb_error ${wk_php7}
-
-    wb_rtm /srv/php7
+    [ -f ${wbapp}/bin/php7 ] || wk_find_php7
+    [ -f ${wbapp}/bin/php7 ] || wk_make_php7
+    [ -f ${wbapp}/bin/php7 ] || wk__error ${wk_php7}
 
 }
 
 ########################################################################
 
-wb_make_php7_ext() {
+wk_make_php7_ext() {
 
-    cd ${wbsrc}/${wk_php7}/ext/${1}
+    cd ${wksrc}/${wk_php7}/ext/${1}
 
     shift 1
 
-    /srv/php7/bin/phpize && ./configure "${@}" \
-        --with-php-config=/srv/php7/bin/php-config
+    ${wbapp}/bin/phpize7 && ./configure "${@}" \
+        --with-php-config=${wbapp}/bin/php-config7
 
     make && make install
 
 }
 
-wb_make_php7_pecl() {
+wk_make_php7_pecl() {
 
-    wb_apply http://pecl.php.net/get/ ${1} .tgz ${wk_php7}/ext/${1}
+    wk__apply http://pecl.php.net/get/ ${1} .tgz ${wk_php7}/ext/${1}
     rm -rf ../package.xml
 
-    wb_make_php7_ext "${@}"
+    wk_make_php7_ext "${@}"
 
 }
 
-wb_plus_php7_geoip2() {
+wk_plus_php7_geoip2() {
 
-    cd ${wbsrc}/${wk_php7}/ext
+    cd ${wksrc}/${wk_php7}/ext
 
     if [ ! -d geoip2 ]; then
 
         local url=https://codeload.github.com/maxmind/MaxMind-DB-Reader-php/zip/master
-        local zip=$(wb_get ${url} ${wk_php7}/ext/MaxMind-DB-Reader-php-master.zip)
+        local zip=$(wk__fetch ${url} ${wk_php7}/ext/MaxMind-DB-Reader-php-master.zip)
 
         unzip -q ${zip} && mv MaxMind-DB-Reader-php-master/ext geoip2
 
-        wb_error_check 'not found geoip2'
+        wk__error_check 'not found geoip2'
 
         rm -rf MaxMind-DB-Reader-php-master
 
     fi
 
-    wb_make_php7_ext geoip2 --with-maxminddb=${webox}
+    wk_make_php7_ext geoip2 --with-maxminddb=${wbcom}
 
 }
