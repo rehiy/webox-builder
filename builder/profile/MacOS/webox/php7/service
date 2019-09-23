@@ -9,7 +9,7 @@ export APP_GROUP=_www
 export APP_ROOT=/srv/wbapp
 export APP_DATA=/srv/htdoc
 
-export APP_BIN_FILE=$APP_ROOT/sbin/php-fpm
+export APP_BIN_FILE=$APP_ROOT/sbin/php-fpm7
 export APP_PID_FILE=$APP_ROOT/var/run/php7/fpm.pid
 
 #####################################################################
