@@ -34,8 +34,6 @@ wk_inst_php7
 
 #################################################################Profile#
 
-rm -rf ${wbapp}/etc/nginx
-rm -rf ${wbapp}/etc/php*
 cp -av ${wketc}/* /srv/
 
 chown -R 0:0  /srv
