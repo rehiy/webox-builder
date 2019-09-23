@@ -12,11 +12,13 @@ wk_make_redis() {
 
     make && make PREFIX=${wbapp} install
 
+    rm -rf ${wbapp}/docs
+
 }
 
 wk_inst_redis() {
 
-    local fine=${wbapp}/bin/redis
+    local fine=${wbapp}/bin/redis-server
 
     [ -e ${fine} ] || wk_find_redis
     [ -e ${fine} ] || wk_make_redis
