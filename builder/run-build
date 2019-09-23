@@ -40,7 +40,7 @@ chown -R 0:0  /srv
 chmod -R 0755 /srv/service
 chmod -R 0755 /srv/webox/bin/wkit
 chmod -R 0755 /srv/webox/wkit
-chmod -R 0755 /srv/webroot/*
+chmod -R 0755 /srv/www/*
 
 find /srv/*/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
 find /srv/*/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;

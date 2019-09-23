@@ -1,17 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+#
 
-export wkexec=${0##*/}
+. /srv/webox/function
 
-[ "${wkexec}" = "wkit" ] && {
-    wkexec=${1}
-    shift
-}
-
-export wksbin=/srv/webox/bin
-export wktemp=/srv/webox/var
-export wkhome=/srv/webox/wkit
-
-source /srv/webox/runtime
-
-source ${wkhome}/wb_main
-wk_run ${wkexec} "${@}"
+wbx_app_run "$@"

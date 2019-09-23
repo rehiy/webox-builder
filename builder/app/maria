@@ -36,15 +36,6 @@ wb_make_maria() {
     make -j4 && make install
     wb_error_check ${wk_maria}
 
-    sleep 1
-
-    mkdir -p /srv/maria/var/{run,log,tmp}
-
-    /srv/maria/bin/mysqld --initialize-insecure \
-        --basedir=/srv/maria --datadir=/srv/maria/var/data
-
-    sleep 2
-
     rm -rf /srv/maria/{README,COPYING}
     rm -rf /srv/maria/{docs,scripts,support-files}
     rm -rf /srv/maria/*-test /srv/maria/bin/*test

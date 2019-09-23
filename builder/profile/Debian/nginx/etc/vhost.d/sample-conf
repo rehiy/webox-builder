@@ -5,7 +5,7 @@ server {
     server_name www.anrip.net;
 
     set $pool default;
-    set $pooldir /srv/webroot/$pool;
+    set $pooldir /srv/www/$pool;
 
     if ($host ~ ^([^\.]+)\.([^\.]+)$) {
         rewrite ^/?(.*)$ http://www.$host/$1 last;

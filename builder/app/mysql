@@ -36,15 +36,6 @@ wb_make_mysql() {
     make -j4 && make install
     wb_error_check ${wk_mysql}
 
-    sleep 1
-
-    mkdir -p /srv/mysql/var/{run,log,tmp}
-
-    /srv/mysql/bin/mysqld --initialize-insecure \
-        --basedir=/srv/mysql --datadir=/srv/mysql/var/data
-
-    sleep 2
-
     rm -rf /srv/mysql/{README,COPYING}
     rm -rf /srv/mysql/{docs,scripts,support-files}
     rm -rf /srv/mysql/*-test /srv/mysql/bin/*test

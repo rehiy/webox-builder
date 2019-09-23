@@ -22,7 +22,7 @@ tar -xvf ${name}
 
 chown -R 0:0 srv
 rm -rf srv/*/var
-rm -rf srv/webroot
+rm -rf srv/www
 
 ####################################################################
 
