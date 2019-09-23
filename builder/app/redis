@@ -16,8 +16,10 @@ wk_make_redis() {
 
 wk_inst_redis() {
 
-    [ -f ${wbapp}/bin/redis ] || wk_find_redis
-    [ -f ${wbapp}/bin/redis ] || wk_make_redis
-    [ -f ${wbapp}/bin/redis ] || wk__error ${wk_redis}
+    local fine=${wbapp}/bin/redis
+
+    [ -e ${fine} ] || wk_find_redis
+    [ -e ${fine} ] || wk_make_redis
+    [ -e ${fine} ] || wk__error ${wk_redis}
 
 }

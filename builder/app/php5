@@ -64,9 +64,11 @@ wk_make_php5() {
 
 wk_inst_php5() {
 
-    [ -f ${wbapp}/bin/php5 ] || wk_find_php5
-    [ -f ${wbapp}/bin/php5 ] || wk_make_php5
-    [ -f ${wbapp}/bin/php5 ] || wk__error ${wk_php5}
+    local fine=${wbapp}/bin/php5
+
+    [ -e ${fine} ] || wk_find_php5
+    [ -e ${fine} ] || wk_make_php5
+    [ -e ${fine} ] || wk__error ${wk_php5}
 
 }
 

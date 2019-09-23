@@ -18,8 +18,10 @@ wk_make_node() {
 
 wk_inst_node() {
 
-    [ -f ${wbapp}/bin/node ] || wk_find_node
-    [ -f ${wbapp}/bin/node ] || wk_make_node
-    [ -f ${wbapp}/bin/node ] || wk__error ${wk_node}
+    local fine=${wbapp}/bin/node
+
+    [ -e ${fine} ] || wk_find_node
+    [ -e ${fine} ] || wk_make_node
+    [ -e ${fine} ] || wk__error ${wk_node}
 
 }

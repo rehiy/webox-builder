@@ -59,8 +59,10 @@ wk_make_mysql() {
 
 wk_inst_mysql() {
 
-    [ -f ${wbapp}/bin/mysql ] || wk_find_mysql
-    [ -f ${wbapp}/bin/mysql ] || wk_make_mysql
-    [ -f ${wbapp}/bin/mysql ] || wk__error ${wk_mysql}
+    local fine=${wbapp}/bin/mysql
+
+    [ -e ${fine} ] || wk_find_mysql
+    [ -e ${fine} ] || wk_make_mysql
+    [ -e ${fine} ] || wk__error ${wk_mysql}
 
 }
