@@ -11,14 +11,14 @@ server {
         rewrite ^/?(.*)$ http://www.$host/$1 last;
     }
     if ($host ~* ([^\.]+)\.([^\.]+)\.([a-z]+)$) {
-        set $sitedir $pooldir/$3.$2/$1;
+        set $sitedir $pooldir/$3.$2.$1;
     }
 
     root  $sitedir;
     index index.php index.html index.html;
     try_files $uri $uri/ /index.php$is_args$args;
 
-    include common/22.server_error_page;
-    include common/25.server_fastcgi_php5;
+    include http.d/22.server_error_page;
+    include http.d/25.server_fastcgi_php5;
 
 }
