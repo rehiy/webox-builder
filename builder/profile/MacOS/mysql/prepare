@@ -10,15 +10,6 @@ export APP_ROOT=/srv/mysql
 
 app_prepare() {
 
-    if ! grep $APP_GROUP /etc/group >/dev/null; then
-        groupadd $APP_GROUP -g 74
-    fi
-
-    if ! grep $APP_USER /etc/passwd >/dev/null; then
-        useradd $APP_USER -u 74 -g 74
-        usermod $APP_USER -d $APP_ROOT -s /usr/bin/false
-    fi
-
     [ -d $APP_ROOT/var/log ] || mkdir -p $APP_ROOT/var/log
     [ -d $APP_ROOT/var/tmp ] || mkdir -p $APP_ROOT/var/tmp
     [ -d $APP_ROOT/var/run ] || mkdir -p $APP_ROOT/var/run

@@ -23,17 +23,17 @@ app_start() {
 
     echo "start $APP_NAME ..."
 
-    local POOL_CONF POOL_PATH
+    local POOL_CONF POOL_ROOT
 
     for POOL_CONF in $APP_ETC_PATH/fpm.d/*.conf; do
 
         POOL_CONF=${POOL_CONF##*/}
-        POOL_PATH=$APP_DATA/${POOL_CONF/.conf/}
+        POOL_ROOT=$APP_DATA/${POOL_CONF/.conf/}
 
-        mkdir -p $POOL_PATH/log $POOL_PATH/temp
-        mkdir -p $POOL_PATH/session $POOL_PATH/web
+        mkdir -p $POOL_ROOT/log $POOL_ROOT/temp
+        mkdir -p $POOL_ROOT/session $POOL_ROOT/web
 
-        chown -R $APP_USER:$APP_GROUP $POOL_PATH
+        chown -R $APP_USER:$APP_GROUP $POOL_ROOT
 
     done
 
