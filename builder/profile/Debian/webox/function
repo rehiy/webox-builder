@@ -21,14 +21,14 @@ wbx_app_run() {
 
 }
 
-wbx_all_install() {
+wbx_all_prepare() {
 
     local WBX_SCRIPT
 
     for WBX_SCRIPT in /srv/*/prepare; do
         [ -x $WBX_SCRIPT ] || chmod +x $WBX_SCRIPT
         echo "EXEC SCRIPT: $WBX_SCRIPT"
-        $WBX_SCRIPT install
+        $WBX_SCRIPT prepare
     done
 
 }

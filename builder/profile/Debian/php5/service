@@ -98,7 +98,7 @@ app_usage() {
     local DOES="start|stop|reload|restart|status"
 
     if ! echo "|$DOES|" | grep -q "|$1|"; then
-        echo "Usage: webox $APP_NAME {$DOES}"
+        echo "Usage: wkit $APP_NAME {$DOES}"
         exit 1
     fi
 
@@ -111,9 +111,9 @@ app_result() {
     local ERROR=${3:-failed}
 
     if [ $CODE -eq 0 ]; then
-        echo -e "$1 $APP_NAME \033[32m$RIGHT \033[0m"
+        echo "$1 $APP_NAME \033[32m$RIGHT \033[0m"
     else
-        echo -e "$1 $APP_NAME \033[31m$ERROR \033[0m"
+        echo "$1 $APP_NAME \033[31m$ERROR \033[0m"
     fi
 
     exit $CODE
