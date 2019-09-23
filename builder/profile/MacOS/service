@@ -1,13 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 #
 
-source /srv/webox/runtime
+. /srv/webox/runtime
 
-if [ $# -eq 1 ]; then
-    wkit service php7  "${@}"
-    wkit service redis "${@}"
-    wkit service mysql "${@}"
-    wkit service nginx "${@}"
-else
-    wkit service "${@}"
-fi
+wkit php7  "${@}"
+wkit redis "${@}"
+wkit mysql "${@}"
+wkit nginx "${@}"
