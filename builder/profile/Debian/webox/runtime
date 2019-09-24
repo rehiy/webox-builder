@@ -27,25 +27,65 @@ wbx_app_run() {
         ;;
     esac
 
-    [ -x $WBX_SCRIPT ] || chmod +x $WBX_SCRIPT
+    if [ ! -x $WBX_SCRIPT ]; then
+        echo "can't exec $WBX_SCRIPT"
+        exit 1
+    fi
+
     $WBX_SCRIPT $WBX_ACTION
 
 }
 
-wbx_all_prepare() {
+wbx_own_perm() {
+
+    local WBX_UID=${2:-0}
+    local WBX_GID=${3:-0}
+
+    if [ -z $1 ] || [ ${#1} -lt 2 ] ; then
+        echo "can't apply perm to this dir $1"
+        exit 1
+    fi
+
+    find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+    find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+    find $1 ! \( -uid $WBX_UID -gid $WBX_GID \) -exec chown $WBX_UID:$WBX_GID {} \;
+
+}
+
+wbx_fix_install() {
+
+    local WBX_APP WBX_APP_EXTRA
+
+    chmod +x ${webox}/*/prepare
+    chmod +x ${webox}/*/service
 
     if [ ! -d ${wbapp}/etc ]; then
         mkdir -p ${wbapp}/etc
     fi
 
-    for WBX_SCRIPT in ${webox}/*/prepare; do
-        [ -x $WBX_SCRIPT ] || chmod +x $WBX_SCRIPT
-        echo "run $WBX_SCRIPT"
-        $WBX_SCRIPT prepare
-    done
+    for WBX_APP_EXTRA in ${webox}/*; do
 
-    find ${webox}/*/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
-    find ${webox}/*/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
-    find ${webox}/*/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+        WBX_APP=${WBX_APP_EXTRA##*/}
+
+        if [ ! -x $WBX_APP_EXTRA/prepare ]; then
+            continue
+        fi
+
+        if [ ! -e ${wbapp}/etc/$WBX_APP ]; then
+            if [ -f /.dockerenv ]; then
+                cp -a ${webox}/$WBX_APP/etc ${wbapp}/etc/$WBX_APP
+            else
+                ln -s ${webox}/$WBX_APP/etc ${wbapp}/etc/$WBX_APP
+            fi
+        fi
+
+        wbx_own_perm ${wbapp}/etc/$WBX_APP
+        wbx_own_perm ${wbapp}/etc/$WBX_APP
+        wbx_own_perm ${wbapp}/etc/$WBX_APP
+
+        echo "exec $WBX_APP_EXTRA/prepare"
+        $WBX_APP_EXTRA/prepare prepare
+
+    done
 
 }

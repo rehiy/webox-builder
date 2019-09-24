@@ -2,8 +2,10 @@ export OS_TYPE=Debian
 
 export PKG_CONFIG_PATH=${wblib}/lib/pkgconfig
 
-apt update
-apt install -y pkg-config unzip wget
-apt install -y build-essential python-dev
+if [ ! -x /usr/bin/gcc ]; then
+    apt update
+    apt install -y pkg-config unzip wget
+    apt install -y build-essential python-dev
+fi
 
 ulimit -n 65536

@@ -13,14 +13,6 @@ app_prepare() {
             mkdir -p ${wbapp}/var/${dir}/nginx
     done
 
-    if [ ! -e ${wbapp}/etc/nginx ]; then
-        if [ -f /.dockerenv ]; then
-            cp -a ${webox}/nginx/etc ${wbapp}/etc/nginx
-        else
-            ln -s ${webox}/nginx/etc ${wbapp}/etc/nginx
-        fi
-    fi
-
     if [ ! -d ${wbapp}/var/tmp/nginx/proxy_cache ]; then
         mkdir -p ${wbapp}/var/tmp/nginx/proxy_cache
     fi

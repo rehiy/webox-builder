@@ -34,10 +34,6 @@ wk_inst_php7
 
 #################################################################Profile#
 
-rm -rf ${wblib}/share/{doc,info,man}
-rm -rf ${wbapp}/share/{doc,info,man}
-rm -rf ${wbapp}/share/{php5,php7}
-
 cp -av ${wketc}/* /srv/
 wk__realpath ${webox}
 
@@ -46,4 +42,4 @@ chmod -R 0755 /srv/*/bin
 chmod -R 0755 /srv/*/sbin
 
 source ${webox}/runtime
-wbx_all_prepare
+wbx_fix_install

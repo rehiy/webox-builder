@@ -12,6 +12,28 @@ fi
 
 source ${wkdir}/function
 
+#####################################################################CLS#
+
+rm -rf ${wblib}/include
+rm -rf ${wblib}/share/{doc,info,man}
+
+rm -rf ${wbapp}/include
+rm -rf ${wbapp}/share/{doc,info,man}
+rm -rf ${wbapp}/share/{php5,php7}
+rm -rf ${wbapp}/var/{log,run,tmp}/*
+rm -rf ${wbapp}/var/lib/mysql/*.cnf
+rm -rf ${wbapp}/var/lib/redis/*
+
+find /srv -type f -name "*.log" -exec rm {} \;
+find /srv -type f -name "*.pid" -exec rm {} \;
+find /srv -type f -name ".DS_Store" -exec rm {} \;
+find /srv -type f -name "sess_*" -exec rm {} \;
+find /srv -type d -name "lost+found" -exec rm {} \;
+
+if [ "$OS_TYPE" == "MacOS" ]; then
+    xattr -rd com.apple.quarantine /srv
+fi
+
 #####################################################################MIN#
 
 if [ "$1" == "-min" ]; then
@@ -19,38 +41,21 @@ if [ "$1" == "-min" ]; then
     mkdir -p ${wblib}/bin2
     mv ${wblib}/bin/{wkit,curl,openssl} ${wblib}/bin2
 
+    rm -rf ${wblib}/{bin,etc,man,share}
+    mv ${wblib}/bin2 ${wblib}/bin
+
     for d in cmake gettext libmcrypt terminfo preloadable_*; do
         rm -rf ${wblib}/lib/${d}
     done
-
-    rm -rf ${wblib}/{bin,etc,man,share}
-    mv ${wblib}/bin2 ${wblib}/bin
 
     find /srv -name "*.a" -exec rm {} \;
     find /srv -name "*.la" -exec rm {} \;
 
     wk__strip ${wblib}/bin
     wk__strip ${wbapp}/bin
+    wk__strip ${wbapp}/sbin
 
 fi
-
-#####################################################################CLS#
-
-rm -rf ${wbapp}/var/log/*
-rm -rf ${wbapp}/var/run/*
-rm -rf ${wbapp}/var/tmp/*
-
-rm -rf ${wbapp}/var/lib/mysql/*.cnf
-
-if [ "$OS_TYPE" == "MacOS" ]; then
-    xattr -rd com.apple.quarantine /srv
-fi
-
-find /srv -type f -name "*.log" -exec rm {} \;
-find /srv -type f -name "*.pid" -exec rm {} \;
-find /srv -type f -name ".DS_Store" -exec rm {} \;
-find /srv -type f -name "sess_*" -exec rm {} \;
-find /srv -type d -name "lost+found" -exec rm {} \;
 
 #####################################################################PKG#
 

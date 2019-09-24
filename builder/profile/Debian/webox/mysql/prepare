@@ -22,24 +22,16 @@ app_prepare() {
             mkdir -p ${wbapp}/var/${dir}/mysql
     done
 
-    if [ ! -e ${wbapp}/etc/mysql ]; then
-        if [ -f /.dockerenv ]; then
-            cp -a ${webox}/mysql/etc ${wbapp}/etc/mysql
-        else
-            ln -s ${webox}/mysql/etc ${wbapp}/etc/mysql
-        fi
-    fi
-
     if [ ! -f ${wbapp}/var/log/mysql/error.log ]; then
         touch ${wbapp}/var/log/mysql/error.log
     fi
+
+    chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/mysql
 
     if [ ! -f ${wbapp}/var/lib/mysql/ibdata1 ]; then
         ${wbapp}/sbin/mysqld --initialize-insecure \
             --basedir=${wbapp} --datadir=${wbapp}/var/lib/mysql
     fi
-
-    chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/mysql
 
 }
 

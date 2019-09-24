@@ -13,14 +13,6 @@ app_prepare() {
             mkdir -p ${wbapp}/var/${dir}/redis
     done
 
-    if [ ! -e ${wbapp}/etc/redis ]; then
-        if [ -f /.dockerenv ]; then
-            cp -a ${webox}/redis/etc ${wbapp}/etc/redis
-        else
-            ln -s ${webox}/redis/etc ${wbapp}/etc/redis
-        fi
-    fi
-
     if [ ! -f ${wbapp}/etc/redis/conf.d/useful.conf ]; then
         touch ${wbapp}/etc/redis/conf.d/useful.conf
     fi
