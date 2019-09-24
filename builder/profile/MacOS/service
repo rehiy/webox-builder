@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-
-. ${webox}/runtime
-
-wkit php7  "$@"
-wkit redis "$@"
-wkit mysql "$@"
-wkit nginx "$@"
