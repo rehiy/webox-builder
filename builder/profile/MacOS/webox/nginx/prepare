@@ -3,21 +3,25 @@
 
 export APP_USER=_www
 export APP_GROUP=_www
-export APP_DATA=${htdoc}
 
 #####################################################################
 
 app_prepare() {
 
-    [ -d ${wbapp}/var/log/nginx ] || mkdir -p ${wbapp}/var/log/nginx
-    [ -d ${wbapp}/var/run/nginx ] || mkdir -p ${wbapp}/var/run/nginx
-    [ -d ${wbapp}/var/tmp/nginx ] || mkdir -p ${wbapp}/var/tmp/nginx
+    for dir in log run tmp; do
+        [ -d ${wbapp}/var/${dir}/nginx ]
+            || mkdir -p ${wbapp}/var/${dir}/nginx
+    done
+
+    if [ ! -e ${wbapp}/etc/nginx ]; then
+        ln -s ../../webox/nginx/etc ${wbapp}/etc/nginx
+    fi
 
     if [ ! -d ${wbapp}/var/tmp/nginx/proxy_cache ]; then
         mkdir -p ${wbapp}/var/tmp/nginx/proxy_cache
     fi
 
-    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/nginx
+    chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/nginx
 
 }
 

@@ -8,10 +8,14 @@ export APP_GROUP=_mysql
 
 app_prepare() {
 
-    [ -d ${wbapp}/var/lib/mysql ] || mkdir -p ${wbapp}/var/lib/mysql
-    [ -d ${wbapp}/var/log/mysql ] || mkdir -p ${wbapp}/var/log/mysql
-    [ -d ${wbapp}/var/run/mysql ] || mkdir -p ${wbapp}/var/run/mysql
-    [ -d ${wbapp}/var/tmp/mysql ] || mkdir -p ${wbapp}/var/tmp/mysql
+    for dir in lib log run tmp; do
+        [ -d ${wbapp}/var/${dir}/mysql ]
+            || mkdir -p ${wbapp}/var/${dir}/mysql
+    done
+
+    if [ ! -e ${wbapp}/etc/mysql ]; then
+        ln -s ../../webox/mysql/etc ${wbapp}/etc/mysql
+    fi
 
     if [ ! -f ${wbapp}/var/log/mysql/error.log ]; then
         touch ${wbapp}/var/log/mysql/error.log
@@ -22,7 +26,7 @@ app_prepare() {
             --basedir=${wbapp} --datadir=${wbapp}/var/lib/mysql
     fi
 
-    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/mysql
+    chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/mysql
 
 }
 

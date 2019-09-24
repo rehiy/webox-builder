@@ -3,7 +3,6 @@
 
 export APP_USER=www-data
 export APP_GROUP=www-data
-export APP_DATA=${htdoc}
 
 #####################################################################
 
@@ -15,18 +14,23 @@ app_prepare() {
 
     if ! grep $APP_USER /etc/passwd >/dev/null; then
         useradd $APP_USER -u 33 -g 33
-        usermod $APP_USER -d $APP_DATA -s /usr/sbin/nologin
+        usermod $APP_USER -d ${htdoc} -s /usr/sbin/nologin
     fi
 
-    [ -d ${wbapp}/var/log/nginx ] || mkdir -p ${wbapp}/var/log/nginx
-    [ -d ${wbapp}/var/run/nginx ] || mkdir -p ${wbapp}/var/run/nginx
-    [ -d ${wbapp}/var/tmp/nginx ] || mkdir -p ${wbapp}/var/tmp/nginx
+    for dir in log run tmp; do
+        [ -d ${wbapp}/var/${dir}/nginx ]
+            || mkdir -p ${wbapp}/var/${dir}/nginx
+    done
+
+    if [ ! -e ${wbapp}/etc/nginx ]; then
+        ln -s ../../webox/nginx/etc ${wbapp}/etc/nginx
+    fi
 
     if [ ! -d ${wbapp}/var/tmp/nginx/proxy_cache ]; then
         mkdir -p ${wbapp}/var/tmp/nginx/proxy_cache
     fi
 
-    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/nginx
+    chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/nginx
 
 }
 

@@ -1,8 +1,6 @@
 #!/bin/sh
 #
 
-export APP_NAME=redis
-
 export APP_USER=daemon
 export APP_GROUP=daemon
 
@@ -10,16 +8,20 @@ export APP_GROUP=daemon
 
 app_prepare() {
 
-    [ -d ${wbapp}/var/lib/redis ] || mkdir -p ${wbapp}/var/lib/redis
-    [ -d ${wbapp}/var/log/redis ] || mkdir -p ${wbapp}/var/log/redis
-    [ -d ${wbapp}/var/run/redis ] || mkdir -p ${wbapp}/var/run/redis
-    [ -d ${wbapp}/var/tmp/redis ] || mkdir -p ${wbapp}/var/tmp/redis
+    for dir in lib log run tmp; do
+        [ -d ${wbapp}/var/${dir}/redis ]
+            || mkdir -p ${wbapp}/var/${dir}/redis
+    done
 
-    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/redis
+    if [ ! -e ${wbapp}/etc/redis ]; then
+        ln -s ../../webox/redis/etc ${wbapp}/etc/redis
+    fi
 
     if [ ! -f ${wbapp}/etc/redis/conf.d/useful.conf ]; then
         touch ${wbapp}/etc/redis/conf.d/useful.conf
     fi
+
+    chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/redis
 
 }
 

@@ -58,8 +58,8 @@ wbx_all_install() {
 
     done
 
-    find ${wbapp}/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
-    find ${wbapp}/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
-    find ${wbapp}/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+    find ${wbapp}/etc/* ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
+    find ${wbapp}/etc/* \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+    find ${wbapp}/etc/* \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
 
 }

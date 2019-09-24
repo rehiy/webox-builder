@@ -3,7 +3,6 @@
 
 export APP_USER=www-data
 export APP_GROUP=www-data
-export APP_DATA=${htdoc}
 
 #####################################################################
 
@@ -15,14 +14,19 @@ app_prepare() {
 
     if ! grep $APP_USER /etc/passwd >/dev/null; then
         useradd $APP_USER -u 33 -g 33
-        usermod $APP_USER -d $APP_DATA -s /usr/sbin/nologin
+        usermod $APP_USER -d ${htdoc} -s /usr/sbin/nologin
     fi
 
-    [ -d ${wbapp}/var/log/php7 ] || mkdir -p ${wbapp}/var/log/php7
-    [ -d ${wbapp}/var/run/php7 ] || mkdir -p ${wbapp}/var/run/php7
-    [ -d ${wbapp}/var/tmp/php7 ] || mkdir -p ${wbapp}/var/tmp/php7
+    for dir in log run tmp; do
+        [ -d ${wbapp}/var/${dir}/php7 ]
+            || mkdir -p ${wbapp}/var/${dir}/php7
+    done
 
-    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/php7
+    if [ ! -e ${wbapp}/etc/php7 ]; then
+        ln -s ../../webox/php7/etc ${wbapp}/etc/php7
+    fi
+
+    chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/php7
 
 }
 
