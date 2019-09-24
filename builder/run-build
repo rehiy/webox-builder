@@ -34,13 +34,17 @@ wk_inst_php7
 
 #################################################################Profile#
 
-rm -rf ${wbapp}/share/{php5,php7}
-rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wbcom}/share/{doc,info,man}
+rm -rf ${wbapp}/share/{doc,info,man}
+rm -rf ${wbapp}/share/{php5,php7}
 
 cp -av ${wketc}/* /srv/
 
 chown -R 0:0  /srv
 chmod -R 0755 ${wbcom}/bin
+chmod -R 0755 ${wbapp}/bin
+chmod -R 0755 ${wbapp}/sbin
 chmod -R 0755 /srv/service
-chmod -R 0755 /srv/htdoc/*
+
+source /srv/webox/runtime
+wbx_all_install
