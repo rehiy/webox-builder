@@ -1,13 +1,13 @@
 
 wk__error() {
 
-    echo Failed: ${@}; exit 1
+    echo Failed: $@; exit 1
 
 }
 
 wk__error_check() {
 
-    [ ${?} -ne 0 ] && wk__error ${@}
+    [ $? -ne 0 ] && wk__error $@
 
 }
 
@@ -17,13 +17,13 @@ wk__fetch() {
 
     local save=${wkget}/${1##*/}
 
-    [ -z ${2} ] || save=${wkget}/${2}
+    [ -z $2 ] || save=${wkget}/$2
     [ -d ${save%/*} ] || mkdir -p ${save%/*}
 
     if [ $(which wget) ]; then
-        wget --no-check-certificate -c -O ${save} ${1}
+        wget --no-check-certificate -c -O ${save} $1
     else
-        curl -k -L -C - -o ${save} ${1}
+        curl -k -L -C - -o ${save} $1
     fi
 
     echo ${save}
@@ -32,17 +32,17 @@ wk__fetch() {
 
 wk__apply() {
 
-    local name=${2}${3}
-    local dist=${wksrc}/${2}
+    local name=$2$3
+    local dist=${wksrc}/$2
 
-    [ -z ${4} ] || name=${4}${3}
-    [ -z ${4} ] || dist=${wksrc}/${4}
+    [ -z $4 ] || name=$4$3
+    [ -z $4 ] || dist=${wksrc}/$4
 
     if [ ! -d ${dist} ]; then
 
-        echo "Appling: ${1}${2}${3}"
+        echo "Appling: $1$2$3"
 
-        local save=$(wk__fetch ${1}${2}${3} ${name})
+        local save=$(wk__fetch $1$2$3 ${name})
 
         [ -d ${dist%/*} ] || mkdir -p ${dist%/*}
 
@@ -64,8 +64,8 @@ wk__strip() {
 
     rm -f ${lst}
 
-    echo "Search ${1} to strip ..."
-    find ${1} -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >>${lst}
+    echo "Search $1 to strip ..."
+    find $1 -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >>${lst}
 
     sed -i~ 's/:.*//' ${lst}
 
@@ -75,5 +75,14 @@ wk__strip() {
     done
 
     rm -f ${lst}
+
+}
+
+wk__realpath() {
+
+    sed -i "s#\${htdoc}#${htdoc}#" `grep '${htdoc}' -rl $1`
+    sed -i "s#\${wbapp}#${wbapp}#" `grep '${wbapp}' -rl $1`
+    sed -i "s#\${wbcom}#${wbcom}#" `grep '${wbcom}' -rl $1`
+    sed -i "s#\${webox}#${webox}#" `grep '${webox}' -rl $1`
 
 }

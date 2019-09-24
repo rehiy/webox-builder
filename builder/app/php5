@@ -77,11 +77,11 @@ wk_inst_php5() {
 
 wk_make_php5_ext() {
 
-    cd ${wksrc}/${wk_php5}/ext/${1}
+    cd ${wksrc}/${wk_php5}/ext/$1
 
     shift 1
 
-    ${wbapp}/bin/phpize5 && ./configure "${@}" \
+    ${wbapp}/bin/phpize5 && ./configure "$@" \
         --with-php-config=${wbapp}/bin/php-config5
 
     make && make install
@@ -90,10 +90,10 @@ wk_make_php5_ext() {
 
 wk_make_php5_pecl() {
 
-    wk__apply http://pecl.php.net/get/ ${1} .tgz ${wk_php5}/ext/${1}
+    wk__apply http://pecl.php.net/get/ $1 .tgz ${wk_php5}/ext/$1
     rm -rf ../package.xml
 
-    wk_make_php5_ext "${@}"
+    wk_make_php5_ext "$@"
 
 }
 

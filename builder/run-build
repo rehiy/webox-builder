@@ -39,11 +39,12 @@ rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wbapp}/share/{php5,php7}
 
 cp -av ${wketc}/* /srv/
+wk__realpath ${webox}
 
 chown -R 0:0  /srv
 chmod -R 0755 /srv/*/bin
 chmod -R 0755 /srv/*/sbin
 chmod -R 0755 /srv/service
 
-source /srv/webox/runtime
+source ${webox}/runtime
 wbx_all_install

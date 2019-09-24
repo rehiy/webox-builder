@@ -5,10 +5,8 @@ export APP_NAME=redis
 
 export APP_USER=daemon
 
-export APP_ROOT=/srv/wbapp
-
-export APP_BIN_FILE=$APP_ROOT/bin/redis-server
-export APP_PID_FILE=$APP_ROOT/var/run/redis/redis.pid
+export APP_BIN_FILE=${wbapp}/bin/redis-server
+export APP_PID_FILE=${wbapp}/var/run/redis/redis.pid
 
 #####################################################################
 
@@ -21,7 +19,7 @@ app_start() {
 
     echo "start $APP_NAME ..."
 
-    $APP_BIN_FILE $APP_ROOT/etc/redis/redis.conf
+    $APP_BIN_FILE ${wbapp}/etc/redis/redis.conf
 
 }
 

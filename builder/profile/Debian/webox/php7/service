@@ -5,12 +5,10 @@ export APP_NAME=php7
 
 export APP_USER=www-data
 export APP_GROUP=www-data
+export APP_DATA=${htdoc}
 
-export APP_ROOT=/srv/wbapp
-export APP_DATA=/srv/htdoc
-
-export APP_BIN_FILE=$APP_ROOT/sbin/php-fpm7
-export APP_PID_FILE=$APP_ROOT/var/run/php7/fpm.pid
+export APP_BIN_FILE=${wbapp}/sbin/php-fpm7
+export APP_PID_FILE=${wbapp}/var/run/php7/fpm.pid
 
 #####################################################################
 
@@ -25,7 +23,7 @@ app_start() {
 
     local POOL_CONF POOL_ROOT
 
-    for POOL_CONF in $APP_ROOT/etc/php7/fpm.d/*.conf; do
+    for POOL_CONF in ${wbapp}/etc/php7/fpm.d/*.conf; do
 
         POOL_CONF=${POOL_CONF##*/}
         POOL_ROOT=$APP_DATA/${POOL_CONF%.*}
@@ -38,7 +36,7 @@ app_start() {
 
     done
 
-    $APP_BIN_FILE -c $APP_ROOT/etc/php7 -y $APP_ROOT/etc/php7/fpm.conf
+    $APP_BIN_FILE -c ${wbapp}/etc/php7 -y ${wbapp}/etc/php7/fpm.conf
 
 }
 

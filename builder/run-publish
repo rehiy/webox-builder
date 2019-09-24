@@ -14,7 +14,7 @@ source ${wkdir}/function
 
 #####################################################################MIN#
 
-if [ "${1}" == "-min" ]; then
+if [ "$1" == "-min" ]; then
 
     mkdir -p ${wbcom}/bin2
     mv ${wbcom}/bin/{wkit,curl,openssl} ${wbcom}/bin2
@@ -55,6 +55,6 @@ find /srv -type d -name "lost+found" -exec rm {} \;
 #####################################################################PKG#
 
 plat=$(uname -s)-$(getconf LONG_BIT)
-dist=${wkdir}/Webox-${plat}bit${1}.tgz
+dist=${wkdir}/Webox-${plat}bit$1.tgz
 
 tar --exclude builder -czvf ${dist} /srv

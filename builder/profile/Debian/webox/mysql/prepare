@@ -4,8 +4,6 @@
 export APP_USER=mysql
 export APP_GROUP=mysql
 
-export APP_ROOT=/srv/wbapp
-
 #####################################################################
 
 app_prepare() {
@@ -16,24 +14,24 @@ app_prepare() {
 
     if ! grep $APP_USER /etc/passwd >/dev/null; then
         useradd $APP_USER -u 77 -g 77
-        usermod $APP_USER -d $APP_ROOT -s /usr/sbin/nologin
+        usermod $APP_USER -d ${wbapp} -s /usr/sbin/nologin
     fi
 
-    [ -d $APP_ROOT/var/lib/mysql ] || mkdir -p $APP_ROOT/var/lib/mysql
-    [ -d $APP_ROOT/var/log/mysql ] || mkdir -p $APP_ROOT/var/log/mysql
-    [ -d $APP_ROOT/var/run/mysql ] || mkdir -p $APP_ROOT/var/run/mysql
-    [ -d $APP_ROOT/var/tmp/mysql ] || mkdir -p $APP_ROOT/var/tmp/mysql
+    [ -d ${wbapp}/var/lib/mysql ] || mkdir -p ${wbapp}/var/lib/mysql
+    [ -d ${wbapp}/var/log/mysql ] || mkdir -p ${wbapp}/var/log/mysql
+    [ -d ${wbapp}/var/run/mysql ] || mkdir -p ${wbapp}/var/run/mysql
+    [ -d ${wbapp}/var/tmp/mysql ] || mkdir -p ${wbapp}/var/tmp/mysql
 
-    if [ ! -f $APP_ROOT/var/log/mysql/error.log ]; then
-        touch $APP_ROOT/var/log/mysql/error.log
+    if [ ! -f ${wbapp}/var/log/mysql/error.log ]; then
+        touch ${wbapp}/var/log/mysql/error.log
     fi
 
-    if [ ! -f $APP_ROOT/var/lib/mysql/ibdata1 ]; then
-        $APP_ROOT/sbin/mysqld --initialize-insecure \
-            --basedir=$APP_ROOT --datadir=$APP_ROOT/var/lib/mysql
+    if [ ! -f ${wbapp}/var/lib/mysql/ibdata1 ]; then
+        ${wbapp}/sbin/mysqld --initialize-insecure \
+            --basedir=${wbapp} --datadir=${wbapp}/var/lib/mysql
     fi
 
-    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*/mysql
+    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/mysql
 
 }
 

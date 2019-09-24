@@ -3,19 +3,17 @@
 
 export APP_USER=_www
 export APP_GROUP=_www
-
-export APP_ROOT=/srv/wbapp
-export APP_DATA=/srv/htdoc
+export APP_DATA=${htdoc}
 
 #####################################################################
 
 app_prepare() {
 
-    [ -d $APP_ROOT/var/log/php7 ] || mkdir -p $APP_ROOT/var/log/php7
-    [ -d $APP_ROOT/var/run/php7 ] || mkdir -p $APP_ROOT/var/run/php7
-    [ -d $APP_ROOT/var/tmp/php7 ] || mkdir -p $APP_ROOT/var/tmp/php7
+    [ -d ${wbapp}/var/log/php7 ] || mkdir -p ${wbapp}/var/log/php7
+    [ -d ${wbapp}/var/run/php7 ] || mkdir -p ${wbapp}/var/run/php7
+    [ -d ${wbapp}/var/tmp/php7 ] || mkdir -p ${wbapp}/var/tmp/php7
 
-    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*/php7
+    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/php7
 
 }
 

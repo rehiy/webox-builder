@@ -3,12 +3,12 @@
 
 export PATH=/srv/bin:${PATH}
 
-export PATH=/srv/wbcom/bin:${PATH}
+export PATH=${wbcom}/bin:${PATH}
 
-export PATH=/srv/wbapp/bin:${PATH}
-export PATH=/srv/wbapp/sbin:${PATH}
+export PATH=${wbapp}/bin:${PATH}
+export PATH=${wbapp}/sbin:${PATH}
 
-export LD_LIBRARY_PATH=/srv/wbcom/lib:/srv/wbapp/lib
+export LD_LIBRARY_PATH=${wbcom}/lib:${wbapp}/lib
 
 #####################################################################
 
@@ -16,7 +16,7 @@ wbx_app_run() {
 
     local WBX_APP=$1
     local WBX_ACTION=$2
-    local WBX_SCRIPT=/srv/webox/$1
+    local WBX_SCRIPT=${webox}/$1
 
     case $WBX_ACTION in
         prepare)
@@ -36,11 +36,11 @@ wbx_all_install() {
 
     local WBX_APP WBX_APP_PATH
 
-    if [ ! -d /srv/wbapp/etc ]; then
-        mkdir -p /srv/wbapp/etc
+    if [ ! -d ${wbapp}/etc ]; then
+        mkdir -p ${wbapp}/etc
     fi
 
-    for WBX_APP_PATH in /srv/webox/*; do
+    for WBX_APP_PATH in ${webox}/*; do
 
         WBX_APP=${WBX_APP_PATH##*/}
 
@@ -48,8 +48,8 @@ wbx_all_install() {
 
             echo "install wbapp $WBX_APP"
 
-            if [ ! -e /srv/wbapp/etc/$WBX_APP ]; then
-                ln -s ../../webox/$WBX_APP/etc /srv/wbapp/etc/$WBX_APP
+            if [ ! -e ${wbapp}/etc/$WBX_APP ]; then
+                ln -s ../../webox/$WBX_APP/etc ${wbapp}/etc/$WBX_APP
             fi
 
             wbx_app_run $WBX_APP prepare
@@ -58,8 +58,8 @@ wbx_all_install() {
 
     done
 
-    find /srv/wbapp/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
-    find /srv/wbapp/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
-    find /srv/wbapp/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+    find ${wbapp}/etc/* ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
+    find ${wbapp}/etc/* \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+    find ${wbapp}/etc/* \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
 
 }

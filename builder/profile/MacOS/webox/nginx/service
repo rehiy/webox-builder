@@ -3,10 +3,8 @@
 
 export APP_NAME=nginx
 
-export APP_ROOT=/srv/wbapp
-
-export APP_BIN_FILE=$APP_ROOT/sbin/nginx
-export APP_PID_FILE=$APP_ROOT/var/run/nginx/nginx.pid
+export APP_BIN_FILE=${wbapp}/sbin/nginx
+export APP_PID_FILE=${wbapp}/var/run/nginx/nginx.pid
 
 #####################################################################
 
@@ -19,7 +17,7 @@ app_start() {
 
     echo "start $APP_NAME ..."
 
-    $APP_BIN_FILE -c $APP_ROOT/etc/nginx/nginx.conf
+    $APP_BIN_FILE -c ${wbapp}/etc/nginx/nginx.conf
 
 }
 

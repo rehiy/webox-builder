@@ -3,9 +3,7 @@
 
 export APP_USER=www-data
 export APP_GROUP=www-data
-
-export APP_ROOT=/srv/wbapp
-export APP_DATA=/srv/htdoc
+export APP_DATA=${htdoc}
 
 #####################################################################
 
@@ -20,11 +18,11 @@ app_prepare() {
         usermod $APP_USER -d $APP_DATA -s /usr/sbin/nologin
     fi
 
-    [ -d $APP_ROOT/var/log/php5 ] || mkdir -p $APP_ROOT/var/log/php5
-    [ -d $APP_ROOT/var/run/php5 ] || mkdir -p $APP_ROOT/var/run/php5
-    [ -d $APP_ROOT/var/tmp/php5 ] || mkdir -p $APP_ROOT/var/tmp/php5
+    [ -d ${wbapp}/var/log/php5 ] || mkdir -p ${wbapp}/var/log/php5
+    [ -d ${wbapp}/var/run/php5 ] || mkdir -p ${wbapp}/var/run/php5
+    [ -d ${wbapp}/var/tmp/php5 ] || mkdir -p ${wbapp}/var/tmp/php5
 
-    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*/php5
+    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/php5
 
 }
 

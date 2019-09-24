@@ -18,7 +18,7 @@ location ~ \.php$ {
     fastcgi_param PATH_INFO $fastcgi_path_info;
 
     fastcgi_index index.php;
-    fastcgi_pass  unix:/srv/wbapp/var/run/php5/$pool.sock;
+    fastcgi_pass  unix:${wbapp}/var/run/php5/$pool.sock;
 
     fastcgi_buffer_size 128k;
     fastcgi_buffers 4 256k;

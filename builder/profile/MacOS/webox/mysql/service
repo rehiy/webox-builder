@@ -3,10 +3,8 @@
 
 export APP_NAME=mysql
 
-export APP_ROOT=/srv/wbapp
-
-export APP_BIN_FILE=$APP_ROOT/bin/mysqld_safe
-export APP_PID_FILE=$APP_ROOT/var/run/mysql/mysqld.pid
+export APP_BIN_FILE=${wbapp}/bin/mysqld_safe
+export APP_PID_FILE=${wbapp}/var/run/mysql/mysqld.pid
 
 #####################################################################
 

@@ -2,7 +2,7 @@
 
 zend_extension = opcache.so
 
-;opcache.blacklist_filename = /srv/wbapp/etc/php5/php.d/opcache.black
+;opcache.blacklist_filename = ${wbapp}/etc/php5/php.d/opcache.black
 
 opcache.memory_consumption = 256
 opcache.interned_strings_buffer = 16

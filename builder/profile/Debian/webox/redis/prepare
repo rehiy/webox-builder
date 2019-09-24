@@ -6,21 +6,19 @@ export APP_NAME=redis
 export APP_USER=daemon
 export APP_GROUP=daemon
 
-export APP_ROOT=/srv/wbapp
-
 #####################################################################
 
 app_prepare() {
 
-    [ -d $APP_ROOT/var/lib/redis ] || mkdir -p $APP_ROOT/var/lib/redis
-    [ -d $APP_ROOT/var/log/redis ] || mkdir -p $APP_ROOT/var/log/redis
-    [ -d $APP_ROOT/var/run/redis ] || mkdir -p $APP_ROOT/var/run/redis
-    [ -d $APP_ROOT/var/tmp/redis ] || mkdir -p $APP_ROOT/var/tmp/redis
+    [ -d ${wbapp}/var/lib/redis ] || mkdir -p ${wbapp}/var/lib/redis
+    [ -d ${wbapp}/var/log/redis ] || mkdir -p ${wbapp}/var/log/redis
+    [ -d ${wbapp}/var/run/redis ] || mkdir -p ${wbapp}/var/run/redis
+    [ -d ${wbapp}/var/tmp/redis ] || mkdir -p ${wbapp}/var/tmp/redis
 
-    chown -R $APP_USER:$APP_USER $APP_ROOT/var/*/redis
+    chown -R $APP_USER:$APP_USER ${wbapp}/var/*/redis
 
-    if [ ! -f $APP_ROOT/etc/redis/conf.d/useful.conf ]; then
-        touch $APP_ROOT/etc/redis/conf.d/useful.conf
+    if [ ! -f ${wbapp}/etc/redis/conf.d/useful.conf ]; then
+        touch ${wbapp}/etc/redis/conf.d/useful.conf
     fi
 
 }

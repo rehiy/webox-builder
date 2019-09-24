@@ -74,11 +74,11 @@ wk_inst_php7() {
 
 wk_make_php7_ext() {
 
-    cd ${wksrc}/${wk_php7}/ext/${1}
+    cd ${wksrc}/${wk_php7}/ext/$1
 
     shift 1
 
-    ${wbapp}/bin/phpize7 && ./configure "${@}" \
+    ${wbapp}/bin/phpize7 && ./configure "$@" \
         --with-php-config=${wbapp}/bin/php-config7
 
     make && make install
@@ -87,10 +87,10 @@ wk_make_php7_ext() {
 
 wk_make_php7_pecl() {
 
-    wk__apply http://pecl.php.net/get/ ${1} .tgz ${wk_php7}/ext/${1}
+    wk__apply http://pecl.php.net/get/ $1 .tgz ${wk_php7}/ext/$1
     rm -rf ../package.xml
 
-    wk_make_php7_ext "${@}"
+    wk_make_php7_ext "$@"
 
 }
 

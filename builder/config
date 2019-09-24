@@ -8,8 +8,10 @@ fi
 
 #####################################################WEBOX-TARGET-VAR#
 
+export htdoc=/srv/htdoc
 export wbapp=/srv/wbapp
 export wbcom=/srv/wbcom
+export webox=/srv/webox
 
 [ -d ${wbapp} ] || mkdir -p ${wbapp}
 [ -d ${wbcom} ] || mkdir -p ${wbcom}
