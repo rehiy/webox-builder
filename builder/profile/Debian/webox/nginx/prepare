@@ -18,8 +18,8 @@ app_prepare() {
     fi
 
     for dir in log run tmp; do
-        [ -d ${wbapp}/var/${dir}/nginx ]
-            || mkdir -p ${wbapp}/var/${dir}/nginx
+        [ -d ${wbapp}/var/${dir}/nginx ] ||
+            mkdir -p ${wbapp}/var/${dir}/nginx
     done
 
     if [ ! -e ${wbapp}/etc/nginx ]; then

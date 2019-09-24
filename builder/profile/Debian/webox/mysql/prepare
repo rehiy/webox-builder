@@ -18,8 +18,8 @@ app_prepare() {
     fi
 
     for dir in lib log run tmp; do
-        [ -d ${wbapp}/var/${dir}/mysql ]
-            || mkdir -p ${wbapp}/var/${dir}/mysql
+        [ -d ${wbapp}/var/${dir}/mysql ] ||
+            mkdir -p ${wbapp}/var/${dir}/mysql
     done
 
     if [ ! -e ${wbapp}/etc/mysql ]; then

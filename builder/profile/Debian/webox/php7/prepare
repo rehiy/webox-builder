@@ -18,8 +18,8 @@ app_prepare() {
     fi
 
     for dir in log run tmp; do
-        [ -d ${wbapp}/var/${dir}/php7 ]
-            || mkdir -p ${wbapp}/var/${dir}/php7
+        [ -d ${wbapp}/var/${dir}/php7 ] ||
+            mkdir -p ${wbapp}/var/${dir}/php7
     done
 
     if [ ! -e ${wbapp}/etc/php7 ]; then

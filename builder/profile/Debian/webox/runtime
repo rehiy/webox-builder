@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-export PATH=/srv/bin:${PATH}
+export PATH=${webox}/bin:${PATH}
 
 export PATH=${wbcom}/bin:${PATH}
 
@@ -32,34 +32,20 @@ wbx_app_run() {
 
 }
 
-wbx_all_install() {
-
-    local WBX_APP WBX_APP_PATH
+wbx_all_prepare() {
 
     if [ ! -d ${wbapp}/etc ]; then
         mkdir -p ${wbapp}/etc
     fi
 
-    for WBX_APP_PATH in ${webox}/*; do
-
-        WBX_APP=${WBX_APP_PATH##*/}
-
-        if [ -d $WBX_APP_PATH/etc ]; then
-
-            echo "install wbapp $WBX_APP"
-
-            if [ ! -e ${wbapp}/etc/$WBX_APP ]; then
-                ln -s ../../webox/$WBX_APP/etc ${wbapp}/etc/$WBX_APP
-            fi
-
-            wbx_app_run $WBX_APP prepare
-
-        fi
-
+    for WBX_SCRIPT in ${webox}/*/prepare; do
+        [ -x $WBX_SCRIPT ] || chmod +x $WBX_SCRIPT
+        echo "run $WBX_SCRIPT"
+        $WBX_SCRIPT prepare
     done
 
-    find ${wbapp}/etc/* ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
-    find ${wbapp}/etc/* \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
-    find ${wbapp}/etc/* \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+    find ${webox}/*/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
+    find ${webox}/*/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+    find ${webox}/*/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
 
 }

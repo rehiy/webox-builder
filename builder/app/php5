@@ -19,7 +19,6 @@ wk_make_php5() {
         --sysconfdir=${wbapp}/etc/php5 \
         --with-config-file-path=${wbapp}/etc/php5 \
         --with-config-file-scan-dir=${wbapp}/etc/php5/php.d \
-        --with-layout=GNU \
         --without-pear \
         --disable-rpath \
         --disable-cgi \
@@ -81,7 +80,7 @@ wk_make_php5_ext() {
 
     shift 1
 
-    ${wbapp}/bin/phpize5 && ./configure "$@" \
+    ${wbapp}/bin/phpize5 && ./configure "${@}" \
         --with-php-config=${wbapp}/bin/php-config5
 
     make && make install
@@ -93,7 +92,7 @@ wk_make_php5_pecl() {
     wk__apply http://pecl.php.net/get/ $1 .tgz ${wk_php5}/ext/$1
     rm -rf ../package.xml
 
-    wk_make_php5_ext "$@"
+    wk_make_php5_ext "${@}"
 
 }
 

@@ -1,7 +1,7 @@
 
 wk__error() {
 
-    echo Failed: $@; exit 1
+    echo "Failed: $@"; exit 1
 
 }
 

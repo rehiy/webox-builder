@@ -18,8 +18,8 @@ app_prepare() {
     fi
 
     for dir in log run tmp; do
-        [ -d ${wbapp}/var/${dir}/php5 ]
-            || mkdir -p ${wbapp}/var/${dir}/php5
+        [ -d ${wbapp}/var/${dir}/php5 ] ||
+            mkdir -p ${wbapp}/var/${dir}/php5
     done
 
     if [ ! -e ${wbapp}/etc/php5 ]; then

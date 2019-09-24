@@ -9,8 +9,8 @@ export APP_GROUP=_www
 app_prepare() {
 
     for dir in log run tmp; do
-        [ -d ${wbapp}/var/${dir}/nginx ]
-            || mkdir -p ${wbapp}/var/${dir}/nginx
+        [ -d ${wbapp}/var/${dir}/nginx ] ||
+            mkdir -p ${wbapp}/var/${dir}/nginx
     done
 
     if [ ! -e ${wbapp}/etc/nginx ]; then
