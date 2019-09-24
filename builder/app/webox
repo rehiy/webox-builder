@@ -40,7 +40,4 @@ wk_inst_webox() {
 
     wk_make_webox
 
-    wk__runtime ${wbapp}
-    wk__runtime ${wbcom}
-
 }

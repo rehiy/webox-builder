@@ -13,30 +13,6 @@ wk__error_check() {
 
 ########################################################################
 
-wk__runtime() {
-
-    local path=${wbcom}/runtime
-
-    if [ ! -f ${path} ] ; then
-
-        echo "export LD_LIBRARY_PATH=${wbcom}/lib" >${path}
-
-    fi
-
-    for p in ${1}/bin ${1}/sbin; do
-
-        [ $PATH == *${p}* ] || export PATH=${p}:${PATH}
-
-        if [ $(grep -c ${p} ${path}) -eq 0 ] && [ -d "${p}" ]; then
-            echo "export PATH=${p}:\${PATH}" >>${path}
-        fi
-
-    done
-
-}
-
-########################################################################
-
 wk__fetch() {
 
     local save=${wkget}/${1##*/}

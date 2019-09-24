@@ -44,7 +44,3 @@ chown -R 0:0  /srv
 chmod -R 0755 ${wbcom}/bin
 chmod -R 0755 /srv/service
 chmod -R 0755 /srv/htdoc/*
-
-find ${wbapp}/etc ! \( -uid 0 -gid 0 \) -exec chown 0:0 {} \;
-find ${wbapp}/etc \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
-find ${wbapp}/etc \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;

@@ -3,7 +3,7 @@
 ##
 
 location /errpage/ {
-    alias /srv/htdoc/default/error/;
+    alias /srv/htdoc/default/errpage/;
 }
 
 error_page 403 /errpage/403.htm;
