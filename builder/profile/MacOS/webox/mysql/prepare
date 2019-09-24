@@ -10,6 +10,7 @@ export APP_ROOT=/srv/wbapp
 
 app_prepare() {
 
+    [ -d $APP_ROOT/var/lib/mysql ] || mkdir -p $APP_ROOT/var/lib/mysql
     [ -d $APP_ROOT/var/log/mysql ] || mkdir -p $APP_ROOT/var/log/mysql
     [ -d $APP_ROOT/var/run/mysql ] || mkdir -p $APP_ROOT/var/run/mysql
     [ -d $APP_ROOT/var/tmp/mysql ] || mkdir -p $APP_ROOT/var/tmp/mysql
