@@ -30,8 +30,9 @@ app_start() {
         POOL_CONF=${POOL_CONF##*/}
         POOL_ROOT=$APP_DATA/${POOL_CONF%.*}
 
-        mkdir -p $POOL_ROOT/log $POOL_ROOT/temp
-        mkdir -p $POOL_ROOT/session $POOL_ROOT/web
+        mkdir -p $POOL_ROOT/web
+        mkdir -p $POOL_ROOT/log
+        mkdir -p $POOL_ROOT/temp/session
 
         chown -R $APP_USER:$APP_GROUP $POOL_ROOT
 
