@@ -1,8 +1,8 @@
 ### Update: 2019-09-23 ###
 
-export wk_webox=webox-v9.2.0
+export wk_deps=deps-v9.2.0
 
-wk_make_webox() {
+wk_make_deps() {
 
     wk_inst_m4
     wk_inst_autoconf
@@ -36,8 +36,8 @@ wk_make_webox() {
 
 }
 
-wk_inst_webox() {
+wk_inst_deps() {
 
-    wk_make_webox
+    wk_make_deps
 
 }
