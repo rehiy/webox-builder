@@ -1,6 +1,8 @@
 #!/bin/sh
 #
 
+export PATH=/srv/webox/bin:${PATH}
+
 export PATH=/srv/wbcom/bin:${PATH}
 
 export PATH=/srv/wbapp/bin:${PATH}
