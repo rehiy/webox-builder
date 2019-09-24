@@ -12,6 +12,7 @@ export APP_ROOT=/srv/wbapp
 
 app_prepare() {
 
+    [ -d $APP_ROOT/var/lib/redis ] || mkdir -p $APP_ROOT/var/lib/redis
     [ -d $APP_ROOT/var/log/redis ] || mkdir -p $APP_ROOT/var/log/redis
     [ -d $APP_ROOT/var/run/redis ] || mkdir -p $APP_ROOT/var/run/redis
     [ -d $APP_ROOT/var/tmp/redis ] || mkdir -p $APP_ROOT/var/tmp/redis
