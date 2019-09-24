@@ -19,6 +19,7 @@ wk_make_php7() {
         --sysconfdir=${wbapp}/etc/php7 \
         --with-config-file-path=${wbapp}/etc/php7 \
         --with-config-file-scan-dir=${wbapp}/etc/php7/php.d \
+        --with-layout=GNU \
         --without-pear \
         --disable-rpath \
         --disable-cgi \
