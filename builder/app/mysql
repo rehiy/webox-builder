@@ -38,8 +38,8 @@ wk_make_mysql() {
         -DDEFAULT_CHARSET=utf8mb4 \
         -DDEFAULT_COLLATION=utf8mb4_general_ci \
         -DENABLED_LOCAL_INFILE=1 \
-        -DWITH_SSL=${wbcom} \
-        -DWITH_ZLIB=${wbcom} \
+        -DWITH_SSL=${wblib} \
+        -DWITH_ZLIB=${wblib} \
         -DWITH_BOOST=${wksrc} \
         -DDOWNLOAD_BOOST=1 \
         -DDOWNLOAD_BOOST_TIMEOUT=1800

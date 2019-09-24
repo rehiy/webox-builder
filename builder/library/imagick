@@ -10,7 +10,7 @@ wk_find_imagick() {
 
 wk_make_imagick() {
 
-    ./configure --prefix=${wbcom} LDFLAGS=-L${wbcom}/lib
+    ./configure --prefix=${wblib} LDFLAGS=-L${wblib}/lib
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_imagick() {
 
 wk_inst_imagick() {
 
-    local fine=${wbcom}/bin/convert
+    local fine=${wblib}/bin/convert
 
     [ -e ${fine} ] || wk_find_imagick
     [ -e ${fine} ] || wk_make_imagick

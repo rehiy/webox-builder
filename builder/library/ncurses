@@ -10,7 +10,7 @@ wk_find_ncurses() {
 
 wk_make_ncurses() {
 
-    ./configure --prefix=${wbcom} --mandir=${wbcom}/share/man --with-shared
+    ./configure --prefix=${wblib} --mandir=${wblib}/share/man --with-shared
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_ncurses() {
 
 wk_inst_ncurses() {
 
-    local fine=${wbcom}/lib/libncurses.a
+    local fine=${wblib}/lib/libncurses.a
 
     [ -e ${fine} ] || wk_find_ncurses
     [ -e ${fine} ] || wk_make_ncurses

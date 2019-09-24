@@ -23,7 +23,11 @@ app_prepare() {
     done
 
     if [ ! -e ${wbapp}/etc/php7 ]; then
-        ln -s ../../webox/php7/etc ${wbapp}/etc/php7
+        if [ -f /.dockerenv ]; then
+            cp -a ${webox}/php7/etc ${wbapp}/etc/php7
+        else
+            ln -s ${webox}/php7/etc ${wbapp}/etc/php7
+        fi
     fi
 
     chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/php7

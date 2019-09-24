@@ -10,7 +10,7 @@ wk_find_png() {
 
 wk_make_png() {
 
-    ./configure --prefix=${wbcom}
+    ./configure --prefix=${wblib}
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_png() {
 
 wk_inst_png() {
 
-    local fine=${wbcom}/lib/libpng.a
+    local fine=${wblib}/lib/libpng.a
 
     [ -e ${fine} ] || wk_find_png
     [ -e ${fine} ] || wk_make_png

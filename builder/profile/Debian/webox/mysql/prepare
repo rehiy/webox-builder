@@ -23,7 +23,11 @@ app_prepare() {
     done
 
     if [ ! -e ${wbapp}/etc/mysql ]; then
-        ln -s ../../webox/mysql/etc ${wbapp}/etc/mysql
+        if [ -f /.dockerenv ]; then
+            cp -a ${webox}/mysql/etc ${wbapp}/etc/mysql
+        else
+            ln -s ${webox}/mysql/etc ${wbapp}/etc/mysql
+        fi
     fi
 
     if [ ! -f ${wbapp}/var/log/mysql/error.log ]; then

@@ -10,7 +10,7 @@ wk_find_gettext() {
 
 wk_make_gettext() {
 
-    ./configure --prefix=${wbcom}
+    ./configure --prefix=${wblib}
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_gettext() {
 
 wk_inst_gettext() {
 
-    local fine=${wbcom}/bin/gettext
+    local fine=${wblib}/bin/gettext
 
     [ -e ${fine} ] || wk_find_gettext
     [ -e ${fine} ] || wk_make_gettext

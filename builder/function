@@ -82,7 +82,7 @@ wk__realpath() {
 
     sed -i "s#\${htdoc}#${htdoc}#" `grep '${htdoc}' -rl $1`
     sed -i "s#\${wbapp}#${wbapp}#" `grep '${wbapp}' -rl $1`
-    sed -i "s#\${wbcom}#${wbcom}#" `grep '${wbcom}' -rl $1`
+    sed -i "s#\${wblib}#${wblib}#" `grep '${wblib}' -rl $1`
     sed -i "s#\${webox}#${webox}#" `grep '${webox}' -rl $1`
 
 }

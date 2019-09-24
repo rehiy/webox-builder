@@ -36,18 +36,18 @@ wk_make_php5() {
         --with-pdo-mysql \
         --with-gd \
         --enable-gd-native-ttf \
-        --with-freetype-dir=${wbcom} \
-        --with-jpeg-dir=${wbcom} \
-        --with-png-dir=${wbcom} \
-        --with-curl=${wbcom} \
-        --with-gettext=${wbcom} \
-        --with-iconv=${wbcom} \
-        --with-mcrypt=${wbcom} \
-        --with-openssl=${wbcom} \
-        --with-pcre-dir=${wbcom} \
-        --with-libxml-dir=${wbcom} \
-        --with-libzip=${wbcom} \
-        --with-zlib=${wbcom}
+        --with-freetype-dir=${wblib} \
+        --with-jpeg-dir=${wblib} \
+        --with-png-dir=${wblib} \
+        --with-curl=${wblib} \
+        --with-gettext=${wblib} \
+        --with-iconv=${wblib} \
+        --with-mcrypt=${wblib} \
+        --with-openssl=${wblib} \
+        --with-pcre-dir=${wblib} \
+        --with-libxml-dir=${wblib} \
+        --with-libzip=${wblib} \
+        --with-zlib=${wblib}
 
     make && make install
     wk__error_check ${wk_php5}
@@ -114,6 +114,6 @@ wk_plus_php5_geoip2() {
 
     fi
 
-    wk_make_php5_ext geoip2 --with-maxminddb=${wbcom}
+    wk_make_php5_ext geoip2 --with-maxminddb=${wblib}
 
 }

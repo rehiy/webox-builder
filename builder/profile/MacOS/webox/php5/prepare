@@ -14,7 +14,11 @@ app_prepare() {
     done
 
     if [ ! -e ${wbapp}/etc/php5 ]; then
-        ln -s ../../webox/php5/etc ${wbapp}/etc/php5
+        if [ -f /.dockerenv ]; then
+            cp -a ${webox}/php5/etc ${wbapp}/etc/php5
+        else
+            ln -s ${webox}/php5/etc ${wbapp}/etc/php5
+        fi
     fi
 
     chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/php5

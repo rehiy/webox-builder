@@ -13,8 +13,8 @@ wk_find_zip() {
 wk_make_zip() {
 
     cmake . \
-        -DCMAKE_PREFIX_PATH=${wbcom} \
-        -DCMAKE_INSTALL_PREFIX=${wbcom}
+        -DCMAKE_PREFIX_PATH=${wblib} \
+        -DCMAKE_INSTALL_PREFIX=${wblib}
 
     make && make install
 
@@ -22,7 +22,7 @@ wk_make_zip() {
 
 wk_inst_zip() {
 
-    local fine=${wbcom}/bin/ziptool
+    local fine=${wblib}/bin/ziptool
 
     [ -e ${fine} ] || wk_find_zip
     [ -e ${fine} ] || wk_make_zip

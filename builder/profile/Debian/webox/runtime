@@ -3,12 +3,12 @@
 
 export PATH=${webox}/bin:${PATH}
 
-export PATH=${wbcom}/bin:${PATH}
+export PATH=${wblib}/bin:${PATH}
 
 export PATH=${wbapp}/bin:${PATH}
 export PATH=${wbapp}/sbin:${PATH}
 
-export LD_LIBRARY_PATH=${wbcom}/lib:${wbapp}/lib
+export LD_LIBRARY_PATH=${wblib}/lib:${wbapp}/lib
 
 #####################################################################
 

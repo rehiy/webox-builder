@@ -10,13 +10,13 @@ wk_find_gd() {
 
 wk_make_gd() {
 
-    ./configure --prefix=${wbcom} \
-        --with-libiconv-prefix=${wbcom} \
-        --with-zlib=${wbcom} \
-        --with-png=${wbcom} \
-        --with-freetype=${wbcom} \
-        --with-jpeg=${wbcom} \
-        --with-tiff=${wbcom}
+    ./configure --prefix=${wblib} \
+        --with-libiconv-prefix=${wblib} \
+        --with-zlib=${wblib} \
+        --with-png=${wblib} \
+        --with-freetype=${wblib} \
+        --with-jpeg=${wblib} \
+        --with-tiff=${wblib}
 
     make && make install
 
@@ -24,7 +24,7 @@ wk_make_gd() {
 
 wk_inst_gd() {
 
-    local fine=${wbcom}/lib/libgd.a
+    local fine=${wblib}/lib/libgd.a
 
     [ -e ${fine} ] || wk_find_gd
     [ -e ${fine} ] || wk_make_gd

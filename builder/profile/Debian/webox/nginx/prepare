@@ -23,7 +23,11 @@ app_prepare() {
     done
 
     if [ ! -e ${wbapp}/etc/nginx ]; then
-        ln -s ../../webox/nginx/etc ${wbapp}/etc/nginx
+        if [ -f /.dockerenv ]; then
+            cp -a ${webox}/nginx/etc ${wbapp}/etc/nginx
+        else
+            ln -s ${webox}/nginx/etc ${wbapp}/etc/nginx
+        fi
     fi
 
     if [ ! -d ${wbapp}/var/tmp/nginx/proxy_cache ]; then

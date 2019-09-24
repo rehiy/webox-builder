@@ -1,6 +1,6 @@
 export OS_TYPE=Debian
 
-export PKG_CONFIG_PATH=${wbcom}/lib/pkgconfig
+export PKG_CONFIG_PATH=${wblib}/lib/pkgconfig
 
 apt update
 apt install -y pkg-config unzip wget

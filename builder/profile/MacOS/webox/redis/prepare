@@ -14,7 +14,11 @@ app_prepare() {
     done
 
     if [ ! -e ${wbapp}/etc/redis ]; then
-        ln -s ../../webox/redis/etc ${wbapp}/etc/redis
+        if [ -f /.dockerenv ]; then
+            cp -a ${webox}/redis/etc ${wbapp}/etc/redis
+        else
+            ln -s ${webox}/redis/etc ${wbapp}/etc/redis
+        fi
     fi
 
     if [ ! -f ${wbapp}/etc/redis/conf.d/useful.conf ]; then

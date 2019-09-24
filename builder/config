@@ -9,12 +9,12 @@ fi
 #####################################################WEBOX-TARGET-VAR#
 
 export htdoc=/srv/htdoc
-export wbapp=/srv/wbapp
-export wbcom=/srv/wbcom
+export wbapp=/srv/app
+export wblib=/srv/library
 export webox=/srv/webox
 
 [ -d ${wbapp} ] || mkdir -p ${wbapp}
-[ -d ${wbcom} ] || mkdir -p ${wbcom}
+[ -d ${wblib} ] || mkdir -p ${wblib}
 
 ##################################################WEBOX-BUILD-KIT-VAR#
 
@@ -30,14 +30,14 @@ find ${wkget} -name "*" -type f -size 0c | xargs -n 1 rm -f
 
 ##############################################################RUNTIME#
 
-export PATH=${wbapp}/bin:${wbcom}/bin:${PATH}
+export PATH=${wbapp}/bin:${wblib}/bin:${PATH}
 
-export CPATH=${wbapp}/include:${wbcom}/include
-export LIBRARY_PATH=${wbapp}/lib:${wbcom}/lib
+export CPATH=${wbapp}/include:${wblib}/include
+export LIBRARY_PATH=${wbapp}/lib:${wblib}/lib
 export LD_LIBRARY_PATH=$LIBRARY_PATH
 
-mkdir -p ${wbapp}/include ${wbcom}/include
-mkdir -p ${wbapp}/lib ${wbcom}/lib
+mkdir -p ${wbapp}/include ${wblib}/include
+mkdir -p ${wbapp}/lib ${wblib}/lib
 
 case $(uname) in
     "Linux")

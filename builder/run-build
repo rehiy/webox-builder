@@ -34,7 +34,7 @@ wk_inst_php7
 
 #################################################################Profile#
 
-rm -rf ${wbcom}/share/{doc,info,man}
+rm -rf ${wblib}/share/{doc,info,man}
 rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wbapp}/share/{php5,php7}
 

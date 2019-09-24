@@ -10,7 +10,7 @@ wk_find_pcre() {
 
 wk_make_pcre() {
 
-    ./configure --prefix=${wbcom}
+    ./configure --prefix=${wblib}
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_pcre() {
 
 wk_inst_pcre() {
 
-    local fine=${wbcom}/lib/libpcre.a
+    local fine=${wblib}/lib/libpcre.a
 
     [ -e ${fine} ] || wk_find_pcre
     [ -e ${fine} ] || wk_make_pcre

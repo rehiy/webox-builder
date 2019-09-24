@@ -10,7 +10,7 @@ wk_find_maxmind() {
 
 wk_make_maxmind() {
 
-    ./configure --prefix=${wbcom}
+    ./configure --prefix=${wblib}
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_maxmind() {
 
 wk_inst_maxmind() {
 
-    local fine=${wbcom}/lib/libmaxminddb.a
+    local fine=${wblib}/lib/libmaxminddb.a
 
     [ -e ${fine} ] || wk_find_maxmind
     [ -e ${fine} ] || wk_make_maxmind

@@ -16,20 +16,20 @@ source ${wkdir}/function
 
 if [ "$1" == "-min" ]; then
 
-    mkdir -p ${wbcom}/bin2
-    mv ${wbcom}/bin/{wkit,curl,openssl} ${wbcom}/bin2
+    mkdir -p ${wblib}/bin2
+    mv ${wblib}/bin/{wkit,curl,openssl} ${wblib}/bin2
 
     for d in cmake gettext libmcrypt terminfo preloadable_*; do
-        rm -rf ${wbcom}/lib/${d}
+        rm -rf ${wblib}/lib/${d}
     done
 
-    rm -rf ${wbcom}/{bin,etc,man,share}
-    mv ${wbcom}/bin2 ${wbcom}/bin
+    rm -rf ${wblib}/{bin,etc,man,share}
+    mv ${wblib}/bin2 ${wblib}/bin
 
     find /srv -name "*.a" -exec rm {} \;
     find /srv -name "*.la" -exec rm {} \;
 
-    wk__strip ${wbcom}/bin
+    wk__strip ${wblib}/bin
     wk__strip ${wbapp}/bin
 
 fi
