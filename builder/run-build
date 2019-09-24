@@ -34,6 +34,10 @@ wk_inst_php7
 
 #################################################################Profile#
 
+rm -rf ${wbapp}/share/{php5,php7}
+rm -rf ${wbapp}/share/{doc,info,man}
+rm -rf ${wbcom}/share/{doc,info,man}
+
 cp -av ${wketc}/* /srv/
 
 chown -R 0:0  /srv
