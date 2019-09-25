@@ -14,6 +14,12 @@ export LD_LIBRARY_PATH=${wblib}/lib:${wbapp}/lib
 
 #####################################################################
 
+if [ ! -x ${webox}/runtime ]; then
+    chmod +x ${webox}/*/prepare
+    chmod +x ${webox}/*/service
+    chmod +x ${webox}/runtime
+fi
+
 wbx_app_run() {
 
     local WBX_APP=$1
@@ -57,9 +63,6 @@ wbx_own_perm() {
 wbx_fix_install() {
 
     local WBX_APP WBX_APP_EXTRA
-
-    chmod +x ${webox}/*/prepare
-    chmod +x ${webox}/*/service
 
     if [ ! -d ${wbapp}/etc ]; then
         mkdir -p ${wbapp}/etc
