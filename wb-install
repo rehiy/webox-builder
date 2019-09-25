@@ -9,19 +9,16 @@ plat=$(uname -s)-$(uname -m)
 
 case ${plat} in
     "Darwin-x86_64")
-        name=Webox-Darwin-x86_64-v7.0910.tgz
+        name=Webox-Darwin-x86_64-v9.0628.tgz
         curl -C - -o ${name} http://get.vmlu.com/webox/${name}
     ;;
     "Linux-x86_64")
-        name=Webox-Darwin-x86_64-v9.0309.tgz
+        name=Webox-Linux-x86_64-v9.0926.tgz
         wget -c -O ${name} http://get.vmlu.com/webox/${name}
     ;;
 esac
 
 tar -xvf ${name}
-
-chown -R 0:0  srv
-chmod -R 0777 srv/www/*
 
 ####################################################################
 

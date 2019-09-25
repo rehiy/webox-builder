@@ -9,30 +9,24 @@ plat=$(uname -s)-$(uname -m)
 
 case ${plat} in
     "Darwin-x86_64")
-        name=Webox-Darwin-x86_64-v7.0910.tgz
+        name=Webox-Darwin-x86_64-v9.0628.tgz
         curl -C - -o ${name} http://get.vmlu.com/webox/${name}
     ;;
     "Linux-x86_64")
-        name=Webox-Darwin-x86_64-v9.0309.tgz
+        name=Webox-Linux-x86_64-v9.0926.tgz
         wget -c -O ${name} http://get.vmlu.com/webox/${name}
     ;;
 esac
 
 tar -xvf ${name}
 
-chown -R 0:0 srv
-rm -rf srv/*/var
-rm -rf srv/www
+rm -rf srv/webox/*/etc
 
 ####################################################################
 
 [ -x /srv/service ] && /srv/service stop
 
-for x in php5 php7 nginx mysql redis webox; do
-    ls /srv/${x} | grep -v 'etc\|var' | xargs -I {} rm -rf /srv/${x}/{}
-done
-
-rm -rf /srv/webox/var/ready
+rm -rf /var/lib/webox
 cp -av srv/* /srv/
 
 rm -rf srv/ ${name}
