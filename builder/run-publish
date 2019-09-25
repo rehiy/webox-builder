@@ -33,16 +33,19 @@ fi
 
 if [ "$1" == "-min" ]; then
 
-    rm -rf ${wbapp}/include
     rm -rf ${wbapp}/bin/phpize*
     rm -rf ${wbapp}/bin/phpdbg*
     rm -rf ${wbapp}/bin/php-config*
     rm -rf ${wbapp}/bin/mysql_config
+    rm -rf ${wbapp}/include
+    rm -rf ${wbapp}/lib/pkgconfig
+    rm -rf ${wbapp}/share/aclocal
 
     rm -rf ${wblib}/lib/cmake
     rm -rf ${wblib}/lib/gettext
     rm -rf ${wblib}/lib/libmcrypt
     rm -rf ${wblib}/lib/terminfo
+    rm -rf ${wblib}/lib/pkgconfig
     rm -rf ${wblib}/lib/preloadable_*
     rm -rf ${wblib}/lib/xml2Conf.sh
 
