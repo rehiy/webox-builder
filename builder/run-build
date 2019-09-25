@@ -41,5 +41,4 @@ chown -R 0:0  /srv
 chmod -R 0755 /srv/*/bin
 chmod -R 0755 /srv/*/sbin
 
-source ${webox}/runtime
-wbx_fix_install
+${webox}/bin/wkit install
