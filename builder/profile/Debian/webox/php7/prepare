@@ -8,11 +8,11 @@ export APP_GROUP=www-data
 
 app_prepare() {
 
-    if ! grep $APP_GROUP /etc/group >/dev/null; then
+    if ! grep -q $APP_GROUP /etc/group; then
         groupadd $APP_GROUP -g 33
     fi
 
-    if ! grep $APP_USER /etc/passwd >/dev/null; then
+    if ! grep -q $APP_USER /etc/passwd; then
         useradd $APP_USER -u 33 -g 33
         usermod $APP_USER -d ${htdoc} -s /usr/sbin/nologin
     fi
