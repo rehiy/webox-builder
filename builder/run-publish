@@ -40,7 +40,7 @@ fi
 if [ "$1" == "-min" ]; then
 
     mkdir -p ${wblib}/bin2
-    mv ${wblib}/bin/{wkit,curl,openssl} ${wblib}/bin2
+    mv ${wblib}/bin/{curl,openssl} ${wblib}/bin2
 
     rm -rf ${wblib}/{bin,etc,man,share}
     mv ${wblib}/bin2 ${wblib}/bin
