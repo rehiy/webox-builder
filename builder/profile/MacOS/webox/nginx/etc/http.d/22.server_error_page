@@ -3,7 +3,7 @@
 ##
 
 location /errpage/ {
-    alias ${htdoc}/default/not/;
+    alias ${htdoc}/default/miss/;
 }
 
 error_page 403 /errpage/403.htm;
