@@ -72,24 +72,17 @@ wbx_fix_install() {
 
         WBX_APP=${WBX_APP_EXTRA##*/}
 
-        if [ ! -x $WBX_APP_EXTRA/prepare ]; then
-            continue
-        fi
-
-        if [ ! -e ${wbapp}/etc/$WBX_APP ]; then
-            if [ -f /.dockerenv ]; then
-                cp -a ${webox}/$WBX_APP/etc ${wbapp}/etc/$WBX_APP
-            else
-                ln -s ${webox}/$WBX_APP/etc ${wbapp}/etc/$WBX_APP
+        if [ -d $WBX_APP_EXTRA/etc ]; then
+            wbx_own_perm $WBX_APP_EXTRA/etc
+            if [ ! -e ${wbapp}/etc/$WBX_APP ]; then
+                ln -s $WBX_APP_EXTRA/etc ${wbapp}/etc/$WBX_APP
             fi
         fi
 
-        wbx_own_perm ${wbapp}/etc/$WBX_APP
-        wbx_own_perm ${wbapp}/etc/$WBX_APP
-        wbx_own_perm ${wbapp}/etc/$WBX_APP
-
-        echo "exec $WBX_APP_EXTRA/prepare"
-        $WBX_APP_EXTRA/prepare prepare
+        if [ -x $WBX_APP_EXTRA/prepare ]; then
+            echo "exec $WBX_APP_EXTRA/prepare"
+            $WBX_APP_EXTRA/prepare prepare
+        fi
 
     done
 

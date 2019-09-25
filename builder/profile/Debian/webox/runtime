@@ -72,16 +72,16 @@ wbx_fix_install() {
 
         WBX_APP=${WBX_APP_EXTRA##*/}
 
-        if [ -x $WBX_APP_EXTRA/prepare ]; then
-            echo "exec $WBX_APP_EXTRA/prepare"
-            $WBX_APP_EXTRA/prepare prepare
-        fi
-
         if [ -d $WBX_APP_EXTRA/etc ]; then
             wbx_own_perm $WBX_APP_EXTRA/etc
             if [ ! -e ${wbapp}/etc/$WBX_APP ]; then
                 ln -s $WBX_APP_EXTRA/etc ${wbapp}/etc/$WBX_APP
             fi
+        fi
+
+        if [ -x $WBX_APP_EXTRA/prepare ]; then
+            echo "exec $WBX_APP_EXTRA/prepare"
+            $WBX_APP_EXTRA/prepare prepare
         fi
 
     done
