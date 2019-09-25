@@ -40,5 +40,4 @@ wk__realpath ${webox}
 chown -R 0:0  /srv
 chmod -R 0755 /srv/*/bin
 chmod -R 0755 /srv/*/sbin
-
-${webox}/bin/wkit install
+chmod -R 0755 /srv/service

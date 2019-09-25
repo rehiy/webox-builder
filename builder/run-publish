@@ -14,22 +14,16 @@ source ${wkdir}/function
 
 #####################################################################CLS#
 
-rm -rf ${wblib}/include
+rm -rf ${wbapp}/etc/*
+rm -rf ${wbapp}/var/*/*
+rm -rf ${htdoc}/*/{log,temp}
+
+rm -rf ${wbapp}/share/{php5,php7}
+rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wblib}/share/{doc,info,man}
 
-rm -rf ${wbapp}/etc/*
-rm -rf ${wbapp}/include
-rm -rf ${wbapp}/share/{doc,info,man}
-rm -rf ${wbapp}/share/{php5,php7}
-rm -rf ${wbapp}/var/{log,run,tmp}/*
-rm -rf ${wbapp}/var/lib/mysql/*.cnf
-rm -rf ${wbapp}/var/lib/redis/*
-
-find /srv -type f -name "*.log" -exec rm {} \;
-find /srv -type f -name "*.pid" -exec rm {} \;
-find /srv -type f -name ".DS_Store" -exec rm {} \;
-find /srv -type f -name "sess_*" -exec rm {} \;
-find /srv -type d -name "lost+found" -exec rm {} \;
+find /srv -name ".DS_Store" -type f -delete
+find /srv -name "lost+found" -type d -delete
 
 if [ "$OS_TYPE" == "MacOS" ]; then
     xattr -rd com.apple.quarantine /srv
@@ -39,18 +33,26 @@ fi
 
 if [ "$1" == "-min" ]; then
 
-    mkdir -p ${wblib}/bin2
-    mv ${wblib}/bin/{curl,openssl} ${wblib}/bin2
+    rm -rf ${wbapp}/include
+    rm -rf ${wbapp}/bin/phpize*
+    rm -rf ${wbapp}/bin/phpdbg*
+    rm -rf ${wbapp}/bin/php-config*
+    rm -rf ${wbapp}/bin/mysql_config
 
-    rm -rf ${wblib}/{bin,etc,man,share}
-    mv ${wblib}/bin2 ${wblib}/bin
+    rm -rf ${wblib}/lib/cmake
+    rm -rf ${wblib}/lib/gettext
+    rm -rf ${wblib}/lib/libmcrypt
+    rm -rf ${wblib}/lib/terminfo
+    rm -rf ${wblib}/lib/preloadable_*
+    rm -rf ${wblib}/lib/xml2Conf.sh
 
-    for d in cmake gettext libmcrypt terminfo preloadable_*; do
-        rm -rf ${wblib}/lib/${d}
+    sf='curl\|openssl'
+    for f in `ls ${wblib}/bin | grep -v ${sf}`; do
+        rm -rf ${wblib}/bin/${f}
     done
 
-    find /srv -name "*.a" -exec rm {} \;
-    find /srv -name "*.la" -exec rm {} \;
+    find /srv -name "*.a" -type f -delete
+    find /srv -name "*.la" -type f -delete
 
     wk__strip ${wblib}/bin
     wk__strip ${wbapp}/bin
