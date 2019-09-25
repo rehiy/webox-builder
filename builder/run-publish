@@ -17,6 +17,7 @@ source ${wkdir}/function
 rm -rf ${wblib}/include
 rm -rf ${wblib}/share/{doc,info,man}
 
+rm -rf ${wbapp}/etc/*
 rm -rf ${wbapp}/include
 rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wbapp}/share/{php5,php7}
