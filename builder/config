@@ -30,7 +30,7 @@ find ${wkget} -name "*" -type f -size 0c | xargs -n 1 rm -f
 
 ##############################################################RUNTIME#
 
-export PATH=${wbapp}/bin:${wblib}/bin:${PATH}
+export PATH=${wbapp}/bin:${wblib}/bin:$PATH
 
 export CPATH=${wbapp}/include:${wblib}/include
 export LIBRARY_PATH=${wbapp}/lib:${wblib}/lib

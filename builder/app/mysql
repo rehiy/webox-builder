@@ -18,8 +18,8 @@ wk_make_mysql() {
 
     cmake . \
         -DCMAKE_PREFIX_PATH=${wbapp} \
-        -DCMAKE_INCLUDE_PATH=${CPATH} \
-        -DCMAKE_LIBRARY_PATH=${LIBRARY_PATH} \
+        -DCMAKE_INCLUDE_PATH=$CPATH \
+        -DCMAKE_LIBRARY_PATH=$LIBRARY_PATH \
         -DCMAKE_INSTALL_PREFIX=${wbapp} \
         -DINSTALL_SBINDIR=sbin \
         -DINSTALL_DOCDIR=share/doc/mysql \
