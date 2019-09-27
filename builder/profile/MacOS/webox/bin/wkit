@@ -8,18 +8,5 @@ if [ $# -eq 2 ]; then
 fi
 
 if [ "$1" = "install" ]; then
-
-    mkdir -p /var/lib/webox
-
-    if [ ! -f /var/lib/webox/version ]; then
-        echo 0 > /var/lib/webox/version
-    fi
-
-    if [ `cat /var/lib/webox/version` -lt $WBX_VERSION ]; then
-        echo $WBX_VERSION > /var/lib/webox/version
-        wbx_fix_install
-    fi
-
-    exit
-
+   ${webox}/install
 fi

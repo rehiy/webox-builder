@@ -14,11 +14,10 @@ export LD_LIBRARY_PATH=${wblib}/lib:${wbapp}/lib
 
 #####################################################################
 
-if [ ! -x ${webox}/runtime ]; then
+if [ ! -x ${webox}/install ]; then
     chmod +x ${webox}/*/prepare
     chmod +x ${webox}/*/service
-    chmod +x ${webox}/runtime
-    chmod +x ${webox}/bin/*
+    chmod +x ${webox}/install
 fi
 
 wbx_app_run() {
@@ -86,5 +85,7 @@ wbx_fix_install() {
         fi
 
     done
+
+    echo $WBX_VERSION > ${wbapp}/etc/version
 
 }
