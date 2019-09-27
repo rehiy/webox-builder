@@ -18,6 +18,7 @@ if [ ! -x ${webox}/runtime ]; then
     chmod +x ${webox}/*/prepare
     chmod +x ${webox}/*/service
     chmod +x ${webox}/runtime
+    chmod +x ${webox}/bin/*
 fi
 
 wbx_app_run() {
