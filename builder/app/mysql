@@ -47,6 +47,7 @@ wk_make_mysql() {
     make -j4 && make install
     wk__error_check ${wk_mysql}
 
+    rm -rf ${wbapp}/bin/mysql_install_db
     rm -rf ${wbapp}/bin/*embedded
     rm -rf ${wbapp}/bin/*test
 
