@@ -29,12 +29,8 @@ app_prepare() {
     chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/mysql
 
     if [ ! -f ${wbapp}/var/lib/mysql/ibdata1 ]; then
-        ${wbapp}/sbin/mysqld --initialize \
-            --basedir=${wbapp} --datadir=${wbapp}/var/lib/mysql
-        if [ $? -eq 0 ]; then
-            pw=`grep password ${wbapp}/var/log/mysql/error.log`
-            echo "MySQL root password is \033[32m${pw##* }\033[0m"
-        fi
+        ${wbapp}/sbin/mysqld --initialize --user=$APP_USER
+        grep password /var/log/mysql/error.log
     fi
 
 }
