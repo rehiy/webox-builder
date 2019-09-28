@@ -14,10 +14,9 @@ export LD_LIBRARY_PATH=${wblib}/lib:${wbapp}/lib
 
 #####################################################################
 
-if [ ! -x ${webox}/install ]; then
-    chmod +x ${webox}/*/prepare
-    chmod +x ${webox}/*/service
-    chmod +x ${webox}/install
+if [ ! -x /srv/webox/runtime ]; then
+    chmod +x /srv/webox/*/*
+    chmod +x /srv/webox/*
 fi
 
 wbx_app_run() {
