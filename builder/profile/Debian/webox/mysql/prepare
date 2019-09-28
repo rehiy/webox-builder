@@ -30,7 +30,7 @@ app_prepare() {
 
     if [ ! -f ${wbapp}/var/lib/mysql/ibdata1 ]; then
         ${wbapp}/sbin/mysqld --initialize --user=$APP_USER
-        grep password /var/log/mysql/error.log
+        grep password ${wbapp}/var/log/mysql/error.log
     fi
 
 }
