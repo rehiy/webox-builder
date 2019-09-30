@@ -45,7 +45,7 @@ wbx_own_perm() {
         exit 1
     fi
 
-    chown -R $APP_UID:$APP_GID
+    chown -R $APP_UID:$APP_GID $1
     find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
     find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
 
