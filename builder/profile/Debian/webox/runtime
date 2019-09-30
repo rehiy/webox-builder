@@ -4,13 +4,14 @@
 export WBX_VERSION=10
 
 export PATH=${webox}/bin:$PATH
-
 export PATH=${wblib}/bin:$PATH
-
-export PATH=${wbapp}/bin:$PATH
-export PATH=${wbapp}/sbin:$PATH
+export PATH=${wbapp}/bin:${wbapp}/sbin:$PATH
 
 export LD_LIBRARY_PATH=${wblib}/lib:${wbapp}/lib
+
+if [ -z "$WBX_APPS" ]; then
+    export WBX_APPS='nginx mysql redis php7'
+fi
 
 #####################################################################
 
