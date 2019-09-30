@@ -23,26 +23,16 @@ If the host is `www.anrip.com`, the webroot will be `/srv/htdoc/defualt/web/com.
 
 # Manual Control Services
 
-When `auto` are not used, you can manual control the services
-
-## enable the modules you need
+## fix global runtime
 
 ```shell
-/srv/webox/bin/wkit nginx prepare
-/srv/webox/bin/wkit mysql prepare
-/srv/webox/bin/wkit redis prepare
-/srv/webox/bin/wkit php5 prepare
-/srv/webox/bin/wkit php7 prepare
+. /srv/webox/runtime
 ```
 
 ## control the modules you need
 
 ```shell
-/srv/webox/bin/wkit nginx [start|stop|restart|reload]
-/srv/webox/bin/wkit mysql [start|stop|restart|reload]
-/srv/webox/bin/wkit redis [start|stop|restart|reload]
-/srv/webox/bin/wkit php5 [start|stop|restart|reload]
-/srv/webox/bin/wkit php7 [start|stop|restart|reload]
+wkit [nginx|mysql|redis|php5|php7] [start|stop|restart|reload]
 ```
 
 ## configure the modules you need
@@ -54,7 +44,7 @@ please edit the config files in /srv/app/etc/\*, then reload the service
 ## don't forget change mysql password
 
 ```shell
-/srv/app/bin/mysqladmin password a1B2c3E4
+mysqladmin -u root password a1B2c3E4
 ```
 
 # More Issues
