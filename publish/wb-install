@@ -1,31 +1,26 @@
 #!/bin/sh
 #
 
-####################################################################
-
 cd ~
 
-plat=$(uname -s)-$(uname -m)
+if type curl >/dev/null 2>&1; then
+    curl http://get.vmlu.com/webox/wb-fetch | sh
+else
+    wget -qO- http://get.vmlu.com/webox/wb-fetch | sh
+fi
 
-case ${plat} in
-    "Darwin-x86_64")
-        name=Webox-Darwin-x86_64-v9.0628.tgz
-        curl -C - -o ${name} http://get.vmlu.com/webox/${name}
-    ;;
-    "Linux-x86_64")
-        name=Webox-Linux-x86_64-v9.0926.tgz
-        wget -c -O ${name} http://get.vmlu.com/webox/${name}
-    ;;
-esac
-
-tar -xvf ${name}
+if [ ! -d ~/srv/webox ]; then
+    echo "can't download webox.tgz"
+    exit 1
+fi
 
 ####################################################################
 
 [ -e /srv ] || mkdir -p /srv
+
 cp -av srv/* /srv/
 
-rm -rf srv/ ${name}
+rm -rf srv/
 
 ####################################################################
 
