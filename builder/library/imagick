@@ -1,6 +1,6 @@
-### Update: 2019-05-26 ###
+### Update: 2019-09-29 ###
 
-export wk_imagick=ImageMagick-7.0.8-47
+export wk_imagick=ImageMagick-6.9.10-67
 
 wk_find_imagick() {
 

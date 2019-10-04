@@ -1,6 +1,6 @@
-### Update: 2019-08-29 ###
+### Update: 2019-09-26 ###
 
-export wk_php7=php-7.3.9
+export wk_php7=php-7.3.10
 
 wk_find_php7() {
 
@@ -13,16 +13,17 @@ wk_make_php7() {
     ./configure \
         --prefix=${wbapp} \
         --program-suffix=7 \
-        --datadir=${wbapp}/share/php7 \
-        --includedir=${wbapp}/include/php7 \
         --libdir=${wbapp}/lib/php7 \
+        --includedir=${wbapp}/include/php7 \
+        --datarootdir=${wbapp}/share/php7 \
         --sysconfdir=${wbapp}/etc/php7 \
         --with-config-file-path=${wbapp}/etc/php7 \
         --with-config-file-scan-dir=${wbapp}/etc/php7/php.d \
         --with-layout=GNU \
         --without-pear \
-        --disable-rpath \
         --disable-cgi \
+        --disable-rpath \
+        --disable-opcache \
         --enable-fpm \
         --enable-bcmath \
         --enable-calendar \
@@ -31,28 +32,37 @@ wk_make_php7() {
         --enable-mbstring \
         --enable-sockets \
         --enable-zip \
-        --with-mysqli \
-        --with-pdo-mysql \
+        --with-pcre-regex \
+        --with-pcre-jit \
+        --with-pcre-dir=${wblib} \
         --with-gd \
-        --with-freetype-dir=${wblib} \
         --with-jpeg-dir=${wblib} \
         --with-png-dir=${wblib} \
-        --with-curl=${wblib} \
-        --with-gettext=${wblib} \
-        --with-iconv=${wblib} \
-        --with-openssl=${wblib} \
-        --with-pcre-dir=${wblib} \
-        --with-libxml-dir=${wblib} \
+        --with-freetype-dir=${wblib} \
+        --with-zlib \
+        --with-zlib-dir=${wblib} \
         --with-libzip=${wblib} \
-        --with-zlib=${wblib}
+        --with-libxml-dir=${wblib} \
+        --with-iconv \
+        --with-iconv-dir=${wblib} \
+        --with-gettext=${wblib} \
+        --with-curl=${wblib} \
+        --with-openssl \
+        --with-openssl-dir=${wblib} \
+        --with-mysqli \
+        --with-pdo-mysql
 
     make && make install
     wk__error_check ${wk_php7}
 
+    wk_make_php7_ext intl
     wk_make_php7_ext opcache
     wk_make_php7_ext pcntl
+    wk_make_php7_ext shmop
+    wk_make_php7_ext soap
 
-    wk_make_php7_pecl redis-4.2.0
+    wk_make_php7_pecl redis-5.0.2
+    wk_make_php7_pecl imagick-3.4.4 --with-imagick=${wblib}
 
     wk_plus_php7_geoip2
 

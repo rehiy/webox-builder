@@ -24,6 +24,7 @@ wk_make_deps() {
     wk_inst_tiff
     wk_inst_freetype
     wk_inst_gd
+    wk_inst_imagick
 
     wk_inst_bison
     wk_inst_re2c

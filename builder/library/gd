@@ -13,9 +13,9 @@ wk_make_gd() {
     ./configure --prefix=${wblib} \
         --with-libiconv-prefix=${wblib} \
         --with-zlib=${wblib} \
+        --with-jpeg=${wblib} \
         --with-png=${wblib} \
         --with-freetype=${wblib} \
-        --with-jpeg=${wblib} \
         --with-tiff=${wblib}
 
     make && make install
