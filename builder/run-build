@@ -5,12 +5,12 @@ if [ -f $(pwd)/config ]; then
     source $(pwd)/config
 fi
 
-if [ -z ${wkdir} ]; then
+if [ -f ${wkdir}/function ]; then
+    source ${wkdir}/function
+else
     echo "Please use './wk_complie' to run this script"
     exit 1
 fi
-
-source ${wkdir}/function
 
 #################################################################Package#
 
@@ -29,8 +29,8 @@ wk_inst_redis
 
 wk_inst_nginx
 
-wk_inst_php5
 wk_inst_php7
+wk_inst_php5
 
 #################################################################Profile#
 

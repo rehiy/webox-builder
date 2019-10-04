@@ -3,22 +3,32 @@
 
 export WBX_VERSION=10
 
-export PATH=${webox}/bin:$PATH
-export PATH=${wblib}/bin:$PATH
-export PATH=${wbapp}/bin:${wbapp}/sbin:$PATH
-
-export LD_LIBRARY_PATH=${wblib}/lib:${wbapp}/lib
-
 if [ -z "$WBX_APPS" ]; then
     export WBX_APPS='nginx mysql redis php7'
 fi
 
-#####################################################################
+if ! echo $PATH | grep -q ${webox}; then
+    export PATH=${webox}/bin:$PATH
+fi
+
+if ! echo $PATH | grep -q ${wblib}; then
+    export PATH=${wblib}/bin:$PATH
+fi
+
+if ! echo $PATH | grep -q ${wbapp}; then
+    export PATH=${wbapp}/bin:${wbapp}/sbin:$PATH
+fi
+
+if ! echo $LD_LIBRARY_PATH | grep -q ${wblib}; then
+    export LD_LIBRARY_PATH=${wblib}/lib:${wbapp}/lib
+fi
 
 if [ ! -x ${webox}/runtime ]; then
     chmod +x ${webox}/*/*
     chmod +x ${webox}/*
 fi
+
+#####################################################################
 
 wbx_app_run() {
 
@@ -47,6 +57,7 @@ wbx_own_perm() {
     fi
 
     chown -R $APP_UID:$APP_GID $1
+
     find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
     find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
 

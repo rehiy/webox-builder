@@ -5,12 +5,12 @@ if [ -f $(pwd)/config ]; then
     source $(pwd)/config
 fi
 
-if [ -z ${wkdir} ]; then
-    echo "Please use './wk_publish' to run this script"
+if [ -f ${wkdir}/function ]; then
+    source ${wkdir}/function
+else
+    echo "Please use './wk_complie' to run this script"
     exit 1
 fi
-
-source ${wkdir}/function
 
 #####################################################################CLS#
 
@@ -25,13 +25,13 @@ rm -rf ${wblib}/share/{doc,info,man}
 find /srv -name ".DS_Store" -type f -delete
 find /srv -name "lost+found" -type d -delete
 
-if [ "$OS_TYPE" == "MacOS" ]; then
+if [ "$OS_TYPE" = "MacOS" ]; then
     xattr -rd com.apple.quarantine /srv
 fi
 
 #####################################################################MIN#
 
-if [ "$1" == "-min" ]; then
+if [ "$1" = "-min" ]; then
 
     rm -rf ${wbapp}/bin/phpize*
     rm -rf ${wbapp}/bin/phpdbg*

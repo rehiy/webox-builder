@@ -47,7 +47,7 @@ wk__apply() {
         [ -d ${dist%/*} ] || mkdir -p ${dist%/*}
 
         tar -xvf ${save} -C ${dist%/*}
-        wk__error_check wk__apply ${name}
+        [ $? -ne 0 ] && rm -rf ${dist}
 
     fi
 

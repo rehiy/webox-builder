@@ -27,7 +27,7 @@ wk_make_nginx() {
         --http-fastcgi-temp-path=${wbapp}/var/tmp/nginx/fastcgi \
         --http-scgi-temp-path=${wbapp}/var/tmp/nginx/scgi \
         --http-uwsgi-temp-path=${wbapp}/var/tmp/nginx/uwsgi \
-        --with-file-aio \
+        $([ "$OS_TYPE" = "Debian" ] && echo --with-file-aio) \
         --with-threads \
         --with-http_ssl_module \
         --with-http_v2_module \
