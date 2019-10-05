@@ -6,6 +6,24 @@ if [ $UID -ne 0 ]; then
     exit 1
 fi
 
+##################################################WEBOX-BUILD-KIT-VAR#
+
+export wkdir=$(pwd)
+
+export wksrc=${wkdir}/source
+export wkget=${wkdir}/storage
+export wketc=${wkdir}/profile/$(uname)
+
+if [ ! -f ${wketc}.rtm ]; then
+    echo "$(uname) platform is not supported"
+    exit 1
+fi
+
+[ -d ${wksrc} ] || mkdir -p ${wksrc}
+[ -d ${wkget} ] || mkdir -p ${wkget}
+
+find ${wkget} -name "*" -type f -size 0c | xargs -n 1 rm -f
+
 #####################################################WEBOX-TARGET-VAR#
 
 export htdoc=/srv/htdoc
@@ -15,18 +33,6 @@ export webox=/srv/webox
 
 [ -d ${wbapp} ] || mkdir -p ${wbapp}
 [ -d ${wblib} ] || mkdir -p ${wblib}
-
-##################################################WEBOX-BUILD-KIT-VAR#
-
-export wkdir=$(pwd)
-
-export wksrc=${wkdir}/source
-export wkget=${wkdir}/storage
-
-[ -d ${wksrc} ] || mkdir -p ${wksrc}
-[ -d ${wkget} ] || mkdir -p ${wkget}
-
-find ${wkget} -name "*" -type f -size 0c | xargs -n 1 rm -f
 
 ##############################################################RUNTIME#
 
@@ -38,16 +44,3 @@ export LD_LIBRARY_PATH=$LIBRARY_PATH
 
 mkdir -p ${wbapp}/include ${wblib}/include
 mkdir -p ${wbapp}/lib ${wblib}/lib
-
-case $(uname) in
-    "Linux")
-        wketc=${wkdir}/profile/Linux
-    ;;
-    "Darwin")
-        wketc=${wkdir}/profile/Darwin
-    ;;
-    *)
-        exit 2
-esac
-
-source ${wketc}.rtm

@@ -8,6 +8,7 @@ wk_find_php7() {
 
     sed -i 's#includedir@/php"#includedir@/php7"#' scripts/php-config.in
     sed -i 's#includedir@/php"#includedir@/php7"#' scripts/phpize.in
+
     sed -i 's#includedir)/php$#includedir)/php7#' scripts/Makefile.frag
     sed -i 's#include/php$#include/php7#' ext/pdo/Makefile.frag
     sed -i "s#include/php'#include/php7'#" Makefile.global

@@ -1,16 +1,14 @@
 #!/bin/bash
 #
 
-if [ -f $(pwd)/config ]; then
-    source $(pwd)/config
-fi
-
-if [ -f ${wkdir}/function ]; then
-    source ${wkdir}/function
-else
-    echo "Please use './wk_complie' to run this script"
+if [ ! -f $(pwd)/config ]; then
+    echo "Please use './run-publish' to run me"
     exit 1
 fi
+
+source $(pwd)/config
+
+source ${wkdir}/function
 
 #####################################################################CLS#
 
