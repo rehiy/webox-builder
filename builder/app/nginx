@@ -6,8 +6,8 @@ wk_find_nginx() {
 
     wk__apply http://nginx.org/download/ ${wk_nginx} .tar.gz
 
-    sed -i 's/^CFLAGS="$CFLAGS -g"/#CFLAGS="$CFLAGS -g"/' auto/cc/gcc
-    sed -i 's/^CFLAGS="$CFLAGS -Werror"/#CFLAGS="$CFLAGS -Werror"/' auto/cc/gcc
+    sed -i~ 's/^CFLAGS="$CFLAGS -g"/#CFLAGS="$CFLAGS -g"/' auto/cc/gcc
+    sed -i~ 's/^CFLAGS="$CFLAGS -Werror"/#CFLAGS="$CFLAGS -Werror"/' auto/cc/gcc
 
 }
 

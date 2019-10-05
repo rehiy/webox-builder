@@ -11,7 +11,7 @@ wk_find_iconv() {
 wk_make_iconv() {
 
     if [ "$OS_TYPE" = "Linux" ]; then
-        sed -i '/gets is a security hole/d' srclib/stdio*.h
+        sed -i~ '/gets is a security hole/d' srclib/stdio*.h
     fi
 
     ./configure --prefix=${wblib} --enable-shared
