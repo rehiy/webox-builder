@@ -6,6 +6,12 @@ wk_find_php7() {
 
     wk__apply http://jp2.php.net/distributions/ ${wk_php7} .tar.gz
 
+    sed -i 's#includedir@/php"#includedir@/php7"#' scripts/php-config.in
+    sed -i 's#includedir@/php"#includedir@/php7"#' scripts/phpize.in
+    sed -i 's#includedir)/php$#includedir)/php7#' scripts/Makefile.frag
+    sed -i 's#include/php$#include/php7#' ext/pdo/Makefile.frag
+    sed -i "s#include/php'#include/php7'#" Makefile.global
+
 }
 
 wk_make_php7() {
@@ -14,8 +20,7 @@ wk_make_php7() {
         --prefix=${wbapp} \
         --program-suffix=7 \
         --libdir=${wbapp}/lib/php7 \
-        --includedir=${wbapp}/include/php7 \
-        --datarootdir=${wbapp}/share/php7 \
+        --datadir=${wbapp}/share/php7 \
         --sysconfdir=${wbapp}/etc/php7 \
         --with-config-file-path=${wbapp}/etc/php7 \
         --with-config-file-scan-dir=${wbapp}/etc/php7/php.d \

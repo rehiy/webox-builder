@@ -6,6 +6,12 @@ wk_find_php5() {
 
     wk__apply http://jp2.php.net/distributions/ ${wk_php5} .tar.gz
 
+    sed -i 's#includedir@/php"#includedir@/php5"#' scripts/php-config.in
+    sed -i 's#includedir@/php"#includedir@/php5"#' scripts/phpize.in
+    sed -i 's#includedir)/php$#includedir)/php5#' scripts/Makefile.frag
+    sed -i 's#include/php$#include/php5#' ext/pdo/Makefile.frag
+    sed -i "s#include/php'#include/php5'#" Makefile.global
+
 }
 
 wk_make_php5() {
@@ -14,8 +20,7 @@ wk_make_php5() {
         --prefix=${wbapp} \
         --program-suffix=5 \
         --libdir=${wbapp}/lib/php5 \
-        --includedir=${wbapp}/include/php5 \
-        --datarootdir=${wbapp}/share/php5 \
+        --datadir=${wbapp}/share/php5 \
         --sysconfdir=${wbapp}/etc/php5 \
         --with-config-file-path=${wbapp}/etc/php5 \
         --with-config-file-scan-dir=${wbapp}/etc/php5/php.d \
