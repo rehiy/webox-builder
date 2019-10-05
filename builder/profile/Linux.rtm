@@ -1,4 +1,4 @@
-export OS_TYPE=Debian
+export OS_TYPE=Linux
 
 export PKG_CONFIG_PATH=${wblib}/lib/pkgconfig
 

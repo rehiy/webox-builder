@@ -1,4 +1,4 @@
-export OS_TYPE=MacOS
+export OS_TYPE=Darwin
 
 export KERNEL_BITS=64
 

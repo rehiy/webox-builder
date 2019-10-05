@@ -18,14 +18,13 @@ rm -rf ${wbapp}/etc/*
 rm -rf ${wbapp}/var/*/*
 rm -rf ${htdoc}/*/{log,temp}
 
-rm -rf ${wbapp}/share/{php5,php7}
 rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wblib}/share/{doc,info,man}
 
 find /srv -name ".DS_Store" -type f -delete
 find /srv -name "lost+found" -type d -delete
 
-if [ "$OS_TYPE" = "MacOS" ]; then
+if [ "$OS_TYPE" = "Darwin" ]; then
     xattr -rd com.apple.quarantine /srv
 fi
 
@@ -40,6 +39,7 @@ if [ "$1" = "-min" ]; then
     rm -rf ${wbapp}/include
     rm -rf ${wbapp}/lib/pkgconfig
     rm -rf ${wbapp}/share/aclocal
+    rm -rf ${wbapp}/share/php*
 
     rm -rf ${wblib}/lib/cmake
     rm -rf ${wblib}/lib/gettext

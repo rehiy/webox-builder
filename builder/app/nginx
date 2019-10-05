@@ -72,7 +72,7 @@ wk_inst_nginx() {
 
 wk_plus_nginx() {
 
-    if [ "$OS_TYPE" = "Debian" ]; then
+    if [ "$OS_TYPE" = "Linux" ]; then
         echo --with-file-aio --with-threads
     fi
 }

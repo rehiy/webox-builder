@@ -41,13 +41,13 @@ mkdir -p ${wbapp}/lib ${wblib}/lib
 
 case $(uname) in
     "Linux")
-        wketc=${wkdir}/profile/Debian
+        wketc=${wkdir}/profile/Linux
     ;;
     "Darwin")
-        wketc=${wkdir}/profile/MacOS
+        wketc=${wkdir}/profile/Darwin
     ;;
     *)
-        exit 10
+        exit 2
 esac
 
 source ${wketc}.rtm
