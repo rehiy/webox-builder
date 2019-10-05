@@ -51,6 +51,9 @@ wk_make_mysql() {
     rm -rf ${wbapp}/bin/*embedded
     rm -rf ${wbapp}/bin/*test
 
+    rm -rf ${wbapp}/lib/mysql/plugin/*test*
+    rm -rf ${wbapp}/lib/mysql/plugin/*example*
+
     rm -rf ${wbapp}/share/mysql-scripts
     rm -rf ${wbapp}/share/mysql-support
     rm -rf ${wbapp}/share/mysql-test
