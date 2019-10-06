@@ -1,0 +1,3 @@
+[Imagick]
+
+extension = imagick.so
