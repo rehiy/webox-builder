@@ -2,7 +2,7 @@
 #
 
 if [ ! -f $(pwd)/config ]; then
-    echo "Please use './run-publish' to run me"
+    echo "Please use './run-tarball' to run me"
     exit 1
 fi
 
