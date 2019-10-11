@@ -27,51 +27,45 @@ wk_make_php5() {
         --with-config-file-scan-dir=${wbapp}/etc/php5/php.d \
         --with-layout=GNU \
         --without-pear \
-        --disable-cgi \
         --disable-rpath \
+        --disable-cgi \
         --enable-fpm \
-        --enable-bcmath \
-        --enable-calendar \
-        --enable-exif \
-        --enable-ftp \
-        --enable-mbstring \
-        --enable-sockets \
-        --enable-zip \
-        --with-pcre-regex \
-        --with-pcre-dir=${wblib} \
-        --with-gd \
-        --enable-gd-native-ttf \
-        --with-jpeg-dir=${wblib} \
-        --with-png-dir=${wblib} \
-        --with-freetype-dir=${wblib} \
-        --with-zlib \
-        --with-zlib-dir=${wblib} \
-        --with-libzip=${wblib} \
-        --with-libxml-dir=${wblib} \
-        --with-iconv \
-        --with-iconv-dir=${wblib} \
-        --with-gettext=${wblib} \
-        --with-curl=${wblib} \
-        --with-openssl \
-        --with-openssl-dir=${wblib} \
-        --with-mcrypt=${wblib} \
         --with-mysql \
         --with-mysqli \
-        --with-pdo-mysql
+        --with-pdo-mysql \
+        --with-iconv=${wblib} \
+        --with-libxml-dir=${wblib}
 
     make && make install
     wk__error_check ${wk_php5}
 
-    wk_make_php5_ext intl
+    wk_make_php5_ext bcmath
+   #wk_make_php5_ext bz2
+    wk_make_php5_ext calendar
+    wk_make_php5_ext curl -with-curl=${wblib}
+    wk_make_php5_ext exif
+    wk_make_php5_ext ftp --with-openssl-dir=${wblib}
+    wk_make_php5_ext gd --with-freetype-dir=${wblib} --with-jpeg-dir=${wblib} --with-png-dir=${wblib} --with-zlib-dir=${wblib}
+    wk_make_php5_ext gettext --with-gettext=${wblib}
+    wk_make_php5_ext mbstring
+    wk_make_php5_ext mcrypt --with-mcrypt=${wblib}
     wk_make_php5_ext opcache
+    wk_make_php5_ext openssl --with-openssl=${wblib}
     wk_make_php5_ext pcntl
     wk_make_php5_ext shmop
-    wk_make_php5_ext soap
+    wk_make_php5_ext soap --with-libxml-dir=${wblib}
+    wk_make_php5_ext sockets
+    wk_make_php5_ext sysvmsg
+    wk_make_php5_ext sysvsem
+    wk_make_php5_ext sysvshm
+    wk_make_php5_ext xmlrpc --with-libxml-dir=${wblib} --with-iconv-dir=${wblib}
+    wk_make_php5_ext zip --with-libzip=${wblib} --with-pcre-dir=${wblib} --with-zlib-dir=${wblib}
+    wk_make_php5_ext zlib --with-zlib-dir=${wblib}
 
     wk_make_php5_pecl redis-4.3.0
     wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wblib}
 
-    wk_plus_php5_geoip2
+    wk_plus_php5_maxminddb
 
     rm -rf ${wbapp}/etc/php5
 
@@ -95,10 +89,15 @@ wk_make_php5_ext() {
 
     shift 1
 
-    ${wbapp}/bin/phpize5 && ./configure "${@}" \
+    [ -e config.m4 ] || ln config0.m4 config.m4
+
+    ${wbapp}/bin/phpize5 && ./configure "$@" \
         --with-php-config=${wbapp}/bin/php-config5
 
     make && make install
+    wk__error_check "${wk_php5} - $(pwd)"
+
+    cd ${wksrc}/${wk_php5}
 
 }
 
@@ -107,27 +106,27 @@ wk_make_php5_pecl() {
     wk__apply http://pecl.php.net/get/ $1 .tgz ${wk_php5}/ext/$1
     rm -rf ../package.xml
 
-    wk_make_php5_ext "${@}"
+    wk_make_php5_ext "$@"
 
 }
 
-wk_plus_php5_geoip2() {
+wk_plus_php5_maxminddb() {
 
     cd ${wksrc}/${wk_php5}/ext
 
-    if [ ! -d geoip2 ]; then
+    if [ ! -d maxminddb ]; then
 
         local url=https://codeload.github.com/maxmind/MaxMind-DB-Reader-php/zip/master
         local zip=$(wk__fetch ${url} ${wk_php5}/ext/MaxMind-DB-Reader-php-master.zip)
 
-        unzip -q ${zip} && mv MaxMind-DB-Reader-php-master/ext geoip2
+        unzip -q ${zip} && mv MaxMind-DB-Reader-php-master/ext maxminddb
 
-        wk__error_check 'not found geoip2'
+        wk__error_check "${wk_php5} - not found maxminddb"
 
         rm -rf MaxMind-DB-Reader-php-master
 
     fi
 
-    wk_make_php5_ext geoip2 --with-maxminddb=${wblib}
+    wk_make_php5_ext maxminddb --with-maxminddb=${wblib}
 
 }

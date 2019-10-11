@@ -1,6 +1,6 @@
-[Opcache]
-
 zend_extension = opcache.so
+
+[Opcache]
 
 ;opcache.blacklist_filename = ${wbapp}/etc/php7/php.d/opcache.black
 
