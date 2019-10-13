@@ -56,13 +56,11 @@ if [ "$1" = "-min" ]; then
     rm -rf ${wblib}/lib/xml2Conf.sh
     rm -rf ${wblib}/share
 
-    find /srv -name "*.a" -type f -delete
-    find /srv -name "*.la" -type f -delete
+    find /srv -name "*.a" -type l,f -delete
+    find /srv -name "*.la" -type l,f -delete
 
-    wk__strip ${wbapp}/bin
-    wk__strip ${wbapp}/sbin
-
-    wk__strip ${wblib}/bin
+    wk__strip ${wbapp}
+    wk__strip ${wblib}
 
 fi
 
