@@ -15,10 +15,9 @@ source ${wkdir}/function
 
 rm -rf ${wbapp}/etc/*
 rm -rf ${wbapp}/var/*/*
-rm -rf ${htdoc}/*/{log,temp}
-
 rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wblib}/share/{doc,info,man}
+rm -rf ${htdoc}/*/{log,temp}
 
 find /srv -name ".DS_Store" -type f -delete
 find /srv -name "lost+found" -type d -delete
@@ -40,8 +39,13 @@ if [ "$1" = "-min" ]; then
     rm -rf ${wbapp}/share/aclocal
     rm -rf ${wbapp}/share/php*
 
+    find ${wbapp} -name "*.a" -type l,f -delete
+    find ${wbapp} -name "*.la" -type l,f -delete
+
+    wk__strip ${wbapp}
+
     sf='curl\|openssl'
-    for f in `ls ${wblib}/bin | grep -v ${sf}`; do
+    for f in `ls ${wblib}/bin | grep -v ${sf}$`; do
         rm -rf ${wblib}/bin/${f}
     done
 
@@ -56,10 +60,9 @@ if [ "$1" = "-min" ]; then
     rm -rf ${wblib}/lib/xml2Conf.sh
     rm -rf ${wblib}/share
 
-    find /srv -name "*.a" -type l,f -delete
-    find /srv -name "*.la" -type l,f -delete
+    find ${wblib} -name "*.a" -type l,f -delete
+    find ${wblib} -name "*.la" -type l,f -delete
 
-    wk__strip ${wbapp}
     wk__strip ${wblib}
 
 fi
