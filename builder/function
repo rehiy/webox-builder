@@ -62,21 +62,21 @@ wk__apply() {
 
 wk__strip() {
 
-    local lst=${wksrc}/wk__strip_list
+    local list=${wksrc}/strip.list
 
-    rm -f ${lst}
+    rm -f ${list}
 
     echo "Search $1 to strip ..."
-    find $1 -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >>${lst}
+    find $1 -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >>${list}
 
-    sed -i~ 's/:.*//' ${lst}
+    sed -i~ 's/:.*//' ${list}
 
-    for line in $(<${lst}); do
-        echo "Strip: ${line}"
-        strip ${line}
+    for file in `cat ${list}`; do
+        echo "Strip: ${file}"
+        strip ${file}
     done
 
-    rm -f ${lst}
+    rm -f ${list} ${list}~
 
 }
 
