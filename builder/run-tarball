@@ -8,6 +8,7 @@ fi
 
 source $(pwd)/config
 
+source ${wketc}.rtm
 source ${wkdir}/function
 
 #####################################################################CLS#
