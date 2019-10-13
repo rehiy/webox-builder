@@ -8,9 +8,11 @@ export APP_GROUP=_mysql
 
 app_prepare() {
 
-    for dir in lib log run tmp; do
-        [ -d ${wbapp}/var/${dir}/mysql ] ||
-            mkdir -p ${wbapp}/var/${dir}/mysql
+    local DIR
+
+    for DIR in lib log run tmp; do
+        [ -d ${wbapp}/var/$DIR/mysql ] ||
+            mkdir -p ${wbapp}/var/$DIR/mysql
     done
 
     if [ ! -f ${wbapp}/var/log/mysql/error.log ]; then

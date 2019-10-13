@@ -8,9 +8,11 @@ export APP_GROUP=daemon
 
 app_prepare() {
 
-    for dir in lib log run tmp; do
-        [ -d ${wbapp}/var/${dir}/redis ] ||
-            mkdir -p ${wbapp}/var/${dir}/redis
+    local DIR
+
+    for DIR in lib log run tmp; do
+        [ -d ${wbapp}/var/$DIR/redis ] ||
+            mkdir -p ${wbapp}/var/$DIR/redis
     done
 
     if [ ! -f ${wbapp}/etc/redis/conf.d/useful.conf ]; then

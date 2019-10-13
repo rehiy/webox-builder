@@ -8,9 +8,11 @@ export APP_GROUP=_www
 
 app_prepare() {
 
-    for dir in log run tmp; do
-        [ -d ${wbapp}/var/${dir}/php5 ] ||
-            mkdir -p ${wbapp}/var/${dir}/php5
+    local DIR
+
+    for DIR in log run tmp; do
+        [ -d ${wbapp}/var/$DIR/php5 ] ||
+            mkdir -p ${wbapp}/var/$DIR/php5
     done
 
     chown -R $APP_USER:$APP_GROUP ${wbapp}/var/*/php5
