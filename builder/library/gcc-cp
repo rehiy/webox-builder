@@ -3,9 +3,10 @@
 ## deps by mysql
 ## https://gcc.gnu.org/viewcvs/gcc/trunk/libatomic
 
-cp -a /usr/lib/x86_64-linux-gnu/libatomic.* ${wblib}/lib/
-
 ## deps by imagick
 ## https://gcc.gnu.org/viewcvs/gcc/trunk/libgomp/
 
-cp -a /usr/lib/x86_64-linux-gnu/libgomp.* ${wblib}/lib/
+if [ "$OS_TYPE" = "Linux" ]; then
+    cp -a /usr/lib/x86_64-linux-gnu/libatomic.* ${wblib}/lib/
+    cp -a /usr/lib/x86_64-linux-gnu/libgomp.* ${wblib}/lib/
+fi
