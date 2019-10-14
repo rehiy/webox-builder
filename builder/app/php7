@@ -33,13 +33,14 @@ wk_make_php7() {
         --with-mysqli \
         --with-pdo-mysql \
         --with-iconv=${wblib} \
-        --with-libxml-dir=${wblib}
+        --with-libxml-dir=${wblib} \
+        CFLAGS="-O3" CXXFLAGS="-O3"
 
     make && make install
     wk__error_check ${wk_php7}
 
     wk_make_php7_ext bcmath
-   #wk_make_php7_ext bz2
+    wk_make_php7_ext bz2 --with-bzip2=${wblib}
     wk_make_php7_ext calendar
     wk_make_php7_ext curl -with-curl=${wblib}
     wk_make_php7_ext exif
@@ -60,8 +61,8 @@ wk_make_php7() {
     wk_make_php7_ext zip --with-libzip=${wblib} --with-pcre-dir=${wblib} --with-zlib-dir=${wblib}
     wk_make_php7_ext zlib --with-zlib-dir=${wblib}
 
-    wk_make_php7_pecl redis-5.0.2
     wk_make_php7_pecl imagick-3.4.4 --with-imagick=${wblib}
+    wk_make_php7_pecl redis-5.0.2
 
     wk_plus_php7_maxminddb
 

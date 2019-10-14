@@ -17,7 +17,7 @@ wk_find_php5() {
 
 wk_make_php5() {
 
-    ./configure \
+   ./configure \
         --prefix=${wbapp} \
         --program-suffix=5 \
         --libdir=${wbapp}/lib/php5 \
@@ -34,13 +34,14 @@ wk_make_php5() {
         --with-mysqli \
         --with-pdo-mysql \
         --with-iconv=${wblib} \
-        --with-libxml-dir=${wblib}
+        --with-libxml-dir=${wblib} \
+        CFLAGS="-O3" CXXFLAGS="-O3"
 
     make && make install
     wk__error_check ${wk_php5}
 
     wk_make_php5_ext bcmath
-   #wk_make_php5_ext bz2
+    wk_make_php5_ext bz2 --with-bzip2=${wblib}
     wk_make_php5_ext calendar
     wk_make_php5_ext curl -with-curl=${wblib}
     wk_make_php5_ext exif
@@ -62,8 +63,8 @@ wk_make_php5() {
     wk_make_php5_ext zip --with-libzip=${wblib} --with-pcre-dir=${wblib} --with-zlib-dir=${wblib}
     wk_make_php5_ext zlib --with-zlib-dir=${wblib}
 
-    wk_make_php5_pecl redis-4.3.0
     wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wblib}
+    wk_make_php5_pecl redis-4.3.0
 
     wk_plus_php5_maxminddb
 

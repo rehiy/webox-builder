@@ -1,0 +1,25 @@
+### Update: 2018-11-03 ###
+
+export wk_bzip2=bzip2-1.0.6
+
+wk_find_bzip2() {
+
+    wk__apply https://nchc.dl.sourceforge.net/project/bzip2/ ${wk_bzip2} .tar.gz
+
+}
+
+wk_make_bzip2() {
+
+    make && make install PREFIX=${wblib}
+
+}
+
+wk_inst_bzip2() {
+
+    local fine=${wblib}/lib/libbz2.a
+
+    [ -e ${fine} ] || wk_find_bzip2
+    [ -e ${fine} ] || wk_make_bzip2
+    [ -e ${fine} ] || wk__error ${wk_bzip2}
+
+}

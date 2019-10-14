@@ -29,6 +29,7 @@ wk_make_deps() {
     wk_inst_bison
     wk_inst_re2c
 
+    wk_inst_bzip2
     wk_inst_zip
 
     wk_inst_mcrypt

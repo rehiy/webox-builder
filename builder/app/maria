@@ -21,28 +21,31 @@ wk_make_maria() {
         -DCMAKE_INCLUDE_PATH=$CPATH \
         -DCMAKE_LIBRARY_PATH=$LIBRARY_PATH \
         -DCMAKE_INSTALL_PREFIX=${wbapp} \
-        -DINSTALL_SBINDIR=${wbapp}/sbin \
-        -DINSTALL_DOCDIR=${wbapp}/share/doc/mysql \
-        -DINSTALL_DOCREADMEDIR=${wbapp}/share/doc/mysql \
-        -DINSTALL_INCLUDEDIR=${wbapp}/include/mysql \
-        -DINSTALL_INFODIR=${wbapp}/share/info/mysql \
-        -DINSTALL_MANDIR=${wbapp}/share/man \
-        -DINSTALL_MYSQLSHAREDIR=${wbapp}/share/mysql \
-        -DINSTALL_MYSQLTESTDIR=${wbapp}/share/mysql-test \
-        -DINSTALL_PLUGINDIR=${wbapp}/lib/mysql/plugin \
-        -DINSTALL_SCRIPTDIR=${wbapp}/share/mysql-scripts \
-        -DINSTALL_SUPPORTFILESDIR=${wbapp}/share/mysql-support \
+        -DINSTALL_SBINDIR=sbin \
+        -DINSTALL_DOCDIR=share/doc/mysql \
+        -DINSTALL_DOCREADMEDIR=share/doc/mysql \
+        -DINSTALL_INCLUDEDIR=include/mysql \
+        -DINSTALL_INFODIR=share/info/mysql \
+        -DINSTALL_MANDIR=share/man \
+        -DINSTALL_MYSQLSHAREDIR=share/mysql \
+        -DINSTALL_MYSQLTESTDIR=share/mysql-test \
+        -DINSTALL_PLUGINDIR=lib/mysql/plugin \
+        -DINSTALL_SCRIPTDIR=share/mysql-scripts \
+        -DINSTALL_SUPPORTFILESDIR=share/mysql-support \
         -DSYSCONFDIR=${wbapp}/etc/mysql \
         -DMYSQL_DATADIR=${wbapp}/var/lib/mysql \
         -DMYSQL_UNIX_ADDR=${wbapp}/var/run/mysql/mysqld.sock \
         -DDEFAULT_CHARSET=utf8mb4 \
         -DDEFAULT_COLLATION=utf8mb4_general_ci \
         -DENABLED_LOCAL_INFILE=1 \
+        -DWITH_UNIT_TESTS=OFF \
         -DWITH_SSL=${wblib} \
         -DWITH_ZLIB=${wblib} \
         -DWITH_BOOST=${wksrc} \
         -DDOWNLOAD_BOOST=1 \
-        -DDOWNLOAD_BOOST_TIMEOUT=1800
+        -DDOWNLOAD_BOOST_TIMEOUT=1800 \
+        -DCMAKE_C_FLAGS_RELWITHDEBINFO="-O3" \
+        -DCMAKE_CXX_FLAGS_RELWITHDEBINFO="-O3"
 
     make -j4 && make install
     wk__error_check ${wk_maria}
@@ -50,8 +53,9 @@ wk_make_maria() {
     rm -rf ${wbapp}/bin/*embedded
     rm -rf ${wbapp}/bin/*test
 
-    rm -rf ${wbapp}/share/doc/mysql
-    rm -rf ${wbapp}/share/info/mysql
+    rm -rf ${wbapp}/lib/mysql/plugin/*test*
+    rm -rf ${wbapp}/lib/mysql/plugin/*example*
+
     rm -rf ${wbapp}/share/mysql-scripts
     rm -rf ${wbapp}/share/mysql-support
     rm -rf ${wbapp}/share/mysql-test

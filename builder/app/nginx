@@ -15,7 +15,7 @@ wk_make_nginx() {
 
     ./configure \
         --prefix=${wbapp} \
-        --sbin-path=${wbapp}/sbin/nginx \
+        --sbin-path=sbin/nginx \
         --modules-path=lib/nginx \
         --conf-path=etc/nginx/nginx.conf \
         --pid-path=var/run/nginx/nginx.pid \

@@ -10,7 +10,7 @@ wk_find_redis() {
 
 wk_make_redis() {
 
-    make && make PREFIX=${wbapp} install
+    make && make install PREFIX=${wbapp}
 
 }
 
