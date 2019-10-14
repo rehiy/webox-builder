@@ -40,7 +40,7 @@ wk_make_php7() {
     wk__error_check ${wk_php7}
 
     wk_make_php7_ext bcmath
-    wk_make_php7_ext bz2 --with-bzip2=${wblib}
+    wk_make_php7_ext bz2 --with-bz2=${wblib}
     wk_make_php7_ext calendar
     wk_make_php7_ext curl -with-curl=${wblib}
     wk_make_php7_ext exif
