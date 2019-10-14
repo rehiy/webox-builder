@@ -16,17 +16,17 @@ wk_make_nginx() {
     ./configure \
         --prefix=${wbapp} \
         --sbin-path=${wbapp}/sbin/nginx \
-        --modules-path=${wbapp}/lib/nginx \
-        --conf-path=${wbapp}/etc/nginx/nginx.conf \
-        --pid-path=${wbapp}/var/run/nginx/nginx.pid \
-        --lock-path=${wbapp}/var/run/nginx/nginx.lock \
-        --error-log-path=${wbapp}/var/log/nginx/error.log \
-        --http-log-path=${wbapp}/var/log/nginx/access.log \
-        --http-client-body-temp-path=${wbapp}/var/tmp/nginx/body \
-        --http-proxy-temp-path=${wbapp}/var/tmp/nginx/proxy \
-        --http-fastcgi-temp-path=${wbapp}/var/tmp/nginx/fastcgi \
-        --http-scgi-temp-path=${wbapp}/var/tmp/nginx/scgi \
-        --http-uwsgi-temp-path=${wbapp}/var/tmp/nginx/uwsgi \
+        --modules-path=lib/nginx \
+        --conf-path=etc/nginx/nginx.conf \
+        --pid-path=var/run/nginx/nginx.pid \
+        --lock-path=var/run/nginx/nginx.lock \
+        --error-log-path=var/log/nginx/error.log \
+        --http-log-path=var/log/nginx/access.log \
+        --http-client-body-temp-path=var/tmp/nginx/body \
+        --http-proxy-temp-path=var/tmp/nginx/proxy \
+        --http-fastcgi-temp-path=var/tmp/nginx/fastcgi \
+        --http-scgi-temp-path=var/tmp/nginx/scgi \
+        --http-uwsgi-temp-path=var/tmp/nginx/uwsgi \
         $(wk_plus_nginx) \
         --with-http_ssl_module \
         --with-http_v2_module \
