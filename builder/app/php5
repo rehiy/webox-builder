@@ -93,14 +93,15 @@ wk_make_php5_ext() {
 
     [ -e config.m4 ] || ln config0.m4 config.m4
 
-    ${wbapp}/bin/phpize5 && ./configure "$@" \
-        --with-php-config=${wbapp}/bin/php-config5
+    ${wbapp}/bin/phpize5 && ./configure \
+        --with-php-config=${wbapp}/bin/php-config5 \
+        "$@" CFLAGS="-O3" CXXFLAGS="-O3"
 
     make && make install
 
-    local extdir=`$(wbapp)/bin/php-config5 --extension-dir`
+    local extdir=`${wbapp}/bin/php-config5 --extension-dir`
 
-    if [ ! -e ${extdir}/${name}.so ]; then
+    if [ ! -e ${extdir}/${name%%-*}.so ]; then
         wk__error "${wk_php5} - $(pwd)"
     fi
 
