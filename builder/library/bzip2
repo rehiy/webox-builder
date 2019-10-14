@@ -6,11 +6,16 @@ wk_find_bzip2() {
 
     wk__apply https://nchc.dl.sourceforge.net/project/bzip2/ ${wk_bzip2} .tar.gz
 
+    sed -i~ 's/-O2/-O3 -fPIC/' Makefile
+
 }
 
 wk_make_bzip2() {
 
     make && make install PREFIX=${wblib}
+
+    make -f Makefile-libbz2_so &&
+        cp -av libbz2.so* ${wblib}/lib/
 
 }
 

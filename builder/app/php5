@@ -86,9 +86,10 @@ wk_inst_php5() {
 
 wk_make_php5_ext() {
 
-    cd ${wksrc}/${wk_php5}/ext/$1
-
+    local name=$1
     shift 1
+
+    cd ${wksrc}/${wk_php5}/ext/${name}
 
     [ -e config.m4 ] || ln config0.m4 config.m4
 
@@ -96,7 +97,12 @@ wk_make_php5_ext() {
         --with-php-config=${wbapp}/bin/php-config5
 
     make && make install
-    wk__error_check "${wk_php5} - $(pwd)"
+
+    local extdir=`$(wbapp)/bin/php-config5 --extension-dir`
+
+    if [ ! -e ${extdir}/${name}.so ]; then
+        wk__error "${wk_php5} - $(pwd)"
+    fi
 
     cd ${wksrc}/${wk_php5}
 

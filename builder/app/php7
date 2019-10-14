@@ -84,9 +84,10 @@ wk_inst_php7() {
 
 wk_make_php7_ext() {
 
-    cd ${wksrc}/${wk_php7}/ext/$1
-
+    local name=$1
     shift 1
+
+    cd ${wksrc}/${wk_php7}/ext/${name}
 
     [ -e config.m4 ] || ln config0.m4 config.m4
 
@@ -94,7 +95,12 @@ wk_make_php7_ext() {
         --with-php-config=${wbapp}/bin/php-config7
 
     make && make install
-    wk__error_check "${wk_php7} - $(pwd)"
+
+    local extdir=`$(wbapp)/bin/php-config7 --extension-dir`
+
+    if [ ! -e ${extdir}/${name}.so ]; then
+        wk__error "${wk_php7} - $(pwd)"
+    fi
 
     cd ${wksrc}/${wk_php7}
 
