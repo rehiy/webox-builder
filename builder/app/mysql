@@ -1,6 +1,6 @@
-### Update: 2019-07-22 ###
+### Update: 2019-09-27 ###
 
-export wk_mysql=mysql-5.7.27
+export wk_mysql=mysql-5.7.28
 
 wk_find_mysql() {
 
@@ -17,6 +17,7 @@ wk_make_mysql() {
     # http://dev.mysql.com/doc/refman/5.7/en/source-configuration-options.html
 
     cmake . \
+        -DBUILD_CONFIG=mysql_release \
         -DCMAKE_PREFIX_PATH=${wbapp} \
         -DCMAKE_INCLUDE_PATH=$CPATH \
         -DCMAKE_LIBRARY_PATH=$LIBRARY_PATH \
@@ -43,9 +44,7 @@ wk_make_mysql() {
         -DWITH_ZLIB=${wblib} \
         -DWITH_BOOST=${wksrc} \
         -DDOWNLOAD_BOOST=1 \
-        -DDOWNLOAD_BOOST_TIMEOUT=1800 \
-        -DCMAKE_C_FLAGS_RELWITHDEBINFO="-O3" \
-        -DCMAKE_CXX_FLAGS_RELWITHDEBINFO="-O3"
+        -DDOWNLOAD_BOOST_TIMEOUT=1800
 
     make -j4 && make install
     wk__error_check ${wk_mysql}
