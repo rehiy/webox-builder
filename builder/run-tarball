@@ -19,6 +19,7 @@ rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wblib}/share/{doc,info,man}
 rm -rf ${htdoc}/*/{log,temp}
 
+find /srv -name "*.old" -type l,f -delete
 find /srv -name ".DS_Store" -type f -delete
 find /srv -name "lost+found" -type d -delete
 
