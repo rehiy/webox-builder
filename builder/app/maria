@@ -43,9 +43,7 @@ wk_make_maria() {
         -DWITH_ZLIB=${wblib} \
         -DWITH_BOOST=${wksrc} \
         -DDOWNLOAD_BOOST=1 \
-        -DDOWNLOAD_BOOST_TIMEOUT=1800 \
-        -DCMAKE_C_FLAGS_RELWITHDEBINFO="-O3" \
-        -DCMAKE_CXX_FLAGS_RELWITHDEBINFO="-O3"
+        -DDOWNLOAD_BOOST_TIMEOUT=1800
 
     make -j4 && make install
     wk__error_check ${wk_maria}
