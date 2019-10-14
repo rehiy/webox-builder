@@ -32,6 +32,8 @@ wk_make_deps() {
     wk_inst_bzip2
     wk_inst_zip
 
+    wk_inst_aio
+
     wk_inst_mcrypt
 
     wk_inst_maxmind

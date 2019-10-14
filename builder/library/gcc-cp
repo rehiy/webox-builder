@@ -1,0 +1,11 @@
+### Update: 2019-10-15 ###
+
+## deps by mysql
+## https://gcc.gnu.org/viewcvs/gcc/trunk/libatomic
+
+cp -a /usr/lib/x86_64-linux-gnu/libatomic.* ${wblib}/lib/
+
+## deps by imagick
+## https://gcc.gnu.org/viewcvs/gcc/trunk/libgomp/
+
+cp -a /usr/lib/x86_64-linux-gnu/libgomp.* ${wblib}/lib/

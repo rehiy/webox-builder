@@ -1,0 +1,25 @@
+### Update: 2019-02-25 ###
+
+export wk_aio=libaio_0.3.112
+
+wk_find_aio() {
+
+    wk__apply http://ftp.debian.org/debian/pool/main/liba/libaio/ ${wk_aio} .orig.tar.xz ${wk_aio/_/-}
+
+}
+
+wk_make_aio() {
+
+    make && make install prefix=${wblib}
+
+}
+
+wk_inst_aio() {
+
+    local fine=${wblib}/lib/libaio.a
+
+    [ -e ${fine} ] || wk_find_aio
+    [ -e ${fine} ] || wk_make_aio
+    [ -e ${fine} ] || wk__error ${wk_aio}
+
+}

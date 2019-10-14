@@ -7,6 +7,7 @@ wk_find_bzip2() {
     wk__apply https://nchc.dl.sourceforge.net/project/bzip2/ ${wk_bzip2} .tar.gz
 
     sed -i~ 's/-O2/-O3 -fPIC/' Makefile
+    sed -i~ 's#(PREFIX)/man#(PREFIX)/share/man#g' Makefile
 
 }
 
