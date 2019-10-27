@@ -3,14 +3,19 @@
 
 cd ~
 
-if type curl >/dev/null 2>&1; then
-    curl http://get.vmlu.com/webox/wb-fetch | sh
+name=Webox-$(uname -s)-$(uname -m).tgz
+
+if type wget >/dev/null; then
+    wget -c -O ${name} http://get.vmlu.com/webox/${name}
 else
-    wget -qO- http://get.vmlu.com/webox/wb-fetch | sh
+    curl -C - -o ${name} http://get.vmlu.com/webox/${name}
 fi
 
+echo "Installing with ${name}"
+tar -xf ${name} && rm ${name}
+
 if [ ! -d ~/srv/webox ]; then
-    echo "can't download webox.tgz"
+    echo "Can't download ${name}"
     exit 1
 fi
 
@@ -18,9 +23,8 @@ fi
 
 [ -e /srv ] || mkdir -p /srv
 
-cp -av srv/* /srv/
-
-rm -rf srv/
+cp -av ~/srv/* /srv/
+rm -rf ~/srv/
 
 ####################################################################
 

@@ -22,7 +22,7 @@ wk__fetch() {
     [ -z $2 ] || save=${wkget}/$2
     [ -d ${save%/*} ] || mkdir -p ${save%/*}
 
-    if [ $(which wget) ]; then
+    if type wget >/dev/null; then
         wget --no-check-certificate -c -O ${save} $1
     else
         curl -k -L -C - -o ${save} $1

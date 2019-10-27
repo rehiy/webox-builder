@@ -3,17 +3,18 @@
 
 cd ~
 
-plat=$(uname -s)-$(uname -m)
+name=Webox-$(uname -s)-$(uname -m).tgz
 
-case ${plat} in
-    "Darwin-x86_64")
-        name=Webox-Darwin-x86_64-v9.0628.tgz
-        curl -C - -o ${name} http://get.vmlu.com/webox/${name}
-    ;;
-    "Linux-x86_64")
-        name=Webox-Linux-x86_64-v9.0926.tgz
-        wget -c -O ${name} http://get.vmlu.com/webox/${name}
-    ;;
-esac
+if type wget >/dev/null; then
+    wget -c -O ${name} http://get.vmlu.com/webox/${name}
+else
+    curl -C - -o ${name} http://get.vmlu.com/webox/${name}
+fi
 
-tar -xvf ${name} && rm -rf ${name}
+echo "Extracting from ${name}"
+tar -xf ${name} && rm ${name}
+
+if [ ! -d ~/srv/webox ]; then
+    echo "Can't download ${name}"
+    exit 1
+fi
