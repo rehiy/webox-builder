@@ -5,6 +5,6 @@
 proxy_cache proxy_cache;
 proxy_cache_key "$scheme$host$request_uri";
 
-proxy_cache_valid  200 302 10m;
-proxy_cache_valid  301 1h;
-proxy_cache_valid  any 1m;
+proxy_cache_valid  200 302 1d;
+proxy_cache_valid  404 10m;
+proxy_cache_valid  any 1h;
