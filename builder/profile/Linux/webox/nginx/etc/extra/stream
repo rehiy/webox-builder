@@ -1,1 +1,0 @@
-load_module lib/nginx/ngx_stream_module.so;
