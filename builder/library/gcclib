@@ -1,0 +1,16 @@
+### Update: 2019-10-15 ###
+
+wk_inst_gcclib() {
+
+    if [ "$OS_TYPE" = "Linux" ]; then
+        cp -a /usr/lib/x86_64-linux-gnu/libatomic.* ${wblib}/lib/
+        cp -a /usr/lib/x86_64-linux-gnu/libgomp.* ${wblib}/lib/
+    fi
+
+}
+
+## refs by mysql
+## https://gcc.gnu.org/viewcvs/gcc/trunk/libatomic
+
+## refs by imagick
+## https://gcc.gnu.org/viewcvs/gcc/trunk/libgomp/
