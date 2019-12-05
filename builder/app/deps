@@ -34,16 +34,24 @@ wk_make_deps() {
     wk_inst_bzip2
     wk_inst_zip
 
-    wk_inst_aio
-
     wk_inst_mcrypt
 
     wk_inst_maxmind
 
 }
 
+wk_make_deps_linux() {
+
+    wk_inst_aio
+
+}
+
 wk_inst_deps() {
 
     wk_make_deps
+
+    if [ "$OS_TYPE" = "Linux" ]; then
+        wk_make_deps_linux
+    fi
 
 }
