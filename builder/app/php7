@@ -1,10 +1,10 @@
-### Update: 2019-10-24 ###
+### Update: 2019-11-21 ###
 
-export wk_php7=php-7.3.11
+export wk_php7=php-7.3.12
 
 wk_find_php7() {
 
-    wk__apply http://jp2.php.net/distributions/ ${wk_php7} .tar.gz
+    wk__apply http://www.php.net/distributions/ ${wk_php7} .tar.gz
 
     sed -i~ 's#includedir@/php"#includedir@/php7"#' scripts/php-config.in
     sed -i~ 's#includedir@`/php"#includedir@`/php7"#' scripts/phpize.in

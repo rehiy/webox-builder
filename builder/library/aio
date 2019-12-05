@@ -16,6 +16,10 @@ wk_make_aio() {
 
 wk_inst_aio() {
 
+    if [ "$OS_TYPE" = "Darwin" ]; then
+        return 0
+    fi
+
     local fine=${wblib}/lib/libaio.a
 
     [ -e ${fine} ] || wk_find_aio

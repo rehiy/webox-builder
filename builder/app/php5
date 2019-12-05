@@ -4,7 +4,7 @@ export wk_php5=php-5.6.40
 
 wk_find_php5() {
 
-    wk__apply http://jp2.php.net/distributions/ ${wk_php5} .tar.gz
+    wk__apply http://www.php.net/distributions/ ${wk_php5} .tar.gz
 
     sed -i~ 's#includedir@/php"#includedir@/php5"#' scripts/php-config.in
     sed -i~ 's#includedir@`/php"#includedir@`/php5"#' scripts/phpize.in
