@@ -92,7 +92,7 @@ wk_make_php7_ext() {
     [ -e config.m4 ] || ln config0.m4 config.m4
 
     ${wbapp}/bin/phpize7 && ./configure \
-        --with-php-config=${wbapp}/bin/php-config7
+        --with-php-config=${wbapp}/bin/php-config7 \
         "$@" CFLAGS="-O3" CXXFLAGS="-O3"
 
     make && make install
