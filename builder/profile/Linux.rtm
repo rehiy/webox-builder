@@ -5,7 +5,7 @@ export PKG_CONFIG_PATH=${wbapp}/lib/pkgconfig:$PKG_CONFIG_PATH
 
 if [ ! -x /usr/bin/gcc ]; then
     apt update
-    apt install -y pkg-config unzip wget
+    apt install -y unzip wget
     apt install -y build-essential python-dev
 fi
 
