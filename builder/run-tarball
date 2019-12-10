@@ -19,7 +19,7 @@ rm -rf ${wbapp}/share/{doc,info,man}
 rm -rf ${wblib}/share/{doc,info,man}
 rm -rf ${htdoc}/*/{log,temp}
 
-find /srv -name "*.old" -type l,f -delete
+find /srv -name "*.old" -type f -delete
 find /srv -name ".DS_Store" -type f -delete
 find /srv -name "lost+found" -type d -delete
 
@@ -40,8 +40,10 @@ if [ "$1" = "-min" ]; then
     rm -rf ${wbapp}/share/aclocal
     rm -rf ${wbapp}/share/php*
 
-    find ${wbapp} -name "*.a" -type l,f -delete
-    find ${wbapp} -name "*.la" -type l,f -delete
+    find ${wbapp} -name "*.a" -type l -delete
+    find ${wbapp} -name "*.a" -type f -delete
+    find ${wbapp} -name "*.la" -type l -delete
+    find ${wbapp} -name "*.la" -type f -delete
 
     wk__strip ${wbapp}
 
@@ -61,8 +63,10 @@ if [ "$1" = "-min" ]; then
     rm -rf ${wblib}/lib/xml2Conf.sh
     rm -rf ${wblib}/share
 
-    find ${wblib} -name "*.a" -type l,f -delete
-    find ${wblib} -name "*.la" -type l,f -delete
+    find ${wblib} -name "*.a" -type l -delete
+    find ${wblib} -name "*.a" -type f -delete
+    find ${wblib} -name "*.la" -type l -delete
+    find ${wblib} -name "*.la" -type f -delete
 
     wk__strip ${wblib}
 
