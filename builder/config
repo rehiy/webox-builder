@@ -42,5 +42,7 @@ export CPATH=${wbapp}/include:${wblib}/include
 export LIBRARY_PATH=${wbapp}/lib:${wblib}/lib
 export LD_LIBRARY_PATH=$LIBRARY_PATH
 
+export PKG_CONFIG_PATH=${wbapp}/lib/pkgconfig:${wblib}/lib/pkgconfig
+
 mkdir -p ${wbapp}/include ${wblib}/include
 mkdir -p ${wbapp}/lib ${wblib}/lib

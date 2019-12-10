@@ -1,8 +1,5 @@
 export OS_TYPE=Linux
 
-export PKG_CONFIG_PATH=${wblib}/lib/pkgconfig
-export PKG_CONFIG_PATH=${wbapp}/lib/pkgconfig:$PKG_CONFIG_PATH
-
 if [ ! -x /usr/bin/gcc ]; then
     apt update
     apt install -y unzip wget

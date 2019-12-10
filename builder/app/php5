@@ -63,9 +63,9 @@ wk_make_php5() {
     wk_make_php5_ext zip --with-libzip=${wblib} --with-pcre-dir=${wblib} --with-zlib-dir=${wblib}
     wk_make_php5_ext zlib --with-zlib-dir=${wblib}
 
-    wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wblib}
     wk_make_php5_pecl redis-4.3.0
 
+    wk_plus_php7_imagick
     wk_plus_php5_maxminddb
 
     rm -rf ${wbapp}/etc/php5
@@ -115,6 +115,18 @@ wk_make_php5_pecl() {
     rm -rf ../package.xml
 
     wk_make_php5_ext "$@"
+
+}
+
+
+wk_plus_php5_imagick() {
+
+    if [ "$OS_TYPE" = "Darwin" ]; then
+        env CPPFLAGS="-I${wblib}/include/ImageMagick-6" \
+        wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wblib}
+    else
+        wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wblib}
+    fi
 
 }
 
