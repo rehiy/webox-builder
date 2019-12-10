@@ -45,7 +45,9 @@ if [ "$1" = "-min" ]; then
     find ${wbapp} -name "*.la" -type l -delete
     find ${wbapp} -name "*.la" -type f -delete
 
-    wk__strip ${wbapp}
+    if [ "$OS_TYPE" = "Linux" ]; then
+        wk__strip ${wbapp}
+    fi
 
     sf='curl\|openssl'
     for f in `ls ${wblib}/bin | grep -v ${sf}$`; do
@@ -68,7 +70,9 @@ if [ "$1" = "-min" ]; then
     find ${wblib} -name "*.la" -type l -delete
     find ${wblib} -name "*.la" -type f -delete
 
-    wk__strip ${wblib}
+    if [ "$OS_TYPE" = "Linux" ]; then
+        wk__strip ${wblib}
+    fi
 
 fi
 
