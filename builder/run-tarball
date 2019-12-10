@@ -23,7 +23,7 @@ find /srv -name "*.old" -type f -delete
 find /srv -name ".DS_Store" -type f -delete
 find /srv -name "lost+found" -type d -delete
 
-if [ "$OS_TYPE" = "OS_TYPE" ]; then
+if [ "$OS_TYPE" = "Darwin" ]; then
     xattr -rd com.apple.quarantine /srv
 fi
 
