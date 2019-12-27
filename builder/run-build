@@ -21,7 +21,7 @@ for pkg in ${wkdir}/app/*; do
     source ${pkg}
 done
 
-wk_inst_deps
+wk_inst_libs
 
 wk_inst_mysql
 wk_inst_redis

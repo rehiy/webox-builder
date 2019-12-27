@@ -28,7 +28,7 @@ wk_inst_gcc() {
 
 wk_make_gcc_libatomic() {
 
-    ## dep by mysql
+    ## required by mysql
 
     cd ${wksrc}/${wk_gcc}/libatomic
 
@@ -40,7 +40,7 @@ wk_make_gcc_libatomic() {
 
 wk_make_gcc_libgomp() {
 
-    ## dep by imagick
+    ## required by imagick
 
     cd ${wksrc}/${wk_gcc}/libgomp
 
