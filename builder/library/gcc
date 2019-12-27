@@ -1,0 +1,51 @@
+### Update: 2019-08-12 ###
+
+export wk_gcc=gcc-9.2.0
+
+wk_find_gcc() {
+
+    wk__apply http://ftp.gnu.org/gnu/gcc/${wk_gcc}/ ${wk_gcc} .tar.xz
+
+}
+
+wk_make_gcc() {
+
+    wk_make_gcc_libatomic
+    wk_make_gcc_libgomp
+
+}
+
+wk_inst_gcc() {
+
+    if [ "$OS_TYPE" = "Linux" ]; then
+        cp -a /usr/lib/x86_64-linux-gnu/libatomic.* ${wblib}/lib/
+        cp -a /usr/lib/x86_64-linux-gnu/libgomp.* ${wblib}/lib/
+    fi
+
+}
+
+########################################################################
+
+wk_make_gcc_libatomic() {
+
+    ## dep by mysql
+
+    cd ${wksrc}/${wk_gcc}/libatomic
+
+    ./configure --prefix=${wblib}
+
+    make && make install
+
+}
+
+wk_make_gcc_libgomp() {
+
+    ## dep by imagick
+
+    cd ${wksrc}/${wk_gcc}/libgomp
+
+    ./configure --prefix=${wblib}
+
+    make && make install
+
+}

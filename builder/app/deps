@@ -4,12 +4,12 @@ export wk_deps=deps-v9.2.0
 
 wk_make_deps() {
 
-    wk_inst_gcclib
-
     wk_inst_m4
     wk_inst_autoconf
     wk_inst_automaked
     wk_inst_pkgconfig
+
+    #wk_inst_gcc
 
     wk_inst_pcre
     wk_inst_ncurses

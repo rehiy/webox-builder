@@ -4,7 +4,7 @@ export wk_automake=automake-1.16.1
 
 wk_find_automake() {
 
-    wk__apply http://mirrors.kernel.org/gnu/automake/ ${wk_automake} .tar.xz
+    wk__apply http://ftp.gnu.org/gnu/automake/ ${wk_automake} .tar.xz
 
 }
 
