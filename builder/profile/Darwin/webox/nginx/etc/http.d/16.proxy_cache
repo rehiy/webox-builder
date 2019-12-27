@@ -1,5 +1,0 @@
-##
-# Cache Store
-##
-
-proxy_cache_path ${wbapp}/var/tmp/nginx/proxy_cache levels=1:2 keys_zone=proxy_cache:32m max_size=4g inactive=7d;
