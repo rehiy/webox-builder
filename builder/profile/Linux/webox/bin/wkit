@@ -3,10 +3,20 @@
 
 . ${webox}/runtime
 
-if [ $# -eq 2 ]; then
-    wbx_app_run "$@"
-fi
+#####################################################################
 
 if [ "$1" = "install" ]; then
    ${webox}/install
+    exit 0
 fi
+
+if [ $# -eq 2 ]; then
+    wbx_app_run "$@"
+    exit 0
+fi
+
+#####################################################################
+
+for APP in $WBX_APPS; do
+    wbx_app_run $APP $1
+done
