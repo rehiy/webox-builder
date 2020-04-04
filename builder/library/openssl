@@ -10,7 +10,7 @@ wk_find_openssl() {
 
 wk_make_openssl() {
 
-    ./config --prefix=${wblib} shared
+    ./config --prefix=${wbcom} shared
 
     make && make install_sw
 
@@ -18,7 +18,7 @@ wk_make_openssl() {
 
 wk_inst_openssl() {
 
-    local fine=${wblib}/lib/libssl.a
+    local fine=${wbcom}/lib/libssl.a
 
     [ -e ${fine} ] || wk_find_openssl
     [ -e ${fine} ] || wk_make_openssl

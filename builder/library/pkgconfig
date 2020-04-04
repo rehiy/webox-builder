@@ -12,9 +12,9 @@ wk_make_pkgconfig() {
 
     if [ "$OS_TYPE" = "Darwin" ]; then
         env LDFLAGS="-framework CoreFoundation -framework Carbon" \
-        ./configure --prefix=${wblib} --with-internal-glib
+        ./configure --prefix=${wbcom} --with-internal-glib
     else
-        ./configure --prefix=${wblib}
+        ./configure --prefix=${wbcom}
     fi
 
     make && make install
@@ -23,7 +23,7 @@ wk_make_pkgconfig() {
 
 wk_inst_pkgconfig() {
 
-    local fine=${wblib}/bin/pkg-config
+    local fine=${wbcom}/bin/pkg-config
 
     [ -e ${fine} ] || wk_find_pkgconfig
     [ -e ${fine} ] || wk_make_pkgconfig

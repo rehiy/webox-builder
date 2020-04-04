@@ -10,13 +10,13 @@ wk_find_aio() {
 
 wk_make_aio() {
 
-    make && make install prefix=${wblib}
+    make && make install prefix=${wbcom}
 
 }
 
 wk_inst_aio() {
 
-    local fine=${wblib}/lib/libaio.a
+    local fine=${wbcom}/lib/libaio.a
 
     [ -e ${fine} ] || wk_find_aio
     [ -e ${fine} ] || wk_make_aio

@@ -10,7 +10,7 @@ wk_find_cmake() {
 
 wk_make_cmake() {
 
-    ./bootstrap --prefix=${wblib} --docdir=share/doc/cmake --system-curl
+    ./bootstrap --prefix=${wbcom} --docdir=share/doc/cmake --system-curl
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_cmake() {
 
 wk_inst_cmake() {
 
-    local fine=${wblib}/bin/cmake
+    local fine=${wbcom}/bin/cmake
 
     [ -e ${fine} ] || wk_find_cmake
     [ -e ${fine} ] || wk_make_cmake

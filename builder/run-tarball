@@ -16,7 +16,7 @@ source ${wkdir}/function
 rm -rf ${wbapp}/etc/*
 rm -rf ${wbapp}/var/*/*
 rm -rf ${wbapp}/share/{doc,info,man}
-rm -rf ${wblib}/share/{doc,info,man}
+rm -rf ${wbcom}/share/{doc,info,man}
 rm -rf ${htdoc}/*/{log,temp}
 
 find /srv -name "*.old" -type f -delete
@@ -50,28 +50,28 @@ if [ "$1" = "-min" ]; then
     fi
 
     sf='curl\|openssl'
-    for f in `ls ${wblib}/bin | grep -v ${sf}$`; do
-        rm -rf ${wblib}/bin/${f}
+    for f in `ls ${wbcom}/bin | grep -v ${sf}$`; do
+        rm -rf ${wbcom}/bin/${f}
     done
 
-    rm -rf ${wblib}/etc
-    rm -rf ${wblib}/include
-    rm -rf ${wblib}/lib/cmake
-    rm -rf ${wblib}/lib/gettext
-    rm -rf ${wblib}/lib/libmcrypt
-    rm -rf ${wblib}/lib/terminfo
-    rm -rf ${wblib}/lib/pkgconfig
-    rm -rf ${wblib}/lib/preloadable_*
-    rm -rf ${wblib}/lib/xml2Conf.sh
-    rm -rf ${wblib}/share
+    rm -rf ${wbcom}/etc
+    rm -rf ${wbcom}/include
+    rm -rf ${wbcom}/lib/cmake
+    rm -rf ${wbcom}/lib/gettext
+    rm -rf ${wbcom}/lib/libmcrypt
+    rm -rf ${wbcom}/lib/terminfo
+    rm -rf ${wbcom}/lib/pkgconfig
+    rm -rf ${wbcom}/lib/preloadable_*
+    rm -rf ${wbcom}/lib/xml2Conf.sh
+    rm -rf ${wbcom}/share
 
-    find ${wblib} -name "*.a" -type l -delete
-    find ${wblib} -name "*.a" -type f -delete
-    find ${wblib} -name "*.la" -type l -delete
-    find ${wblib} -name "*.la" -type f -delete
+    find ${wbcom} -name "*.a" -type l -delete
+    find ${wbcom} -name "*.a" -type f -delete
+    find ${wbcom} -name "*.la" -type l -delete
+    find ${wbcom} -name "*.la" -type f -delete
 
     if [ "$OS_TYPE" = "Linux" ]; then
-        wk__strip ${wblib}
+        wk__strip ${wbcom}
     fi
 
 fi

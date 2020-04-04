@@ -27,22 +27,22 @@ find ${wkget} -name "*" -type f -size 0c | xargs -n 1 rm -f
 #####################################################WEBOX-TARGET-VAR#
 
 export htdoc=/srv/htdoc
+
 export wbapp=/srv/app
-export wblib=/srv/library
-export webox=/srv/webox
+export wbcom=/srv/webox
 
 [ -d ${wbapp} ] || mkdir -p ${wbapp}
-[ -d ${wblib} ] || mkdir -p ${wblib}
+[ -d ${wbcom} ] || mkdir -p ${wbcom}
 
 ##############################################################RUNTIME#
 
-export PATH=${wbapp}/bin:${wblib}/bin:$PATH
+export PATH=${wbapp}/bin:${wbcom}/bin:$PATH
 
-export CPATH=${wbapp}/include:${wblib}/include
-export LIBRARY_PATH=${wbapp}/lib:${wblib}/lib
+export CPATH=${wbapp}/include:${wbcom}/include
+export LIBRARY_PATH=${wbapp}/lib:${wbcom}/lib
 export LD_LIBRARY_PATH=$LIBRARY_PATH
 
-export PKG_CONFIG_PATH=${wbapp}/lib/pkgconfig:${wblib}/lib/pkgconfig
+export PKG_CONFIG_PATH=${wbapp}/lib/pkgconfig:${wbcom}/lib/pkgconfig
 
-mkdir -p ${wbapp}/include ${wblib}/include
-mkdir -p ${wbapp}/lib ${wblib}/lib
+mkdir -p ${wbapp}/include ${wbcom}/include
+mkdir -p ${wbapp}/lib ${wbcom}/lib

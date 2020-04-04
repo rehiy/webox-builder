@@ -82,10 +82,10 @@ wk__strip() {
 
 wk__realpath() {
 
-    sed -i~ "s#\${htdoc}#${htdoc}#g" `grep '${htdoc}' -rl $1`
-    sed -i~ "s#\${wbapp}#${wbapp}#g" `grep '${wbapp}' -rl $1`
-    sed -i~ "s#\${wblib}#${wblib}#g" `grep '${wblib}' -rl $1`
-    sed -i~ "s#\${webox}#${webox}#g" `grep '${webox}' -rl $1`
+    sed -i~ "s#\${htdoc}#${htdoc}#g" `grep '${htdoc}' -rl ${wbapp}/misc`
+
+    sed -i~ "s#\${wbapp}#${wbapp}#g" `grep '${wbapp}' -rl ${wbapp}/misc`
+    sed -i~ "s#\${wbcom}#${wbcom}#g" `grep '${wbcom}' -rl ${wbapp}/misc`
 
     find $1 -name "*~" -type f -delete
 

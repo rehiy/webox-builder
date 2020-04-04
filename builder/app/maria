@@ -39,8 +39,8 @@ wk_make_maria() {
         -DDEFAULT_COLLATION=utf8mb4_general_ci \
         -DENABLED_LOCAL_INFILE=1 \
         -DWITH_UNIT_TESTS=OFF \
-        -DWITH_SSL=${wblib} \
-        -DWITH_ZLIB=${wblib} \
+        -DWITH_SSL=${wbcom} \
+        -DWITH_ZLIB=${wbcom} \
         -DWITH_BOOST=${wksrc} \
         -DDOWNLOAD_BOOST=1 \
         -DDOWNLOAD_BOOST_TIMEOUT=1800

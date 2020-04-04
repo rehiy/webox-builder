@@ -1,22 +1,26 @@
 #!/bin/sh
 #
 
-. ${webox}/runtime
+. ${wbcom}/runtime
 
-#####################################################################
+#################################################################
 
-if [ "$1" = "install" ]; then
-   ${webox}/install
-    exit 0
+ETC_VERSION=0
+
+if [ -f ${wbapp}/etc/version ]; then
+    ETC_VERSION=`cat ${wbapp}/etc/version`
 fi
 
-if [ $# -eq 2 ]; then
-    wbx_app_run "$@"
-    exit 0
+if [ $ETC_VERSION -lt $WBX_VERSION ]; then
+    ${wbcom}/wbx_install "$WBX_APPS"
 fi
 
-#####################################################################
+#################################################################
 
-for APP in $WBX_APPS; do
-    wbx_app_run $APP $1
-done
+if [ $# -eq 1 ]; then
+    for APP in $WBX_APPS; do
+        ${wbcom}/wbx_service $APP $1
+    done
+else
+    ${wbcom}/wbx_service "$@"
+fi

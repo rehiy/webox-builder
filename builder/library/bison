@@ -10,7 +10,7 @@ wk_find_bison() {
 
 wk_make_bison() {
 
-    ./configure --prefix=${wblib}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_bison() {
 
 wk_inst_bison() {
 
-    local fine=${wblib}/bin/bison
+    local fine=${wbcom}/bin/bison
 
     [ -e ${fine} ] || wk_find_bison
     [ -e ${fine} ] || wk_make_bison

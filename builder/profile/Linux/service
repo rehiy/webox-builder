@@ -1,5 +1,0 @@
-#!/bin/sh
-#
-
-/srv/webox/bin/wkit install
-/srv/webox/bin/wkit "$@"

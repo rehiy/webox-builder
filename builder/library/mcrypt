@@ -10,7 +10,7 @@ wk_find_mcrypt() {
 
 wk_make_mcrypt() {
 
-    ./configure --prefix=${wblib} --mandir=${wblib}/share/man
+    ./configure --prefix=${wbcom} --mandir=${wbcom}/share/man
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_mcrypt() {
 
 wk_inst_mcrypt() {
 
-    local fine=${wblib}/lib/libmcrypt.la
+    local fine=${wbcom}/lib/libmcrypt.la
 
     [ -e ${fine} ] || wk_find_mcrypt
     [ -e ${fine} ] || wk_make_mcrypt

@@ -13,16 +13,16 @@ wk_find_bzip2() {
 
 wk_make_bzip2() {
 
-    make && make install PREFIX=${wblib}
+    make && make install PREFIX=${wbcom}
 
     make -f Makefile-libbz2_so &&
-        cp -av libbz2.so* ${wblib}/lib/
+        cp -av libbz2.so* ${wbcom}/lib/
 
 }
 
 wk_inst_bzip2() {
 
-    local fine=${wblib}/lib/libbz2.a
+    local fine=${wbcom}/lib/libbz2.a
 
     [ -e ${fine} ] || wk_find_bzip2
     [ -e ${fine} ] || wk_make_bzip2

@@ -14,7 +14,7 @@ wk_make_iconv() {
         sed -i~ '/gets is a security hole/d' srclib/stdio*.h
     fi
 
-    ./configure --prefix=${wblib} --enable-shared
+    ./configure --prefix=${wbcom} --enable-shared
 
     make && make install
 
@@ -22,7 +22,7 @@ wk_make_iconv() {
 
 wk_inst_iconv() {
 
-    local fine=${wblib}/lib/libiconv.la
+    local fine=${wbcom}/lib/libiconv.la
 
     [ -e ${fine} ] || wk_find_iconv
     [ -e ${fine} ] || wk_make_iconv

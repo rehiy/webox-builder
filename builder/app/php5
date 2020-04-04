@@ -33,35 +33,35 @@ wk_make_php5() {
         --with-mysql \
         --with-mysqli \
         --with-pdo-mysql \
-        --with-iconv=${wblib} \
-        --with-libxml-dir=${wblib} \
+        --with-iconv=${wbcom} \
+        --with-libxml-dir=${wbcom} \
         CFLAGS="-O3" CXXFLAGS="-O3"
 
     make && make install
     wk__error_check ${wk_php5}
 
     wk_make_php5_ext bcmath
-    wk_make_php5_ext bz2 --with-bz2=${wblib}
+    wk_make_php5_ext bz2 --with-bz2=${wbcom}
     wk_make_php5_ext calendar
-    wk_make_php5_ext curl -with-curl=${wblib}
+    wk_make_php5_ext curl -with-curl=${wbcom}
     wk_make_php5_ext exif
-    wk_make_php5_ext ftp --with-openssl-dir=${wblib}
-    wk_make_php5_ext gd --with-freetype-dir=${wblib} --with-jpeg-dir=${wblib} --with-png-dir=${wblib} --with-zlib-dir=${wblib}
-    wk_make_php5_ext gettext --with-gettext=${wblib}
+    wk_make_php5_ext ftp --with-openssl-dir=${wbcom}
+    wk_make_php5_ext gd --with-freetype-dir=${wbcom} --with-jpeg-dir=${wbcom} --with-png-dir=${wbcom} --with-zlib-dir=${wbcom}
+    wk_make_php5_ext gettext --with-gettext=${wbcom}
     wk_make_php5_ext mbstring
-    wk_make_php5_ext mcrypt --with-mcrypt=${wblib}
+    wk_make_php5_ext mcrypt --with-mcrypt=${wbcom}
     wk_make_php5_ext opcache
-    wk_make_php5_ext openssl --with-openssl=${wblib}
+    wk_make_php5_ext openssl --with-openssl=${wbcom}
     wk_make_php5_ext pcntl
     wk_make_php5_ext shmop
-    wk_make_php5_ext soap --with-libxml-dir=${wblib}
+    wk_make_php5_ext soap --with-libxml-dir=${wbcom}
     wk_make_php5_ext sockets
     wk_make_php5_ext sysvmsg
     wk_make_php5_ext sysvsem
     wk_make_php5_ext sysvshm
-    wk_make_php5_ext xmlrpc --with-libxml-dir=${wblib} --with-iconv-dir=${wblib}
-    wk_make_php5_ext zip --with-libzip=${wblib} --with-pcre-dir=${wblib} --with-zlib-dir=${wblib}
-    wk_make_php5_ext zlib --with-zlib-dir=${wblib}
+    wk_make_php5_ext xmlrpc --with-libxml-dir=${wbcom} --with-iconv-dir=${wbcom}
+    wk_make_php5_ext zip --with-libzip=${wbcom} --with-pcre-dir=${wbcom} --with-zlib-dir=${wbcom}
+    wk_make_php5_ext zlib --with-zlib-dir=${wbcom}
 
     wk_make_php5_pecl redis-4.3.0
 
@@ -122,10 +122,10 @@ wk_make_php5_pecl() {
 wk_plus_php5_imagick() {
 
     if [ "$OS_TYPE" = "Darwin" ]; then
-        env CPPFLAGS="-I${wblib}/include/ImageMagick-6" \
-        wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wblib}
+        env CPPFLAGS="-I${wbcom}/include/ImageMagick-6" \
+        wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wbcom}
     else
-        wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wblib}
+        wk_make_php5_pecl imagick-3.4.4 --with-imagick=${wbcom}
     fi
 
 }
@@ -147,6 +147,6 @@ wk_plus_php5_maxminddb() {
 
     fi
 
-    wk_make_php5_ext maxminddb --with-maxminddb=${wblib}
+    wk_make_php5_ext maxminddb --with-maxminddb=${wbcom}
 
 }

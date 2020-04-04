@@ -9,7 +9,7 @@ wk_find_autoconf() {
 
 wk_make_autoconf() {
 
-    ./configure --prefix=${wblib}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
@@ -17,7 +17,7 @@ wk_make_autoconf() {
 
 wk_inst_autoconf() {
 
-    local fine=${wblib}/bin/autoconf
+    local fine=${wbcom}/bin/autoconf
 
     [ -e ${fine} ] || wk_find_autoconf
     [ -e ${fine} ] || wk_make_autoconf

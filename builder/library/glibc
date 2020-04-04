@@ -12,7 +12,7 @@ wk_make_glibc() {
 
     mkdir -p build && cd build
 
-    ../configure --prefix=${wblib}
+    ../configure --prefix=${wbcom}
 
     make && make install
 
@@ -20,7 +20,7 @@ wk_make_glibc() {
 
 wk_inst_glibc() {
 
-    local fine=${wblib}/lib/libc.a
+    local fine=${wbcom}/lib/libc.a
 
     [ -e ${fine} ] || wk_find_glibc
     [ -e ${fine} ] || wk_make_glibc

@@ -34,7 +34,8 @@ wk_inst_php7
 #################################################################Profile#
 
 cp -av ${wketc}/* /srv/
-wk__realpath ${webox}
+
+wk__realpath
 
 chown -R 0:0  /srv
 chmod -R 0755 /srv/*/bin

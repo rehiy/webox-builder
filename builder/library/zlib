@@ -10,7 +10,7 @@ wk_find_zlib() {
 
 wk_make_zlib() {
 
-    ./configure --prefix=${wblib} --$(getconf LONG_BIT)
+    ./configure --prefix=${wbcom} --$(getconf LONG_BIT)
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_zlib() {
 
 wk_inst_zlib() {
 
-    local fine=${wblib}/lib/libz.a
+    local fine=${wbcom}/lib/libz.a
 
     [ -e ${fine} ] || wk_find_zlib
     [ -e ${fine} ] || wk_make_zlib

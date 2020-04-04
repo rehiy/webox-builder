@@ -10,7 +10,7 @@ wk_find_re2c() {
 
 wk_make_re2c() {
 
-    ./configure --prefix=${wblib}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_re2c() {
 
 wk_inst_re2c() {
 
-    local fine=${wblib}/bin/re2c
+    local fine=${wbcom}/bin/re2c
 
     [ -e ${fine} ] || wk_find_re2c
     [ -e ${fine} ] || wk_make_re2c

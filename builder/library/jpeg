@@ -10,7 +10,7 @@ wk_find_jpeg() {
 
 wk_make_jpeg() {
 
-    ./configure --prefix=${wblib}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
@@ -18,7 +18,7 @@ wk_make_jpeg() {
 
 wk_inst_jpeg() {
 
-    local fine=${wblib}/lib/libjpeg.a
+    local fine=${wbcom}/lib/libjpeg.a
 
     [ -e ${fine} ] || wk_find_jpeg
     [ -e ${fine} ] || wk_make_jpeg

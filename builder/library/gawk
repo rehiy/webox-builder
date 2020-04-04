@@ -12,7 +12,7 @@ wk_make_gawk() {
 
     mkdir -p build && cd build
 
-    ../configure --prefix=${wblib}
+    ../configure --prefix=${wbcom}
 
     make && make install
 
@@ -20,7 +20,7 @@ wk_make_gawk() {
 
 wk_inst_gawk() {
 
-    local fine=${wblib}/bin/gawk
+    local fine=${wbcom}/bin/gawk
 
     [ -e ${fine} ] || wk_find_gawk
     [ -e ${fine} ] || wk_make_gawk

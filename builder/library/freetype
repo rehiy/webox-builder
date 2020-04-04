@@ -10,19 +10,19 @@ wk_find_freetype() {
 
 wk_make_freetype() {
 
-    ./configure --prefix=${wblib}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
     sleep 1
 
-    cp -av builds/unix/freetype-config ${wblib}/bin/
+    cp -av builds/unix/freetype-config ${wbcom}/bin/
 
 }
 
 wk_inst_freetype() {
 
-    local fine=${wblib}/lib/libfreetype.a
+    local fine=${wbcom}/lib/libfreetype.a
 
     [ -e ${fine} ] || wk_find_freetype
     [ -e ${fine} ] || wk_make_freetype

@@ -18,8 +18,8 @@ wk_make_gcc() {
 wk_inst_gcc() {
 
     if [ "$OS_TYPE" = "Linux" ]; then
-        cp -a /usr/lib/x86_64-linux-gnu/libatomic.* ${wblib}/lib/
-        cp -a /usr/lib/x86_64-linux-gnu/libgomp.* ${wblib}/lib/
+        cp -a /usr/lib/x86_64-linux-gnu/libatomic.* ${wbcom}/lib/
+        cp -a /usr/lib/x86_64-linux-gnu/libgomp.* ${wbcom}/lib/
     fi
 
 }
@@ -32,7 +32,7 @@ wk_make_gcc_libatomic() {
 
     cd ${wksrc}/${wk_gcc}/libatomic
 
-    ./configure --prefix=${wblib}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
@@ -44,7 +44,7 @@ wk_make_gcc_libgomp() {
 
     cd ${wksrc}/${wk_gcc}/libgomp
 
-    ./configure --prefix=${wblib}
+    ./configure --prefix=${wbcom}
 
     make && make install
 
