@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-if [ -n "$WBX_VERSION" ]; then
+if [ -z "$WBX_VERSION" ]; then
     . ${webox}/runtime
 fi
 
