@@ -23,7 +23,6 @@ fi
 
 if [ ! -x ${wbcom}/runtime ]; then
     chmod +x ${wbapp}/misc/*/*
-    chmod +x ${wbcom}/bin/wkit
     chmod +x ${wbcom}/runtime
     chmod +x ${wbcom}/wbx_*
 fi

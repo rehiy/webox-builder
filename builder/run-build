@@ -33,11 +33,16 @@ wk_inst_php7
 
 #################################################################Profile#
 
-cp -av ${wketc}/* /srv/
+mkdir -p /tmp/wketc
+cp -av ${wketc}/* /tmp/wketc
 
-wk__realpath
+wk__realpath /tmp/wketc
+cp -av /tmp/wketc/* /srv/
+
+rm -r /tmp/wketc
 
 chown -R 0:0  /srv
 chmod -R 0755 /srv/*/bin
 chmod -R 0755 /srv/*/sbin
-chmod -R 0755 /srv/service
+
+ln -s ${wbcom}/bin/wkit /srv/service
