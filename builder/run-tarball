@@ -78,7 +78,7 @@ fi
 
 #####################################################################PKG#
 
-plat=$(uname -s)-$(getconf LONG_BIT)
-dist=${wkdir}/Webox-${plat}bit$1.tgz
+plat=$(uname -s)-$(uname -m)
+dist=${wkdir}/Webox-${plat}$1.tgz
 
 tar --exclude builder -czvf ${dist} /srv
