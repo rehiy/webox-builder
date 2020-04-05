@@ -14,7 +14,7 @@ wk_make_pkgconfig() {
         env LDFLAGS="-framework CoreFoundation -framework Carbon" \
         ./configure --prefix=${wbcom} --with-internal-glib
     else
-        ./configure --prefix=${wbcom}
+        ./configure --prefix=${wbcom} --with-internal-glib
     fi
 
     make && make install
