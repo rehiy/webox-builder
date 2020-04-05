@@ -1,10 +1,10 @@
-### Update: 2019-12-20 ###
+### Update: 2020-03-31 ###
 
-export wk_openssl=openssl-1.0.2u
+export wk_openssl=openssl-1.1.1f
 
 wk_find_openssl() {
 
-    wk__apply http://www.openssl.org/source/old/1.0.2/ ${wk_openssl} .tar.gz
+    wk__apply http://www.openssl.org/source/ ${wk_openssl} .tar.gz
 
 }
 
