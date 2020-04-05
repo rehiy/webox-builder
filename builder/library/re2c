@@ -4,7 +4,7 @@ export wk_re2c=re2c-1.3
 
 wk_find_re2c() {
 
-    wk__apply https://github.com/skvadrik/re2c/releases/download/${wk_re2c##*-}/ ${wk_re2c} .tar.gz
+    wk__apply https://github.com/skvadrik/re2c/releases/download/${wk_re2c##*-}/ ${wk_re2c} .tar.xz
 
 }
 
