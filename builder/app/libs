@@ -12,6 +12,7 @@ wk_make_libs() {
     #wk_inst_gcc
 
     wk_inst_pcre
+    wk_inst_oniguruma
     wk_inst_ncurses
     wk_inst_iconv
     wk_inst_xml2
@@ -37,9 +38,9 @@ wk_make_libs() {
 
     wk_inst_mcrypt
 
-    wk_inst_sqlite
-
     wk_inst_maxmind
+
+    wk_inst_sqlite
 
 }
 
