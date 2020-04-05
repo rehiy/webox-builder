@@ -37,6 +37,8 @@ wk_make_libs() {
 
     wk_inst_mcrypt
 
+    wk_inst_sqlite
+
     wk_inst_maxmind
 
 }

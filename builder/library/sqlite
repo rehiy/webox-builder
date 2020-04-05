@@ -18,7 +18,7 @@ wk_make_sqlite() {
 
 wk_inst_sqlite() {
 
-    local fine=${wbcom}/bin/sqlite
+    local fine=${wbcom}/bin/sqlite3
 
     [ -e ${fine} ] || wk_find_sqlite
     [ -e ${fine} ] || wk_make_sqlite
