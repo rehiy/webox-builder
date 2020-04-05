@@ -49,7 +49,7 @@ if [ "$1" = "-min" ]; then
         wk__strip ${wbapp}
     fi
 
-    sf='curl\|openssl'
+    sf='wkit\|curl\|openssl'
     for f in `ls ${wbcom}/bin | grep -v ${sf}$`; do
         rm -rf ${wbcom}/bin/${f}
     done
