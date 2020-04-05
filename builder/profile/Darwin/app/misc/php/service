@@ -1,26 +1,26 @@
 #!/bin/sh
 #
 
-export APP_USER=www-data
-export APP_GROUP=www-data
+export APP_USER=_www
+export APP_GROUP=_www
 
-export APP_BIN_FILE=${wbapp}/sbin/php-fpm7
-export APP_PID_FILE=${wbapp}/var/run/php7/fpm.pid
+export APP_BIN_FILE=${wbapp}/sbin/php-fpm
+export APP_PID_FILE=${wbapp}/var/run/php/fpm.pid
 
 #####################################################################
 
 app_start() {
 
     if app_check ; then
-        echo "php7 is already running"
+        echo "php is already running"
         exit 1
     fi
 
-    echo "start php7 ..."
+    echo "start php ..."
 
     local POOL_CONF POOL_ROOT
 
-    for POOL_CONF in ${wbapp}/etc/php7/pool.d/*.conf; do
+    for POOL_CONF in ${wbapp}/etc/php/pool.d/*.conf; do
 
         POOL_CONF=${POOL_CONF##*/}
         POOL_ROOT=${htdoc}/${POOL_CONF%.*}
@@ -40,11 +40,11 @@ app_start() {
 app_stop() {
 
     if ! app_check ; then
-        echo "php7 is not running"
+        echo "php is not running"
         exit 1
     fi
 
-    echo "stop php7 ..."
+    echo "stop php ..."
 
     kill -TERM `cat $APP_PID_FILE`
 
@@ -53,11 +53,11 @@ app_stop() {
 app_reload() {
 
     if ! app_check ; then
-        echo "php7 is not running"
+        echo "php is not running"
         exit 1
     fi
 
-    echo "reload php7 ..."
+    echo "reload php ..."
 
     kill -USR2 `cat $APP_PID_FILE`
 
@@ -94,7 +94,7 @@ app_usage() {
     local DOES="start|stop|reload|restart|status"
 
     if ! echo "|$DOES|" | grep -q "|$1|"; then
-        echo "Usage: wkit php7 {$DOES}"
+        echo "Usage: wkit php {$DOES}"
         exit 1
     fi
 
@@ -107,9 +107,9 @@ app_result() {
     local ERROR=${3:-failed}
 
     if [ $CODE -eq 0 ]; then
-        echo "$1 php7 \033[32m$RIGHT \033[0m"
+        echo "$1 php \033[32m$RIGHT \033[0m"
     else
-        echo "$1 php7 \033[31m$ERROR \033[0m"
+        echo "$1 php \033[31m$ERROR \033[0m"
     fi
 
     exit $CODE

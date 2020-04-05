@@ -20,6 +20,6 @@ server {
     try_files $uri $uri/ /index.php$is_args$args;
 
     include http.d/22.server_error_page;
-    include http.d/25.server_fastcgi_php7;
+    include http.d/25.server_fastcgi_php;
 
 }
