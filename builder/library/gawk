@@ -1,6 +1,6 @@
-### Update: 2019-04-12 ###
+### Update: 2019-06-18 ###
 
-export wk_gawk=gawk-5.0.0
+export wk_gawk=gawk-5.0.1
 
 wk_find_gawk() {
 

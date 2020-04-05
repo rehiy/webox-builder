@@ -28,6 +28,7 @@ wk_inst_redis
 
 wk_inst_nginx
 
+wk_inst_node
 wk_inst_php7
 
 #################################################################Profile#

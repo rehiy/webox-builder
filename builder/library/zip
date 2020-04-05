@@ -1,6 +1,6 @@
-### Update: 2019-03-12 ###
+### Update: 2020-02-03 ###
 
-export wk_zip=libzip-1.5.2
+export wk_zip=libzip-1.6.1
 
 wk_find_zip() {
 

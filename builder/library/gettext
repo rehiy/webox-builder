@@ -1,6 +1,6 @@
-### Update: 2014-06-01 ###
+### Update: 2019-05-12 ###
 
-export wk_gettext=gettext-0.19.8
+export wk_gettext=gettext-0.20.1
 
 wk_find_gettext() {
 

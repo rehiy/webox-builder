@@ -4,7 +4,7 @@ export wk_php7=php-7.4.4
 
 wk_find_php7() {
 
-    wk__apply http://www.php.net/distributions/ ${wk_php7} .tar.gz
+    wk__apply http://www.php.net/distributions/ ${wk_php7} .tar.xz
 
     sed -i~ 's#includedir@/php"#includedir@/php7"#' scripts/php-config.in
     sed -i~ 's#includedir@`/php"#includedir@`/php7"#' scripts/phpize.in

@@ -1,6 +1,6 @@
-### Update: 2019-02-23 ###
+### Update: 2020-02-12 ###
 
-export wk_pcre=pcre-8.43
+export wk_pcre=pcre-8.44
 
 wk_find_pcre() {
 

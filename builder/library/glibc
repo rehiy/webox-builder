@@ -1,6 +1,6 @@
-### Update: 2019-08-01 ###
+### Update: 2020-02-01 ###
 
-export wk_glibc=glibc-2.30
+export wk_glibc=glibc-2.31
 
 wk_find_glibc() {
 

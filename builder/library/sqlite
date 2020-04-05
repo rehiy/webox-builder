@@ -1,0 +1,27 @@
+### Update: 2020-03-26 ###
+
+export wk_sqlite=sqlite-autoconf-3310100
+
+wk_find_sqlite() {
+
+    wk__apply https://www.sqlite.org/2020/ ${wk_sqlite} .tar.gz
+
+}
+
+wk_make_sqlite() {
+
+    ./configure --prefix=${wbcom}
+
+    make && make install
+
+}
+
+wk_inst_sqlite() {
+
+    local fine=${wbcom}/bin/sqlite
+
+    [ -e ${fine} ] || wk_find_sqlite
+    [ -e ${fine} ] || wk_make_sqlite
+    [ -e ${fine} ] || wk__error ${wk_sqlite}
+
+}
