@@ -6,7 +6,7 @@ wk_make_libs() {
 
     wk_inst_m4
     wk_inst_autoconf
-    wk_inst_automaked
+    wk_inst_automake
     wk_inst_pkgconfig
 
     #wk_inst_gcc
