@@ -1,10 +1,10 @@
 # Feature
 
-WeBox is a lnmp server based on ubuntu, debian or alpine. contains the following modules: nginx, mysql, redis, php5/php7. And some popular plug-ins have been added, such as redis, geoip2, imagick ...
+WeBox is a lnmp server based on ubuntu, debian or alpine. contains the following modules: nginx, mysql, redis, php. And some popular plug-ins have been added, such as redis, geoip2, imagick ...
 
 # Simple Usage
 
-## auto prepare and start nginx/mysql/redis/php7
+## auto prepare and start nginx/mysql/redis/php
 
 ```shell
 wget -qO- http://get.vmlu.com/webox/wb-install | sudo sh
@@ -32,7 +32,7 @@ If the host is `www.anrip.com`, the webroot will be `/srv/htdoc/defualt/web/com.
 ## control the modules you need
 
 ```shell
-wkit [nginx|mysql|redis|php5|php7] [start|stop|restart|reload]
+wkit [nginx|mysql|redis|php] [start|stop|restart|reload]
 ```
 
 ## configure the modules you need
