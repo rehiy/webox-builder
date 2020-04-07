@@ -9,7 +9,7 @@ wk_make_libs() {
     wk_inst_automake
     wk_inst_pkgconfig
 
-    #wk_inst_gcc
+    wk_inst_gcc
 
     wk_inst_pcre
     wk_inst_oniguruma
