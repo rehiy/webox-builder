@@ -4,48 +4,30 @@ export wk_gcc=gcc-9.3.0
 
 wk_find_gcc() {
 
+    wk__apply ftp://ftp.gmplib.org/pub/gmp/ gmp-6.2.0 .tar.xz
+    wk__apply https://www.mpfr.org/mpfr-current/ mpfr-4.0.2 .tar.xz
+    wk__apply http://ftp.gnu.org/gnu/mpc/ mpc-1.1.0 .tar.gz
+
     wk__apply http://ftp.gnu.org/gnu/gcc/${wk_gcc}/ ${wk_gcc} .tar.xz
 
 }
 
 wk_make_gcc() {
 
-    wk_make_gcc_libatomic
-    wk_make_gcc_libgomp
+    ./configure --prefix=${wbcom}
 
 }
 
 wk_inst_gcc() {
 
     if [ "$OS_TYPE" = "Linux" ]; then
+
+        ## required by mysql
         cp -a /usr/lib/x86_64-linux-gnu/libatomic.* ${wbcom}/lib/
+
+        ## required by imagick
         cp -a /usr/lib/x86_64-linux-gnu/libgomp.* ${wbcom}/lib/
+
     fi
-
-}
-
-########################################################################
-
-wk_make_gcc_libatomic() {
-
-    ## required by mysql
-
-    cd ${wksrc}/${wk_gcc}/libatomic
-
-    ./configure --prefix=${wbcom}
-
-    make && make install
-
-}
-
-wk_make_gcc_libgomp() {
-
-    ## required by imagick
-
-    cd ${wksrc}/${wk_gcc}/libgomp
-
-    ./configure --prefix=${wbcom}
-
-    make && make install
 
 }
