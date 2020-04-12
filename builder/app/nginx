@@ -38,8 +38,6 @@ wk_make_nginx() {
         --with-http_secure_link_module \
         --with-http_slice_module \
         --with-http_image_filter_module=dynamic \
-        $(wk_plus_nginx_http_cache_purge) \
-        $(wk_plus_nginx_http_echo) \
         $(wk_plus_nginx_http_geoip2) \
         $(wk_plus_nginx_js) \
         --with-stream=dynamic \
@@ -111,40 +109,5 @@ wk_plus_nginx_http_geoip2() {
     fi
 
     echo "--add-dynamic-module=http_geoip2"
-
-}
-
-
-wk_plus_nginx_http_echo() {
-
-    if [ ! -d http_echo ]; then
-
-        local url=https://codeload.github.com/openresty/echo-nginx-module/zip/master
-        local zip=$(wk__fetch ${url} ${wk_nginx}/echo-nginx-module-master.zip)
-
-        unzip -q ${zip} && mv echo-nginx-module-master http_echo
-
-        wk__error_check 'not found http_echo'
-
-    fi
-
-    echo "--add-module=http_echo"
-
-}
-
-wk_plus_nginx_http_cache_purge() {
-
-    if [ ! -d http_cache_purge ]; then
-
-        local url=https://codeload.github.com/FRiCKLE/ngx_cache_purge/zip/master
-        local zip=$(wk__fetch ${url} ${wk_nginx}/ngx_cache_purge-master.zip)
-
-        unzip -q ${zip} && mv ngx_cache_purge-master http_cache_purge
-
-        wk__error_check 'not found http_cache_purge'
-
-    fi
-
-    echo "--add-module=http_cache_purge"
 
 }
