@@ -14,9 +14,6 @@ wk_make_curl() {
 
     make && make install
 
-    local cert=$(wk__fetch http://curl.haxx.se/ca/cacert.pem)
-    mkdir -p ${wbcom}/ssl && cp -a ${cert} ${wbcom}/ssl/cert.pem
-
 }
 
 wk_inst_curl() {
@@ -26,5 +23,10 @@ wk_inst_curl() {
     [ -e ${fine} ] || wk_find_curl
     [ -e ${fine} ] || wk_make_curl
     [ -e ${fine} ] || wk__error ${wk_curl}
+
+    if [ ! -f ${wbcom}/ssl/cert.pem ]; then
+        local cert=$(wk__fetch http://curl.haxx.se/ca/cacert.pem)
+        mkdir -p ${wbcom}/ssl && cp -a ${cert} ${wbcom}/ssl/cert.pem
+    fi
 
 }
