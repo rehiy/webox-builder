@@ -15,8 +15,6 @@ source ${wkdir}/function
 
 rm -rf ${wbapp}/etc/*
 rm -rf ${wbapp}/var/*/*
-rm -rf ${wbapp}/share/{doc,info,man}
-rm -rf ${wbcom}/share/{doc,info,man}
 rm -rf ${htdoc}/*/{log,temp}
 
 find /srv -name "*.old" -type f -delete
@@ -31,14 +29,16 @@ fi
 
 if [ "$1" = "-min" ]; then
 
-    rm -rf ${wbapp}/bin/phpize*
-    rm -rf ${wbapp}/bin/phpdbg*
-    rm -rf ${wbapp}/bin/php-config*
-    rm -rf ${wbapp}/bin/mysql_config
+    rm -rf ${wbapp}/bin/phpize
+    rm -rf ${wbapp}/bin/phpdbg
+    rm -rf ${wbapp}/bin/php-config
+    rm -rf ${wbapp}/bin/mysql_config*
+
     rm -rf ${wbapp}/include
     rm -rf ${wbapp}/lib/pkgconfig
+    rm -rf ${wbapp}/share/{doc,info,man}
     rm -rf ${wbapp}/share/aclocal
-    rm -rf ${wbapp}/share/php*
+    rm -rf ${wbapp}/share/php
 
     find ${wbapp} -name "*.a" -type l -delete
     find ${wbapp} -name "*.a" -type f -delete
