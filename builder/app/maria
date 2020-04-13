@@ -64,8 +64,8 @@ wk_inst_maria() {
 
     local fine=${wbapp}/bin/mysql
 
-    [ -e ${fine} ] || wk_find_mysql
-    [ -e ${fine} ] || wk_make_mysql
-    [ -e ${fine} ] || wk__error ${wk_mysql}
+    [ -e ${fine} ] || wk_find_maria
+    [ -e ${fine} ] || wk_make_maria
+    [ -e ${fine} ] || wk__error ${wk_maria}
 
 }
