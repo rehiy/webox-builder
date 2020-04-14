@@ -29,6 +29,7 @@ app_stop() {
     echo "stop mysql ..."
 
     kill -TERM `cat $APP_PID_FILE`
+    while app_check; do sleep 1; done;
 
 }
 
