@@ -1,0 +1,4 @@
+#/bin/sh
+#
+
+tar czvf php-binary.tgz ${wbapp}/bin/phar* ${wbapp}/*/php*
