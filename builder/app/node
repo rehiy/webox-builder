@@ -1,6 +1,6 @@
-### Update: 2020-02-18 ###
+### Update: 2020-04-28 ###
 
-export wk_node=node-v12.16.1
+export wk_node=node-v12.16.3
 
 wk_find_node() {
 

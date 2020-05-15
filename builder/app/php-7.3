@@ -1,6 +1,6 @@
 ### Update: 2020-05-14 ###
 
-export wk_php=php-7.4.6
+export wk_php=php-7.3.18
 
 wk_find_php() {
 
@@ -25,6 +25,8 @@ wk_make_php() {
         --enable-fpm \
         --with-mysqli \
         --with-pdo-mysql \
+        --with-iconv=${wbcom} \
+        --with-libxml-dir=${wbcom} \
         CFLAGS="-O3" CXXFLAGS="-O3"
 
     make && make install
@@ -33,24 +35,24 @@ wk_make_php() {
     wk_make_php_ext bcmath
     wk_make_php_ext bz2 --with-bz2=${wbcom}
     wk_make_php_ext calendar
-    wk_make_php_ext curl
+    wk_make_php_ext curl -with-curl=${wbcom}
     wk_make_php_ext exif
     wk_make_php_ext ftp --with-openssl-dir=${wbcom}
-    wk_make_php_ext gd --with-freetype --with-jpeg
+    wk_make_php_ext gd --with-freetype-dir=${wbcom} --with-jpeg-dir=${wbcom} --with-png-dir=${wbcom} --with-zlib-dir=${wbcom}
     wk_make_php_ext gettext --with-gettext=${wbcom}
     wk_make_php_ext mbstring
     wk_make_php_ext opcache
-    wk_make_php_ext openssl
+    wk_make_php_ext openssl --with-openssl=${wbcom}
     wk_make_php_ext pcntl
     wk_make_php_ext shmop
-    wk_make_php_ext soap
+    wk_make_php_ext soap --with-libxml-dir=${wbcom}
     wk_make_php_ext sockets
     wk_make_php_ext sysvmsg
     wk_make_php_ext sysvsem
     wk_make_php_ext sysvshm
-    wk_make_php_ext xmlrpc --with-iconv-dir=${wbcom}
-    wk_make_php_ext zip
-    wk_make_php_ext zlib
+    wk_make_php_ext xmlrpc --with-libxml-dir=${wbcom} --with-iconv-dir=${wbcom}
+    wk_make_php_ext zip --with-libzip=${wbcom} --with-pcre-dir=${wbcom} --with-zlib-dir=${wbcom}
+    wk_make_php_ext zlib --with-zlib-dir=${wbcom}
 
     wk_make_php_pecl redis-5.0.2
 
