@@ -1,6 +1,6 @@
-### Update: 2020-03-31 ###
+### Update: 2020-04-21 ###
 
-export wk_openssl=openssl-1.1.1f
+export wk_openssl=openssl-1.1.1g
 
 wk_find_openssl() {
 

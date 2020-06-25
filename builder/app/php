@@ -52,7 +52,8 @@ wk_make_php() {
     wk_make_php_ext zip
     wk_make_php_ext zlib
 
-    wk_make_php_pecl redis-5.0.2
+    wk_make_php_pecl redis-5.2.2
+    wk_make_php_pecl swoole-4.5.2
 
     wk_plus_php_imagick
     wk_plus_php_maxminddb

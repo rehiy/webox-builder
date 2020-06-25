@@ -1,6 +1,6 @@
-### Update: 2020-01-27 ###
+### Update: 2020-06-24 ###
 
-export wk_maria=mariadb-10.4.12
+export wk_maria=mariadb-10.5.4
 
 wk_find_maria() {
 

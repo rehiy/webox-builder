@@ -6,6 +6,11 @@ wk_find_m4() {
 
     wk__apply http://ftp.gnu.org/gnu/m4/ ${wk_m4} .tar.xz
 
+    if ! grep -q _IO_IN_BACKUP lib/stdio-impl.h ; then
+        sed -i~ 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+        echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+    fi
+
 }
 
 wk_make_m4() {

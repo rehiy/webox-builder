@@ -12,6 +12,7 @@ wk_make_libs() {
     wk_inst_gcc
 
     wk_inst_pcre
+    wk_inst_pcre2
     wk_inst_oniguruma
     wk_inst_ncurses
     wk_inst_iconv

@@ -1,0 +1,27 @@
+### Update: 2020-05-09 ###
+
+export wk_pcre2=pcre2-10.35
+
+wk_find_pcre2() {
+
+    wk__apply https://ftp.pcre.org/pub/pcre/ ${wk_pcre2} .tar.gz
+
+}
+
+wk_make_pcre2() {
+
+    ./configure --prefix=${wbcom}
+
+    make && make install
+
+}
+
+wk_inst_pcre2() {
+
+    local fine=${wbcom}/lib/libpcre2-posix.a
+
+    [ -e ${fine} ] || wk_find_pcre2
+    [ -e ${fine} ] || wk_make_pcre2
+    [ -e ${fine} ] || wk__error ${wk_pcre2}
+
+}
