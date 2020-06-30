@@ -14,7 +14,7 @@ sudo /srv/service start
 ## the following commands are supported
 
 ```shell
-/srv/service [start|stop|restart|reload]
+/srv/service [nginx|mysql|redis|php] [start|stop|restart|reload]
 ```
 
 ## put your files to host's webroot path
@@ -23,21 +23,15 @@ If the host is `www.anrip.com`, the webroot will be `/srv/htdoc/defualt/web/com.
 
 # Manual Control Services
 
-## fix global runtime
+## fix ENV to run commands such as `mysql`
 
 ```shell
-. /srv/webox/runtime
-```
-
-## control the modules you need
-
-```shell
-wkit [nginx|mysql|redis|php] [start|stop|restart|reload]
+. /srv/app/runtime
 ```
 
 ## configure the modules you need
 
-please edit the config files in /srv/app/etc/\*, then reload the service
+please edit the config files in `/srv/webox/etc/`, then reload the service
 
 # Important Notice
 
