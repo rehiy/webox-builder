@@ -19,6 +19,7 @@ make_pacakge() {
     for vvv in `ls cell/`; do
         for vv in `ls cell/$vvv/`; do
             copy_parents cell/$vvv/$vv/lib $target
+            copy_parents cell/$vvv/$vv/lib64 $target
         done
     done
 
