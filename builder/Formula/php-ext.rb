@@ -6,7 +6,6 @@ class PhpExt < Formula
 
     depends_on "autoconf" => :build
     depends_on "pkg-config" => :build
-    depends_on "unzip" => :build
 
     depends_on "anrip/webox/php"
     depends_on "curl-openssl"

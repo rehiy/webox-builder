@@ -4,8 +4,6 @@ class Nginx < Formula
     url "https://nginx.org/download/nginx-1.19.0.tar.gz"
     sha256 "44a616171fcd7d7ad7c6af3e6f3ad0879b54db5a5d21be874cd458b5691e36c8"
 
-    depends_on "unzip" => :build
-
     depends_on "libgd"
     depends_on "libmaxminddb"
     depends_on "openssl@1.1"

@@ -8,10 +8,14 @@ deps_install() {
         apt update
     fi
 
-    if ! type make >/dev/null 2>&1; then
-        apt install -y locales \
-            build-essential curl file git
+    if [ ! -d /usr/share/i18n ]; then
+        apt install -y busybox locales
         localedef -i en_US -f UTF-8 en_US.UTF-8
+        busybox --install -s
+    fi
+
+    if ! type make >/dev/null 2>&1; then
+        apt install -y build-essential curl file git
     fi
 
 }
