@@ -1,9 +1,0 @@
-export OS_TYPE=Linux
-
-if [ ! -x /usr/bin/gcc ]; then
-    apt update
-    apt install -y build-essential
-    apt install -y wget unzip python-dev
-fi
-
-ulimit -n 65536

@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+
+export APP_USER=daemon
+export APP_GROUP=daemon
+
+#####################################################################
+
+app_useradd() {
+
+    echo ''
+
+}
+
+app_userlet() {
+
+    chown -R $APP_USER:$APP_GROUP $1
+
+    find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+    find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+
+}
+
+app_dataset() {
+
+    local DIR
+
+    for DIR in lib log run tmp; do
+        mkdir -p ${whome}/var/$DIR/redis
+        app_userlet ${whome}/var/$DIR/redis
+    done
+
+    if [ ! -e ${whome}/etc/redis ]; then
+        ln -s ${wbapp}/redis/etc ${whome}/etc/redis
+    fi
+
+    if [ ! -f ${whome}/etc/redis/conf.d/override.conf ]; then
+        touch ${whome}/etc/redis/conf.d/override.conf
+    fi
+
+    app_userlet ${whome}/etc/redis
+
+}
+
+#####################################################################
+
+if [ "$1" = "prepare" ]; then
+    app_useradd
+    app_dataset
+fi
+

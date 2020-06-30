@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+
+copy_parents() {
+
+    [ -d $1 ] && cp -av --parents $@
+
+}
+
+rm_empty_dir() {
+
+    find $1 -mindepth 1 -maxdepth 1 -type d | while read -r dir; do
+        if [ -z `find "$dir" -mindepth 1 -type f` ]; then
+            rm -r $dir 2>&- && echo "rm_empty_dir: $dir"
+        fi
+        [ -d $dir ] && rm_empty_dir "$dir"
+    done
+
+}

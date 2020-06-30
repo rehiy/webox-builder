@@ -1,47 +1,18 @@
 #!/bin/bash
 #
 
-if [ ! -f $(pwd)/config ]; then
-    echo "Please use './run-build' to run me"
-    exit 1
-fi
+source Declare/runtime.sh
 
-source $(pwd)/config
+env_initialize
 
-source ${wketc}.rtm
-source ${wkdir}/function
+##############################################BUILD##################
 
-#################################################################Package#
+brew_install libxml2
 
-for pkg in ${wkdir}/library/*; do
-    source ${pkg}
-done
+brew_install php
+brew_install php-ext
 
-for pkg in ${wkdir}/app/*; do
-    source ${pkg}
-done
+brew_install nginx
 
-wk_inst_libs
-
-wk_inst_mysql
-wk_inst_redis
-
-wk_inst_nginx
-
-wk_inst_php
-
-#################################################################Profile#
-
-mkdir -p /tmp/wketc
-cp -av ${wketc}/* /tmp/wketc
-
-wk__realpath /tmp/wketc
-cp -av /tmp/wketc/* /srv/
-
-rm -r /tmp/wketc
-
-chown -R 0:0  /srv
-chmod -R 0755 /srv/*/bin
-chmod -R 0755 /srv/*/sbin
-
-ln -s ${wbcom}/bin/wkit /srv/service
+brew_install mysql
+brew_install redis

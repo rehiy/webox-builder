@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+
+if [ -z "$WBX_VERSION" ]; then
+    . ${wbapp}/runtime
+fi
+
+#####################################################################
+
+ETC_VERSION=0
+
+if [ -f ${whome}/etc/version ]; then
+    ETC_VERSION=`cat ${whome}/etc/version`
+fi
+
+if [ $ETC_VERSION -lt $WBX_VERSION ]; then
+    echo $WBX_VERSION > ${whome}/etc/version
+    wbx_install "$WBX_APPS"
+fi
+
+#####################################################################
+
+if [ $# -eq 1 ]; then
+    for APP in $WBX_APPS; do
+        wbx_service $APP $1
+    done
+else
+    wbx_service "$@"
+fi

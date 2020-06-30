@@ -1,5 +1,0 @@
-extension = soap.so
-
-[Soap]
-
-soap.wsdl_cache_dir = "${wbapp}/var/tmp/php"

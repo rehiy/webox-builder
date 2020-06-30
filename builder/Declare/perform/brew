@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+
+homebrew_init() {
+
+    if [ ! -x $whome/bin/brew ]; then
+        git clone https://github.com/Homebrew/brew.git $whome
+    fi
+
+    sed -i~ "s#/Cellar#/cell#g" $whome/Library/Homebrew/brew.sh
+
+}
+
+taps_register() {
+
+    local wbtap=`brew --repository anrip/webox`
+
+    if [ ! -e $wbtap/Formula ]; then
+        mkdir -p $wbtap &&
+            ln -s $wbase/Formula $wbtap/Formula
+    fi
+
+    if [ ! -d `brew --repository homebrew/core` ]; then
+        brew tap homebrew/core
+    fi
+
+}
+
+brew_install() {
+
+    if [ -f $wbase/Formula/$1.sh ]; then
+        $wbase/Formula/$1.sh
+        return $?
+    fi
+
+    if [ -f $wbase/Formula/$1.rb ]; then
+        brew install -v anrip/webox/$1
+        return $?
+    fi
+
+    brew install -v $1
+
+}
+
+brew_deps() {
+
+    brew deps --tree "$@"
+
+}

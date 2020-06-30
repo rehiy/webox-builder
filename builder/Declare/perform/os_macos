@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+
+deps_install() {
+
+    if ! type make >/dev/null 2>&1; then
+        xcode-select --install
+    fi
+
+}
+
+strip_binary() {
+
+    echo ''
+
+}

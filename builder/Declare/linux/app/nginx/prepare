@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+
+export APP_USER=www-data
+export APP_GROUP=www-data
+
+#####################################################################
+
+app_useradd() {
+
+    if ! grep -q $APP_GROUP /etc/group; then
+        groupadd $APP_GROUP -g 33
+    fi
+
+    if ! grep -q $APP_USER /etc/passwd; then
+        useradd $APP_USER -u 33 -g 33
+        usermod $APP_USER -d ${htdoc} -s /usr/sbin/nologin
+    fi
+
+}
+
+app_userlet() {
+
+    chown -R $APP_USER:$APP_GROUP $1
+
+    find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+    find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+
+}
+
+app_dataset() {
+
+    local DIR
+
+    for DIR in log run tmp; do
+        mkdir -p ${whome}/var/$DIR/nginx
+        app_userlet ${whome}/var/$DIR/nginx
+    done
+
+    if [ ! -d ${whome}/var/tmp/nginx/proxy_cache ]; then
+        mkdir -p ${whome}/var/tmp/nginx/proxy_cache
+    fi
+
+    app_userlet ${whome}/var/tmp/nginx/proxy_cache
+
+    if [ ! -e ${whome}/etc/nginx ]; then
+        ln -s ${wbapp}/nginx/etc ${whome}/etc/nginx
+    fi
+
+    app_userlet ${whome}/etc/nginx
+
+}
+
+#####################################################################
+
+if [ "$1" = "prepare" ]; then
+    app_useradd
+    app_dataset
+fi
+

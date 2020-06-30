@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+
+deps_install() {
+
+    if [ ! -f /tmp/apt-done ]; then
+        touch /tmp/apt-done
+        apt update
+    fi
+
+    if ! type make >/dev/null 2>&1; then
+        apt install -y locales \
+            build-essential curl file git
+        localedef -i en_US -f UTF-8 en_US.UTF-8
+    fi
+
+}
+
+strip_binary() {
+
+    local list=$1/strip.list
+
+    echo "Search $1 to strip ..."
+    find $1 -type f | xargs file | grep 'Mach-O \|ELF \| ar z' >>$list
+
+    sed -i~ 's/:.*//' $list
+
+    for file in `cat $list`; do
+        echo "Strip $file"
+        strip $file
+    done
+
+    rm -f $list $list~
+
+}

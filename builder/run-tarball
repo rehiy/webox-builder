@@ -1,84 +1,23 @@
 #!/bin/bash
 #
 
-if [ ! -f $(pwd)/config ]; then
-    echo "Please use './run-tarball' to run me"
-    exit 1
-fi
+source Declare/runtime.sh
 
-source $(pwd)/config
+env_initialize
 
-source ${wketc}.rtm
-source ${wkdir}/function
+##############################################UNINSTALL##############
 
-#####################################################################CLS#
+brew rm autoconf automake cmake gcc@6 m4 pkg-config
+brew rm binutils cunit gperf groff json-c sphinx-doc
+brew rm meson ninja intltool itstool texinfo
 
-rm -rf ${wbapp}/etc/*
-rm -rf ${wbapp}/var/*/*
-rm -rf ${htdoc}/*/{log,temp}
+brew cleanup
 
-find /srv -name "*.old" -type f -delete
-find /srv -name ".DS_Store" -type f -delete
-find /srv -name "lost+found" -type d -delete
+##############################################MINIFY#################
 
-if [ "$OS_TYPE" = "Darwin" ]; then
-    xattr -rd com.apple.quarantine /srv
-fi
+mini=$wbase/srv-dist
 
-#####################################################################MIN#
+make_profile $mini
+make_package $mini/webox
 
-if [ "$1" = "-min" ]; then
-
-    rm -rf ${wbapp}/bin/phpize
-    rm -rf ${wbapp}/bin/phpdbg
-    rm -rf ${wbapp}/bin/php-config
-    rm -rf ${wbapp}/bin/mysql_config*
-
-    rm -rf ${wbapp}/include
-    rm -rf ${wbapp}/lib/pkgconfig
-    rm -rf ${wbapp}/share/{doc,info,man}
-    rm -rf ${wbapp}/share/aclocal
-    rm -rf ${wbapp}/share/php
-
-    find ${wbapp} -name "*.a" -type l -delete
-    find ${wbapp} -name "*.a" -type f -delete
-    find ${wbapp} -name "*.la" -type l -delete
-    find ${wbapp} -name "*.la" -type f -delete
-
-    if [ "$OS_TYPE" = "Linux" ]; then
-        wk__strip ${wbapp}
-    fi
-
-    sf='wkit\|curl\|openssl'
-    for f in `ls ${wbcom}/bin | grep -v ${sf}$`; do
-        rm -rf ${wbcom}/bin/${f}
-    done
-
-    rm -rf ${wbcom}/etc
-    rm -rf ${wbcom}/include
-    rm -rf ${wbcom}/lib/cmake
-    rm -rf ${wbcom}/lib/gettext
-    rm -rf ${wbcom}/lib/libmcrypt
-    rm -rf ${wbcom}/lib/terminfo
-    rm -rf ${wbcom}/lib/pkgconfig
-    rm -rf ${wbcom}/lib/preloadable_*
-    rm -rf ${wbcom}/lib/xml2Conf.sh
-    rm -rf ${wbcom}/share
-
-    find ${wbcom} -name "*.a" -type l -delete
-    find ${wbcom} -name "*.a" -type f -delete
-    find ${wbcom} -name "*.la" -type l -delete
-    find ${wbcom} -name "*.la" -type f -delete
-
-    if [ "$OS_TYPE" = "Linux" ]; then
-        wk__strip ${wbcom}
-    fi
-
-fi
-
-#####################################################################PKG#
-
-plat=$(uname -s)-$(uname -m)
-dist=${wkdir}/Webox-${plat}$1.tgz
-
-tar --exclude builder -czvf ${dist} /srv
+ln -s app/perform $mini/service
