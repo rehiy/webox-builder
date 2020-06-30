@@ -4,7 +4,9 @@
 export wbase=`pwd`
 export whome=$wbase/webox
 
-export PATH=$whome/bin:$whome/sbin:$PATH
+if ! echo $PATH | grep -q $whome; then
+    export PATH=$whome/bin:$whome/sbin:$PATH
+fi
 
 export osvar=$([ `uname` = "Darwin" ] && echo macos || echo linux)
 
