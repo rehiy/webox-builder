@@ -18,3 +18,8 @@ brew_install nginx
 
 brew_install mysql
 brew_install redis
+
+##############################################CLEAN##################
+
+brew_ceanup \
+    gcc@6 glibc mysql nginx php redis

@@ -1,16 +1,16 @@
 #!/bin/bash
 #
 
-make_pacakge() {
+make_package() {
 
     local vv vvv
     local target=${1:-srv/webox}
 
+    mkdir -p $target
+
     # 最小化复制软件包
 
     cd $whome
-
-    mkdir -p $target
 
     for vvv in bin lib opt sbin; do
         copy_parents $vvv $target
@@ -32,6 +32,8 @@ make_pacakge() {
         copy_parents share/$vvv $target
     done
 
+    copy_parents cell/etc/openssl@1.1 $target
+
     cd -
 
     # 清理不必要的文件
@@ -39,19 +41,15 @@ make_pacakge() {
     echo "Clean up $target ..."
 
     rm -rf $target/bin/brew
+
     rm -rf $target/cell/*/*/share/doc/
     rm -rf $target/cell/*/*/share/man/
 
     rm -rf $target/cell/icu4c/*/lib/icu/
-
-    rm -rf $target/cell/lib/python*/
+    rm -rf $target/cell/gcc@6/*/lib/gcc/6/gcc/
     rm -rf $target/cell/python*/*/lib/python*/
 
-    rm -rf $target/cell/lib/perl*/
-    for vvv in `ls $target/cell/perl/`; do
-        find $target/cell/perl/$vvv/lib \
-            ! -wholename '*.so*' -type f -delete
-    done
+    rm -rf $target/lib/python*/
 
     find $target -name "pkgconfig" | xargs rm -rf
     find $target -name ".keepme" -type f -delete
@@ -72,6 +70,6 @@ make_pacakge() {
 
     # 清理空目录
 
-    rm_empty_dir $target
+    #rm_empty_dir $target
 
 }

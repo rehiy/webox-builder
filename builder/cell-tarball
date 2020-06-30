@@ -5,14 +5,6 @@ source Declare/runtime.sh
 
 env_initialize
 
-##############################################UNINSTALL##############
-
-brew rm autoconf automake cmake gcc@6 m4 pkg-config
-brew rm binutils cunit gperf groff json-c sphinx-doc
-brew rm meson ninja intltool itstool texinfo
-
-brew cleanup
-
 ##############################################MINIFY#################
 
 mini=$wbase/srv-dist

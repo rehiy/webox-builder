@@ -6,6 +6,8 @@ make_profile() {
     local vv vvv
     local target=${1:-srv}
 
+    mkdir -p $target
+
     # 复制配置文件
 
     cp -r -f $wbase/Declare/$osvar/* $target/

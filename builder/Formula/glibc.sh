@@ -15,6 +15,6 @@ if [ ! -d $whome/cell/glibc ]; then
         apt install -y gawk bison python3
     fi
 
-    brew install -v glibc
+    brew install -v gcc@6 glibc
 
 fi

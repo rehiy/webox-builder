@@ -7,14 +7,13 @@ class PhpExt < Formula
     depends_on "autoconf" => :build
     depends_on "pkg-config" => :build
 
-    depends_on "anrip/webox/php"
     depends_on "curl-openssl"
-    depends_on "gettext"
     depends_on "freetype"
+    depends_on "gettext"
+    depends_on "gd"
     depends_on "imagemagick"
     depends_on "jpeg"
     depends_on "libffi"
-    depends_on "libgd"
     depends_on "libmaxminddb"
     depends_on "libpng"
     depends_on "libzip"

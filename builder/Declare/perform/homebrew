@@ -42,8 +42,27 @@ brew_install() {
 
 }
 
-brew_deps() {
+brew_ceanup() {
 
-    brew deps --tree "$@"
+    local vvv
+
+    brew deps --tree "$@" \
+        | sed "s/[│─├└─]//g;s/ //g" \
+        | sed "s#^.\+/##g" \
+        | sort -k2n | uniq \
+        > deps-yes.txt
+
+    rm -rf deps-no.txt
+    for vvv in `ls webox/cell`; do
+        if ! grep -q "^$vvv$" deps-yes.txt; then
+            echo $vvv >>deps-no.txt
+        fi
+    done
+
+    brew rm -f `cat < deps-no.txt`
+
+    rm -rf deps-*.txt
+
+    brew cleanup
 
 }
