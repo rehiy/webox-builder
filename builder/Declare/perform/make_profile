@@ -11,7 +11,7 @@ make_profile() {
     # 复制配置文件
 
     cp -r -f $wbase/Declare/basefs/* $target/
-    chmod +x $target/app/*/* $target/app/perform
+    chmod +x $target/app/*/* $target/app/srvkit
 
     # 替换预置变量
 
