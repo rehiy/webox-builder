@@ -9,39 +9,36 @@ homebrew_init() {
 
     sed -i~ "s#/Cellar#/cell#g" $whome/Library/Homebrew/brew.sh
 
-}
-
-taps_register() {
-
-    local wbtap=`brew --repository anrip/webox`
-
-    if [ ! -e $wbtap/Formula ]; then
-        mkdir -p $wbtap &&
-            ln -s $wbase/Formula $wbtap/Formula
-    fi
-
     if [ ! -d `brew --repository homebrew/core` ]; then
         brew tap homebrew/core
+    fi
+
+    local mytap=`brew --repository anrip/webox`
+
+    if [ ! -e $mytap/Formula ]; then
+        mkdir -p $mytap && ln -s $wbase/Formula $mytap
     fi
 
 }
 
 brew_install() {
 
+    if [ -f $wbase/Formula/$1.sh ]; then
+        source $wbase/Formula/$1.sh
+        brew_install_$1
+        if_exit $?
+        return
+    fi
+
     if [ -f $wbase/Formula/$1.rb ]; then
         brew install -v anrip/webox/$1
-        if [ ! -d $whome/$1 ]; then
-            exit 1
-        fi
-        return 0
+    else
+        brew install -v $1
     fi
 
-    if [ -f $wbase/Formula/$1.sh ]; then
-        $wbase/Formula/$1.sh
-        return $?
+    if [ ! -d $whome/$1 ]; then
+        exit 1
     fi
-
-    brew install -v $1
 
 }
 

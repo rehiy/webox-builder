@@ -5,11 +5,11 @@ if [ ! -e $whome/lib/gcc ]; then
     brew_install gcc
 fi
 
-if [ ! -e $whome/lib/ld.so ]; then
+if [ ! -e $whome/cell/glibc ]; then
     brew_install glibc
 fi
 
-if [ ! -e $whome/lib/libpcre.so ]; then
+if [ ! -e $whome/cell/libpcre ]; then
     brew_install libpcre
 fi
 

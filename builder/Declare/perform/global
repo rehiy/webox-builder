@@ -1,6 +1,12 @@
 #!/bin/bash
 #
 
+if_exit() {
+
+    [ $1 -eq 0 ] || exit $1
+
+}
+
 copy_parents() {
 
     [ -d $1 ] && cp -av --parents $@

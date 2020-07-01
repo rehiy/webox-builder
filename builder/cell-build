@@ -1,13 +1,13 @@
 #!/bin/bash
 #
 
-source Declare/runtime
+source `pwd`/Declare/runtime
 
 env_initialize
 
 ##############################################BUILD##################
 
-brew_install preload
+source $wbase/Declare/preload
 
 brew_install nginx
 

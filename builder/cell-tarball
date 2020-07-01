@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-source Declare/runtime
+source `pwd`/Declare/runtime
 
 env_initialize
 
