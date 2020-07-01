@@ -11,10 +11,10 @@ brew_install glibc
 
 brew_install libxml2
 
+brew_install nginx
+
 brew_install php
 brew_install php-ext
-
-brew_install nginx
 
 brew_install mysql
 brew_install redis

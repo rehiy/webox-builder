@@ -32,7 +32,7 @@ app_dataset() {
         touch ${whome}/etc/redis/conf.d/override.conf
     fi
 
-    app_userlet ${whome}/etc/redis
+    chown -R 0:0 ${whome}/etc/redis
 
 }
 

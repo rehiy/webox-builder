@@ -28,7 +28,7 @@ app_dataset() {
         ln -s ${wbapp}/php/etc ${whome}/etc/php
     fi
 
-    app_userlet ${whome}/etc/php
+    chown -R 0:0 ${whome}/etc/php
 
 }
 

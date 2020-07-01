@@ -39,7 +39,7 @@ app_dataset() {
         ln -s ${wbapp}/mysql/etc ${whome}/etc/mysql
     fi
 
-    app_userlet ${whome}/etc/mysql
+    chown -R 0:0 ${whome}/etc/mysql
 
     if [ ! -f $1/ibdata1 ]; then
         mysqld --initialize-insecure --user=$APP_USER
