@@ -16,3 +16,7 @@ fi
 if [ ! -e $whome/include/libxml ]; then
     brew_install libxml2
 fi
+
+if [ ! -e $whome/cell/imagemagick@6 ]; then
+    sed -i "/keg_only/d" `brew --repository homebrew/core`/Formula/imagemagick@6.rb
+fi
