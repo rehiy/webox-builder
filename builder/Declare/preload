@@ -9,8 +9,8 @@ if [ ! -e $whome/cell/glibc ]; then
     brew_install glibc
 fi
 
-if [ ! -e $whome/cell/libpcre ]; then
-    brew_install libpcre
+if [ ! -e $whome/cell/pcre ]; then
+    brew_install pcre
 fi
 
 if [ ! -e $whome/include/libxml ]; then
