@@ -107,9 +107,9 @@ app_result() {
     local ERROR=${3:-failed}
 
     if [ $CODE -eq 0 ]; then
-        echo "$1 php \033[32m$RIGHT \033[0m"
+        echo "$1 php $RIGHT"
     else
-        echo "$1 php \033[31m$ERROR \033[0m"
+        echo "$1 php $ERROR"
     fi
 
     exit $CODE
