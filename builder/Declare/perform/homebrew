@@ -42,7 +42,7 @@ brew_install() {
 
 }
 
-brew_ceanup() {
+brew_cleanup() {
 
     local vvv
 

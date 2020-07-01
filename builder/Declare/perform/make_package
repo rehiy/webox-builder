@@ -46,7 +46,7 @@ make_package() {
     rm -rf $target/cell/*/*/share/man/
 
     rm -rf $target/cell/icu4c/*/lib/icu/
-    rm -rf $target/cell/gcc@6/*/lib/gcc/6/gcc/
+    rm -rf $target/cell/gcc*/*/lib/gcc/*/gcc/
     rm -rf $target/cell/python*/*/lib/python*/
 
     rm -rf $target/lib/python*/

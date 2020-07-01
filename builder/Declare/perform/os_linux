@@ -8,9 +8,13 @@ deps_install() {
         apt update
     fi
 
-    if [ ! -d /usr/share/i18n ]; then
-        apt install -y busybox locales
+    if [ ! -d /usr/share/i18n/locales ]; then
+        apt install -y locales
         localedef -i en_US -f UTF-8 en_US.UTF-8
+    fi
+
+    if ! type busybox >/dev/null 2>&1; then
+        apt install -y busybox
         busybox --install -s
     fi
 
