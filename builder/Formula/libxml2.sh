@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 
-if [ ! -e $whome/include/libxml2 ]; then
-    brew install libxml2
+if [ ! -e $whome/cell/libxml2 ]; then
+    brew install -v libxml2
 fi
 
 if [ ! -e $whome/include/libxml ]; then

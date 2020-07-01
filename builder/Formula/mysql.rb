@@ -5,13 +5,10 @@ class Mysql < Formula
     sha256 "00f514124de2bad1ba7b380cbbd46e316cae7fc7bc3a5621456cabf352f27978"
 
     depends_on "cmake" => :build
+    depends_on "pkg-config" => :build
     depends_on "openssl@1.1"
 
     uses_from_macos "libedit"
-
-    on_linux do
-      depends_on "pkg-config" => :build
-    end
 
     def install
       ENV.append_to_cflags "-fPIC" unless OS.mac?
@@ -102,4 +99,4 @@ class Mysql < Formula
       Process.kill(9, pid)
       Process.wait(pid)
     end
-  end
+end

@@ -28,13 +28,16 @@ taps_register() {
 
 brew_install() {
 
-    if [ -f $wbase/Formula/$1.sh ]; then
-        $wbase/Formula/$1.sh
-        return $?
-    fi
-
     if [ -f $wbase/Formula/$1.rb ]; then
         brew install -v anrip/webox/$1
+        if [ ! -d $whome/$1 ]; then
+            exit 1
+        fi
+        return 0
+    fi
+
+    if [ -f $wbase/Formula/$1.sh ]; then
+        $wbase/Formula/$1.sh
         return $?
     fi
 

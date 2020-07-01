@@ -7,9 +7,7 @@ env_initialize
 
 ##############################################BUILD##################
 
-brew_install glibc
-
-brew_install libxml2
+brew_install preload
 
 brew_install nginx
 

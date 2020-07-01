@@ -12,7 +12,7 @@ class PhpExt < Formula
     depends_on "freetype"
     depends_on "gettext"
     depends_on "gd"
-    depends_on "imagemagick"
+    depends_on "imagemagick@6"
     depends_on "jpeg"
     depends_on "libffi"
     depends_on "libmaxminddb"
