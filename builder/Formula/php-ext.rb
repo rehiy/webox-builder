@@ -7,6 +7,7 @@ class PhpExt < Formula
     depends_on "autoconf" => :build
     depends_on "pkg-config" => :build
 
+    depends_on "anrip/webox/php"
     depends_on "curl-openssl"
     depends_on "freetype"
     depends_on "gettext"
@@ -46,11 +47,11 @@ class PhpExt < Formula
     def install
       @log = prefix/"install.log"
       @log.write ">> start\n"
-      php_ext_inst
-    end
 
-    def php_ext_inst
-      @name = "php"
+      # Link lib to php/lib
+      unless lib.exist?
+        system "ln -s ../../php/#{version}/lib #{prefix}/"
+      end
 
       # Prevent homebrew from harcoding path to sed shim in phpize script
       ENV["lt_cv_path_SED"] = "sed"

@@ -10,14 +10,14 @@ fi
 
 export osvar=$([ `uname` = "Darwin" ] && echo macos || echo linux)
 
-##############################################INCLUDE################
+##############################################HELPERS################
 
-source $wbase/Declare/perform/global
-source $wbase/Declare/perform/homebrew
-source $wbase/Declare/perform/os_$osvar
+source $wbase/Declare/helper/global
+source $wbase/Declare/helper/homebrew
+source $wbase/Declare/helper/os_$osvar
 
-source $wbase/Declare/perform/make_package
-source $wbase/Declare/perform/make_profile
+source $wbase/Declare/helper/make_package
+source $wbase/Declare/helper/make_profile
 
 env_initialize() {
 

@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+
+export APP_USER=daemon
+export APP_GROUP=daemon
+
+#####################################################################
+
+app_userlet() {
+
+    chown -R $APP_USER:$APP_GROUP $1
+
+    find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+    find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+
+}
+
+app_dataset() {
+
+    local DIR
+
+    for DIR in log run tmp; do
+        mkdir -p ${whome}/var/$DIR/nginx
+        app_userlet ${whome}/var/$DIR/nginx
+    done
+
+    if [ ! -d ${whome}/var/tmp/nginx/proxy_cache ]; then
+        mkdir -p ${whome}/var/tmp/nginx/proxy_cache
+    fi
+
+    app_userlet ${whome}/var/tmp/nginx/proxy_cache
+
+    if [ ! -e ${whome}/etc/nginx ]; then
+        ln -s ${wbapp}/nginx/etc ${whome}/etc/nginx
+    fi
+
+    app_userlet ${whome}/etc/nginx
+
+}
+
+#####################################################################
+
+if [ "$1" = "prepare" ]; then
+    app_dataset
+fi

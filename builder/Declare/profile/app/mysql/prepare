@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+
+export APP_USER=daemon
+export APP_GROUP=daemon
+
+#####################################################################
+
+app_userlet() {
+
+    chown -R $APP_USER:$APP_GROUP $1
+
+    if [ -f $1/ibdata1 ]; then
+        find $1 \( ! -perm 0640 -type f \) -exec chmod 0640 {} \;
+        find $1 \( ! -perm 0750 -type d \) -exec chmod 0750 {} \;
+    else
+        find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+        find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+    fi
+
+}
+
+app_dataset() {
+
+    local DIR
+
+    for DIR in lib log run tmp; do
+        mkdir -p ${whome}/var/$DIR/mysql
+        app_userlet ${whome}/var/$DIR/mysql
+    done
+
+    if [ ! -f ${whome}/var/log/mysql/error.log ]; then
+        touch ${whome}/var/log/mysql/error.log
+    fi
+
+    app_userlet ${whome}/var/log/mysql
+
+    if [ ! -e ${whome}/etc/mysql ]; then
+        ln -s ${wbapp}/mysql/etc ${whome}/etc/mysql
+    fi
+
+    app_userlet ${whome}/etc/mysql
+
+    if [ ! -f $1/ibdata1 ]; then
+        mysqld --initialize-insecure --user=$APP_USER
+    fi
+
+}
+
+#####################################################################
+
+if [ "$1" = "prepare" ]; then
+    app_dataset
+fi

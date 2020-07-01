@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+
+make_package() {
+
+    local vv vvv
+    local target=${1:-srv/webox}
+
+    mkdir -p $target
+
+    # 最小化复制软件包
+
+    cd $whome
+
+    for vvv in bin lib opt sbin; do
+        copy_parents $vvv $target
+    done
+
+    for vvv in `ls cell/`; do
+        for vv in `ls cell/$vvv/`; do
+            copy_parents cell/$vvv/$vv/lib $target
+            copy_parents cell/$vvv/$vv/lib64 $target
+        done
+    done
+
+    for vvv in nginx mysql php redis; do
+        for vv in `ls cell/$vvv/`; do
+            copy_parents cell/$vvv/$vv/bin $target
+            copy_parents cell/$vvv/$vv/sbin $target
+            copy_parents cell/$vvv/$vv/share $target
+        done
+        copy_parents share/$vvv $target
+    done
+
+    copy_parents etc/openssl@1.1 $target
+
+    cd -
+
+    # 清理不必要的文件
+
+    echo "Clean up $target ..."
+
+    rm -rf $target/bin/brew
+
+    rm -rf $target/cell/*/*/share/doc/
+    rm -rf $target/cell/*/*/share/man/
+
+    rm -rf $target/cell/icu4c/*/lib/icu/
+    rm -rf $target/cell/gcc*/*/lib/gcc/*/gcc/
+    rm -rf $target/cell/python*/*/lib/python*/
+
+    rm -rf $target/lib/python*/
+
+    find $target -name "pkgconfig" | xargs rm -rf
+    find $target -name ".keepme" -type f -delete
+    find $target -name "*.la" -type f -delete
+    find $target -name "*.la" -type l -delete
+    find $target -name "*.a" -type f -delete
+    find $target -name "*.a" -type l -delete
+
+    # 清理失效的软连接
+
+    for vvv in `find $target -type l`; do
+        [ -e $vvv ] || rm -f $vvv
+    done
+
+    # 优化二进制文件
+
+    strip_binary $target/cell
+
+    # 清理空目录
+
+    #rm_empty_dir $target
+
+}
