@@ -33,7 +33,7 @@ class Nginx < Formula
         --conf-path=#{etc}/nginx/nginx.conf
         --pid-path=#{var}/run/nginx/nginx.pid
         --lock-path=#{var}/run/nginx/nginx.lock
-        --http-client-body-temp-path=#{var}/tmp/nginx/client-body
+        --http-client-body-temp-path=#{var}/tmp/nginx/client_body
         --http-fastcgi-temp-path=#{var}/tmp/nginx/fastcgi
         --http-proxy-temp-path=#{var}/tmp/nginx/proxy
         --http-scgi-temp-path=#{var}/tmp/nginx/scgi
