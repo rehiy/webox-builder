@@ -30,7 +30,7 @@ wbx_install() {
 
     for APP_NAME in $APP_LIST; do
         APP_INIT=${wbapp}/$APP_NAME/prepare
-        [ -x $APP_INIT ] && $APP_INIT prepare
+        [ -x $APP_INIT ] && $APP_INIT once
     done
 
 }
@@ -38,7 +38,7 @@ wbx_install() {
 wbx_service() {
 
     if [ $# -eq 0 ]; then
-        wbx_error "bad service args"
+        wbx_error "miss service args"
     fi
 
     if [ ! -x ${wbapp}/$1/service ]; then

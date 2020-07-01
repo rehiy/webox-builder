@@ -103,6 +103,7 @@ app_usage() {
 app_result() {
 
     local CODE=$?
+
     local RIGHT=${2:-done}
     local ERROR=${3:-failed}
 
