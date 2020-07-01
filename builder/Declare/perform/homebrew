@@ -46,7 +46,7 @@ brew_cleanup() {
 
     local vvv
 
-    rm -rf deps-*.txt
+    rm -f deps-*.txt
 
     brew deps --tree "$@" \
         | sed "s/[│─├└─]//g;s/ //g" \
@@ -64,7 +64,7 @@ brew_cleanup() {
         brew rm -f `cat deps-no.txt`
     fi
 
-    rm -rf deps-*.txt
+    rm -f deps-*.txt
 
     brew cleanup
 
