@@ -5,6 +5,7 @@ make_package() {
 
     local vv vvv
     local target=${1:-srv/webox}
+    local cellar=${2:-nginx php}
 
     mkdir -p $target
 
@@ -23,7 +24,7 @@ make_package() {
         done
     done
 
-    for vvv in nginx mysql php redis; do
+    for vvv in $cellar; do
         for vv in `ls cell/$vvv/`; do
             copy_parents cell/$vvv/$vv/bin $target
             copy_parents cell/$vvv/$vv/sbin $target
