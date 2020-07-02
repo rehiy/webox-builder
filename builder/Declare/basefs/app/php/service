@@ -21,6 +21,7 @@ app_start() {
     for POOL in `ls ${whome}/etc/php/pool.d/*.conf`; do
 
         POOL=${POOL%.*}
+        POOL=${POOL##*/}
 
         mkdir -p ${htdoc}/${POOL}
         mkdir -p ${whome}/var/log/php/${POOL}

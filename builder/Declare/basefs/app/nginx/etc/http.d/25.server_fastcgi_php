@@ -9,8 +9,8 @@ location ~ \.php$ {
     if ($safedir = "") {
         set $safedir $sitedir;
     }
-    set $vardirs ${whome}/var/log/$pooldir;
-    set $vardirs ${whome}/var/log/$pooldir:$vardirs;
+    set $vardirs ${whome}/var/log/$pool;
+    set $vardirs ${whome}/var/tmp/$pool:$vardirs;
 
     fastcgi_param PHP_ADMIN_VALUE "open_basedir=$vardirs:$safedir";
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
