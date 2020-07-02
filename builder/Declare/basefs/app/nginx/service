@@ -1,8 +1,8 @@
 #!/bin/sh
 #
 
-export APP_BIN_FILE=${whome}/sbin/nginx
-export APP_PID_FILE=${whome}/var/run/nginx/nginx.pid
+APP_BIN_FILE=${whome}/sbin/nginx
+APP_PID_FILE=${whome}/var/run/nginx/nginx.pid
 
 #####################################################################
 
@@ -73,7 +73,7 @@ app_check() {
 
 app_usage() {
 
-    local DOES="start|stop|reload|restart|status"
+    DOES="start|stop|reload|restart|status"
 
     if ! echo "|$DOES|" | grep -q "|$1|"; then
         echo "Usage: wkit nginx {$DOES}"
@@ -84,10 +84,10 @@ app_usage() {
 
 app_result() {
 
-    local CODE=$?
+    CODE=$?
 
-    local RIGHT=${2:-done}
-    local ERROR=${3:-failed}
+    RIGHT=${2:-done}
+    ERROR=${3:-failed}
 
     if [ $CODE -eq 0 ]; then
         echo "$1 nginx $RIGHT"

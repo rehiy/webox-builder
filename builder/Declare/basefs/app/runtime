@@ -4,7 +4,7 @@
 export WBX_VERSION=12
 
 if [ -z "$WBX_APPS" ]; then
-    export WBX_APPS='mysql nginx php redis'
+    export WBX_APPS="mysql nginx php redis"
 fi
 
 if ! echo $PATH | grep -q ${whome}; then

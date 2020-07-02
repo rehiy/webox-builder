@@ -1,8 +1,8 @@
 #!/bin/sh
 #
 
-export APP_USER=daemon
-export APP_GROUP=daemon
+APP_USER=daemon
+APP_GROUP=daemon
 
 #####################################################################
 
@@ -17,11 +17,9 @@ app_userlet() {
 
 app_dataset() {
 
-    local DIR
-
-    for DIR in log run tmp; do
-        mkdir -p ${whome}/var/$DIR/nginx
-        app_userlet ${whome}/var/$DIR/nginx
+    for SDIR in log run tmp; do
+        mkdir -p ${whome}/var/$SDIR/nginx
+        app_userlet ${whome}/var/$SDIR/nginx
     done
 
     if [ ! -d ${whome}/var/tmp/nginx/proxy_cache ]; then
