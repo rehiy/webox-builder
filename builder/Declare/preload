@@ -18,5 +18,5 @@ if [ ! -e $webox/include/libxml ]; then
 fi
 
 if [ ! -e $webox/cell/imagemagick@6 ]; then
-    sed -i "/keg_only/d" `brew --repository homebrew/core`/Formula/imagemagick@6.rb
+    sed -i~ "/keg_only/d" `brew --repository homebrew/core`/Formula/imagemagick@6.rb
 fi
