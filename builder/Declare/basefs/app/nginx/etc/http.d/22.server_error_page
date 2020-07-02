@@ -1,9 +1,9 @@
 ##
-# Server Error Page
+# Server - Error Page
 ##
 
 location /errpage/ {
-    alias ${htdoc}/default/miss/;
+    alias ${htdoc}/assets/;
 }
 
 error_page 403 /errpage/403.htm;

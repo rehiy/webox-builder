@@ -1,5 +1,5 @@
 ##
-# Proxy Cache Enable
+# Proxy - Cache Enable
 ##
 
 proxy_cache proxy_cache;

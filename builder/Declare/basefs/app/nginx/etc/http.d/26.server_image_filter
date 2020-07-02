@@ -1,5 +1,5 @@
 ##
-# Server Image Filter
+# Server - Image Filter
 ##
 
 if ($args ~ ^r\d+x\d+$) {

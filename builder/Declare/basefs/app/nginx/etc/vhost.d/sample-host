@@ -12,7 +12,7 @@ server {
         rewrite ^/?(.*)$ http://www.$host/$1 last;
     }
     if ($host ~* ([^\.]+)\.([^\.]+)\.([a-z]+)$) {
-        set $sitedir $pooldir/web/$3.$2.$1;
+        set $sitedir $pooldir/$3.$2.$1;
     }
 
     root  $sitedir;
