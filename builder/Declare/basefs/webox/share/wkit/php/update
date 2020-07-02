@@ -6,6 +6,17 @@ APP_GROUP=daemon
 
 #####################################################################
 
+app_dataset() {
+
+    chown -R 0:0 ${whome}/etc/php
+
+    for SDIR in log run tmp; do
+        mkdir -p ${whome}/var/$SDIR/php
+        app_userlet ${whome}/var/$SDIR/php
+    done
+
+}
+
 app_userlet() {
 
     chown -R $APP_USER:$APP_GROUP $1
@@ -15,23 +26,8 @@ app_userlet() {
 
 }
 
-app_dataset() {
-
-    for SDIR in log run tmp; do
-        mkdir -p ${whome}/var/$SDIR/php
-        app_userlet ${whome}/var/$SDIR/php
-    done
-
-    if [ ! -e ${whome}/etc/php ]; then
-        ln -s ${wbapp}/php/etc ${whome}/etc/php
-    fi
-
-    chown -R 0:0 ${whome}/etc/php
-
-}
-
 #####################################################################
 
-if [ "$1" = "once" ]; then
+if [ "$1" = "auto" ]; then
     app_dataset
 fi

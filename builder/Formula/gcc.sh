@@ -11,7 +11,7 @@ brew_install_gcc() {
     cd $whome
 
     for vvv in `find cell/gcc@7/ -name "*.so.*"`; do
-        ln -s -f ../$vvv $whome/lib
+        ln -sf ../$vvv $whome/lib
     done
 
     cd -

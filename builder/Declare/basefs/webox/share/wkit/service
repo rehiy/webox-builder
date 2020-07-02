@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+
+export WBX_VERSION=12
+
+export WBX_UTIL=${whome}/share/wkit
+
+if [ -z "$WBX_APPS" ]; then
+    export WBX_APPS=`ls $WBX_UTIL`
+fi
+
+if ! echo $PATH | grep -q ${whome}; then
+    export PATH=${whome}/bin:${whome}/sbin:$PATH
+fi
+
+#####################################################################
+
+export ETC_VERSION=0
+
+if [ -f ${whome}/etc/version ]; then
+    ETC_VERSION=`cat ${whome}/etc/version`
+fi
+
+if [ $ETC_VERSION -lt $WBX_VERSION ]; then
+
+    echo $WBX_VERSION >${whome}/etc/version
+
+    ln -sf $WBX_UTIL/service /bin/wkit
+
+    for WBX_APP in $WBX_APPS; do
+        if [ -x $WBX_UTIL/$WBX_APP/update ]; then
+            $WBX_UTIL/$WBX_APP/update auto
+        fi
+    done
+
+fi
+
+#####################################################################
+
+wbx_service() {
+    if [ -x $WBX_UTIL/$1/service ]; then
+        $WBX_UTIL/$1/service $2
+    else
+        echo "[WKIT] invalid service: $1"
+    fi
+}
+
+if [ $# -eq 0 ]; then
+    echo "[WKIT] miss service args"
+    exit 1
+fi
+
+if [ $# -eq 1 ]; then
+    for WBX_APP in $WBX_APPS; do
+        wbx_service $WBX_APP $1
+    done
+    exit $?
+fi
+
+wbx_service "$@"

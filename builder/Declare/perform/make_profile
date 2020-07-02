@@ -10,25 +10,33 @@ make_profile() {
 
     # 复制配置文件
 
-    cp -r -f $wbase/Declare/basefs/* $target/
-    chmod +x $target/app/*/* $target/app/srvkit
+    cp -rf $wbase/Declare/basefs/* $target/
+    ln -sf webox/share/wkit/service $target/service
+
+    chmod -R +x $target/webox/share/wkit
 
     # 替换预置变量
 
-    grep '${htdoc}' -rl $target/app | while read -r vvv; do
-        sed -i~ "s#\${htdoc}#$wbase/htdoc#g" $vvv
+    for vvv in `grep '${\w\+}' -rl $target/webox/etc`; do
+        make_profile_sed $vvv
     done
 
-    grep '${wbapp}' -rl $target/app | while read -r vvv; do
-        sed -i~ "s#\${wbapp}#$wbase/app#g" $vvv
+    for vvv in `grep '${\w\+}' -rl $target/webox/share/wkit`; do
+        make_profile_sed $vvv
     done
 
-    grep '${whome}' -rl $target/app | while read -r vvv; do
-        sed -i~ "s#\${whome}#$whome#g" $vvv
-    done
+}
 
-    # 清理临时文件
+make_profile_sed() {
 
-    find $target/app -name "*~" -type f -delete
+    local htdoc=$wbase/htdoc
+    local whome=$wbase/webox
+
+    sed -i~ \
+        -e "s#\${htdoc}#$htdoc#g" \
+        -e "s#\${whome}#$whome#g" \
+        $1
+
+    find $1 -name "*~" -type f -delete
 
 }

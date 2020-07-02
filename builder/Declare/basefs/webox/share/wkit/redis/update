@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+
+APP_USER=daemon
+APP_GROUP=daemon
+
+#####################################################################
+
+app_dataset() {
+
+    chown -R 0:0 ${whome}/etc/redis
+
+    for SDIR in lib log run tmp; do
+        mkdir -p ${whome}/var/$SDIR/redis
+        app_userlet ${whome}/var/$SDIR/redis
+    done
+
+}
+
+app_userlet() {
+
+    chown -R $APP_USER:$APP_GROUP $1
+
+    find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+    find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+
+}
+
+#####################################################################
+
+if [ "$1" = "auto" ]; then
+    app_dataset
+fi
