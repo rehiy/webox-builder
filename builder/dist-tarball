@@ -1,11 +1,20 @@
 #!/bin/bash
 #
 
-rm -rf srv-dist/webox/etc/version
-rm -rf srv-dist/webox/var/*/*
+source `pwd`/Declare/runtime
 
-mv srv-dist srv
+mini=$wbsrc/srv-mini
 
-tar czvf webox-linux-v12.tgz srv/
+##############################################MINIFY#################
 
-mv srv srv-dist
+mv $mini srv
+
+rm -rf srv/etc/version
+rm -rf srv/var/lib/*/*
+rm -rf srv/var/log/*/*
+rm -rf srv/var/run/*/*
+rm -rf srv/var/tmp/*/*
+
+tar czvf webox-linux-v12.tgz srv
+
+mv srv $mini

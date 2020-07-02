@@ -15,7 +15,7 @@ brew_install_glibc() {
         apt install -y gawk bison python3
     fi
 
-    if [ ! -d $whome/cell/glibc ]; then
+    if [ ! -d $webox/cell/glibc ]; then
         brew install -v glibc
     fi
 

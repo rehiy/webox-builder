@@ -1,28 +1,27 @@
 #!/bin/bash
 #
 
-if [ -z "$whome" ]; then
-    export wbase=`pwd`
-    export whome=$wbase/webox
+export webox='/srv'
+export wbsrc=`dirname $0`
+
+if ! echo $PATH | grep -q $webox; then
+    export PATH=$webox/bin:$webox/sbin:$PATH
 fi
 
-if ! echo $PATH | grep -q $whome; then
-    export PATH=$whome/bin:$whome/sbin:$PATH
-fi
-
-if [ -z "$wplat" ]; then
-    export wplat=$([ `uname` = "Darwin" ] && echo macos || echo linux)
-fi
+export wplat=$([ `uname` = "Darwin" ] && echo macos || echo linux)
 
 ##############################################HELPERS################
 
-source $wbase/Declare/perform/global
-source $wbase/Declare/perform/homebrew
-source $wbase/Declare/perform/os_$wplat
+source $wbsrc/Declare/perform/global
+source $wbsrc/Declare/perform/homebrew
+source $wbsrc/Declare/perform/os_$wplat
 
-source $wbase/Declare/perform/make_package
-source $wbase/Declare/perform/make_profile
+source $wbsrc/Declare/perform/make_package
+source $wbsrc/Declare/perform/make_profile
 
 env_initialize() {
     deps_install && homebrew_init
+    if [ "$1" = "build" ]; then
+        source $wbsrc/Declare/preload
+    fi
 }

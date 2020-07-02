@@ -3,11 +3,11 @@
 
 homebrew_init() {
 
-    if [ ! -x $whome/bin/brew ]; then
-        git clone https://github.com/Homebrew/brew.git $whome
+    if [ ! -x $webox/bin/brew ]; then
+        git clone https://github.com/Homebrew/brew.git $webox
     fi
 
-    sed -i~ "s#/Cellar#/cell#g" $whome/Library/Homebrew/brew.sh
+    sed -i~ "s#/Cellar#/cell#g" $webox/Library/Homebrew/brew.sh
 
     if [ ! -d `brew --repository homebrew/core` ]; then
         brew tap homebrew/core
@@ -16,27 +16,27 @@ homebrew_init() {
     local mytap=`brew --repository anrip/webox`
 
     if [ ! -e $mytap/Formula ]; then
-        mkdir -p $mytap && ln -s $wbase/Formula $mytap
+        mkdir -p $mytap && ln -s $wbsrc/Formula $mytap
     fi
 
 }
 
 brew_install() {
 
-    if [ -f $wbase/Formula/$1.sh ]; then
-        source $wbase/Formula/$1.sh
+    if [ -f $wbsrc/Formula/$1.sh ]; then
+        source $wbsrc/Formula/$1.sh
         brew_install_$1
         if_exit $?
         return
     fi
 
-    if [ -f $wbase/Formula/$1.rb ]; then
+    if [ -f $wbsrc/Formula/$1.rb ]; then
         brew install -v anrip/webox/$1
     else
         brew install -v $1
     fi
 
-    if [ ! -d $whome/cell/$1 ]; then
+    if [ ! -d $webox/cell/$1 ]; then
         exit 1
     fi
 

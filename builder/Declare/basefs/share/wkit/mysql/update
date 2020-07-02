@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+
+APP_USER=daemon
+APP_GROUP=daemon
+
+#####################################################################
+
+app_dataset() {
+
+    chown -R 0:0 ${webox}/etc/mysql
+
+    for SDIR in lib log run tmp; do
+        mkdir -p ${webox}/var/$SDIR/mysql
+        app_userlet ${webox}/var/$SDIR/mysql
+    done
+
+    if [ ! -f ${webox}/var/log/mysql/error.log ]; then
+        touch ${webox}/var/log/mysql/error.log
+        app_userlet ${webox}/var/log/mysql
+    fi
+
+    if [ ! -f $1/ibdata1 ]; then
+        mysqld --initialize-insecure --user=$APP_USER
+    fi
+
+}
+
+app_userlet() {
+
+    chown -R $APP_USER:$APP_GROUP $1
+
+    if [ -f $1/ibdata1 ]; then
+        find $1 \( ! -perm 0640 -type f \) -exec chmod 0640 {} \;
+        find $1 \( ! -perm 0750 -type d \) -exec chmod 0750 {} \;
+    else
+        find $1 \( ! -perm 0644 -type f \) -exec chmod 0644 {} \;
+        find $1 \( ! -perm 0755 -type d \) -exec chmod 0755 {} \;
+    fi
+
+}
+
+#####################################################################
+
+if [ "$1" = "auto" ]; then
+    app_dataset
+fi

@@ -4,14 +4,14 @@
 make_package() {
 
     local vv vvv
-    local target=${1:-srv/webox}
+    local target=${1:-mini}
     local cellar=${2:-nginx php}
 
     mkdir -p $target
 
     # 最小化复制软件包
 
-    cd $whome
+    cd $webox
 
     for vvv in bin lib opt sbin; do
         copy_parents $vvv $target

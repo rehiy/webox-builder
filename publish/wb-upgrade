@@ -10,16 +10,16 @@ else
 fi
 
 if type wget >/dev/null; then
-    wget -c -O ${name} http://get.vmlu.com/webox/${name}
+    wget -c -O $name http://get.vmlu.com/webox/$name
 else
-    curl -C - -o ${name} http://get.vmlu.com/webox/${name}
+    curl -C - -o $name http://get.vmlu.com/webox/$name
 fi
 
-echo "Updating with ${name}"
-tar -xf ${name} && rm ${name}
+echo "Updating with $name"
+tar -xf $name && rm $name
 
-if [ ! -d ~/srv/webox ]; then
-    echo "Can't download ${name}"
+if [ ! -d ~/srv/share/wkit ]; then
+    echo "Can't download $name"
     exit 1
 fi
 

@@ -3,14 +3,12 @@
 
 source `pwd`/Declare/runtime
 
-env_initialize
+mini=$wbsrc/srv-mini
 
 ##############################################MINIFY#################
 
-mini=$wbase/srv-dist
-
 brew_cleanup gcc@7 glibc mysql nginx node php php-ext redis
 
-make_package $mini/webox "mysql nginx node php redis"
+make_package $mini "mysql nginx node php redis"
 
 make_profile $mini
