@@ -10,7 +10,7 @@ make_profile() {
 
     # 复制配置文件
 
-    cp -rf $wbsrc/Declare/basefs/* $target/
+    cp -rf $wbase/Declare/basefs/* $target/
     ln -sf $webox/share/wkit/service $target/service
 
     chmod -R +x $target/share/wkit

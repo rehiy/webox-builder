@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-source `pwd`/Declare/runtime
+source Declare/runtime
 
 env_initialize build
 

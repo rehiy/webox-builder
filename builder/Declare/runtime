@@ -1,8 +1,9 @@
 #!/bin/bash
 #
 
-export webox='/srv'
-export wbsrc=`dirname $0`
+export webox=/srv
+
+export wbase=`dirname $(readlink -f $0)`
 
 if ! echo $PATH | grep -q $webox; then
     export PATH=$webox/bin:$webox/sbin:$PATH
@@ -12,16 +13,19 @@ export wplat=$([ `uname` = "Darwin" ] && echo macos || echo linux)
 
 ##############################################HELPERS################
 
-source $wbsrc/Declare/perform/global
-source $wbsrc/Declare/perform/homebrew
-source $wbsrc/Declare/perform/os_$wplat
+source Declare/perform/global
+source Declare/perform/homebrew
+source Declare/perform/os_$wplat
 
-source $wbsrc/Declare/perform/make_package
-source $wbsrc/Declare/perform/make_profile
+source Declare/perform/make_package
+source Declare/perform/make_profile
 
 env_initialize() {
+
     deps_install && homebrew_init
+
     if [ "$1" = "build" ]; then
-        source $wbsrc/Declare/preload
+        source Declare/preload
     fi
+
 }

@@ -1,9 +1,9 @@
 #!/bin/bash
 #
 
-source `pwd`/Declare/runtime
+source Declare/runtime
 
-mini=$wbsrc/srv-mini
+mini=$wbase/srv-mini
 
 ##############################################MINIFY#################
 

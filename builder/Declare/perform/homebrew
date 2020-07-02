@@ -16,21 +16,21 @@ homebrew_init() {
     local mytap=`brew --repository anrip/webox`
 
     if [ ! -e $mytap/Formula ]; then
-        mkdir -p $mytap && ln -s $wbsrc/Formula $mytap
+        mkdir -p $mytap && ln -s $wbase/Formula $mytap
     fi
 
 }
 
 brew_install() {
 
-    if [ -f $wbsrc/Formula/$1.sh ]; then
-        source $wbsrc/Formula/$1.sh
+    if [ -f $wbase/Formula/$1.sh ]; then
+        source $wbase/Formula/$1.sh
         brew_install_$1
         if_exit $?
         return
     fi
 
-    if [ -f $wbsrc/Formula/$1.rb ]; then
+    if [ -f $wbase/Formula/$1.rb ]; then
         brew install -v anrip/webox/$1
     else
         brew install -v $1
