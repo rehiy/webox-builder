@@ -19,7 +19,7 @@ sudo /srv/service start
 
 ## put your files to host's webroot path
 
-If the host is `www.anrip.com`, the webroot will be `/srv/htdoc/defualt/web/com.anrip.www/`
+If the host is `www.anrip.net`, the webroot will be `/srv/htdoc/defualt/net.anrip.www/`
 
 # Manual Control Services
 
