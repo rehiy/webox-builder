@@ -26,7 +26,7 @@ If the host is `www.anrip.net`, the webroot will be `/srv/htdoc/defualt/net.anri
 ## fix ENV to run commands such as `mysql`
 
 ```shell
-. /srv/app/runtime
+PATH=/srv/webox/bin:/srv/webox/sbin:$PATH
 ```
 
 ## configure the modules you need
