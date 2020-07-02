@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+
+rm -rf srv-dist/webox/etc/version
+rm -rf srv-dist/webox/var/*/*
+
+mv srv-dist srv
+
+tar czvf webox-linux-v12.0.tgz srv/
+
+mv srv srv-dist
