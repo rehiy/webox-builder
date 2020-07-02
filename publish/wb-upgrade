@@ -3,9 +3,13 @@
 
 cd ~
 
-name=Webox-$(uname -s)-$(uname -m).tgz
+if [ `uname` = "Darwin" ]; then
+    name=webox-macos-v10.tgz
+else
+    name=webox-linux-v11.tgz
+fi
 
-if type wget >/dev/null 2>&1; then
+if type wget >/dev/null; then
     wget -c -O ${name} http://get.vmlu.com/webox/${name}
 else
     curl -C - -o ${name} http://get.vmlu.com/webox/${name}
@@ -22,8 +26,6 @@ fi
 ####################################################################
 
 [ -x /srv/service ] && /srv/service stop
-
-rm -rf /var/lib/webox
 
 cp -au ~/srv/* /srv/
 rm -rf ~/srv/
