@@ -33,7 +33,7 @@ app_start() {
 
     done
 
-    $APP_BIN_FILE -p ${webox}
+    $APP_BIN_FILE
 
 }
 
