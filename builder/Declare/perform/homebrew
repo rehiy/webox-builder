@@ -54,7 +54,7 @@ brew_cleanup() {
         | sort -k2n | uniq \
         > deps-yes.txt
 
-    for vvv in `ls webox/cell`; do
+    for vvv in `ls $webox/cell`; do
         if ! grep -q "^$vvv$" deps-yes.txt; then
             echo $vvv >>deps-no.txt
         fi
