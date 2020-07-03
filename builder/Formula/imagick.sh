@@ -8,6 +8,8 @@ brew_install_imagick() {
         if_exit $?
     fi
 
-    brew link --force imagemagick@6
+    if [ ! -e $webox/lib/ImageMagick ]; then
+        brew link --force imagemagick@6
+    fi
 
 }

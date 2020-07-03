@@ -20,7 +20,7 @@ app_dataset() {
         app_userlet ${webox}/var/log/mysql
     fi
 
-    if [ ! -f $1/ibdata1 ]; then
+    if [ ! -d ${webox}/var/lib/ibdata1 ]; then
         mysqld --initialize-insecure --user=$APP_USER
     fi
 

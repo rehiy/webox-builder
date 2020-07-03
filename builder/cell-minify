@@ -3,6 +3,8 @@
 
 source Declare/runtime
 
+load_modules
+
 mini=$wbase/srv-mini
 
 ##############################################MINIFY#################

@@ -3,7 +3,7 @@
 
 source Declare/runtime
 
-env_initialize build
+init_toolchain
 
 ##############################################BUILD##################
 

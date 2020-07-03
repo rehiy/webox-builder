@@ -3,11 +3,15 @@
 
 homebrew_init() {
 
+    export HOMEBREW_NO_AUTO_UPDATE=1
+
     if [ ! -x $webox/bin/brew ]; then
         git clone https://github.com/Homebrew/brew.git $webox
     fi
 
-    sed -i~ "s#/Cellar#/cell#g" $webox/Library/Homebrew/brew.sh
+    if grep -q "/Cellar" $webox/Library/Homebrew/brew.sh; then
+        sed -i~ "s#/Cellar#/cell#g" $webox/Library/Homebrew/brew.sh
+    fi
 
     if [ ! -d `brew --repository homebrew/core` ]; then
         brew tap homebrew/core
