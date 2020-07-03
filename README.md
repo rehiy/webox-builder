@@ -1,6 +1,6 @@
 # Feature
 
-WeBox is a lnmp server based on ubuntu, debian or alpine. contains the following modules: nginx, mysql, redis, php. And some popular plug-ins have been added, such as redis, geoip2, imagick ...
+WeBox is a lnmp server based on ubuntu, debian or alpine. contains the following modules: nginx, mysql, redis, php. And some popular plug-ins have been added, such as geoip2, imagick ...
 
 # Simple Usage
 
