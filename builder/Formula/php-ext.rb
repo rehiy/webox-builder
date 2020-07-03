@@ -20,6 +20,7 @@ class PhpExt < Formula
     depends_on "libzip"
     depends_on "oniguruma"
     depends_on "openssl@1.1"
+    depends_on "re2c"
     depends_on "webp"
 
     uses_from_macos "xz" => :build
