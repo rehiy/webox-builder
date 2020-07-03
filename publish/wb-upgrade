@@ -6,7 +6,7 @@ cd ~
 if [ `uname` = "Darwin" ]; then
     name=webox-macos-v10.tgz
 else
-    name=webox-linux-v11.tgz
+    name=webox-linux-v12.tgz
 fi
 
 if type wget >/dev/null; then
@@ -18,7 +18,7 @@ fi
 echo "Updating with $name"
 tar -xf $name && rm $name
 
-if [ ! -d ~/srv/share/wkit ]; then
+if [ $? -ne 0 ]; then
     echo "Can't download $name"
     exit 1
 fi
