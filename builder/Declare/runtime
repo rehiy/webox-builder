@@ -13,19 +13,19 @@ export wplat=$([ `uname` = "Darwin" ] && echo macos || echo linux)
 
 ##############################################HELPERS################
 
-source Declare/perform/global
-source Declare/perform/homebrew
-source Declare/perform/os_$wplat
+source $wbase/Declare/module/global
+source $wbase/Declare/module/homebrew
+source $wbase/Declare/module/os_$wplat
 
-source Declare/perform/make_package
-source Declare/perform/make_profile
+source $wbase/Declare/module/make_package
+source $wbase/Declare/module/make_profile
 
 env_initialize() {
 
     deps_install && homebrew_init
 
     if [ "$1" = "build" ]; then
-        source Declare/preload
+        source $wbase/Declare/preload
     fi
 
 }
