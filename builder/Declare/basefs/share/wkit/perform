@@ -6,7 +6,7 @@ export WBX_VERSION=12
 export WBX_UTIL=${webox}/share/wkit
 
 if [ -z "$WBX_APPS" ]; then
-    export WBX_APPS=`ls $WBX_UTIL`
+    export WBX_APPS="mysql nginx php redis"
 fi
 
 if ! echo $PATH | grep -q ${webox}; then
@@ -41,12 +41,12 @@ wbx_service() {
     if [ -x $WBX_UTIL/$1/service ]; then
         $WBX_UTIL/$1/service $2
     else
-        echo "[WKIT] invalid service: $1"
+        echo "[wkit] invalid app: $1"
     fi
 }
 
 if [ $# -eq 0 ]; then
-    echo "[WKIT] miss service args"
+    echo "[wkit] parameter missing"
     exit 1
 fi
 
