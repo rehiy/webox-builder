@@ -1,22 +1,13 @@
 #!/bin/bash
 #
 
-if [ ! -e $webox/lib/gcc ]; then
-    brew_install gcc
-fi
-
-if [ ! -e $webox/cell/glibc ]; then
-    brew_install glibc
-fi
+brew_install gcc
+brew_install glibc
 
 if [ ! -e $webox/cell/pcre ]; then
     brew_install pcre
 fi
 
-if [ ! -e $webox/include/libxml ]; then
-    brew_install libxml2
-fi
+brew_install libxml2
 
-if [ ! -e $webox/cell/imagemagick@6 ]; then
-    sed -i~ "/keg_only/d" `brew --repository homebrew/core`/Formula/imagemagick@6.rb
-fi
+brew_install imagick

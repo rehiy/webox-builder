@@ -8,6 +8,14 @@ brew_install_gcc() {
         if_exit $?
     fi
 
+    if [ ! -e $webox/lib/libgcc_s.so ]; then
+        brew_install_gcc_libfix
+    fi
+
+}
+
+brew_install_gcc_libfix() {
+
     cd $webox
 
     for vvv in `find cell/gcc@7/ -name "*.so.*"`; do
