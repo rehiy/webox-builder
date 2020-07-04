@@ -21,4 +21,9 @@ class OpensslAT10 < Formula
     system "make"
     system "make", "install"
   end
+
+  def postinstall
+    # fix zero byte - libcrypto.so
+    system "cd #{prefix}/lib && ar -x libcrypto.a && gcc -shared *.o -o libcrypto.so && rm *.o"
+  end
 end
