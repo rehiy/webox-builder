@@ -1,8 +1,7 @@
 class PhpExt < Formula
     desc "General-purpose scripting language"
     homepage "https://www.php.net/"
-    url "https://www.php.net/distributions/php-7.4.7.tar.xz"
-    sha256 "53558f8f24cd8ab6fa0ea252ca8198e2650160649681ce5230c1df1dc2b52faf"
+    url "https://www.php.net/distributions/php-7.3.19.tar.xz"
 
     depends_on "autoconf" => :build
     depends_on "pkg-config" => :build
@@ -20,7 +19,6 @@ class PhpExt < Formula
     depends_on "libzip"
     depends_on "oniguruma"
     depends_on "openssl@1.1"
-    depends_on "re2c"
     depends_on "webp"
 
     uses_from_macos "xz" => :build
@@ -65,9 +63,9 @@ class PhpExt < Formula
       php_ext_make "calendar"
       php_ext_make "curl"
       php_ext_make "exif"
-      php_ext_make "ftp", "--with-openssl-dir=#{Formula["openssl@1.1"].opt_prefix}"
-      php_ext_make "gd", "--with-freetype", "--with-jpeg", "--with-webp"
-      php_ext_make "gettext"
+      php_ext_make "ftp", "--with-openssl-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "gd", "--with-freetype-dir=#{HOMEBREW_PREFIX}", "--with-jpeg-dir=#{HOMEBREW_PREFIX}", "--with-png-dir=#{HOMEBREW_PREFIX}", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "gettext", "--with-gettext=#{HOMEBREW_PREFIX}"
       php_ext_make "mbstring"
       php_ext_make "openssl"
       php_ext_make "pcntl"
@@ -77,10 +75,10 @@ class PhpExt < Formula
       php_ext_make "sysvmsg"
       php_ext_make "sysvsem"
       php_ext_make "sysvshm"
-      php_ext_make "xmlrpc"
-      php_ext_make "xsl"
-      php_ext_make "zip"
-      php_ext_make "zlib"
+      php_ext_make "xsl", "--with-xsl=#{HOMEBREW_PREFIX}"
+      php_ext_make "xmlrpc", "--with-libxml-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "zip", "--with-libzip=#{HOMEBREW_PREFIX}", "--with-pcre-dir=#{HOMEBREW_PREFIX}", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "zlib", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
 
       resource("redis").stage do
         mv "redis-5.2.2", buildpath/"ext/redis"

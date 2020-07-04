@@ -1,12 +1,12 @@
 class PhpExt < Formula
     desc "General-purpose scripting language"
     homepage "https://www.php.net/"
-    url "https://www.php.net/distributions/php-7.4.7.tar.xz"
-    sha256 "53558f8f24cd8ab6fa0ea252ca8198e2650160649681ce5230c1df1dc2b52faf"
+    url "https://www.php.net/distributions/php-5.6.40.tar.xz"
 
     depends_on "autoconf" => :build
     depends_on "pkg-config" => :build
 
+    depends_on "anrip/webox/openssl@1.0"
     depends_on "anrip/webox/php"
     depends_on "curl-openssl"
     depends_on "freetype"
@@ -15,11 +15,10 @@ class PhpExt < Formula
     depends_on "imagemagick@6"
     depends_on "jpeg"
     depends_on "libffi"
-    depends_on "libmaxminddb"
     depends_on "libpng"
     depends_on "libzip"
+    depends_on "mcrypt"
     depends_on "oniguruma"
-    depends_on "openssl@1.1"
     depends_on "re2c"
     depends_on "webp"
 
@@ -30,11 +29,7 @@ class PhpExt < Formula
     uses_from_macos "zlib"
 
     resource "redis" do
-      url "http://pecl.php.net/get/redis-5.2.2.tgz"
-    end
-
-    resource "swoole" do
-      url "http://pecl.php.net/get/swoole-4.5.2.tgz"
+      url "http://pecl.php.net/get/redis-4.3.0.tgz"
     end
 
     resource "imagick" do
@@ -59,52 +54,44 @@ class PhpExt < Formula
 
       # system pkg-config missing
       ENV["BZIP_DIR"] = Formula["bzip2"].opt_prefix
+      ENV.append_path "PKG_CONFIG_PATH", Formula["openssl@1.0"].opt_lib/"pkgconfig"
 
       php_ext_make "bcmath"
       php_ext_make "bz2"
       php_ext_make "calendar"
-      php_ext_make "curl"
+      php_ext_make "curl", "--with-curl=#{Formula["curl-openssl"].opt_prefix}"
       php_ext_make "exif"
-      php_ext_make "ftp", "--with-openssl-dir=#{Formula["openssl@1.1"].opt_prefix}"
-      php_ext_make "gd", "--with-freetype", "--with-jpeg", "--with-webp"
-      php_ext_make "gettext"
+      php_ext_make "ftp", "--with-openssl-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "gd", "--with-freetype-dir=#{HOMEBREW_PREFIX}", "--with-jpeg-dir=#{HOMEBREW_PREFIX}", "--with-png-dir=#{HOMEBREW_PREFIX}", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "gettext", "--with-gettext=#{HOMEBREW_PREFIX}"
       php_ext_make "mbstring"
-      php_ext_make "openssl"
+      php_ext_make "mcrypt", "--with-mcrypt=#{HOMEBREW_PREFIX}"
+      php_ext_make "openssl", "--with-openssl-dir=#{Formula["openssl@1.0"].opt_prefix}"
       php_ext_make "pcntl"
       php_ext_make "shmop"
-      php_ext_make "soap"
+      php_ext_make "soap", "--with-libxml-dir=#{HOMEBREW_PREFIX}"
       php_ext_make "sockets"
       php_ext_make "sysvmsg"
       php_ext_make "sysvsem"
       php_ext_make "sysvshm"
-      php_ext_make "xmlrpc"
-      php_ext_make "xsl"
-      php_ext_make "zip"
-      php_ext_make "zlib"
+      php_ext_make "xmlrpc", "--with-libxml-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "xsl", "--with-xsl=#{HOMEBREW_PREFIX}"
+      php_ext_make "zip", "--with-libzip=#{HOMEBREW_PREFIX}", "--with-pcre-dir=#{HOMEBREW_PREFIX}", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "zlib", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
 
       resource("redis").stage do
-        mv "redis-5.2.2", buildpath/"ext/redis"
+        mv "redis-4.3.0", buildpath/"ext/redis"
         php_ext_make "redis"
-      end
-
-      resource("swoole").stage do
-        mv "swoole-4.5.2", buildpath/"ext/swoole"
-        php_ext_make "swoole"
       end
 
       resource("imagick").stage do
         mv "imagick-3.4.4", buildpath/"ext/imagick"
         php_ext_make "imagick"
       end
-
-      resource("maxminddb").stage do
-        mv "ext", buildpath/"ext/maxminddb"
-        php_ext_make "maxminddb"
-      end
     end
 
     def php_ext_make (ext, *args)
-      if (lib/"php/20190902/#{ext}.so").exist?
+      if (lib/"php/20131226/#{ext}.so").exist?
         @log.append_lines "#{ext} exist"
         return true
       end
@@ -124,6 +111,6 @@ class PhpExt < Formula
     end
 
     test do
-      (lib/"php/20190902/maxminddb.so").exist?
+      (lib/"php/20131226/imagick.so").exist?
     end
 end
