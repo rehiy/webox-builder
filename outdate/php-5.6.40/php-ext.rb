@@ -32,14 +32,6 @@ class PhpExt < Formula
       url "http://pecl.php.net/get/redis-4.3.0.tgz"
     end
 
-    resource "imagick" do
-      url "http://pecl.php.net/get/imagick-3.4.4.tgz"
-    end
-
-    resource "maxminddb" do
-      url "https://codeload.github.com/maxmind/MaxMind-DB-Reader-php/zip/master"
-    end
-
     def install
       @log = prefix/"install.log"
       @log.write ">> start\n"
@@ -61,7 +53,7 @@ class PhpExt < Formula
       php_ext_make "calendar"
       php_ext_make "curl", "--with-curl=#{Formula["curl-openssl"].opt_prefix}"
       php_ext_make "exif"
-      php_ext_make "ftp", "--with-openssl-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "ftp"
       php_ext_make "gd", "--with-freetype-dir=#{HOMEBREW_PREFIX}", "--with-jpeg-dir=#{HOMEBREW_PREFIX}", "--with-png-dir=#{HOMEBREW_PREFIX}", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
       php_ext_make "gettext", "--with-gettext=#{HOMEBREW_PREFIX}"
       php_ext_make "mbstring"
@@ -82,11 +74,6 @@ class PhpExt < Formula
       resource("redis").stage do
         mv "redis-4.3.0", buildpath/"ext/redis"
         php_ext_make "redis"
-      end
-
-      resource("imagick").stage do
-        mv "imagick-3.4.4", buildpath/"ext/imagick"
-        php_ext_make "imagick"
       end
     end
 
@@ -111,6 +98,6 @@ class PhpExt < Formula
     end
 
     test do
-      (lib/"php/20131226/imagick.so").exist?
+      (lib/"php/20131226/redis.so").exist?
     end
 end
