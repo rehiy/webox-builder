@@ -3,7 +3,7 @@
 
 homebrew_init() {
 
-    export HOMEBREW_NO_AUTO_UPDATE=1
+    export HOMEBREW_NO_AUTO_UPDATE="1"
 
     if [ ! -x $webox/bin/brew ]; then
         git clone https://github.com/Homebrew/brew.git $webox
