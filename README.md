@@ -1,25 +1,27 @@
-# Feature
+# What is Webox?
 
-WeBox is a lnmp server based on ubuntu, debian or alpine. contains the following modules: nginx, mysql, redis, php. And some popular plug-ins have been added, such as geoip2, imagick ...
+Webox (`abbreviation for web-box`) is a customized lnmp server. It supports running on most linux distributions, such as alpine, CentOS, Debian, and Ubuntu.
+
+Webox contains the following modules: mysql, nginx, nodejs, php, redis. And some popular plug-ins have been added, such as geoip2, imagick ...
 
 # Simple Usage
 
-## auto prepare and start nginx/mysql/redis/php
+## install and start nginx/mysql/redis/php
 
 ```shell
-wget -qO- http://get.vmlu.com/webox/wb-install | sudo sh
-sudo /srv/service start
+wget -qO- http://get.vmlu.com/webox/wb-install | sh
+/srv/service start
 ```
 
-## the following commands are supported
+## service management command
 
 ```shell
 /srv/service [nginx|mysql|redis|php] [start|stop|restart|reload]
 ```
 
-## put your files to host's webroot path
+## put your files to host's webroot
 
-If the host is `www.anrip.net`, the webroot will be `/srv/htdoc/defualt/net.anrip.www/`
+If the domain is `www.anrip.net`, the webroot will be `/srv/var/www/default/net.anrip.www/`
 
 # Manual Control Services
 
@@ -31,7 +33,7 @@ PATH=/srv/bin:/srv/sbin:$PATH
 
 ## configure the modules you need
 
-please edit the config files in `/srv/etc/`, then reload the service
+please edit the config files in `/srv/etc/*`, then reload the service
 
 # Important Notice
 
@@ -43,4 +45,4 @@ mysqladmin -u root password a1B2c3E4
 
 # More Issues
 
-See http://www.anrip.com/webox for more issues
+See https://www.anrip.com/webox for more issues
