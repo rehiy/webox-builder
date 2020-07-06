@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+
+. ${webox}/share/wkit/function
+
+#####################################################################
+
+APP_NAME=mysql
+
+APP_BIN_FILE=${webox}/bin/mysqld_safe
+APP_PID_FILE=${webox}/var/run/mysql/mysqld.pid
+
+do_start() {
+
+    $APP_BIN_FILE >/dev/null &
+
+}
+
+do_prepare() {
+
+    app_prepare
+
+    if [ ! -f ${webox}/var/log/mysql/error.log ]; then
+        touch ${webox}/var/log/mysql/error.log
+        app_userlet ${webox}/var/log/mysql
+    fi
+
+    if [ ! -f ${webox}/var/lib/ibdata1 ]; then
+        mysqld --initialize-insecure --user=$APP_USER
+    fi
+
+}
+
+#####################################################################
+
+app_usage $1 || exit 1
+
+app_$1
+app_print $1

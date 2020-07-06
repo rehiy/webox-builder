@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+
+export WBX_VERSION=12
+
+if [ -z "$WBX_APPS" ]; then
+    export WBX_APPS="mysql nginx php redis"
+fi
+
+if ! echo $PATH | grep -q ${webox}; then
+    export PATH=${webox}/bin:${webox}/sbin:$PATH
+fi
+
+#####################################################################
+
+wbx_service() {
+    if [ -x ${webox}/share/wkit/service/$1 ]; then
+        ${webox}/share/wkit/service/$1 $2
+    else
+        echo "[wkit] invalid app: $1"
+    fi
+}
+
+if [ $# -eq 0 ]; then
+    echo "[wkit] parameter missing"
+    exit 1
+fi
+
+if [ $# -eq 1 ]; then
+    for WBX_APP in $WBX_APPS; do
+        wbx_service $WBX_APP $1
+    done
+    exit $?
+fi
+
+wbx_service "$@"

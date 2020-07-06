@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+
+. ${webox}/share/wkit/function
+
+#####################################################################
+
+APP_NAME=nginx
+
+APP_BIN_FILE=${webox}/sbin/nginx
+APP_PID_FILE=${webox}/var/run/nginx/nginx.pid
+
+do_stop() {
+
+    $APP_BIN_FILE -s stop
+
+}
+
+do_reload() {
+
+    $APP_BIN_FILE -s reload
+
+}
+
+do_prepare() {
+
+    app_prepare log run tmp
+
+    if [ ! -d ${webox}/var/tmp/nginx/proxy_cache ]; then
+        mkdir -p ${webox}/var/tmp/nginx/proxy_cache
+        app_userlet ${webox}/var/tmp/nginx/proxy_cache
+    fi
+
+}
+
+#####################################################################
+
+app_usage $1 || exit 1
+
+app_$1
+app_print $1

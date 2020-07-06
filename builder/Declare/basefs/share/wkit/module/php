@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+
+. ${webox}/share/wkit/function
+
+#####################################################################
+
+APP_NAME=php
+
+APP_BIN_FILE=${webox}/sbin/php-fpm
+APP_PID_FILE=${webox}/var/run/php/fpm.pid
+
+do_reload() {
+
+    kill -USR2 `cat $APP_PID_FILE`
+
+}
+
+do_prepare() {
+
+    for POOL in `ls ${webox}/etc/php/pool.d/*.conf`; do
+        POOL=${POOL%.*}
+        POOL=${POOL##*/}
+        mkdir -p ${htdoc}/${POOL}
+        mkdir -p ${webox}/var/log/php/${POOL}
+        mkdir -p ${webox}/var/tmp/php/${POOL}/upload
+        mkdir -p ${webox}/var/tmp/php/${POOL}/session
+    done
+
+    app_userlet ${htdoc}
+
+    app_prepare log run tmp
+
+}
+
+#####################################################################
+
+app_usage $1 || exit 1
+
+app_$1
+app_print $1

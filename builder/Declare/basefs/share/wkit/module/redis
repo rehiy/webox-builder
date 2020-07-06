@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+
+. ${webox}/share/wkit/function
+
+#####################################################################
+
+APP_NAME=redis
+
+APP_BIN_FILE=${webox}/bin/redis-server
+APP_PID_FILE=${webox}/var/run/redis/redis.pid
+
+do_start() {
+
+    $APP_BIN_FILE ${webox}/etc/redis/redis.conf
+
+}
+
+#####################################################################
+
+app_usage $1 || exit 1
+
+app_$1
+app_print $1
