@@ -14,8 +14,8 @@ fi
 #####################################################################
 
 wbx_service() {
-    if [ -x ${webox}/share/wkit/service/$1 ]; then
-        ${webox}/share/wkit/service/$1 $2
+    if [ -x ${webox}/share/wkit/module/$1 ]; then
+        ${webox}/share/wkit/module/$1 $2
     else
         echo "[wkit] invalid app: $1"
     fi

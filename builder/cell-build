@@ -9,10 +9,10 @@ init_toolchain
 
 brew_install nginx
 
-brew_install node
-
 brew_install php
 brew_install php-ext
+
+brew_install node
 
 brew_install mysql
 brew_install redis
