@@ -62,7 +62,7 @@ app_do_start() {
     echo "start $APP_NAME ..."
     app_start
 
-    app_wait start
+    app_wait run
 
 }
 
