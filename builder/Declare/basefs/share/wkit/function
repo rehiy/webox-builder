@@ -29,9 +29,9 @@ app_reload() {
 
 }
 
-app_init() {
+app_prepare() {
 
-    app_prepare
+    app_varfix
 
 }
 
@@ -56,7 +56,7 @@ app_do_start() {
     if [ ! -d /var/webox/$APP_NAME ]; then
         mkdir -p /var/webox/$APP_NAME
         echo "prepare $APP_NAME ..."
-        app_init
+        app_prepare
     fi
 
     echo "start $APP_NAME ..."
@@ -175,7 +175,7 @@ app_result() {
 
 #####################################################################
 
-app_prepare() {
+app_varfix() {
 
     local EDIR SDIR
 

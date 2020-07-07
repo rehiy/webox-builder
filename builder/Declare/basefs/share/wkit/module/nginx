@@ -22,9 +22,9 @@ app_reload() {
 
 }
 
-app_init() {
+app_prepare() {
 
-    app_prepare log run tmp
+    app_varfix log run tmp
 
     if [ ! -d ${webox}/var/tmp/nginx/proxy_cache ]; then
         mkdir -p ${webox}/var/tmp/nginx/proxy_cache

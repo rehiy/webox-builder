@@ -16,9 +16,9 @@ app_start() {
 
 }
 
-app_init() {
+app_prepare() {
 
-    app_prepare
+    app_varfix
 
     if [ ! -f ${webox}/var/log/mysql/error.log ]; then
         touch ${webox}/var/log/mysql/error.log

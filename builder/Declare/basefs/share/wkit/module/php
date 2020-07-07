@@ -16,7 +16,7 @@ app_reload() {
 
 }
 
-app_init() {
+app_prepare() {
 
     for POOL in `ls ${webox}/etc/php/pool.d/`; do
         POOL=${POOL%.*}
@@ -28,7 +28,7 @@ app_init() {
 
     app_userlet ${htdoc}
 
-    app_prepare log run tmp
+    app_varfix log run tmp
 
 }
 
