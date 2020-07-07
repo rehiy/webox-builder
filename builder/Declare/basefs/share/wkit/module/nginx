@@ -10,19 +10,19 @@ APP_NAME=nginx
 APP_BIN_FILE=${webox}/sbin/nginx
 APP_PID_FILE=${webox}/var/run/nginx/nginx.pid
 
-do_stop() {
+app_stop() {
 
     $APP_BIN_FILE -s stop
 
 }
 
-do_reload() {
+app_reload() {
 
     $APP_BIN_FILE -s reload
 
 }
 
-do_prepare() {
+app_init() {
 
     app_prepare log run tmp
 
@@ -35,7 +35,7 @@ do_prepare() {
 
 #####################################################################
 
-app_usage $1 || exit 1
+app_helper $1 || exit 1
 
-app_$1
-app_print $1
+app_do_$1
+app_result $1

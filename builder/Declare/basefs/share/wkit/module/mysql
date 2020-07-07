@@ -10,13 +10,13 @@ APP_NAME=mysql
 APP_BIN_FILE=${webox}/bin/mysqld_safe
 APP_PID_FILE=${webox}/var/run/mysql/mysqld.pid
 
-do_start() {
+app_start() {
 
     $APP_BIN_FILE >/dev/null &
 
 }
 
-do_prepare() {
+app_init() {
 
     app_prepare
 
@@ -33,7 +33,7 @@ do_prepare() {
 
 #####################################################################
 
-app_usage $1 || exit 1
+app_helper $1 || exit 1
 
-app_$1
-app_print $1
+app_do_$1
+app_result $1

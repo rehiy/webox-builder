@@ -10,13 +10,13 @@ APP_NAME=php
 APP_BIN_FILE=${webox}/sbin/php-fpm
 APP_PID_FILE=${webox}/var/run/php/fpm.pid
 
-do_reload() {
+app_reload() {
 
     kill -USR2 `cat $APP_PID_FILE`
 
 }
 
-do_prepare() {
+app_init() {
 
     for POOL in `ls ${webox}/etc/php/pool.d/`; do
         POOL=${POOL%.*}
@@ -34,7 +34,7 @@ do_prepare() {
 
 #####################################################################
 
-app_usage $1 || exit 1
+app_helper $1 || exit 1
 
-app_$1
-app_print $1
+app_do_$1
+app_result $1
