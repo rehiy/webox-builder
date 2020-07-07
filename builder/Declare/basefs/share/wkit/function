@@ -2,8 +2,10 @@
 #
 
 export APP_NAME=xx
+
 export APP_USER=daemon
 export APP_GROUP=daemon
+
 export APP_BIN_FILE=${webox}/bin/xx
 export APP_PID_FILE=${webox}/var/run/xx.pid
 
@@ -34,6 +36,15 @@ app_init() {
 }
 
 #####################################################################
+
+app_do() {
+
+    app_helper $1 || exit 1
+
+    app_do_$1
+    app_result $1
+
+}
 
 app_do_start() {
 
