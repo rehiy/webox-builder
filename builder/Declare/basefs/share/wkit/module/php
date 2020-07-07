@@ -18,9 +18,8 @@ do_reload() {
 
 do_prepare() {
 
-    for POOL in `ls ${webox}/etc/php/pool.d/*.conf`; do
+    for POOL in `ls ${webox}/etc/php/pool.d/`; do
         POOL=${POOL%.*}
-        POOL=${POOL##*/}
         mkdir -p ${htdoc}/${POOL}
         mkdir -p ${webox}/var/log/php/${POOL}
         mkdir -p ${webox}/var/tmp/php/${POOL}/upload

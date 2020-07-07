@@ -47,7 +47,7 @@ app_start() {
     if [ ! -d /var/webox/$APP_NAME ]; then
         mkdir -p /var/webox/$APP_NAME
         echo "prepare $APP_NAME ..."
-        do_init
+        do_prepare
     fi
 
     echo "start $APP_NAME ..."
