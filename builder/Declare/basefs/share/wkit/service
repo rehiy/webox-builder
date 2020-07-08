@@ -22,8 +22,8 @@ wbx_service() {
 }
 
 if [ $# -eq 0 ]; then
-    echo "[wkit] parameter missing"
-    exit 1
+    echo "now, using the wkit shell"
+    exec /bin/sh
 fi
 
 if [ $# -eq 1 ]; then
