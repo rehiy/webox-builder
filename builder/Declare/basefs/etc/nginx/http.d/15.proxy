@@ -1,6 +1,11 @@
 ##
-# Proxy - Header
+# Proxy - Config
 ##
+
+proxy_buffers 256 4k;
+
+proxy_read_timeout 300;
+proxy_send_timeout 300;
 
 proxy_set_header Host $host;
 

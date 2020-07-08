@@ -1,0 +1,5 @@
+##
+# Proxy - Cache Zone
+##
+
+proxy_cache_path ${webox}/var/tmp/nginx/proxy_zone1 levels=1:2 keys_zone=proxy_zone1:1g max_size=8g inactive=14d;

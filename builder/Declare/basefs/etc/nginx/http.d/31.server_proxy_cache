@@ -2,7 +2,7 @@
 # Proxy - Cache Enable
 ##
 
-proxy_cache proxy_cache;
+proxy_cache proxy_zone1;
 
 proxy_cache_key "$host$request_uri";
 

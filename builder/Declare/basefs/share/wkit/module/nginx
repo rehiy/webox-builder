@@ -26,9 +26,9 @@ app_prepare() {
 
     app_varfix log run tmp
 
-    if [ ! -d ${webox}/var/tmp/nginx/proxy_cache ]; then
-        mkdir -p ${webox}/var/tmp/nginx/proxy_cache
-        app_userlet ${webox}/var/tmp/nginx/proxy_cache
+    if [ ! -d ${webox}/var/tmp/nginx/proxy_zone1 ]; then
+        mkdir -p ${webox}/var/tmp/nginx/proxy_zone1
+        app_userlet ${webox}/var/tmp/nginx/proxy_zone1
     fi
 
 }

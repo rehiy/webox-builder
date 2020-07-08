@@ -18,11 +18,11 @@ location ~ \.php$ {
     fastcgi_pass  unix:${webox}/var/run/php/$pool.sock;
     fastcgi_index index.php;
 
-    fastcgi_intercept_errors on;
+    fastcgi_buffers 256 4k;
 
     fastcgi_send_timeout 300;
     fastcgi_read_timeout 300;
 
-    fastcgi_buffers 256 4k;
+    fastcgi_intercept_errors on;
 
 }
