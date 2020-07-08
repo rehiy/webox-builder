@@ -1,8 +1,6 @@
 #!/bin/sh
 #
 
-export WBX_VERSION=12
-
 if [ -z "$WBX_APPS" ]; then
     export WBX_APPS="mysql nginx php redis"
 fi
