@@ -25,7 +25,7 @@ app_prepare() {
         app_userlet ${webox}/var/log/mysql
     fi
 
-    if [ ! -f ${webox}/var/lib/ibdata1 ]; then
+    if [ ! -d ${webox}/var/lib/mysql/mysql ]; then
         mysqld --initialize-insecure --user=$APP_USER
     fi
 
