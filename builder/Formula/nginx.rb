@@ -1,8 +1,8 @@
 class Nginx < Formula
     desc "HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server"
     homepage "https://nginx.org/"
-    url "https://nginx.org/download/nginx-1.19.0.tar.gz"
-    sha256 "44a616171fcd7d7ad7c6af3e6f3ad0879b54db5a5d21be874cd458b5691e36c8"
+    url "https://nginx.org/download/nginx-1.19.1.tar.gz"
+    sha256 "a004776c64ed3c5c7bc9b6116ba99efab3265e6b81d49a57ca4471ff90655492"
 
     depends_on "libgd"
     depends_on "libmaxminddb"
@@ -34,8 +34,8 @@ class Nginx < Formula
         --pid-path=#{var}/run/nginx/nginx.pid
         --lock-path=#{var}/run/nginx/nginx.lock
         --http-client-body-temp-path=#{var}/tmp/nginx/client_body
-        --http-fastcgi-temp-path=#{var}/tmp/nginx/fastcgi
         --http-proxy-temp-path=#{var}/tmp/nginx/proxy
+        --http-fastcgi-temp-path=#{var}/tmp/nginx/fastcgi
         --http-scgi-temp-path=#{var}/tmp/nginx/scgi
         --http-uwsgi-temp-path=#{var}/tmp/nginx/uwsgi
         --http-log-path=#{var}/log/nginx/access.log
