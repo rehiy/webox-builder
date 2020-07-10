@@ -24,12 +24,14 @@ app_reload() {
 
 app_prepare() {
 
-    app_varfix log run tmp
+    local vvv
+    local vv=${webox}/etc/nginx/16.proxy_zone
 
-    if [ ! -d ${webox}/var/tmp/nginx/proxy_zone1 ]; then
-        mkdir -p ${webox}/var/tmp/nginx/proxy_zone1
-        app_userlet ${webox}/var/tmp/nginx/proxy_zone1
-    fi
+    for vvv in `awk '$1=="proxy_cache_path" {print $2}' $vv*`; do
+        mkdir -p $vvv
+    done
+
+    app_varfix log run tmp
 
 }
 
