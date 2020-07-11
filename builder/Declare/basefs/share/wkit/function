@@ -110,7 +110,7 @@ app_do_status() {
 
 app_is_run() {
 
-    if [ !  -f $APP_PID_FILE ]; then
+    if [ ! -f $APP_PID_FILE ]; then
         return 1
     fi
 
@@ -130,6 +130,8 @@ app_is_stop() {
 #####################################################################
 
 app_wait() {
+
+    sleep 1
 
     local i=${2:-15}
 
