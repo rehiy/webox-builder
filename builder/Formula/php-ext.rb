@@ -65,7 +65,7 @@ class PhpExt < Formula
       php_ext_make "calendar"
       php_ext_make "curl"
       php_ext_make "exif"
-      php_ext_make "ftp", "--with-openssl-dir=#{Formula["openssl@1.1"].opt_prefix}"
+      php_ext_make "ftp", "--with-openssl-dir=#{HOMEBREW_PREFIX}"
       php_ext_make "gd", "--with-freetype", "--with-jpeg", "--with-webp"
       php_ext_make "gettext"
       php_ext_make "mbstring"

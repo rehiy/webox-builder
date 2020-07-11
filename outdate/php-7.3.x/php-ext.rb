@@ -20,6 +20,7 @@ class PhpExt < Formula
     depends_on "libzip"
     depends_on "oniguruma"
     depends_on "openssl@1.1"
+    depends_on "re2c"
     depends_on "webp"
 
     uses_from_macos "xz" => :build
@@ -76,8 +77,8 @@ class PhpExt < Formula
       php_ext_make "sysvmsg"
       php_ext_make "sysvsem"
       php_ext_make "sysvshm"
-      php_ext_make "xsl", "--with-xsl=#{HOMEBREW_PREFIX}"
       php_ext_make "xmlrpc", "--with-libxml-dir=#{HOMEBREW_PREFIX}"
+      php_ext_make "xsl", "--with-xsl=#{HOMEBREW_PREFIX}"
       php_ext_make "zip", "--with-libzip=#{HOMEBREW_PREFIX}", "--with-pcre-dir=#{HOMEBREW_PREFIX}", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
       php_ext_make "zlib", "--with-zlib-dir=#{HOMEBREW_PREFIX}"
 
@@ -103,7 +104,7 @@ class PhpExt < Formula
     end
 
     def php_ext_make (ext, *args)
-      if (lib/"php/20190902/#{ext}.so").exist?
+      if (lib/"php/20180731/#{ext}.so").exist?
         @log.append_lines "#{ext} exist"
         return true
       end
@@ -123,6 +124,6 @@ class PhpExt < Formula
     end
 
     test do
-      (lib/"php/20190902/maxminddb.so").exist?
+      (lib/"php/20180731/maxminddb.so").exist?
     end
 end

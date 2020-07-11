@@ -2,6 +2,7 @@ class PhpExt < Formula
     desc "General-purpose scripting language"
     homepage "https://www.php.net/"
     url "https://www.php.net/distributions/php-5.6.40.tar.xz"
+    sha256 "1369a51eee3995d7fbd1c5342e5cc917760e276d561595b6052b21ace2656d1c"
 
     depends_on "autoconf" => :build
     depends_on "pkg-config" => :build
