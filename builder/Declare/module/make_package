@@ -54,8 +54,6 @@ make_package() {
 
     find $target -name "pkgconfig" | xargs rm -rf
     find $target -name ".keepme" -type f -delete
-    find $target -name "*.la" -type f -delete
-    find $target -name "*.la" -type l -delete
     find $target -name "*.a" -type f -delete
     find $target -name "*.a" -type l -delete
 
