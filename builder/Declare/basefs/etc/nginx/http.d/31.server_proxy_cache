@@ -2,7 +2,7 @@
 # Proxy - Cache Enable
 ##
 
-proxy_cache kzone_a1;
+proxy_cache pzone_a1;
 
 proxy_cache_background_update on;
 
