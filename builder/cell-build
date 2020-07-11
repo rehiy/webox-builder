@@ -7,12 +7,12 @@ init_toolchain
 
 ##############################################BUILD##################
 
-brew_install nginx
+cell_install nginx
 
-brew_install php
-brew_install php-ext
+cell_install php
+cell_install php-ext
 
-brew_install node
+cell_install node
 
-brew_install mysql
-brew_install redis
+cell_install mysql
+cell_install redis

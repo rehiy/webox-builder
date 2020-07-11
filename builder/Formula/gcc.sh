@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-brew_install_gcc() {
+cell_install_gcc() {
 
     if [ ! -d $webox/cell/gcc@7 ]; then
         brew install -v gcc@7
@@ -9,12 +9,12 @@ brew_install_gcc() {
     fi
 
     if [ ! -e $webox/lib/libgcc_s.so ]; then
-        brew_install_gcc_libfix
+        cell_install_gcc_libfix
     fi
 
 }
 
-brew_install_gcc_libfix() {
+cell_install_gcc_libfix() {
 
     cd $webox
 

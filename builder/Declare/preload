@@ -1,13 +1,11 @@
 #!/bin/bash
 #
 
-brew_install gcc
-brew_install glibc
+cell_install gcc
+cell_install glibc
 
-if [ ! -e $webox/cell/pcre ]; then
-    brew_install pcre
-fi
+cell_install pcre
 
-brew_install libxml2
+cell_install libxml2
 
-brew_install imagick
+cell_install imagick

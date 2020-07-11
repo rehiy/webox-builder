@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-brew_install_libxml2() {
+cell_install_libxml2() {
 
     if [ ! -e $webox/cell/libxml2 ]; then
         brew install -v libxml2

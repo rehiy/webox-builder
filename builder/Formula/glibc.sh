@@ -1,16 +1,20 @@
 #!/bin/bash
 #
 
-brew_install_glibc() {
+cell_install_glibc() {
 
     if [ ! -d $webox/cell/glibc ]; then
-        brew_install_glibc_prefix
+        cell_install_glibc_prefix
         brew install -v glibc
+    fi
+
+    if ! locale charmap 2>/dev/null | grep -q UTF-8; then
+        export LC_ALL="en_US.UTF-8"
     fi
 
 }
 
-brew_install_glibc_prefix() {
+cell_install_glibc_prefix() {
 
     local formula=`brew --repository homebrew/core`/Formula/glibc.rb
 
