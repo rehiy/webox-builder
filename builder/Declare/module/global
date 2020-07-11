@@ -15,11 +15,24 @@ copy_parents() {
 
 rm_empty_dir() {
 
-    find $1 -mindepth 1 -maxdepth 1 -type d | while read -r dir; do
-        if [ -z `find "$dir" -mindepth 1 -type f` ]; then
-            rm -r $dir 2>&- && echo "rm_empty_dir: $dir"
+    local vv
+
+    while true; do
+        vv=`find $1 -type d -empty`
+        if [ -z "$vv" ]; then
+            break
         fi
-        [ -d $dir ] && rm_empty_dir "$dir"
+        rm -rvf $vv
+    done
+
+}
+
+rm_invalid_ln() {
+
+    local vv
+
+    for vv in `find $target -follow -type l`; do
+        [ -e $vv ] || rm -vf $vv
     done
 
 }

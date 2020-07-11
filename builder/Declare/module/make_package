@@ -57,18 +57,13 @@ make_package() {
     find $target -name "*.a" -type f -delete
     find $target -name "*.a" -type l -delete
 
-    # 清理失效的软连接
+    # 清理软连接及目录
 
-    for vvv in `find $target -type l`; do
-        [ -e $vvv ] || rm -f $vvv
-    done
+    rm_invalid_ln $target
+    rm_empty_dir $target
 
     # 优化二进制文件
 
     strip_binary $target/cell
-
-    # 清理空目录
-
-    #rm_empty_dir $target
 
 }
