@@ -1,8 +1,10 @@
 #!/bin/bash
 #
 
-cell_install gcc
-cell_install glibc
+if [ $wplat = "linux" ]; then
+    cell_install gcc
+    cell_install glibc
+fi
 
 cell_install pcre
 

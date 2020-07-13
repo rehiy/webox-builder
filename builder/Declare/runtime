@@ -1,17 +1,16 @@
 #!/bin/bash
 #
-
-export webox=/srv
-
 export wbase=$(cd `dirname $0`; pwd)
+
+export wplat=$([ `uname` = "Darwin" ] && echo macos || echo linux)
+
+export webox=$([ `uname` = "Darwin" ] && echo /opt/webox || echo /srv)
+
+##############################################HELPERS################
 
 if ! echo $PATH | grep -q $webox; then
     export PATH=$webox/bin:$webox/sbin:$PATH
 fi
-
-export wplat=$([ `uname` = "Darwin" ] && echo macos || echo linux)
-
-##############################################HELPERS################
 
 load_modules() {
 
