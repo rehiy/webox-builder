@@ -4,10 +4,13 @@
 if [ $wplat = "linux" ]; then
     cell_install gcc
     cell_install glibc
+    cell_install libxml2
+fi
+
+if [ $wplat = "macos" ]; then
+    cell_install libiconv
 fi
 
 cell_install pcre
-
-cell_install libxml2
 
 cell_install imagick

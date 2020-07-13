@@ -9,7 +9,7 @@ cell_install_libxml2() {
     fi
 
     if [ ! -e $webox/include/libxml ]; then
-        ln -s libxml2/libxml $webox/include/libxml
+        ln -sf libxml2/libxml $webox/include/libxml
     fi
 
 }

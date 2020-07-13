@@ -33,6 +33,10 @@ class Php < Formula
         --with-pdo-mysql
       ]
 
+      if OS.mac?
+        args << "--with-iconv=#{HOMEBREW_PREFIX}"
+      end
+
       system "./configure", *args
       system "make", "install"
     end
