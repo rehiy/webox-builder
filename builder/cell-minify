@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-source Declare/runtime
+source ./Declare/runtime
 
 load_modules
 

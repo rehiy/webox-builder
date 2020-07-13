@@ -3,7 +3,7 @@
 
 export webox=/srv
 
-export wbase=`dirname $(readlink -f $0)`
+export wbase=$(cd `dirname $0`; pwd)
 
 if ! echo $PATH | grep -q $webox; then
     export PATH=$webox/bin:$webox/sbin:$PATH
