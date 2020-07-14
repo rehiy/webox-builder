@@ -13,6 +13,7 @@ rm -rf $mini/var/log/*/*
 rm -rf $mini/var/run/*/*
 rm -rf $mini/var/tmp/*/*
 
+
 mv $mini srv
 tar czvf webox-linux-v12.tgz srv
 mv srv $mini
