@@ -12,8 +12,7 @@ mini=$wbase/srv-mini
 [ -d $mini ] && mv $mini $mini-old
 
 
-cell_cleanup gcc@7 glibc mysql nginx node php php-ext redis
+cell_cleanup "gcc@7 glibc mysql nginx node php php-ext redis"
 
 make_package $mini "mysql nginx node php redis"
-
 make_profile $mini
