@@ -56,7 +56,7 @@ cell_cleanup() {
     rm -f deps-*.txt
 
     brew deps --tree "$@" \
-        | sed "s/[│─├└─]//g;s/ //g" \
+        | sed "s#[│─├└─]##g;s# ##g" \
         | sed "s#^.\+/##g" \
         | sort -k2n | uniq \
         > deps-yes.txt

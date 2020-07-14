@@ -5,9 +5,11 @@ source ./Declare/runtime
 
 load_modules
 
+##############################################MINIFY#################
+
 mini=$wbase/srv-mini
 
-##############################################MINIFY#################
+[ -d $mini ] && mv $mini $mini-old
 
 cell_cleanup gcc@7 glibc mysql nginx node php php-ext redis
 

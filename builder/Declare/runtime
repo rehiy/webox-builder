@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+
 export wbase=$(cd `dirname $0`; pwd)
 
 export wplat=$([ `uname` = "Darwin" ] && echo macos || echo linux)
