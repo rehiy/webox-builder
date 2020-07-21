@@ -17,9 +17,10 @@ server {
 
     root  $sitedir;
     index index.php index.htm index.html;
-    try_files $uri $uri/ /index.php$is_args$args;
+  # try_files $uri $uri/ /index.php$is_args$args;
 
-    include http.d/server_error_page;
-    include http.d/server_fastcgi_php;
+    include section/server_error_page;
+
+    include section/server_fastcgi_php;
 
 }

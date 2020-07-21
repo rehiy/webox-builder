@@ -25,7 +25,7 @@ app_reload() {
 app_prepare() {
 
     local vvv
-    local pz=${webox}/etc/nginx/http.d/proxy_zone
+    local pz=${webox}/etc/nginx/section/proxy_zone
 
     for vvv in `awk '$1=="proxy_cache_path" {print $2}' $pz*`; do
         mkdir -p $vvv
