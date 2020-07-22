@@ -11,9 +11,9 @@ make_profile() {
     # 复制配置文件
 
     cp -rf $wbase/Declare/basefs/* $target/
-    ln -sf share/wkit/service $target/
+    ln -sf cell/wkit/service $target/
 
-    chmod -R +x $target/share/wkit
+    chmod -R +x $target/cell/wkit
 
     # 替换预置变量
 
@@ -21,7 +21,7 @@ make_profile() {
         make_profile_sed $vvv
     done
 
-    for vvv in `grep '${\w\+}' -rl $target/share/wkit`; do
+    for vvv in `grep '${\w\+}' -rl $target/cell/wkit`; do
         make_profile_sed $vvv
     done
 
