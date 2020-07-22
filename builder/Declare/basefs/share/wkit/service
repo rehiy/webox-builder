@@ -12,8 +12,8 @@ fi
 #####################################################################
 
 wbx_single() {
-    if [ -x ${webox}/share/wkit/module/$1 ]; then
-        ${webox}/share/wkit/module/$1 $2
+    if [ -x ${webox}/share/wkit/ports/$1 ]; then
+        ${webox}/share/wkit/ports/$1 $2
     else
         echo "[wkit] invalid app: $1"
     fi
