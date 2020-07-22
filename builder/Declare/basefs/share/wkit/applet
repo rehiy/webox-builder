@@ -48,7 +48,7 @@ app_do() {
 
 app_do_start() {
 
-    if app_is_run; then
+    if app_is_start; then
         echo "$APP_NAME is running"
         exit 1
     fi
@@ -62,7 +62,7 @@ app_do_start() {
     echo "start $APP_NAME ..."
     app_start
 
-    app_wait run
+    app_wait start
 
 }
 
@@ -94,13 +94,13 @@ app_do_reload() {
 
 app_do_restart() {
 
-    app_do_stop && sleep 3 && app_do_start
+    app_do_stop && app_do_start
 
 }
 
 app_do_status() {
 
-    if app_is_run; then
+    if app_is_start; then
         echo "$APP_NAME is running"
     else
         echo "$APP_NAME is stopped"
@@ -108,7 +108,7 @@ app_do_status() {
 
 }
 
-app_is_run() {
+app_is_start() {
 
     if [ ! -f $APP_PID_FILE ]; then
         return 1
@@ -123,7 +123,7 @@ app_is_run() {
 
 app_is_stop() {
 
-    ! app_is_run
+    ! app_is_start
 
 }
 

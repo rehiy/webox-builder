@@ -11,7 +11,7 @@ fi
 
 #####################################################################
 
-wbx_service() {
+wbx_single() {
     if [ -x ${webox}/share/wkit/module/$1 ]; then
         ${webox}/share/wkit/module/$1 $2
     else
@@ -19,16 +19,23 @@ wbx_service() {
     fi
 }
 
+wbx_multiple() {
+    local vv
+    for vv in $WBX_APPS; do
+        wbx_single $vv $1
+    done
+}
+
+#####################################################################
+
 if [ $# -eq 0 ]; then
     echo "now, using the wkit shell"
     exec /bin/sh
 fi
 
 if [ $# -eq 1 ]; then
-    for WBX_APP in $WBX_APPS; do
-        wbx_service $WBX_APP $1
-    done
+    wbx_multiple $1
     exit $?
 fi
 
-wbx_service "$@"
+wbx_single "$@"
