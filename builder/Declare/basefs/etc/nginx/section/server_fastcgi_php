@@ -9,10 +9,9 @@ location ~ \.php$ {
     if ($safedir = "") {
         set $safedir $sitedir;
     }
-    set $vardirs ${webox}/var/log/php/$pool;
-    set $vardirs ${webox}/var/tmp/php/$pool:$vardirs;
+    set $safedir ${webox}/var/tmp/php/$pool;
 
-    fastcgi_param PHP_ADMIN_VALUE "open_basedir=$vardirs:$safedir";
+    fastcgi_param PHP_ADMIN_VALUE "open_basedir=$safedir";
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 
     fastcgi_pass  unix:${webox}/var/run/php/$pool.sock;
