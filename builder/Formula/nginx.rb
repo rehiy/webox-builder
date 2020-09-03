@@ -1,8 +1,8 @@
 class Nginx < Formula
     desc "HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server"
     homepage "https://nginx.org/"
-    url "https://nginx.org/download/nginx-1.19.1.tar.gz"
-    sha256 "a004776c64ed3c5c7bc9b6116ba99efab3265e6b81d49a57ca4471ff90655492"
+    url "https://nginx.org/download/nginx-1.19.2.tar.gz"
+    sha256 "7c1f7bb13e79433ee930c597d272a64bc6e30c356a48524f38fd34fa88d62473"
 
     depends_on "libgd"
     depends_on "libmaxminddb"

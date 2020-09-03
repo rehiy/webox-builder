@@ -1,8 +1,8 @@
 class PhpExt < Formula
     desc "General-purpose scripting language"
     homepage "https://www.php.net/"
-    url "https://www.php.net/distributions/php-7.4.8.tar.xz"
-    sha256 "642843890b732e8af01cb661e823ae01472af1402f211c83009c9b3abd073245"
+    url "https://www.php.net/distributions/php-7.4.10.tar.xz"
+    sha256 "c2d90b00b14284588a787b100dee54c2400e7db995b457864d66f00ad64fb010"
 
     depends_on "autoconf" => :build
     depends_on "pkg-config" => :build
@@ -30,11 +30,11 @@ class PhpExt < Formula
     uses_from_macos "zlib"
 
     resource "redis" do
-      url "http://pecl.php.net/get/redis-5.2.2.tgz"
+      url "http://pecl.php.net/get/redis-5.3.1.tgz"
     end
 
     resource "swoole" do
-      url "http://pecl.php.net/get/swoole-4.5.2.tgz"
+      url "http://pecl.php.net/get/swoole-4.5.3.tgz"
     end
 
     resource "imagick" do
@@ -83,12 +83,12 @@ class PhpExt < Formula
       php_ext_make "zlib"
 
       resource("redis").stage do
-        mv "redis-5.2.2", buildpath/"ext/redis"
+        mv "redis-5.3.1", buildpath/"ext/redis"
         php_ext_make "redis"
       end
 
       resource("swoole").stage do
-        mv "swoole-4.5.2", buildpath/"ext/swoole"
+        mv "swoole-4.5.3", buildpath/"ext/swoole"
         php_ext_make "swoole"
       end
 

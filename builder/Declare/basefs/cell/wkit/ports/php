@@ -26,7 +26,7 @@ app_prepare() {
         mkdir -p ${webox}/var/tmp/php/${POOL}/session
     done
 
-    app_userlet ${htdoc}
+    app_userlet ${htdoc} &
 
     app_varfix log run tmp
 
