@@ -81,7 +81,7 @@ class Nginx < Formula
       rm_rf prefix/"html"
     end
 
-    plist_options :manual => "nginx"
+    plist_options manual: "nginx"
 
     def plist
       <<~EOS

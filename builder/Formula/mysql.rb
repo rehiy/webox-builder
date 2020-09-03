@@ -55,7 +55,7 @@ class Mysql < Formula
       system "rm -rf #{prefix}/data"
     end
 
-    plist_options :manual => "mysqld_safe"
+    plist_options manual: "mysqld_safe"
 
     def plist
       <<~EOS

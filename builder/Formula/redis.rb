@@ -10,7 +10,7 @@ class Redis < Formula
       system "make", "install", "PREFIX=#{prefix}", "CC=#{ENV.cc}", "BUILD_TLS=yes"
     end
 
-    plist_options :manual => "redis-server #{HOMEBREW_PREFIX}/etc/redis/redis.conf"
+    plist_options manual: "redis-server #{HOMEBREW_PREFIX}/etc/redis/redis.conf"
 
     def plist
       <<~EOS
