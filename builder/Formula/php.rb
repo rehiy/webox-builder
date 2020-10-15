@@ -1,8 +1,8 @@
 class Php < Formula
     desc "General-purpose scripting language"
     homepage "https://www.php.net/"
-    url "https://www.php.net/distributions/php-7.4.10.tar.xz"
-    sha256 "c2d90b00b14284588a787b100dee54c2400e7db995b457864d66f00ad64fb010"
+    url "https://www.php.net/distributions/php-7.4.11.tar.xz"
+    sha256 "5408f255243bd2292f3fbc2fafc27a2ec083fcd852902728f2ba9a3ea616b8c5"
 
     depends_on "autoconf" => :build
     depends_on "pkg-config" => :build
