@@ -33,6 +33,10 @@ class PhpExt < Formula
       url "http://pecl.php.net/get/redis-5.3.1.tgz"
     end
 
+    resource "xdebug" do
+      url "http://pecl.php.net/get/xdebug-2.9.8.tgz"
+    end
+
     resource "swoole" do
       url "http://pecl.php.net/get/swoole-4.5.3.tgz"
     end
@@ -85,6 +89,11 @@ class PhpExt < Formula
       resource("redis").stage do
         mv "redis-5.3.1", buildpath/"ext/redis"
         php_ext_make "redis"
+      end
+
+      resource("xdebug").stage do
+        mv "xdebug-2.9.8", buildpath/"ext/xdebug"
+        php_ext_make "xdebug"
       end
 
       resource("swoole").stage do
