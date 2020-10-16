@@ -9,10 +9,10 @@ init_toolchain
 
 cell_install nginx
 
+cell_install node
+
 cell_install php
 cell_install php-ext
 
-cell_install node
-
-cell_install mysql
 cell_install redis
+cell_install mysql
