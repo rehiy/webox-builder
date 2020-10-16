@@ -5,7 +5,7 @@ source ./Declare/runtime
 
 ##############################################TARBALL################
 
-mini=$wbase/srv-mini
+mini=$wbase/webox-mini
 
 rm -rf $mini/etc/version
 rm -rf $mini/var/lib/*/*
@@ -14,6 +14,6 @@ rm -rf $mini/var/run/*/*
 rm -rf $mini/var/tmp/*/*
 
 
-mv $mini srv
-tar czvf webox-linux-v12.tgz srv
-mv srv $mini
+mv $mini webox
+tar -czvf webox-linux-v12.tgz webox
+mv webox $mini

@@ -10,30 +10,30 @@ Webox contains the following modules: mysql, nginx, nodejs, php, redis. And some
 
 ```shell
 wget -qO- http://get.vmlu.com/webox/wb-install | sh
-/srv/service start
+/opt/webox/service start
 ```
 
 ## service management command
 
 ```shell
-/srv/service [nginx|mysql|redis|php] [start|stop|restart|reload]
+/opt/webox/service [nginx|mysql|redis|php] [start|stop|restart|reload]
 ```
 
 ## put your files to host's webroot
 
-If the domain is `www.anrip.net`, the webroot will be `/srv/var/www/default/net.anrip.www/`
+If the domain is `www.anrip.net`, the webroot will be `/opt/webox/var/www/default/net.anrip.www/`
 
 # Manual Control Services
 
 ## fix ENV to run commands such as `mysql`
 
 ```shell
-PATH=/srv/bin:/srv/sbin:$PATH
+PATH=/opt/webox/bin:/opt/webox/sbin:$PATH
 ```
 
 ## configure the modules you need
 
-please edit the config files in `/srv/etc/*`, then reload the service
+please edit the config files in `/opt/webox/etc/*`, then reload the service
 
 # Important Notice
 

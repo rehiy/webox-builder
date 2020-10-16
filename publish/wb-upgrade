@@ -1,6 +1,15 @@
 #!/bin/sh
 #
 
+webox=/opt/webox
+
+if [ ! -e $webox ]; then
+    echo "$webox haven't installed"
+    exit 1
+fi
+
+####################################################################
+
 cd ~
 
 if [ `uname` = "Darwin" ]; then
@@ -15,7 +24,8 @@ else
     curl -C - -o $name http://get.vmlu.com/webox/$name
 fi
 
-echo "Updating with $name"
+echo "Decompressing $name"
+
 tar -xf $name && rm $name
 
 if [ $? -ne 0 ]; then
@@ -25,11 +35,13 @@ fi
 
 ####################################################################
 
-[ -x /srv/service ] && /srv/service stop
+echo "Updating $webox"
 
-cp -au ~/srv/* /srv/
-rm -rf ~/srv/
+$webox/service stop
+
+cp -au ~/webox/* $webox/
+rm -rf ~/webox
 
 ####################################################################
 
-[ -x /srv/service ] && /srv/service start
+$webox/service start

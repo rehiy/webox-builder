@@ -1,11 +1,11 @@
 #!/bin/bash
 #
 
+export webox=/opt/webox
+
 export wbase=$(cd `dirname $0`; pwd)
 
 export wplat=$([ `uname` = "Darwin" ] && echo macos || echo linux)
-
-export webox=$([ `uname` = "Darwin" ] && echo /opt/webox || echo /srv)
 
 ##############################################HELPERS################
 

@@ -7,7 +7,7 @@ load_modules
 
 ##############################################MINIFY#################
 
-mini=$wbase/srv-mini
+mini=$wbase/webox-mini
 
 [ -d $mini ] && mv $mini $mini-old
 

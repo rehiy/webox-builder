@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
-COPY builder /srv
+COPY builder /opt/build
 
-RUN chmod +x /srv/cell-* \
-    && cd /srv && ./cell-build \
-    && cd /srv && ./cell-minify
+RUN chmod +x /opt/build/cell-* \
+    && cd /opt/build && ./cell-build \
+    && cd /opt/build && ./cell-minify

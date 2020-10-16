@@ -1,6 +1,15 @@
 #!/bin/sh
 #
 
+webox=/opt/webox
+
+if [ -e $webox ]; then
+    echo "$webox already exists"
+    exit 1
+fi
+
+####################################################################
+
 cd ~
 
 if [ `uname` = "Darwin" ]; then
@@ -15,7 +24,8 @@ else
     curl -C - -o $name http://get.vmlu.com/webox/$name
 fi
 
-echo "Installing with $name"
+echo "Decompressing $name"
+
 tar -xf $name && rm $name
 
 if [ $? -ne 0 ]; then
@@ -25,11 +35,16 @@ fi
 
 ####################################################################
 
-[ -e /srv ] || mkdir -p /srv
+echo "Installing to $webox"
 
-cp -av ~/srv/* /srv/
-rm -rf ~/srv/
+cp -af ~/webox $webox
+rm -rf ~/webox
+
+if [ $? -ne 0 ]; then
+    echo "Can't install to $webox"
+    exit 1
+fi
 
 ####################################################################
 
-[ -x /srv/service ] && /srv/service start
+$webox/service start

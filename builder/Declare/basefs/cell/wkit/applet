@@ -152,7 +152,7 @@ app_helper() {
     local DOES="start|stop|reload|restart|status"
 
     if ! echo "|$DOES|" | grep -q "|$1|"; then
-        echo "Usage: wkit $APP_NAME {$DOES}"
+        echo "Usage: ${webox}/service $APP_NAME {$DOES}"
         exit 1
     fi
 
