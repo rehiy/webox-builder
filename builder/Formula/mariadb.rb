@@ -11,7 +11,6 @@ class Mariadb < Formula
     unless OS.mac?
       depends_on "gcc@7" => :build
       depends_on "libcsv"
-      depends_on "linux-pam"
     end
 
     uses_from_macos "bison" => :build
@@ -30,7 +29,7 @@ class Mariadb < Formula
         -DDEFAULT_CHARSET=utf8mb4
         -DDEFAULT_COLLATION=utf8mb4_general_ci
         -DENABLED_LOCAL_INFILE=1
-        -DINSTALL_DOCDIR=share/doc/mysql
+        -DINSTALL_DOCDIR=share/doc/#{name}
         -DINSTALL_INCLUDEDIR=include/mysql
         -DINSTALL_INFODIR=share/info
         -DINSTALL_MANDIR=share/man
@@ -41,6 +40,7 @@ class Mariadb < Formula
         -DMYSQL_DATADIR=#{var}/lib/mysql
         -DMYSQL_UNIX_ADDR=#{var}/run/mysql/mysqld.sock
         -DPLUGIN_MROONGA=NO
+        -DPLUGIN_PAM=NO
         -DPLUGIN_ROCKSDB=NO
         -DPLUGIN_TOKUDB=NO
         -DWITH_NUMA=OFF
@@ -56,14 +56,20 @@ class Mariadb < Formula
     end
 
     def post_install
-        system "rm -rf #{bin}/*embedded"
-        system "rm -rf #{bin}/*test"
-        system "rm -rf #{lib}/plugin/*test*"
-        system "rm -rf #{lib}/plugin/*example*"
-        system "rm -rf #{prefix}/support-files"
-        system "rm -rf #{prefix}/sql-bench"
-        system "rm -rf #{prefix}/*-test"
-        system "rm -rf #{prefix}/data"
+      system "rm -rf #{bin}/*embedded"
+      system "rm -rf #{bin}/*test"
+      system "rm -rf #{lib}/plugin/*test*"
+      system "rm -rf #{lib}/plugin/*example*"
+      system "rm -rf #{prefix}/support-files"
+      system "rm -rf #{prefix}/sql-bench"
+      system "rm -rf #{prefix}/*-test"
+      system "rm -rf #{prefix}/data"
+      system "rm -rf #{prefix}/COPYING"
+      system "rm -rf #{prefix}/CREDITS"
+      system "rm -rf #{prefix}/EXCEPTIONS-CLIENT"
+      system "rm -rf #{prefix}/INSTALL*"
+      system "rm -rf #{prefix}/README*"
+      system "rm -rf #{prefix}/THIRDPARTY"
     end
 
     plist_options manual: "mysqld_safe"
