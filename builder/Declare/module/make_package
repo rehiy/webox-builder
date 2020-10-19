@@ -35,6 +35,7 @@ make_package() {
     done
 
     copy_parents etc/openssl@1.1 $target
+    copy_parents var/lib/mysql $target
 
     cd -
 

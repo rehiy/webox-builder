@@ -22,7 +22,7 @@ class Mariadb < Formula
       # Set basedir and ldata for mysql_install_db
       inreplace "scripts/mysql_install_db.sh" do |s|
         s.change_make_var! "basedir", "\"#{prefix}\""
-        s.change_make_var! "ldata", "\"#{var}/mysql\""
+        s.change_make_var! "ldata", "\"#{var}/lib/mysql\""
       end
 
       args = %W[
@@ -30,11 +30,12 @@ class Mariadb < Formula
         -DDEFAULT_COLLATION=utf8mb4_general_ci
         -DENABLED_LOCAL_INFILE=1
         -DINSTALL_DOCDIR=share/doc/#{name}
+        -DINSTALL_DOCREADMEDIR=share/doc/#{name}
         -DINSTALL_INCLUDEDIR=include/mysql
         -DINSTALL_INFODIR=share/info
         -DINSTALL_MANDIR=share/man
         -DINSTALL_MYSQLSHAREDIR=share/mysql
-        -DINSTALL_PLUGINDIR=lib/plugin
+        -DINSTALL_PLUGINDIR=lib/mysql/plugin
         -DINSTALL_SBINDIR=sbin
         -DINSTALL_SYSCONFDIR=#{etc}/mysql
         -DMYSQL_DATADIR=#{var}/lib/mysql
@@ -56,20 +57,19 @@ class Mariadb < Formula
     end
 
     def post_install
-      system "rm -rf #{bin}/*embedded"
+      system "#{prefix}/scripts/mysql_install_db", "--no-defaults"
+
+      system "rm -rf #{var}/lib/mysql/aria_log*"
+      system "rm -rf #{var}/lib/mysql/ib*"
+      system "rm -rf #{var}/lib/mysql/test"
+
       system "rm -rf #{bin}/*test"
-      system "rm -rf #{lib}/plugin/*test*"
-      system "rm -rf #{lib}/plugin/*example*"
+      system "rm -rf #{lib}/mysql/plugin/*example*"
+      system "rm -rf #{lib}/mysql/plugin/*test*"
+      system "rm -rf #{prefix}/mysql-test"
+      system "rm -rf #{prefix}/scripts"
       system "rm -rf #{prefix}/support-files"
       system "rm -rf #{prefix}/sql-bench"
-      system "rm -rf #{prefix}/*-test"
-      system "rm -rf #{prefix}/data"
-      system "rm -rf #{prefix}/COPYING"
-      system "rm -rf #{prefix}/CREDITS"
-      system "rm -rf #{prefix}/EXCEPTIONS-CLIENT"
-      system "rm -rf #{prefix}/INSTALL*"
-      system "rm -rf #{prefix}/README*"
-      system "rm -rf #{prefix}/THIRDPARTY"
     end
 
     plist_options manual: "mysqld_safe"

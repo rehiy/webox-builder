@@ -7,12 +7,12 @@ load_modules
 
 ##############################################MINIFY#################
 
-mini=$wbase/webox-mini
+mini=$webox-mini
 
 [ -d $mini ] && mv $mini $mini-old
 
 
-cell_cleanup "gcc@7 glibc nginx node php php-ext redis mysql"
+cell_cleanup "gcc@7 glibc nginx node php php-ext redis mariadb"
 
-make_package $mini "nginx node php redis mysql"
+make_package $mini "nginx node php redis mariadb"
 make_profile $mini

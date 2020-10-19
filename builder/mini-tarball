@@ -5,14 +5,14 @@ source ./Declare/runtime
 
 ##############################################TARBALL################
 
-mini=$wbase/webox-mini
+mini=$webox-mini
 
 rm -rf $mini/etc/version
-rm -rf $mini/var/lib/*/*
+rm -rf $mini/var/lib/mysql/aria_log*
+rm -rf $mini/var/lib/mysql/ib*
 rm -rf $mini/var/log/*/*
 rm -rf $mini/var/run/*/*
 rm -rf $mini/var/tmp/*/*
-
 
 mv $mini webox
 tar -czvf webox-linux-v12.tgz webox
