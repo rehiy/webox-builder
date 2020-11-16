@@ -17,3 +17,4 @@
   - redis
 
 - redis 6.0.x
+
