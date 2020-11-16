@@ -15,5 +15,5 @@ rm -rf $mini/var/run/*/*
 rm -rf $mini/var/tmp/*/*
 
 mv $mini webox
-tar -czvf webox-linux-v12.tgz webox
+tar -czvf webox-linux-v13.tgz webox
 mv webox $mini

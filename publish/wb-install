@@ -15,7 +15,7 @@ cd ~
 if [ `uname` = "Darwin" ]; then
     name=webox-macos-v10.tgz
 else
-    name=webox-linux-v12.tgz
+    name=webox-linux-v13.tgz
 fi
 
 if type wget >/dev/null; then
