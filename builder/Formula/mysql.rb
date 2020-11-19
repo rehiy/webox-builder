@@ -1,8 +1,8 @@
 class Mysql < Formula
     desc "Open source relational database management system"
-    homepage "https://dev.mysql.com/doc/refman/5.7/en/"
-    url "https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-boost-5.7.31.tar.gz"
-    sha256 "85bd222e61846313d7ad7c095ad664c89ca8f52dd9c21b7ac343ead62d701200"
+    homepage "https://dev.mysql.com/doc/refman/8.0/en/"
+    url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.22.tar.gz"
+    sha256 "ba765f74367c638d7cd1c546c05c14382fd997669bcd9680278e907f8d7eb484"
 
     depends_on "cmake" => :build
     depends_on "pkg-config" => :build

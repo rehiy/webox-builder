@@ -15,4 +15,4 @@ cell_install php
 cell_install php-ext
 
 cell_install redis
-cell_install mariadb
+cell_install mysql

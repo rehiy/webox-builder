@@ -1,6 +1,6 @@
 ## Version 13
 
-- mariadb 10.5.x
+- mysql 8.0.x
 
 - nginx 1.19.x
 
