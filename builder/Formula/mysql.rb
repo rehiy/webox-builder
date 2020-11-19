@@ -14,8 +14,6 @@ class Mysql < Formula
       ENV.append_to_cflags "-fPIC" unless OS.mac?
 
       args = %W[
-        -DDEFAULT_CHARSET=utf8mb4
-        -DDEFAULT_COLLATION=utf8mb4_general_ci
         -DENABLED_LOCAL_INFILE=1
         -DINSTALL_DOCDIR=share/doc/mysql
         -DINSTALL_INCLUDEDIR=include/mysql
@@ -25,14 +23,15 @@ class Mysql < Formula
         -DINSTALL_PLUGINDIR=lib/plugin
         -DINSTALL_SBINDIR=sbin
         -DMYSQL_DATADIR=#{var}/lib/mysql
-        -DMYSQL_UNIX_ADDR=#{var}/run/mysql/mysqld.sock
+        -DMYSQL_UNIX_ADDR=#{var}/run/mysql.sock
         -DSYSCONFDIR=#{etc}/mysql
+        -DSYSTEMD_PID_DIR=#{var}/run/mysql
+        -DTMPDIR=#{var}/tmp/mysql
         -DWITH_BOOST=boost
         -DWITH_EDITLINE=system
-        -DWITH_SSL=yes
-        -DWITH_UNIT_TESTS=OFF
-        -DWITH_EMBEDDED_SERVER=OFF
         -DWITH_INNODB_MEMCACHED=ON
+        -DWITH_SSL=#{Formula["openssl@1.1"].opt_prefix}
+        -DWITH_UNIT_TESTS=OFF
       ]
 
       system "cmake", ".", *std_cmake_args, *args

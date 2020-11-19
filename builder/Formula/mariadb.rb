@@ -39,7 +39,7 @@ class Mariadb < Formula
         -DINSTALL_SBINDIR=sbin
         -DINSTALL_SYSCONFDIR=#{etc}/mysql
         -DMYSQL_DATADIR=#{var}/lib/mysql
-        -DMYSQL_UNIX_ADDR=#{var}/run/mysql/mysqld.sock
+        -DMYSQL_UNIX_ADDR=#{var}/run/mysql.sock
         -DPLUGIN_MROONGA=NO
         -DPLUGIN_PAM=NO
         -DPLUGIN_ROCKSDB=NO
