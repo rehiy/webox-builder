@@ -112,7 +112,7 @@ class PhpExt < Formula
       @log.append_lines "#{ext} build"
       puts ">> buiding php extension: #{ext}"
 
-      cd buildpath/"ext/#{ext}" do
+      (buildpath/"ext/#{ext}").cd do
         system "[ -e config.m4 ] || ln -s config0.m4 config.m4"
         system "phpize && ./configure #{args.join(' ')}"
         system "make", "install"

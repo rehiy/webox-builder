@@ -23,7 +23,9 @@ class OpensslAT10 < Formula
     end
 
     def postinstall
-      # fix zero byte - libcrypto.so
-      system "cd #{prefix}/lib && ar -x libcrypto.a && gcc -shared *.o -o libcrypto.so && rm *.o"
+      (prefix/"lib").cd do
+        # fix zero byte - libcrypto.so
+        system "ar -x libcrypto.a && gcc -shared *.o -o libcrypto.so && rm *.o"
+      end
     end
 end
