@@ -3,8 +3,9 @@
 
 cell_install_glibc() {
 
+    cell_install_glibc_prefix
+
     if [ ! -d $webox/cell/glibc ]; then
-        cell_install_glibc_prefix
         brew install -v glibc
     fi
 
