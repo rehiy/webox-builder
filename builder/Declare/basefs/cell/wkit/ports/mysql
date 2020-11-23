@@ -8,7 +8,7 @@
 APP_NAME=mysql
 
 APP_BIN_FILE=${webox}/bin/mysqld_safe
-APP_PID_FILE=${webox}/var/run/mysql/mysqld.pid
+APP_PID_FILE=${webox}/var/run/mysqld/mysqld.pid
 
 app_start() {
 

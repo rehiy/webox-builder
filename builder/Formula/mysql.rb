@@ -22,10 +22,10 @@ class Mysql < Formula
         -DINSTALL_MYSQLSHAREDIR=share/mysql
         -DINSTALL_PLUGINDIR=lib/plugin
         -DINSTALL_SBINDIR=sbin
-        -DMYSQL_DATADIR=#{var}/lib/mysql
-        -DMYSQL_UNIX_ADDR=#{var}/run/mysql.sock
         -DSYSCONFDIR=#{etc}/mysql
-        -DSYSTEMD_PID_DIR=#{var}/run/mysql
+        -DMYSQL_DATADIR=#{var}/lib/mysql
+        -DSYSTEMD_PID_DIR=#{var}/run/mysqld
+        -DMYSQL_UNIX_ADDR=#{var}/run/mysqld/mysqld.sock
         -DTMPDIR=#{var}/tmp/mysql
         -DENABLED_LOCAL_INFILE=ON
         -DWITH_BOOST=boost
