@@ -11,9 +11,11 @@ class Mysql < Formula
     uses_from_macos "libedit"
 
     def install
-      ENV.append_to_cflags "-fPIC" unless OS.mac?
+    # Fix libmysqlgcs.a(gcs_logging.cc.o): relocation R_X86_64_32
+    ENV.append_to_cflags "-fPIC" unless OS.mac?
 
       args = %W[
+        -DFORCE_INSOURCE_BUILD=1
         -DENABLED_LOCAL_INFILE=1
         -DINSTALL_DOCDIR=share/doc/mysql
         -DINSTALL_INCLUDEDIR=include/mysql
@@ -52,32 +54,6 @@ class Mysql < Formula
       system "rm -rf #{prefix}/support-files"
       system "rm -rf #{prefix}/*-test"
       system "rm -rf #{prefix}/data"
-    end
-
-    plist_options manual: "mysqld_safe"
-
-    def plist
-      <<~EOS
-        <?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-        <plist version="1.0">
-        <dict>
-          <key>KeepAlive</key>
-          <true/>
-          <key>Label</key>
-          <string>#{plist_name}</string>
-          <key>ProgramArguments</key>
-          <array>
-            <string>#{opt_bin}/mysqld_safe</string>
-            <string>--datadir=#{var}/lib/mysql</string>
-          </array>
-          <key>RunAtLoad</key>
-          <true/>
-          <key>WorkingDirectory</key>
-          <string>#{var}/lib/mysql</string>
-        </dict>
-        </plist>
-      EOS
     end
 
     test do
