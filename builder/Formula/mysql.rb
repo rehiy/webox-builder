@@ -11,12 +11,10 @@ class Mysql < Formula
     uses_from_macos "libedit"
 
     def install
-    # Fix libmysqlgcs.a(gcs_logging.cc.o): relocation R_X86_64_32
-    ENV.append_to_cflags "-fPIC" unless OS.mac?
+      ENV.append_to_cflags "-fPIC" unless OS.mac?
 
       args = %W[
-        -DFORCE_INSOURCE_BUILD=1
-        -DENABLED_LOCAL_INFILE=1
+        -DFORCE_INSOURCE_BUILD=ON
         -DINSTALL_DOCDIR=share/doc/mysql
         -DINSTALL_INCLUDEDIR=include/mysql
         -DINSTALL_INFODIR=share/info
@@ -29,10 +27,11 @@ class Mysql < Formula
         -DSYSCONFDIR=#{etc}/mysql
         -DSYSTEMD_PID_DIR=#{var}/run/mysql
         -DTMPDIR=#{var}/tmp/mysql
+        -DENABLED_LOCAL_INFILE=ON
         -DWITH_BOOST=boost
         -DWITH_EDITLINE=system
-        -DWITH_INNODB_MEMCACHED=ON
         -DWITH_SSL=#{Formula["openssl@1.1"].opt_prefix}
+        -DWITH_PROTOBUF=OFF
         -DWITH_UNIT_TESTS=OFF
       ]
 
