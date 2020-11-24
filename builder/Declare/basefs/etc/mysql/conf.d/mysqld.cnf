@@ -1,4 +1,6 @@
 [mysqld]
 
+skip-name-resolve
+
 slow_query_log  = ON
 long_query_time = 30
