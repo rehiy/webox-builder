@@ -128,10 +128,6 @@ class PhpExt < Formula
       end
     end
 
-    def php_version
-      version.to_s.split(".")[0..1].join(".")
-    end
-
     test do
       (lib/"php/20190902/maxminddb.so").exist?
     end

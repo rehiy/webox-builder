@@ -41,10 +41,6 @@ class Php < Formula
       system "make", "install"
     end
 
-    def php_version
-      version.to_s.split(".")[0..1].join(".")
-    end
-
     test do
       system "#{sbin}/php-fpm", "-t"
     end
