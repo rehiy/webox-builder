@@ -10,6 +10,13 @@ class Mysql < Formula
 
     uses_from_macos "libedit"
 
+    unless OS.mac?
+        patch do
+          url "https://raw.githubusercontent.com/NixOS/nixpkgs/dae42566dbee37a3b7a609fa86eca9618f4f4b67/pkgs/servers/sql/mysql/abi-check.patch"
+          sha256 "0dcfcca3bb3e7eb7ccd3ae02d4eb4fb07877970359611f081b03eab77bd4d6c9"
+        end
+    end
+
     def install
       ENV.append_to_cflags "-fPIC" unless OS.mac?
 
