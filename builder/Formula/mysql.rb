@@ -6,9 +6,8 @@ class Mysql < Formula
 
     depends_on "cmake" => :build
     depends_on "pkg-config" => :build
-    depends_on "openssl@1.1"
 
-    uses_from_macos "libedit"
+    depends_on "openssl@1.1"
 
     unless OS.mac?
         patch do
@@ -21,6 +20,7 @@ class Mysql < Formula
       ENV.append_to_cflags "-fPIC" unless OS.mac?
 
       args = %W[
+        -DENABLED_LOCAL_INFILE=ON
         -DFORCE_INSOURCE_BUILD=ON
         -DINSTALL_DOCDIR=share/doc/mysql
         -DINSTALL_INCLUDEDIR=include/mysql
@@ -29,14 +29,12 @@ class Mysql < Formula
         -DINSTALL_MYSQLSHAREDIR=share/mysql
         -DINSTALL_PLUGINDIR=lib/plugin
         -DINSTALL_SBINDIR=sbin
-        -DSYSCONFDIR=#{etc}/mysql
         -DMYSQL_DATADIR=#{var}/lib/mysql
-        -DSYSTEMD_PID_DIR=#{var}/run/mysqld
         -DMYSQL_UNIX_ADDR=#{var}/run/mysqld/mysqld.sock
+        -DSYSTEMD_PID_DIR=#{var}/run/mysqld
+        -DSYSCONFDIR=#{etc}/mysql
         -DTMPDIR=#{var}/tmp/mysql
-        -DENABLED_LOCAL_INFILE=ON
         -DWITH_BOOST=boost
-        -DWITH_EDITLINE=system
         -DWITH_SSL=#{Formula["openssl@1.1"].opt_prefix}
         -DWITH_PROTOBUF=OFF
         -DWITH_UNIT_TESTS=OFF
